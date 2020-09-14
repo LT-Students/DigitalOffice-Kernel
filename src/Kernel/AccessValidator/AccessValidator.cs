@@ -1,15 +1,14 @@
-﻿using System;
-using System.Net;
+﻿using LT.DigitalOffice.Kernel.AccessValidator.Interfaces;
+using LT.DigitalOffice.Kernel.AccessValidator.Requests;
+using LT.DigitalOffice.Kernel.Broker;
 using MassTransit;
 using MassTransit.Clients;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 using MassTransit.Clients.Contexts;
-using LT.DigitalOffice.Kernel.Broker;
-using LT.DigitalOffice.Kernel.AccessValidator.Requests;
-using LT.DigitalOffice.Kernel.AccessValidator.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System;
+using System.Net;
 
 namespace LT.DigitalOffice.Kernel.AccessValidator
 {
@@ -61,31 +60,31 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
                 new RequestTimeout());
         }
 
-        public async Task<bool> HasRights(int rightId)
+        public bool HasRights(int rightId)
         {
             userId = GetCurrentUserId();
 
             var requestClient = CreateRequestClient(bus, options.AccessValidatorCheckRightsServiceURL);
 
-            var result = await requestClient.GetResponse<IOperationResult<bool>>(new
+            var result = requestClient.GetResponse<IOperationResult<bool>>(new
             {
                 UserId = userId,
                 RightId = rightId
-            });
+            }).Result;
 
             return result.Message.Body;
         }
 
-        public async Task<bool> IsAdmin()
+        public bool IsAdmin()
         {
             userId = GetCurrentUserId();
 
             var requestClient = CreateRequestClient(bus, options.AccessValidatorUserServiceURL);
 
-            var result = await requestClient.GetResponse<IOperationResult<bool>>(new
+            var result = requestClient.GetResponse<IOperationResult<bool>>(new
             {
                 UserId = userId
-            });
+            }).Result;
 
             return result.Message.Body;
         }
