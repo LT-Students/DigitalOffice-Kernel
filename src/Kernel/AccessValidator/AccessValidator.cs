@@ -2,30 +2,28 @@
 using LT.DigitalOffice.Kernel.AccessValidator.Requests;
 using LT.DigitalOffice.Kernel.Broker;
 using MassTransit;
-using MassTransit.Clients;
-using MassTransit.Clients.Contexts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using System;
 using System.Net;
+using System.Text;
 
 namespace LT.DigitalOffice.Kernel.AccessValidator
 {
     public class AccessValidator : IAccessValidator
     {
         private Guid userId;
-        private readonly IBus bus;
-        private readonly RabbitMQOptions options;
         private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IRequestClient<IAccessValidatorCRServiceRequest> requestClientCRS;
+        private readonly IRequestClient<IAccessValidatorUserServiceRequest> requestClientUS;
 
         public AccessValidator(
-            [FromServices] IBus bus,
-            [FromServices] IOptions<RabbitMQOptions> options,
-            [FromServices] IHttpContextAccessor httpContextAccessor)
+            [FromServices] IHttpContextAccessor httpContextAccessor,
+            [FromServices] IRequestClient<IAccessValidatorCRServiceRequest> requestClientCRS,
+            [FromServices] IRequestClient<IAccessValidatorUserServiceRequest> requestClientUS)
         {
-            this.bus = bus;
-            this.options = options.Value;
+            this.requestClientCRS = requestClientCRS;
+            this.requestClientUS = requestClientUS;
             this.httpContextAccessor = httpContextAccessor;
         }
 
@@ -51,26 +49,21 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
             return userIdFromHeaders;
         }
 
-        private IRequestClient<IAccessValidatorRequest> CreateRequestClient(IBus bus, string url)
-        {
-            var requestClientFactory = new ClientFactory(new BusClientFactoryContext(bus));
-
-            return requestClientFactory.CreateRequestClient<IAccessValidatorRequest>(
-                new Uri(url),
-                new RequestTimeout());
-        }
-
         public bool HasRights(int rightId)
         {
             userId = GetCurrentUserId();
 
-            var requestClient = CreateRequestClient(bus, options.AccessValidatorCheckRightsServiceURL);
-
-            var result = requestClient.GetResponse<IOperationResult<bool>>(new
+            var result = requestClientCRS.GetResponse<IOperationResult<bool>>(new
             {
                 UserId = userId,
                 RightId = rightId
             }).Result;
+
+            if (!result.Message.IsSuccess)
+            {
+                throw new Exception(new StringBuilder()
+                    .AppendJoin(",", result.Message.Errors).ToString());
+            }
 
             return result.Message.Body;
         }
@@ -79,12 +72,16 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
         {
             userId = GetCurrentUserId();
 
-            var requestClient = CreateRequestClient(bus, options.AccessValidatorUserServiceURL);
-
-            var result = requestClient.GetResponse<IOperationResult<bool>>(new
+            var result = requestClientUS.GetResponse<IOperationResult<bool>>(new
             {
                 UserId = userId
             }).Result;
+
+            if (!result.Message.IsSuccess)
+            {
+                throw new Exception(new StringBuilder()
+                    .AppendJoin(",", result.Message.Errors).ToString());
+            }
 
             return result.Message.Body;
         }
