@@ -1,7 +1,10 @@
-﻿using LT.DigitalOffice.Kernel.Broker;
-using Microsoft.Extensions.Configuration;
-using LT.DigitalOffice.Kernel.AccessValidator;
+﻿using LT.DigitalOffice.Kernel.AccessValidator;
 using LT.DigitalOffice.Kernel.AccessValidator.Interfaces;
+using LT.DigitalOffice.Kernel.AccessValidator.Requests;
+using LT.DigitalOffice.Kernel.Broker;
+using MassTransit;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,9 +14,29 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddHttpContextAccessor();
             services.AddTransient<IAccessValidator, AccessValidator>();
-            services.Configure<RabbitMQOptions>(configuration.GetSection(RabbitMQOptions.RabbitMQ));
+
+            var rabbitmqOptions = configuration.GetSection(RabbitMQOptions.RabbitMQ).Get<RabbitMQOptions>();
+
+            services = ConfigureMassTransit(services, rabbitmqOptions);
 
             return services;
         }
+
+        private static IServiceCollection ConfigureMassTransit(IServiceCollection services, RabbitMQOptions options)
+        {
+            services.AddMassTransit(x =>
+            {
+                x.AddRequestClient<IAccessValidatorUserServiceRequest>(
+                    new Uri(options.AccessValidatorUserServiceURL));
+
+                x.AddRequestClient<IAccessValidatorCRServiceRequest>(
+                    new Uri(options.AccessValidatorCheckRightsServiceURL));
+            });
+
+            services.AddMassTransitHostedService();
+
+            return services;
+        }
+
     }
 }
