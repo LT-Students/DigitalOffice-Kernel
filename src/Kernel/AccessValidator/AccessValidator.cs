@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
-using System.Text;
 
 namespace LT.DigitalOffice.Kernel.AccessValidator
 {

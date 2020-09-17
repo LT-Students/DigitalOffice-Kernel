@@ -7,7 +7,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidator.Requests
     /// </summary>
     public interface IAccessValidatorUserServiceRequest
     {
-        Guid UserId { get; set; }
-        int RightId { get; set; }
+        Guid UserId { get; }
+        int RightId { get; }
     }
 }
