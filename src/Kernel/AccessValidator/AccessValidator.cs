@@ -59,10 +59,9 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
                 RightId = rightId
             }).Result;
 
-            if (!result.Message.IsSuccess)
+            if (result.Message == null)
             {
-                throw new Exception(new StringBuilder()
-                    .AppendJoin(",", result.Message.Errors).ToString());
+                throw new Exception("Failed to send request via the broker");
             }
 
             return result.Message.Body;
@@ -77,10 +76,9 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
                 UserId = userId
             }).Result;
 
-            if (!result.Message.IsSuccess)
+            if (result.Message == null)
             {
-                throw new Exception(new StringBuilder()
-                    .AppendJoin(",", result.Message.Errors).ToString());
+                throw new Exception("Failed to send request via the broker");
             }
 
             return result.Message.Body;

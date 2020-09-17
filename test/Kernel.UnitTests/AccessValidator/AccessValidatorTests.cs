@@ -28,6 +28,7 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
     {
         private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> requestClientUSMock;
         private Mock<IRequestClient<IAccessValidatorCRServiceRequest>> requestClientCRSMock;
+        private Mock<Response<IOperationResult<bool>>> responseBrokerMock;
         private Mock<IHttpContextAccessor> httpContextMock;
 
         private string userId;
@@ -57,14 +58,7 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
             requestClientUSMock = new Mock<IRequestClient<IAccessValidatorUserServiceRequest>>();
             requestClientCRSMock = new Mock<IRequestClient<IAccessValidatorCRServiceRequest>>();
 
-            var responseBrokerMock = new Mock<Response<IOperationResult<bool>>>();
-
-            operationResult = new OperationResult<bool>
-            {
-                IsSuccess = true,
-                Errors = new List<string>(),
-                Body = new Boolean()
-            };
+            responseBrokerMock = new Mock<Response<IOperationResult<bool>>>();
 
             requestClientUSMock.Setup(
                 x => x.GetResponse<IOperationResult<bool>>(
@@ -75,6 +69,17 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
                 x => x.GetResponse<IOperationResult<bool>>(
                     It.IsAny<object>(), default, default))
                 .Returns(Task.FromResult(responseBrokerMock.Object));
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            operationResult = new OperationResult<bool>
+            {
+                IsSuccess = true,
+                Errors = new List<string>(),
+                Body = new Boolean()
+            };
 
             responseBrokerMock
                 .SetupGet(x => x.Message)
@@ -85,7 +90,6 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
         public void ShouldReturnTrueWhenUserIsAdmin()
         {
             operationResult.IsSuccess = true;
-            operationResult.Errors = null;
             operationResult.Body = true;
 
             httpContextMock
@@ -101,7 +105,6 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
         public void ShouldReturnFalseWhenUserIsNotAdmin()
         {
             operationResult.IsSuccess = true;
-            operationResult.Errors = null;
             operationResult.Body = false;
 
             httpContextMock
@@ -116,23 +119,24 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
         [Test]
         public void ShouldThrowExceptionWhenUserServiceConsumerRespondsWithErrors()
         {
-            operationResult.Body = false;
-            operationResult.Errors = new List<string> { "Exception" };
-            operationResult.IsSuccess = false;
+            operationResult = null;
+
+            responseBrokerMock
+                .SetupGet(x => x.Message)
+                .Returns(operationResult);
 
             httpContextMock
                 .Setup(h => h.HttpContext.Request.Headers["UserId"])
                 .Returns(userId);
 
             Assert.That(() => accessValidator.IsAdmin(),
-                Throws.InstanceOf<Exception>().And.Message.EqualTo("Exception"));
+                Throws.InstanceOf<Exception>().And.Message.EqualTo("Failed to send request via the broker"));
         }
 
         [Test]
         public void ShouldReturnTrueWhenUserHasRights()
         {
             operationResult.IsSuccess = true;
-            operationResult.Errors = null;
             operationResult.Body = true;
 
             httpContextMock
@@ -148,7 +152,6 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
         public void ShouldReturnFalseWhenUserDoesntHaveRights()
         {
             operationResult.IsSuccess = true;
-            operationResult.Errors = null;
             operationResult.Body = false;
 
             httpContextMock
@@ -163,16 +166,18 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
         [Test]
         public void ShouldThrowExceptionWhenCheckRightsServiceConsumerRespondsWithErrors()
         {
-            operationResult.Body = false;
-            operationResult.Errors = new List<string> { "Exception" };
-            operationResult.IsSuccess = false;
+            operationResult = null;
+
+            responseBrokerMock
+                .SetupGet(x => x.Message)
+                .Returns(operationResult);
 
             httpContextMock
                 .Setup(h => h.HttpContext.Request.Headers["UserId"])
                 .Returns(userId);
 
             Assert.That(() => accessValidator.HasRights(RIGHT_ID),
-                Throws.InstanceOf<Exception>().And.Message.EqualTo("Exception"));
+                Throws.InstanceOf<Exception>().And.Message.EqualTo("Failed to send request via the broker"));
         }
 
         [Test]
