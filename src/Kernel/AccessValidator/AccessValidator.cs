@@ -61,31 +61,31 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
                 new RequestTimeout());
         }
 
-        public async Task<bool> HasRights(int rightId)
+        public bool HasRights(int rightId)
         {
             userId = GetCurrentUserId();
 
             var requestClient = CreateRequestClient(bus, options.AccessValidatorCheckRightsServiceURL);
 
-            var result = await requestClient.GetResponse<IOperationResult<bool>>(new
+            var result = requestClient.GetResponse<IOperationResult<bool>>(new
             {
                 UserId = userId,
                 RightId = rightId
-            });
+            }).Result;
 
             return result.Message.Body;
         }
 
-        public async Task<bool> IsAdmin()
+        public bool IsAdmin()
         {
             userId = GetCurrentUserId();
 
             var requestClient = CreateRequestClient(bus, options.AccessValidatorUserServiceURL);
 
-            var result = await requestClient.GetResponse<IOperationResult<bool>>(new
+            var result = requestClient.GetResponse<IOperationResult<bool>>(new
             {
                 UserId = userId
-            });
+            }).Result;
 
             return result.Message.Body;
         }
