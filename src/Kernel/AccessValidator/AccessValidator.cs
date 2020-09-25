@@ -60,7 +60,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
 
             if (result.Message == null)
             {
-                throw new Exception("Failed to send request via the broker");
+                throw new NullReferenceException("Failed to send request via the broker");
             }
 
             return result.Message.Body;
@@ -77,7 +77,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
 
             if (result.Message == null)
             {
-                throw new Exception("Failed to send request via the broker");
+                throw new NullReferenceException("Failed to send request via the broker");
             }
 
             return result.Message.Body;

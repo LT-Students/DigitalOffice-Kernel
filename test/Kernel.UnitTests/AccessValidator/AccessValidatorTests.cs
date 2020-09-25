@@ -22,8 +22,6 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
 
         public T Body { get; set; }
     }
-
-
     public class AccessValidatorTests
     {
         private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> requestClientUSMock;

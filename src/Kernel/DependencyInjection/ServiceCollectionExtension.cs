@@ -2,7 +2,7 @@
 using LT.DigitalOffice.Kernel.AccessValidator.Interfaces;
 using LT.DigitalOffice.Kernel.AccessValidator.Requests;
 using LT.DigitalOffice.Kernel.Broker;
-using MassTransit;
+using MassTransit.ExtensionsDependencyInjectionIntegration;
 using Microsoft.Extensions.Configuration;
 using System;
 
@@ -10,33 +10,27 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddKernelExtensions(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddKernelExtensions(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddTransient<IAccessValidator, AccessValidator>();
 
+            return services;
+        }
+
+        public static IServiceCollectionBusConfigurator ConfigureKernelMassTransit(
+            this IServiceCollectionBusConfigurator busConfigurator,
+            IConfiguration configuration)
+        {
             var rabbitmqOptions = configuration.GetSection(RabbitMQOptions.RabbitMQ).Get<RabbitMQOptions>();
 
-            services = ConfigureMassTransit(services, rabbitmqOptions);
+            busConfigurator.AddRequestClient<IAccessValidatorUserServiceRequest>(
+                new Uri(rabbitmqOptions.AccessValidatorUserServiceURL));
 
-            return services;
+            busConfigurator.AddRequestClient<IAccessValidatorCRServiceRequest>(
+                new Uri(rabbitmqOptions.AccessValidatorCheckRightsServiceURL));
+
+            return busConfigurator;
         }
-
-        private static IServiceCollection ConfigureMassTransit(IServiceCollection services, RabbitMQOptions options)
-        {
-            services.AddMassTransit(x =>
-            {
-                x.AddRequestClient<IAccessValidatorUserServiceRequest>(
-                    new Uri(options.AccessValidatorUserServiceURL));
-
-                x.AddRequestClient<IAccessValidatorCRServiceRequest>(
-                    new Uri(options.AccessValidatorCheckRightsServiceURL));
-            });
-
-            services.AddMassTransitHostedService();
-
-            return services;
-        }
-
     }
 }
