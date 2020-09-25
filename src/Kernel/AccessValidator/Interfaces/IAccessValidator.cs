@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace LT.DigitalOffice.Kernel.AccessValidator.Interfaces
+﻿namespace LT.DigitalOffice.Kernel.AccessValidator.Interfaces
 {
     /// <summary>
     /// Provides access validation methods to check whether user is an administrator

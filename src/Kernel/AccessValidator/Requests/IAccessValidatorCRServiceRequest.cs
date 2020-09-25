@@ -2,7 +2,7 @@
 
 namespace LT.DigitalOffice.Kernel.AccessValidator.Requests
 {
-    // <summary>
+    /// <summary>
     /// Message request model that is sent to CheckRightsService via MassTransit.
     /// </summary>
     public interface IAccessValidatorCRServiceRequest
