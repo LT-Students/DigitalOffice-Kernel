@@ -5,7 +5,8 @@ using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Net;
+using System.Net;
+
 namespace LT.DigitalOffice.Kernel.AccessValidator
 {
     public class AccessValidator : IAccessValidator
