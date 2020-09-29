@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace LT.DigitalOffice.Kernel.AccessValidator.Interfaces
+﻿namespace LT.DigitalOffice.Kernel.AccessValidator.Interfaces
 {
     /// <summary>
     /// Provides access validation methods to check whether user is an administrator
@@ -12,8 +10,8 @@ namespace LT.DigitalOffice.Kernel.AccessValidator.Interfaces
         /// Checks whether the user is admin or not.
         /// </summary>
         /// <returns>True, if current user has IsAdmin property set to true in the database. False otherwise.</returns>
-
         bool IsAdmin();
+
         /// <summary>
         /// Checks whether the user has certain rights.
         /// </summary>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 
 namespace LT.DigitalOffice.Kernel.Exceptions
@@ -35,7 +35,7 @@ namespace LT.DigitalOffice.Kernel.Exceptions
         public ForbiddenException(string message, Exception inner) : base(message, inner)
         {
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ForbiddenException"/> class.
         /// </summary>

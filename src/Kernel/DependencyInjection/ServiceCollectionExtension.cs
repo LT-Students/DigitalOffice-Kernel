@@ -1,19 +1,33 @@
-﻿using LT.DigitalOffice.Kernel.Broker;
-using Microsoft.Extensions.Configuration;
-using LT.DigitalOffice.Kernel.AccessValidator;
+﻿using LT.DigitalOffice.Kernel.AccessValidator;
 using LT.DigitalOffice.Kernel.AccessValidator.Interfaces;
+using LT.DigitalOffice.Kernel.AccessValidator.Requests;
+using LT.DigitalOffice.Kernel.Broker;
+using MassTransit.ExtensionsDependencyInjectionIntegration;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtension
     {
-        public static IServiceCollection AddKernelExtensions(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddKernelExtensions(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.AddTransient<IAccessValidator, AccessValidator>();
-            services.Configure<RabbitMQOptions>(configuration.GetSection(RabbitMQOptions.RabbitMQ));
 
             return services;
+        }
+
+        public static IServiceCollectionBusConfigurator ConfigureKernelMassTransit(
+            this IServiceCollectionBusConfigurator busConfigurator,
+            RabbitMQOptions rabbitmqOptions)
+        {
+            busConfigurator.AddRequestClient<IAccessValidatorUserServiceRequest>(
+                new Uri(rabbitmqOptions.AccessValidatorUserServiceURL));
+
+            busConfigurator.AddRequestClient<IAccessValidatorCheckRightsServiceRequest>(
+                new Uri(rabbitmqOptions.AccessValidatorCheckRightsServiceURL));
+
+            return busConfigurator;
         }
     }
 }
