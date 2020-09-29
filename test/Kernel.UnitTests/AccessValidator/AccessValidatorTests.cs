@@ -12,7 +12,7 @@ using System.Net;
 using System.Threading.Tasks;
 using AV = LT.DigitalOffice.Kernel.AccessValidator;
 
-namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
+namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
 {
     public class OperationResult<T> : IOperationResult<T>
     {
@@ -22,6 +22,7 @@ namespace LT.DigitalOffice.KernelUnitTests.AccessValidator
 
         public T Body { get; set; }
     }
+
     public class AccessValidatorTests
     {
         private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> requestClientUSMock;

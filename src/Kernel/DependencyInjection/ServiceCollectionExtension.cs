@@ -3,7 +3,6 @@ using LT.DigitalOffice.Kernel.AccessValidator.Interfaces;
 using LT.DigitalOffice.Kernel.AccessValidator.Requests;
 using LT.DigitalOffice.Kernel.Broker;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
-using Microsoft.Extensions.Configuration;
 using System;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -20,10 +19,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollectionBusConfigurator ConfigureKernelMassTransit(
             this IServiceCollectionBusConfigurator busConfigurator,
-            IConfiguration configuration)
+            RabbitMQOptions rabbitmqOptions)
         {
-            var rabbitmqOptions = configuration.GetSection(RabbitMQOptions.RabbitMQ).Get<RabbitMQOptions>();
-
             busConfigurator.AddRequestClient<IAccessValidatorUserServiceRequest>(
                 new Uri(rabbitmqOptions.AccessValidatorUserServiceURL));
 
