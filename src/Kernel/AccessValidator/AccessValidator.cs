@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
-
+
 namespace LT.DigitalOffice.Kernel.AccessValidator
 {
     public class AccessValidator : IAccessValidator
@@ -58,9 +58,9 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
                 RightId = rightId
             }).Result;
 
-            if (result.Message == null)
-            {
-                throw new NullReferenceException("Failed to send request via the broker");
+            if (result.Message == null)
+            {
+                throw new NullReferenceException("Failed to send request via the broker");
             }
 
             return result.Message.Body;
@@ -75,9 +75,9 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
                 UserId = userId
             }).Result;
 
-            if (result.Message == null)
-            {
-                throw new NullReferenceException("Failed to send request via the broker");
+            if (result.Message == null)
+            {
+                throw new NullReferenceException("Failed to send request via the broker");
             }
 
             return result.Message.Body;
