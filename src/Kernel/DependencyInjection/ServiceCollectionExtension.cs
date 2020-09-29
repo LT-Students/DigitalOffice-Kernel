@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
             busConfigurator.AddRequestClient<IAccessValidatorUserServiceRequest>(
                 new Uri(rabbitmqOptions.AccessValidatorUserServiceURL));
 
-            busConfigurator.AddRequestClient<IAccessValidatorCRServiceRequest>(
+            busConfigurator.AddRequestClient<IAccessValidatorCheckRightsServiceRequest>(
                 new Uri(rabbitmqOptions.AccessValidatorCheckRightsServiceURL));
 
             return busConfigurator;

@@ -13,12 +13,12 @@ namespace LT.DigitalOffice.Kernel.AccessValidator
     {
         private Guid userId;
         private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IRequestClient<IAccessValidatorCRServiceRequest> requestClientCRS;
+        private readonly IRequestClient<IAccessValidatorCheckRightsServiceRequest> requestClientCRS;
         private readonly IRequestClient<IAccessValidatorUserServiceRequest> requestClientUS;
 
         public AccessValidator(
             [FromServices] IHttpContextAccessor httpContextAccessor,
-            [FromServices] IRequestClient<IAccessValidatorCRServiceRequest> requestClientCRS,
+            [FromServices] IRequestClient<IAccessValidatorCheckRightsServiceRequest> requestClientCRS,
             [FromServices] IRequestClient<IAccessValidatorUserServiceRequest> requestClientUS)
         {
             this.requestClientCRS = requestClientCRS;

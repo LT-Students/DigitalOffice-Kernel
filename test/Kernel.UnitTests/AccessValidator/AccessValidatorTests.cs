@@ -26,7 +26,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
     public class AccessValidatorTests
     {
         private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> requestClientUSMock;
-        private Mock<IRequestClient<IAccessValidatorCRServiceRequest>> requestClientCRSMock;
+        private Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>> requestClientCRSMock;
         private Mock<Response<IOperationResult<bool>>> responseBrokerMock;
         private Mock<IHttpContextAccessor> httpContextMock;
 
@@ -55,7 +55,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
         public void BrokerSetUp()
         {
             requestClientUSMock = new Mock<IRequestClient<IAccessValidatorUserServiceRequest>>();
-            requestClientCRSMock = new Mock<IRequestClient<IAccessValidatorCRServiceRequest>>();
+            requestClientCRSMock = new Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>>();
 
             responseBrokerMock = new Mock<Response<IOperationResult<bool>>>();
 
