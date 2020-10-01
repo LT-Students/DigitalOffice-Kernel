@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace LT.DigitalOffice.Kernel.Exceptions
@@ -11,7 +12,7 @@ namespace LT.DigitalOffice.Kernel.Exceptions
     {
         public override int StatusCode => (int) HttpStatusCode.BadRequest;
         public override string Header => "Bad Request";
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BadRequestException"/> class.
         /// </summary>

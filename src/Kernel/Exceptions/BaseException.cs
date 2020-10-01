@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LT.DigitalOffice.Kernel.Exceptions
 {
@@ -11,12 +13,12 @@ namespace LT.DigitalOffice.Kernel.Exceptions
         /// Status code is issued by a server in response to a client's request made to the server.
         /// </summary>
         public virtual int StatusCode { get; }
-        
+
         /// <summary>
         /// An explanatory phrase in English that explains to a person the reason for just such an answer.
         /// </summary>
         public virtual string Header { get; }
-        
+
         protected BaseException()
         {
         }

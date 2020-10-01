@@ -34,7 +34,7 @@ namespace LT.DigitalOffice.Kernel.Exceptions
         public NotFoundException(string message, Exception inner) : base(message, inner)
         {
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NotFoundException"/> class.
         /// </summary>
