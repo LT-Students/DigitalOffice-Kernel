@@ -30,8 +30,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
 
         public async Task InvokeAsync(HttpContext context, [FromServices] IRequestClient<IUserJwtRequest> client)
         {
-            if (context.Request.Method == HttpMethods.Post &&
-                tokenConfiguration.SkippedEndpoints.Any(
+            if (tokenConfiguration.SkippedEndpoints.Any(
                     url => url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase)))
             {
                 await requestDelegate.Invoke(context);
