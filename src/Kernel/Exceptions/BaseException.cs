@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LT.DigitalOffice.Kernel.Exceptions
 {
@@ -24,6 +25,10 @@ namespace LT.DigitalOffice.Kernel.Exceptions
         }
 
         protected BaseException(string message) : base(message)
+        {
+        }
+
+        protected BaseException(IEnumerable<string> messages) : base(new StringBuilder().AppendJoin("\n", messages).ToString())
         {
         }
 

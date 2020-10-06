@@ -21,7 +21,7 @@ namespace LT.DigitalOffice.Kernel
         public static async Task HandleCustomException(HttpContext context)
         {
             var exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
-            
+
             var errorResponse = new ErrorResponse
             {
                 UtcTime = DateTime.UtcNow,

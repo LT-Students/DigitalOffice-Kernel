@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Text;
 
 namespace LT.DigitalOffice.Kernel.Exceptions
 {
@@ -25,6 +26,14 @@ namespace LT.DigitalOffice.Kernel.Exceptions
         /// </summary>
         /// <param name="message">Exception message.</param>
         public BadRequestException(string message) : base(message)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BadRequestException"/> class.
+        /// </summary>
+        /// <param name="messages">Exception messages.</param>
+        public BadRequestException(IEnumerable<string> messages) : base(new StringBuilder().AppendJoin("\n", messages).ToString())
         {
         }
 
