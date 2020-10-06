@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Text;
 
 namespace LT.DigitalOffice.Kernel.Exceptions
 {
@@ -29,12 +31,20 @@ namespace LT.DigitalOffice.Kernel.Exceptions
         /// <summary>
         /// Initializes a new instance of the <see cref="NotFoundException"/> class.
         /// </summary>
+        /// <param name="messages">Exception messages.</param>
+        public NotFoundException(IEnumerable<string> messages) : base(new StringBuilder().AppendJoin("\n", messages).ToString())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NotFoundException"/> class.
+        /// </summary>
         /// <param name="message">Exception message.</param>
         /// <param name="inner">Inner exception.</param>
         public NotFoundException(string message, Exception inner) : base(message, inner)
         {
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="NotFoundException"/> class.
         /// </summary>
