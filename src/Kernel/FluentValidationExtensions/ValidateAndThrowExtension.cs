@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using System.Linq;
 
 namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
 {
