@@ -5,6 +5,7 @@
         <AssemblyName>LT.DigitalOffice.Kernel</AssemblyName>
         <RootNamespace>LT.DigitalOffice.Kernel</RootNamespace>
         <Version>1.0.8</Version>
+
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 

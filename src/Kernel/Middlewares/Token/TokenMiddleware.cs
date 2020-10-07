@@ -57,7 +57,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
                 }
                 else
                 {
-                    throw new ForbiddenException(string.Join(", ", response.Message.Errors));
+                    throw new ForbiddenException(response.Message.Errors);
                 }
             }
         }
