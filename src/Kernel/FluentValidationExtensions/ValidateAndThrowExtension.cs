@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using System.Linq;
 
 namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
 {
@@ -17,9 +18,12 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
         {
             var result = validator.Validate(instance, options => options.IncludeRuleSets(ruleSet));
 
-            if (!result.IsValid)
+            if (result != null && !result.IsValid)
             {
-                throw new ValidationException(result.Errors.ToString());
+                var messages = result.Errors.Select(x => x.ErrorMessage);
+                string message = string.Join("\n", messages);
+
+                throw new ValidationException(message);
             }
         }
     }
