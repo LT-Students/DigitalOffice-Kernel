@@ -13,10 +13,9 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
 		/// <param name="validator">The validator this method is extending.</param>
 		/// <param name="instance">The instance of the type we are validating.</param>
 		/// <param name="ruleSet">Optional: a ruleset when need to validate against.</param>
-        [System.Obsolete]
         public static void ValidateAndThrowCustom<T>(this IValidator<T> validator, T instance, string ruleSet = null)
         {
-            var result = validator.Validate(instance, ruleSet: ruleSet);
+            var result = validator.Validate(instance, options => options.IncludeRuleSets(ruleSet));
 
             if (!result.IsValid)
             {
