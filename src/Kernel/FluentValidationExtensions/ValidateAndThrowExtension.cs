@@ -20,10 +20,7 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
 
             if (result != null && !result.IsValid)
             {
-                var messages = result.Errors.Select(x => x.ErrorMessage);
-                string message = string.Join("\n", messages);
-
-                throw new ValidationException(message);
+                throw new ValidationException(string.Join("\n", result.Errors));
             }
         }
     }
