@@ -11,6 +11,9 @@ using Microsoft.Extensions.Options;
 
 namespace LT.DigitalOffice.Kernel.Middlewares.Token
 {
+    /// <summary>
+    /// Check JW token middleware.
+    /// </summary>
     public class TokenMiddleware
     {
         private const string Token = "token";
@@ -19,6 +22,9 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
         private readonly RequestDelegate requestDelegate;
         private readonly TokenConfiguration tokenConfiguration;
 
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public TokenMiddleware(
             RequestDelegate requestDelegate,
             [FromServices] IOptions<TokenConfiguration> option)
@@ -28,10 +34,16 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
             tokenConfiguration = option.Value;
         }
 
-        public async Task InvokeAsync(HttpContext context, [FromServices] IRequestClient<IUserJwtRequest> client)
+        /// <summary>
+        /// Invoke check token action.
+        /// </summary>
+        public async Task InvokeAsync(
+            HttpContext context,
+            [FromServices] IRequestClient<ICheckTokenRequest> client)
         {
             if (tokenConfiguration.SkippedEndpoints.Any(
-                    url => url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase)))
+                    url =>
+                        url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase)))
             {
                 await requestDelegate.Invoke(context);
             }
@@ -44,12 +56,8 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
                     throw new ForbiddenException(DonNotHaveTokenMessage);
                 }
 
-                var userToken = new
-                {
-                    Token = context.Request.Headers[Token]
-                };
-
-                var response = await client.GetResponse<IOperationResult<bool>>(userToken);
+                var response = await client.GetResponse<IOperationResult<bool>>(
+                    ICheckTokenRequest.CreateObj(token));
 
                 if (response.Message.IsSuccess)
                 {
