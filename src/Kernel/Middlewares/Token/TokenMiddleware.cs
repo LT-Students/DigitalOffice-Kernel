@@ -41,7 +41,8 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
             HttpContext context,
             [FromServices] IRequestClient<ICheckTokenRequest> client)
         {
-            if (tokenConfiguration.SkippedEndpoints.Any(
+            if (tokenConfiguration.SkippedEndpoints != null &&
+                tokenConfiguration.SkippedEndpoints.Any(
                     url =>
                         url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase)))
             {
