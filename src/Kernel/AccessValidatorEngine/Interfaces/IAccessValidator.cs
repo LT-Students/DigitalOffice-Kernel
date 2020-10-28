@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.Kernel.AccessValidator.Interfaces
+﻿namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
 {
     /// <summary>
     /// Provides access validation methods to check whether user is an administrator

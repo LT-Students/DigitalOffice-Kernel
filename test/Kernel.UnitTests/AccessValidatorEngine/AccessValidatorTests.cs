@@ -1,6 +1,8 @@
-﻿using LT.DigitalOffice.Kernel.AccessValidator.Interfaces;
-using LT.DigitalOffice.Kernel.AccessValidator.Requests;
+﻿using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
+using LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces;
+using LT.DigitalOffice.Kernel.AccessValidatorEngine;
 using LT.DigitalOffice.Kernel.Broker;
+using LT.DigitalOffice.Kernel.Exceptions;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
@@ -8,11 +10,9 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
-using AV = LT.DigitalOffice.Kernel.AccessValidator;
 
-namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
+namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
 {
     public class OperationResult<T> : IOperationResult<T>
     {
@@ -46,7 +46,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
 
             httpContextMock = new Mock<IHttpContextAccessor>();
 
-            accessValidator = new AV.AccessValidator(
+            accessValidator = new AccessValidator(
                 httpContextMock.Object,
                 requestClientCRSMock.Object,
                 requestClientUSMock.Object);
@@ -77,7 +77,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
             {
                 IsSuccess = true,
                 Errors = new List<string>(),
-                Body = new Boolean()
+                Body = new bool()
             };
 
             responseBrokerMock
@@ -128,8 +128,9 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
                 .Setup(h => h.HttpContext.Request.Headers["UserId"])
                 .Returns(userId);
 
-            Assert.That(() => accessValidator.IsAdmin(),
-                Throws.InstanceOf<Exception>().And.Message.EqualTo("Failed to send request via the broker"));
+            Assert.Throws<NullReferenceException>(
+                () => accessValidator.IsAdmin(),
+                "Failed to send request via the broker.");
         }
 
         [Test]
@@ -175,8 +176,9 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
                 .Setup(h => h.HttpContext.Request.Headers["UserId"])
                 .Returns(userId);
 
-            Assert.That(() => accessValidator.HasRights(RIGHT_ID),
-                Throws.InstanceOf<Exception>().And.Message.EqualTo("Failed to send request via the broker"));
+            Assert.Throws<NullReferenceException>(
+                () => accessValidator.HasRights(RIGHT_ID),
+                "Failed to send request via the broker.");
         }
 
         [Test]
@@ -186,8 +188,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
                 .Setup(h => h.HttpContext.Request.Headers["UserId"])
                 .Returns("SampleText");
 
-                Assert.Throws<FormatException>(() => accessValidator.IsAdmin());
-                Assert.Throws<FormatException>(() => accessValidator.HasRights(RIGHT_ID));
+                Assert.Throws<BadRequestException>(() => accessValidator.IsAdmin());
+                Assert.Throws<BadRequestException>(() => accessValidator.HasRights(RIGHT_ID));
         }
 
         [Test]
@@ -197,8 +199,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
                 .Setup(h => h.HttpContext.Request.Headers["UserId"])
                 .Returns<StringValues>(null);
 
-            Assert.Throws<NullReferenceException>(() => accessValidator.IsAdmin());
-            Assert.Throws<NullReferenceException>(() => accessValidator.HasRights(RIGHT_ID));
+            Assert.Throws<BadRequestException>(() => accessValidator.IsAdmin());
+            Assert.Throws<BadRequestException>(() => accessValidator.HasRights(RIGHT_ID));
         }
 
         [Test]
@@ -213,8 +215,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidator
                 .Setup(h => h.HttpContext.Request.Headers["UserId"])
                 .Returns(stringValues);
 
-            Assert.Throws<HttpListenerException>(() => accessValidator.IsAdmin());
-            Assert.Throws<HttpListenerException>(() => accessValidator.HasRights(RIGHT_ID));
+            Assert.Throws<BadRequestException>(() => accessValidator.IsAdmin());
+            Assert.Throws<BadRequestException>(() => accessValidator.HasRights(RIGHT_ID));
         }
     }
 }
