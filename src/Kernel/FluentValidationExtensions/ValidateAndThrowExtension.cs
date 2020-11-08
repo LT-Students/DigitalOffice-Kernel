@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LT.DigitalOffice.Kernel.Exceptions;
 using System.Linq;
 
 namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
@@ -28,7 +29,7 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
 
             if (result != null && !result.IsValid)
             {
-                throw new ValidationException(string.Join("\n", result.Errors));
+                throw new UnprocessableEntityException(string.Join("\n", result.Errors));
             }
         }
     }
