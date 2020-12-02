@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
 {
@@ -27,7 +28,8 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
             params string[] allowedOps) where TEntity : Operation
         {
             return ruleBuilder.Must(x => allowedOps.Contains(x.FirstOrDefault(x => x.path == path).op))
-            .WithMessage($"Your operation with {path} not allowed.");
+            .WithMessage($"Your operation with {path} not allowed. " +
+            $"Allowed ops: {new StringBuilder().AppendJoin(", ", allowedOps)}");
         }
     }
 }
