@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.0.16</Version>
+        <Version>1.0.17</Version>
 
         <TargetFramework>netstandard2.1</TargetFramework>
 
@@ -11,6 +11,8 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <NoWarn>1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
