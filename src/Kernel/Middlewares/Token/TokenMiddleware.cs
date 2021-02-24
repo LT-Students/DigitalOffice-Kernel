@@ -17,6 +17,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
     public class TokenMiddleware
     {
         private const string Token = "token";
+        private const string OptionsMethod = "OPTIONS";
         private const string DonNotHaveTokenMessage = "Enter token";
 
         private readonly RequestDelegate requestDelegate;
@@ -41,10 +42,11 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
             HttpContext context,
             [FromServices] IRequestClient<ICheckTokenRequest> client)
         {
-            if (tokenConfiguration.SkippedEndpoints != null &&
-                tokenConfiguration.SkippedEndpoints.Any(
-                    url =>
-                        url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase)))
+            if (string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase) ||
+                (tokenConfiguration.SkippedEndpoints != null &&
+                 tokenConfiguration.SkippedEndpoints.Any(
+                     url =>
+                         url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase))))
             {
                 await requestDelegate.Invoke(context);
             }
