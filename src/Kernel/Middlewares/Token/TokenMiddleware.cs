@@ -59,11 +59,13 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
                     throw new ForbiddenException(DonNotHaveTokenMessage);
                 }
 
-                var response = await client.GetResponse<IOperationResult<bool>>(
+                var response = await client.GetResponse<IOperationResult<Guid>>(
                     ICheckTokenRequest.CreateObj(token));
 
                 if (response.Message.IsSuccess)
                 {
+                    context.Items["UserId"] = response.Message.Body;
+
                     await requestDelegate.Invoke(context);
                 }
                 else
