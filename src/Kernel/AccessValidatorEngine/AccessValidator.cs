@@ -1,7 +1,7 @@
-﻿using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
-using LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces;
+﻿using LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces;
+using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.Broker;
-using LT.DigitalOffice.Kernel.Exceptions;
+using LT.DigitalOffice.Kernel.Extensions;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,10 +12,11 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
     /// <inheritdoc/>
     public class AccessValidator : IAccessValidator
     {
-        private Guid userId;
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IRequestClient<IAccessValidatorCheckRightsServiceRequest> requestClientCRS;
-        private readonly IRequestClient<IAccessValidatorUserServiceRequest> requestClientUS;
+        private Guid _userId;
+
+        private readonly HttpContext _httpContext;
+        private readonly IRequestClient<IAccessValidatorCheckRightsServiceRequest> _requestClientCheckRightService;
+        private readonly IRequestClient<IAccessValidatorUserServiceRequest> _requestClientUserService;
 
         /// <summary>
         /// Constructor.
@@ -25,44 +26,22 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
             [FromServices] IRequestClient<IAccessValidatorCheckRightsServiceRequest> requestClientCRS,
             [FromServices] IRequestClient<IAccessValidatorUserServiceRequest> requestClientUS)
         {
-            this.requestClientCRS = requestClientCRS;
-            this.requestClientUS = requestClientUS;
-            this.httpContextAccessor = httpContextAccessor;
-        }
-
-        private Guid GetCurrentUserId()
-        {
-            if (httpContextAccessor.HttpContext.Request.Headers["UserId"].Count == 0)
-            {
-                throw new BadRequestException("There are no UserId headers in the request.");
-            }
-
-            var headersUserId = httpContextAccessor.HttpContext.Request.Headers["UserId"];
-
-            if (headersUserId.Count > 1)
-            {
-                throw new BadRequestException("There can't be more than one UserId in the request.");
-            }
-
-            if (!Guid.TryParse(headersUserId, out Guid userIdFromHeaders))
-            {
-                throw new BadRequestException("Incorrect GUID format.");
-            }
-
-            return userIdFromHeaders;
+            _requestClientCheckRightService = requestClientCRS;
+            _requestClientUserService = requestClientUS;
+            _httpContext = httpContextAccessor.HttpContext;
         }
 
         /// <inheritdoc/>
         public bool HasRights(int rightId)
         {
-            userId = GetCurrentUserId();
+            _userId = _httpContext.GetUserId();
 
-            var result = requestClientCRS.GetResponse<IOperationResult<bool>>(
-                IAccessValidatorCheckRightsServiceRequest.CreateObj(userId, rightId)).Result;
+            var result = _requestClientCheckRightService.GetResponse<IOperationResult<bool>>(
+                IAccessValidatorCheckRightsServiceRequest.CreateObj(_userId, rightId)).Result;
 
             if (result.Message == null)
             {
-                throw new NullReferenceException("Failed to send request via the broker.");
+                throw new NullReferenceException("Failed to send request to CheckRightService via the broker.");
             }
 
             return result.Message.Body;
@@ -71,14 +50,14 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         /// <inheritdoc/>
         public bool IsAdmin()
         {
-            userId = GetCurrentUserId();
+            _userId = _httpContext.GetUserId();
 
-            var result = requestClientUS.GetResponse<IOperationResult<bool>>(
-                IAccessValidatorUserServiceRequest.CreateObj(userId)).Result;
+            var result = _requestClientUserService.GetResponse<IOperationResult<bool>>(
+                IAccessValidatorUserServiceRequest.CreateObj(_userId)).Result;
 
             if (result.Message == null)
             {
-                throw new NullReferenceException("Failed to send request via the broker.");
+                throw new NullReferenceException("Failed to send request to UserService via the broker.");
             }
 
             return result.Message.Body;

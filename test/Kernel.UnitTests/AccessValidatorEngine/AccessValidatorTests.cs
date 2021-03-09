@@ -11,6 +11,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LT.DigitalOffice.Kernel.Constants;
 
 namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
 {
@@ -25,198 +26,175 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
 
     public class AccessValidatorTests
     {
-        private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> requestClientUSMock;
-        private Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>> requestClientCRSMock;
-        private Mock<Response<IOperationResult<bool>>> responseBrokerMock;
-        private Mock<IHttpContextAccessor> httpContextMock;
+        private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> _requestClientUSMock;
+        private Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>> _requestClientCRSMock;
+        private Mock<Response<IOperationResult<bool>>> _responseBrokerMock;
+        private Mock<IHttpContextAccessor> _httpContextAccessorMock;
+        private Mock<HttpContext> _httpContextMock;
 
-        private string userId;
-        private IAccessValidator accessValidator;
+        private string _userId;
+        private IAccessValidator _accessValidator;
 
-        private const int RIGHT_ID = 5;
+        private const int RightId = 5;
 
-        private OperationResult<bool> operationResult;
+        private OperationResult<bool> _operationResult = new OperationResult<bool>();
+
+        private void BrokerSetUp()
+        {
+            _requestClientUSMock = new Mock<IRequestClient<IAccessValidatorUserServiceRequest>>();
+            _requestClientCRSMock = new Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>>();
+
+            _responseBrokerMock = new Mock<Response<IOperationResult<bool>>>();
+            _responseBrokerMock
+                .Setup(x => x.Message)
+                .Returns(_operationResult);
+
+            _requestClientUSMock
+                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, default))
+                .Returns(Task.FromResult(_responseBrokerMock.Object));
+
+            _requestClientCRSMock
+                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, default))
+                .Returns(Task.FromResult(_responseBrokerMock.Object));
+        }
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            userId = Guid.NewGuid().ToString();
+            _userId = Guid.NewGuid().ToString();
 
             BrokerSetUp();
 
-            httpContextMock = new Mock<IHttpContextAccessor>();
+            _httpContextMock = new Mock<HttpContext>();
 
-            accessValidator = new AccessValidator(
-                httpContextMock.Object,
-                requestClientCRSMock.Object,
-                requestClientUSMock.Object);
-        }
+            _httpContextAccessorMock = new Mock<IHttpContextAccessor>();
+            _httpContextAccessorMock
+                .Setup(x => x.HttpContext)
+                .Returns(_httpContextMock.Object);
 
-        public void BrokerSetUp()
-        {
-            requestClientUSMock = new Mock<IRequestClient<IAccessValidatorUserServiceRequest>>();
-            requestClientCRSMock = new Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>>();
-
-            responseBrokerMock = new Mock<Response<IOperationResult<bool>>>();
-
-            requestClientUSMock.Setup(
-                x => x.GetResponse<IOperationResult<bool>>(
-                    It.IsAny<object>(), default, default))
-                .Returns(Task.FromResult(responseBrokerMock.Object));
-
-            requestClientCRSMock.Setup(
-                x => x.GetResponse<IOperationResult<bool>>(
-                    It.IsAny<object>(), default, default))
-                .Returns(Task.FromResult(responseBrokerMock.Object));
+            _accessValidator = new AccessValidator(
+                _httpContextAccessorMock.Object,
+                _requestClientCRSMock.Object,
+                _requestClientUSMock.Object);
         }
 
         [SetUp]
         public void SetUp()
         {
-            operationResult = new OperationResult<bool>
-            {
-                IsSuccess = true,
-                Errors = new List<string>(),
-                Body = new bool()
-            };
+            _httpContextMock
+                .Setup(x => x.Items[ConstStrings.UserId])
+                .Returns(_userId);
 
-            responseBrokerMock
-                .SetupGet(x => x.Message)
-                .Returns(operationResult);
+            _httpContextMock
+                .Setup(x => x.Items.ContainsKey(ConstStrings.UserId))
+                .Returns(true);
         }
 
         [Test]
         public void ShouldReturnTrueWhenUserIsAdmin()
         {
-            operationResult.IsSuccess = true;
-            operationResult.Body = true;
+            _operationResult.IsSuccess = true;
+            _operationResult.Body = true;
 
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns(userId);
-
-            var result = accessValidator.IsAdmin();
-
-            Assert.AreEqual(true, result);
+            Assert.IsTrue(_accessValidator.IsAdmin());
         }
 
         [Test]
         public void ShouldReturnFalseWhenUserIsNotAdmin()
         {
-            operationResult.IsSuccess = true;
-            operationResult.Body = false;
+            _operationResult.IsSuccess = true;
+            _operationResult.Body = false;
 
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns(userId);
-
-            var result = accessValidator.IsAdmin();
-
-            Assert.AreEqual(false, result);
+            Assert.IsFalse(_accessValidator.IsAdmin());
         }
 
         [Test]
         public void ShouldThrowExceptionWhenUserServiceConsumerRespondsWithErrors()
         {
-            operationResult = null;
-
-            responseBrokerMock
-                .SetupGet(x => x.Message)
-                .Returns(operationResult);
-
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns(userId);
+            _responseBrokerMock
+                .Setup(x => x.Message)
+                .Returns((IOperationResult<bool>)null);
 
             Assert.Throws<NullReferenceException>(
-                () => accessValidator.IsAdmin(),
-                "Failed to send request via the broker.");
+                () => _accessValidator.IsAdmin(),
+                "Failed to send request to UserService via the broker.");
         }
 
         [Test]
         public void ShouldReturnTrueWhenUserHasRights()
         {
-            operationResult.IsSuccess = true;
-            operationResult.Body = true;
+            _operationResult.IsSuccess = true;
+            _operationResult.Body = true;
 
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns(userId);
-
-            var result = accessValidator.HasRights(RIGHT_ID);
-
-            Assert.AreEqual(true, result);
+            Assert.IsTrue(_accessValidator.HasRights(RightId));
         }
 
         [Test]
         public void ShouldReturnFalseWhenUserDoesntHaveRights()
         {
-            operationResult.IsSuccess = true;
-            operationResult.Body = false;
+            _operationResult.IsSuccess = true;
+            _operationResult.Body = false;
 
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns(userId);
-
-            var result = accessValidator.HasRights(RIGHT_ID);
-
-            Assert.AreEqual(false, result);
+            Assert.IsFalse(_accessValidator.HasRights(RightId));
         }
 
         [Test]
         public void ShouldThrowExceptionWhenCheckRightsServiceConsumerRespondsWithErrors()
         {
-            operationResult = null;
-
-            responseBrokerMock
-                .SetupGet(x => x.Message)
-                .Returns(operationResult);
-
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns(userId);
+            _responseBrokerMock
+                .Setup(x => x.Message)
+                .Returns((IOperationResult<bool>)null);
 
             Assert.Throws<NullReferenceException>(
-                () => accessValidator.HasRights(RIGHT_ID),
-                "Failed to send request via the broker.");
+                () => _accessValidator.HasRights(RightId),
+                "Failed to send request to CheckRightService via the broker.");
         }
 
         [Test]
         public void ShouldThrowFormatExceptionWhenThereIsInvalidGuidInHeaders()
         {
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns("SampleText");
+            string text = "Not GUID text.";
 
-                Assert.Throws<BadRequestException>(() => accessValidator.IsAdmin());
-                Assert.Throws<BadRequestException>(() => accessValidator.HasRights(RIGHT_ID));
+            _httpContextMock
+                .Setup(x => x.Items[ConstStrings.UserId])
+                .Returns(text);
+
+            Assert.Throws<InvalidCastException>(
+                () => _accessValidator.IsAdmin(),
+                $"UserId '{text}' value in HttpContext is not in Guid format.");
+            Assert.Throws<InvalidCastException>(
+                () => _accessValidator.HasRights(RightId),
+                $"UserId '{text}' value in HttpContext is not in Guid format.");
         }
 
         [Test]
         public void ShouldThrowNullReferenceExceptionWhenThereIsNoUserIdInHeaders()
         {
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns<StringValues>(null);
+            _httpContextMock
+                .Setup(x => x.Items[ConstStrings.UserId])
+                .Returns(null);
 
-            Assert.Throws<BadRequestException>(() => accessValidator.IsAdmin());
-            Assert.Throws<BadRequestException>(() => accessValidator.HasRights(RIGHT_ID));
+            Assert.Throws<ArgumentException>(
+                () => _accessValidator.IsAdmin(),
+                "UserId value in HttpContext is empty.");
+            Assert.Throws<ArgumentException>(
+                () => _accessValidator.HasRights(RightId),
+                "UserId value in HttpContext is empty.");
         }
 
         [Test]
-        public void ShouldThrowListenerExceptionWhenThereIsMoreThanOneUserIdInHeaders()
+        public void HttpContextNotContainUserId()
         {
-            var stringValues = new StringValues(new string[]
-            {
-                "Guid1", "Guid2"
-            });
+            _httpContextMock
+                .Setup(x => x.Items.ContainsKey(ConstStrings.UserId))
+                .Returns(false);
 
-            httpContextMock
-                .Setup(h => h.HttpContext.Request.Headers["UserId"])
-                .Returns(stringValues);
-
-            Assert.Throws<BadRequestException>(() => accessValidator.IsAdmin());
-            Assert.Throws<BadRequestException>(() => accessValidator.HasRights(RIGHT_ID));
+            Assert.Throws<ArgumentNullException>(
+                () => _accessValidator.IsAdmin(),
+                "HttpContext does not contain UserId.");
+            Assert.Throws<ArgumentNullException>(
+                () => _accessValidator.HasRights(RightId),
+                "HttpContext does not contain UserId.");
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Broker.Requests;
 using LT.DigitalOffice.Kernel.Broker;
+using LT.DigitalOffice.Kernel.Constants;
 using LT.DigitalOffice.Kernel.Exceptions;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
@@ -64,7 +65,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
 
                 if (response.Message.IsSuccess)
                 {
-                    context.Items["UserId"] = response.Message.Body;
+                    context.Items[ConstStrings.UserId] = response.Message.Body;
 
                     await requestDelegate.Invoke(context);
                 }

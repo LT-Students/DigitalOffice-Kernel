@@ -1,0 +1,31 @@
+﻿using LT.DigitalOffice.Kernel.Constants;
+using Microsoft.AspNetCore.Http;
+using System;
+
+namespace LT.DigitalOffice.Kernel.Extensions
+{
+    public static class HttpContexExtensions
+    {
+        public static Guid GetUserId(this HttpContext context)
+        {
+            if (!context.Items.ContainsKey(ConstStrings.UserId))
+            {
+                throw new ArgumentNullException("HttpContext does not contain UserId.");
+            }
+
+            string valueFromContext = context.Items[ConstStrings.UserId]?.ToString();
+            if (string.IsNullOrEmpty(valueFromContext))
+            {
+                throw new ArgumentException("UserId value in HttpContext is empty.");
+            }
+
+            if (!Guid.TryParse(valueFromContext, out Guid result))
+            {
+                throw new InvalidCastException(
+                    $"UserId '{valueFromContext}' value in HttpContext is not in Guid format.");
+            }
+
+            return result;
+        }
+    }
+}
