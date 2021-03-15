@@ -46,7 +46,7 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
         {
             return ruleBuilder
                 .Must(x => allowedOps.Contains(x.FirstOrDefault(x => x.path == path).op))
-                .WithMessage($"Your operation with {path} not allowed. Allowed operations: {string.Join(", ", allowedOps)}");
+                .WithMessage($"Your operation with '{path}' not allowed. Allowed operations: '{string.Join(", ", allowedOps)}'");
         }
     }
 }
