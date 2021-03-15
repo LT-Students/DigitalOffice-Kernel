@@ -27,7 +27,7 @@ jobs:
       - name: Test
         run: dotnet test --no-restore --verbosity normal
       - name: Pack nuget
-        run: dotnet pack --output ./artifacts --configuration Release
+        run: dotnet pack --no-build --output ./artifacts --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - name: Push nuget
-        run: dotnet nuget push ./artifacts/**.nupkg --source nuget.org --api-key ${{secrets.NUGET}}
+        run: dotnet nuget push ./artifacts/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
 
