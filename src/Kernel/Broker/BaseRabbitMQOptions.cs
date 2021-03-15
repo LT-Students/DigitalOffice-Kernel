@@ -1,5 +1,4 @@
 ﻿using LT.DigitalOffice.Kernel.AccessValidatorEngine;
-using System;
 
 namespace LT.DigitalOffice.Kernel.Broker
 {
@@ -8,8 +7,6 @@ namespace LT.DigitalOffice.Kernel.Broker
   /// </summary>
   public class BaseRabbitMqOptions
   {
-    private string _host;
-
     private const string RabbitMqProtocol = "rabbitmq";
 
     /// <summary>
@@ -17,24 +14,15 @@ namespace LT.DigitalOffice.Kernel.Broker
     /// </summary>
     public const string RabbitMqSectionName = "RabbitMQ";
 
+    public string BaseUrl
+    {
+      get { return $"{RabbitMqProtocol}://{Host}"; }
+    }
+
     /// <summary>
     /// RabbitMQ host address.
     /// </summary>
-    public string Host
-    {
-      get
-      {
-        return $"{RabbitMqProtocol}://{_host}";
-      }
-      set
-      {
-        if (string.IsNullOrEmpty(value))
-        {
-          throw new ArgumentNullException(nameof(Host));
-        }
-        _host = value;
-      }
-    }
+    public string Host { get; set; }
 
     /// <summary>
     /// RabbitMQ username.
