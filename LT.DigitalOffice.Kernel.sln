@@ -9,7 +9,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BCFECB30-2AD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{12F33343-2D9F-4585-9B0E-02DDF4046625}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.UnitTests", "test\Kernel.UnitTests\Kernel.UnitTests.csproj", "{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.UnitTests", "test\Kernel.UnitTests\Kernel.UnitTests.csproj", "{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0D82792-8BFB-48B4-893D-65E4A47595CB}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.github\workflows\main.yml = .github\workflows\main.yml
+		.github\workflows\nuget.yml = .github\workflows\nuget.yml
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
