@@ -32,10 +32,10 @@ namespace Microsoft.Extensions.DependencyInjection
             BaseRabbitMqOptions rabbitmqOptions)
         {
             busConfigurator.AddRequestClient<IAccessValidatorUserServiceRequest>(
-                new Uri(rabbitmqOptions.UserServiceCheckUserIsAdminEndpoint));
+                new Uri(rabbitmqOptions.CheckUserIsAdminEndpoint));
 
             busConfigurator.AddRequestClient<IAccessValidatorCheckRightsServiceRequest>(
-                new Uri(rabbitmqOptions.CRServiceCheckUserRightsEndpoint));
+                new Uri(rabbitmqOptions.CheckUserRightsEndpoint));
 
             return busConfigurator;
         }
