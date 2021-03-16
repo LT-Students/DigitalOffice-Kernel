@@ -37,11 +37,11 @@ namespace LT.DigitalOffice.Kernel.Broker
     /// <summary>
     /// RabbitMQ UserService channel url used by <see cref="AccessValidator"/>.
     /// </summary>
-    public string UserServiceCheckUserIsAdminEndpoint { get; set; }
+    public string CheckUserIsAdminEndpoint { get; set; }
 
     /// <summary>
     /// RabbitMQ CheckRightsService channel url used by <see cref="AccessValidator"/>.
     /// </summary>
-    public string CRServiceCheckUserRightsEndpoint { get; set; }
+    public string CheckUserRightsEndpoint { get; set; }
   }
 }
