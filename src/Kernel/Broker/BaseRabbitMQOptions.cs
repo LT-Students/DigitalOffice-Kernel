@@ -43,5 +43,7 @@ namespace LT.DigitalOffice.Kernel.Broker
     /// RabbitMQ CheckRightsService channel url used by <see cref="AccessValidator"/>.
     /// </summary>
     public string CheckUserRightsEndpoint { get; set; }
+
+    public string ValidateTokenEndpoint { get; set; }
   }
 }
