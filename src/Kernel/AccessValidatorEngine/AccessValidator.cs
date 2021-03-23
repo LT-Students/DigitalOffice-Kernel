@@ -17,6 +17,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
 
         private readonly HttpContext _httpContext;
         private readonly IRequestClient<IAccessValidatorCheckRightsServiceRequest> _requestClientCheckRightService;
+        private readonly IRequestClient<IAccessValidatorCheckRightsCollectionServiceRequest> _requestClientCheckRightCollectionService;
         private readonly IRequestClient<IAccessValidatorUserServiceRequest> _requestClientUserService;
 
         /// <summary>
@@ -25,9 +26,11 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         public AccessValidator(
             [FromServices] IHttpContextAccessor httpContextAccessor,
             [FromServices] IRequestClient<IAccessValidatorCheckRightsServiceRequest> requestClientCRS,
+            [FromServices] IRequestClient<IAccessValidatorCheckRightsCollectionServiceRequest> requestClientCRCS,
             [FromServices] IRequestClient<IAccessValidatorUserServiceRequest> requestClientUS)
         {
             _requestClientCheckRightService = requestClientCRS;
+            _requestClientCheckRightCollectionService = requestClientCRCS;
             _requestClientUserService = requestClientUS;
             _httpContext = httpContextAccessor.HttpContext;
         }
@@ -52,7 +55,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         {
             _userId = _httpContext.GetUserId();
 
-            var result = _requestClientCheckRightService.GetResponse<IOperationResult<bool>>(
+            var result = _requestClientCheckRightCollectionService.GetResponse<IOperationResult<bool>>(
                 IAccessValidatorCheckRightsCollectionServiceRequest.CreateObj(_userId, rightIds)).Result;
 
             if (result.Message == null)

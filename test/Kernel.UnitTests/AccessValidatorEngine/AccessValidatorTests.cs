@@ -28,6 +28,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
     {
         private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> _requestClientUSMock;
         private Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>> _requestClientCRSMock;
+        private Mock<IRequestClient<IAccessValidatorCheckRightsCollectionServiceRequest>> _requestClientCRCSMock;
         private Mock<Response<IOperationResult<bool>>> _responseBrokerMock;
         private Mock<IHttpContextAccessor> _httpContextAccessorMock;
         private Mock<HttpContext> _httpContextMock;
@@ -36,6 +37,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         private IAccessValidator _accessValidator;
 
         private const int RightId = 5;
+        private List<int> RightIds = new List<int>() { 5, 4 };
 
         private OperationResult<bool> _operationResult = new OperationResult<bool>();
 
@@ -43,6 +45,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         {
             _requestClientUSMock = new Mock<IRequestClient<IAccessValidatorUserServiceRequest>>();
             _requestClientCRSMock = new Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>>();
+            _requestClientCRCSMock = new Mock<IRequestClient<IAccessValidatorCheckRightsCollectionServiceRequest>>();
 
             _responseBrokerMock = new Mock<Response<IOperationResult<bool>>>();
             _responseBrokerMock
@@ -54,6 +57,10 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 .Returns(Task.FromResult(_responseBrokerMock.Object));
 
             _requestClientCRSMock
+                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, default))
+                .Returns(Task.FromResult(_responseBrokerMock.Object));
+
+            _requestClientCRCSMock
                 .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, default))
                 .Returns(Task.FromResult(_responseBrokerMock.Object));
         }
@@ -75,6 +82,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             _accessValidator = new AccessValidator(
                 _httpContextAccessorMock.Object,
                 _requestClientCRSMock.Object,
+                _requestClientCRCSMock.Object,
                 _requestClientUSMock.Object);
         }
 
@@ -127,6 +135,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             _operationResult.Body = true;
 
             Assert.IsTrue(_accessValidator.HasRight(RightId));
+            Assert.IsTrue(_accessValidator.HasRights(RightIds));
         }
 
         [Test]
@@ -136,6 +145,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             _operationResult.Body = false;
 
             Assert.IsFalse(_accessValidator.HasRight(RightId));
+            Assert.IsFalse(_accessValidator.HasRights(RightIds));
         }
 
         [Test]
@@ -147,6 +157,9 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
 
             Assert.Throws<NullReferenceException>(
                 () => _accessValidator.HasRight(RightId),
+                "Failed to send request to CheckRightService via the broker.");
+            Assert.Throws<NullReferenceException>(
+                () => _accessValidator.HasRights(RightIds),
                 "Failed to send request to CheckRightService via the broker.");
         }
 
@@ -165,6 +178,9 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             Assert.Throws<InvalidCastException>(
                 () => _accessValidator.HasRight(RightId),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
+            Assert.Throws<InvalidCastException>(
+                () => _accessValidator.HasRights(RightIds),
+                $"UserId '{text}' value in HttpContext is not in Guid format.");
         }
 
         [Test]
@@ -180,6 +196,9 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             Assert.Throws<ArgumentException>(
                 () => _accessValidator.HasRight(RightId),
                 "UserId value in HttpContext is empty.");
+            Assert.Throws<ArgumentException>(
+                () => _accessValidator.HasRights(RightIds),
+                "UserId value in HttpContext is empty.");
         }
 
         [Test]
@@ -194,6 +213,9 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 "HttpContext does not contain UserId.");
             Assert.Throws<ArgumentNullException>(
                 () => _accessValidator.HasRight(RightId),
+                "HttpContext does not contain UserId.");
+            Assert.Throws<ArgumentNullException>(
+                () => _accessValidator.HasRights(RightIds),
                 "HttpContext does not contain UserId.");
         }
     }
