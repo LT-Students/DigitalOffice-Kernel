@@ -13,19 +13,19 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests
         /// </summary>
         Guid UserId { get; set; }
         /// <summary>
-        /// Right ID.
+        /// Right Ids.
         /// </summary>
         IEnumerable<int> RightIds { get; set; }
 
         /// <summary>
-        /// Create anonymouse object that can be deserialized into <see cref="IAccessValidatorCheckRightsServiceRequest"/>.
+        /// Create anonymouse object that can be deserialized into <see cref="IAccessValidatorCheckRightsCollectionServiceRequest"/>.
         /// </summary>
         static object CreateObj(Guid userId, IEnumerable<int> rightIds)
         {
             return new
             {
                 UserId = userId,
-                RightId = rightIds
+                RightIds = rightIds
             };
         }
     }
