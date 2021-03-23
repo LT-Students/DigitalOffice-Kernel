@@ -6,6 +6,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
 {
@@ -32,12 +33,27 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         }
 
         /// <inheritdoc/>
-        public bool HasRights(int rightId)
+        public bool HasRight(int rightId)
         {
             _userId = _httpContext.GetUserId();
 
             var result = _requestClientCheckRightService.GetResponse<IOperationResult<bool>>(
                 IAccessValidatorCheckRightsServiceRequest.CreateObj(_userId, rightId)).Result;
+
+            if (result.Message == null)
+            {
+                throw new NullReferenceException("Failed to send request to CheckRightService via the broker.");
+            }
+
+            return result.Message.Body;
+        }
+
+        public bool HasRights(IEnumerable<int> rightIds)
+        {
+            _userId = _httpContext.GetUserId();
+
+            var result = _requestClientCheckRightService.GetResponse<IOperationResult<bool>>(
+                IAccessValidatorCheckRightsCollectionServiceRequest.CreateObj(_userId, rightIds)).Result;
 
             if (result.Message == null)
             {
