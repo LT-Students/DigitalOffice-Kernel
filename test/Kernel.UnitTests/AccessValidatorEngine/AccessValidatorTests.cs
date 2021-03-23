@@ -126,7 +126,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             _operationResult.IsSuccess = true;
             _operationResult.Body = true;
 
-            Assert.IsTrue(_accessValidator.HasRights(RightId));
+            Assert.IsTrue(_accessValidator.HasRight(RightId));
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             _operationResult.IsSuccess = true;
             _operationResult.Body = false;
 
-            Assert.IsFalse(_accessValidator.HasRights(RightId));
+            Assert.IsFalse(_accessValidator.HasRight(RightId));
         }
 
         [Test]
@@ -146,7 +146,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 .Returns((IOperationResult<bool>)null);
 
             Assert.Throws<NullReferenceException>(
-                () => _accessValidator.HasRights(RightId),
+                () => _accessValidator.HasRight(RightId),
                 "Failed to send request to CheckRightService via the broker.");
         }
 
@@ -163,7 +163,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 () => _accessValidator.IsAdmin(),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
             Assert.Throws<InvalidCastException>(
-                () => _accessValidator.HasRights(RightId),
+                () => _accessValidator.HasRight(RightId),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
         }
 
@@ -178,7 +178,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 () => _accessValidator.IsAdmin(),
                 "UserId value in HttpContext is empty.");
             Assert.Throws<ArgumentException>(
-                () => _accessValidator.HasRights(RightId),
+                () => _accessValidator.HasRight(RightId),
                 "UserId value in HttpContext is empty.");
         }
 
@@ -193,7 +193,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 () => _accessValidator.IsAdmin(),
                 "HttpContext does not contain UserId.");
             Assert.Throws<ArgumentNullException>(
-                () => _accessValidator.HasRights(RightId),
+                () => _accessValidator.HasRight(RightId),
                 "HttpContext does not contain UserId.");
         }
     }
