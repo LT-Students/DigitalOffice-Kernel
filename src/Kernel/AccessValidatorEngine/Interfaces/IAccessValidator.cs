@@ -1,4 +1,6 @@
-﻿namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
+﻿using System.Collections.Generic;
+
+namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
 {
     /// <summary>
     /// Provides access validation methods to check whether user is an administrator
@@ -13,10 +15,17 @@
         bool IsAdmin();
 
         /// <summary>
-        /// Checks whether the user has certain rights.
+        /// Checks whether the user has certain right.
         /// </summary>
         /// <param name="rightId">ID of the right.</param>
         /// <returns>True, if there's a UserId-RightId pair in the database. False otherwise.</returns>
-        bool HasRights(int rightId);
+        bool HasRight(int rightId);
+
+        /// <summary>
+        /// Checks whether the user has a list of rights.
+        /// </summary>
+        /// <param name="rightIds">Ids of the rigths.</param>
+        /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
+        bool HasRights(IEnumerable<int> rightIds);
     }
 }
