@@ -1,68 +1,61 @@
-﻿using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
+﻿using LT.DigitalOffice.Kernel.AccessValidatorEngine;
 using LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces;
-using LT.DigitalOffice.Kernel.AccessValidatorEngine;
+using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.Broker;
-using LT.DigitalOffice.Kernel.Exceptions;
+using LT.DigitalOffice.Kernel.Constants;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Primitives;
 using Moq;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using LT.DigitalOffice.Kernel.Constants;
 
 namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
 {
-    public class OperationResult<T> : IOperationResult<T>
-    {
-        public bool IsSuccess { get; set; }
-
-        public List<string> Errors { get; set; }
-
-        public T Body { get; set; }
-    }
-
     public class AccessValidatorTests
     {
-        private Mock<IRequestClient<IAccessValidatorUserServiceRequest>> _requestClientUSMock;
-        private Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>> _requestClientCRSMock;
-        private Mock<IRequestClient<IAccessValidatorCheckRightsCollectionServiceRequest>> _requestClientCRCSMock;
-        private Mock<Response<IOperationResult<bool>>> _responseBrokerMock;
+        private Mock<IRequestClient<ICheckUserIsAdminRequest>> _requestClientUSMock;
+        private Mock<IRequestClient<ICheckUserRightsRequest>> _requestClientCRSMock;
+        private Mock<Response<IOperationResult<bool>>> _brokerResponseMock;
         private Mock<IHttpContextAccessor> _httpContextAccessorMock;
+        private Mock<IOperationResult<bool>> _operationResultMock;
         private Mock<HttpContext> _httpContextMock;
 
         private string _userId;
         private IAccessValidator _accessValidator;
 
-        private const int RightId = 5;
-        private List<int> RightIds = new List<int>() { 5, 4 };
+        private int[] RightIds = new [] { 5, 4 };
 
-        private OperationResult<bool> _operationResult = new OperationResult<bool>();
+        private void ConfigureOperationResult(bool isSuccess, bool body)
+        {
+            _operationResultMock
+                .Setup(x => x.IsSuccess)
+                .Returns(isSuccess);
+
+            _operationResultMock
+                .Setup(x => x.Body)
+                .Returns(body);
+        }
 
         private void BrokerSetUp()
         {
-            _requestClientUSMock = new Mock<IRequestClient<IAccessValidatorUserServiceRequest>>();
-            _requestClientCRSMock = new Mock<IRequestClient<IAccessValidatorCheckRightsServiceRequest>>();
-            _requestClientCRCSMock = new Mock<IRequestClient<IAccessValidatorCheckRightsCollectionServiceRequest>>();
+            _operationResultMock = new Mock<IOperationResult<bool>>();
 
-            _responseBrokerMock = new Mock<Response<IOperationResult<bool>>>();
-            _responseBrokerMock
+            _requestClientUSMock = new Mock<IRequestClient<ICheckUserIsAdminRequest>>();
+            _requestClientCRSMock = new Mock<IRequestClient<ICheckUserRightsRequest>>();
+
+            _brokerResponseMock = new Mock<Response<IOperationResult<bool>>>();
+            _brokerResponseMock
                 .Setup(x => x.Message)
-                .Returns(_operationResult);
+                .Returns(_operationResultMock.Object);
 
             _requestClientUSMock
-                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, default))
-                .Returns(Task.FromResult(_responseBrokerMock.Object));
+                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(_brokerResponseMock.Object));
 
             _requestClientCRSMock
-                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, default))
-                .Returns(Task.FromResult(_responseBrokerMock.Object));
-
-            _requestClientCRCSMock
-                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, default))
-                .Returns(Task.FromResult(_responseBrokerMock.Object));
+                .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, It.IsAny<RequestTimeout>()))
+                .Returns(Task.FromResult(_brokerResponseMock.Object));
         }
 
         [OneTimeSetUp]
@@ -82,7 +75,6 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             _accessValidator = new AccessValidator(
                 _httpContextAccessorMock.Object,
                 _requestClientCRSMock.Object,
-                _requestClientCRCSMock.Object,
                 _requestClientUSMock.Object);
         }
 
@@ -101,8 +93,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         [Test]
         public void ShouldReturnTrueWhenUserIsAdmin()
         {
-            _operationResult.IsSuccess = true;
-            _operationResult.Body = true;
+            ConfigureOperationResult(true, true);
 
             Assert.IsTrue(_accessValidator.IsAdmin());
         }
@@ -110,8 +101,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         [Test]
         public void ShouldReturnFalseWhenUserIsNotAdmin()
         {
-            _operationResult.IsSuccess = true;
-            _operationResult.Body = false;
+            ConfigureOperationResult(true, false);
 
             Assert.IsFalse(_accessValidator.IsAdmin());
         }
@@ -119,7 +109,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         [Test]
         public void ShouldThrowExceptionWhenUserServiceConsumerRespondsWithErrors()
         {
-            _responseBrokerMock
+            _brokerResponseMock
                 .Setup(x => x.Message)
                 .Returns((IOperationResult<bool>)null);
 
@@ -131,33 +121,26 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         [Test]
         public void ShouldReturnTrueWhenUserHasRights()
         {
-            _operationResult.IsSuccess = true;
-            _operationResult.Body = true;
+            ConfigureOperationResult(true, true);
 
-            Assert.IsTrue(_accessValidator.HasRight(RightId));
             Assert.IsTrue(_accessValidator.HasRights(RightIds));
         }
 
         [Test]
         public void ShouldReturnFalseWhenUserDoesntHaveRights()
         {
-            _operationResult.IsSuccess = true;
-            _operationResult.Body = false;
+            ConfigureOperationResult(true, false);
 
-            Assert.IsFalse(_accessValidator.HasRight(RightId));
             Assert.IsFalse(_accessValidator.HasRights(RightIds));
         }
 
         [Test]
         public void ShouldThrowExceptionWhenCheckRightsServiceConsumerRespondsWithErrors()
         {
-            _responseBrokerMock
+            _brokerResponseMock
                 .Setup(x => x.Message)
                 .Returns((IOperationResult<bool>)null);
 
-            Assert.Throws<NullReferenceException>(
-                () => _accessValidator.HasRight(RightId),
-                "Failed to send request to CheckRightService via the broker.");
             Assert.Throws<NullReferenceException>(
                 () => _accessValidator.HasRights(RightIds),
                 "Failed to send request to CheckRightService via the broker.");
@@ -175,9 +158,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             Assert.Throws<InvalidCastException>(
                 () => _accessValidator.IsAdmin(),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
-            Assert.Throws<InvalidCastException>(
-                () => _accessValidator.HasRight(RightId),
-                $"UserId '{text}' value in HttpContext is not in Guid format.");
+
             Assert.Throws<InvalidCastException>(
                 () => _accessValidator.HasRights(RightIds),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
@@ -193,9 +174,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             Assert.Throws<ArgumentException>(
                 () => _accessValidator.IsAdmin(),
                 "UserId value in HttpContext is empty.");
-            Assert.Throws<ArgumentException>(
-                () => _accessValidator.HasRight(RightId),
-                "UserId value in HttpContext is empty.");
+
             Assert.Throws<ArgumentException>(
                 () => _accessValidator.HasRights(RightIds),
                 "UserId value in HttpContext is empty.");
@@ -211,9 +190,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             Assert.Throws<ArgumentNullException>(
                 () => _accessValidator.IsAdmin(),
                 "HttpContext does not contain UserId.");
-            Assert.Throws<ArgumentNullException>(
-                () => _accessValidator.HasRight(RightId),
-                "HttpContext does not contain UserId.");
+
             Assert.Throws<ArgumentNullException>(
                 () => _accessValidator.HasRights(RightIds),
                 "HttpContext does not contain UserId.");

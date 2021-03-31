@@ -4,7 +4,7 @@ using System;
 
 namespace LT.DigitalOffice.Kernel.Extensions
 {
-    public static class HttpContexExtensions
+    public static class HttpContextExtensions
     {
         public static Guid GetUserId(this HttpContext context)
         {

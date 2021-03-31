@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace LT.DigitalOffice.Kernel.Exceptions
+namespace LT.DigitalOffice.Kernel.Exceptions.Models
 {
     /// <summary>
     /// Indicates that the server cannot or will not process the request due to an apparent client error.
@@ -11,7 +11,7 @@ namespace LT.DigitalOffice.Kernel.Exceptions
     [Serializable]
     public class BadRequestException : BaseException
     {
-        public override int StatusCode => (int) HttpStatusCode.BadRequest;
+        public override int StatusCode => (int)HttpStatusCode.BadRequest;
         public override string Header => "Bad Request";
 
         /// <summary>

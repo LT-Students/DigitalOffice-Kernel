@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace LT.DigitalOffice.Kernel.Exceptions
+namespace LT.DigitalOffice.Kernel.Exceptions.Models
 {
     /// <summary>
     /// Indicates that the request contained valid data and was understood by the server, but the server is refusing action.
@@ -11,7 +11,7 @@ namespace LT.DigitalOffice.Kernel.Exceptions
     [Serializable]
     public class ForbiddenException : BaseException
     {
-        public override int StatusCode => (int) HttpStatusCode.Forbidden;
+        public override int StatusCode => (int)HttpStatusCode.Forbidden;
         public override string Header => "Forbidden";
 
         /// <summary>

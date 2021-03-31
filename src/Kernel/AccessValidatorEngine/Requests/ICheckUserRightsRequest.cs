@@ -5,21 +5,24 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests
     /// <summary>
     /// Message request model that is sent to UserService via MassTransit.
     /// </summary>
-    public interface IAccessValidatorUserServiceRequest
+    public interface ICheckUserRightsRequest
     {
         /// <summary>
         /// User ID.
         /// </summary>
         Guid UserId { get; }
 
+        int[] RightIds { get; }
+
         /// <summary>
-        /// Create anonymouse object that can be deserialized into <see cref="IAccessValidatorUserServiceRequest"/>.
+        /// Create anonymouse object that can be deserialized into <see cref="ICheckUserRightsRequest"/>.
         /// </summary>
-        static object CreateObj(Guid userId)
+        static object CreateObj(Guid userId, params int[] rightIds)
         {
             return new
             {
-                UserId = userId
+                UserId = userId,
+                RightIds = rightIds
             };
         }
     }

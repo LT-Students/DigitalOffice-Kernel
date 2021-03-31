@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.Kernel.Consts
+﻿namespace LT.DigitalOffice.Kernel.Constants
 {
     public static class Rights
     {

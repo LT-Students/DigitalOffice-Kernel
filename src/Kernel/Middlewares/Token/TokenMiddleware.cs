@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using LT.DigitalOffice.Broker.Requests;
 using LT.DigitalOffice.Kernel.Broker;
 using LT.DigitalOffice.Kernel.Constants;
-using LT.DigitalOffice.Kernel.Exceptions;
+using LT.DigitalOffice.Kernel.Exceptions.Models;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace LT.DigitalOffice.Kernel.Middlewares.Token
@@ -29,7 +28,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
         /// </summary>
         public TokenMiddleware(
             RequestDelegate requestDelegate,
-            [FromServices] IOptions<TokenConfiguration> option)
+            IOptions<TokenConfiguration> option)
         {
             this.requestDelegate = requestDelegate;
 
@@ -41,7 +40,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
         /// </summary>
         public async Task InvokeAsync(
             HttpContext context,
-            [FromServices] IRequestClient<ICheckTokenRequest> client)
+            IRequestClient<ICheckTokenRequest> client)
         {
             if (string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase) ||
                 (tokenConfiguration.SkippedEndpoints != null &&
@@ -60,8 +59,11 @@ namespace LT.DigitalOffice.Kernel.Middlewares.Token
                     throw new ForbiddenException(DonNotHaveTokenMessage);
                 }
 
-                var response = await client.GetResponse<IOperationResult<Guid>>(
-                    ICheckTokenRequest.CreateObj(token));
+                Response<IOperationResult<Guid>> response = null;
+
+                response = await client.GetResponse<IOperationResult<Guid>>(
+                    ICheckTokenRequest.CreateObj(token),
+                    timeout: RequestTimeout.After(s: 2));
 
                 if (response.Message.IsSuccess)
                 {

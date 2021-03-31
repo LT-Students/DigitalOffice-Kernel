@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace LT.DigitalOffice.Kernel.Exceptions
+namespace LT.DigitalOffice.Kernel.Exceptions.Models
 {
     /// <summary>
     /// Indicates that the requested resource could not be found but may be available in the future.
     /// </summary>
     public class NotFoundException : BaseException
     {
-        public override int StatusCode => (int) HttpStatusCode.NotFound;
+        public override int StatusCode => (int)HttpStatusCode.NotFound;
         public override string Header => "Not Found";
 
         /// <summary>

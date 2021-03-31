@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
 {
@@ -15,17 +15,10 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
         bool IsAdmin();
 
         /// <summary>
-        /// Checks whether the user has certain right.
-        /// </summary>
-        /// <param name="rightId">ID of the right.</param>
-        /// <returns>True, if there's a UserId-RightId pair in the database. False otherwise.</returns>
-        bool HasRight(int rightId);
-
-        /// <summary>
-        /// Checks whether the user has a list of rights.
+        /// Checks whether the user has certain rights.
         /// </summary>
         /// <param name="rightIds">Ids of the rigths.</param>
         /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
-        bool HasRights(IEnumerable<int> rightIds);
+        bool HasRights(params int[] rightIds);
     }
 }

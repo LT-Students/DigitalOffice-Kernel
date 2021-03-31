@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace LT.DigitalOffice.Kernel.Exceptions
+namespace LT.DigitalOffice.Kernel.Exceptions.Models
 {
     /// <summary>
     /// Indicates client or server error.
