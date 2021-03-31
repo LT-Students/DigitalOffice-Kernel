@@ -12,17 +12,14 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests
         /// </summary>
         Guid UserId { get; }
 
-        int[] RightIds { get; }
-
         /// <summary>
         /// Create anonymouse object that can be deserialized into <see cref="ICheckUserIsAdminRequest"/>.
         /// </summary>
-        static object CreateObj(Guid userId, params int[] rightIds)
+        static object CreateObj(Guid userId)
         {
             return new
             {
-                UserId = userId,
-                RightIds = rightIds
+                UserId = userId
             };
         }
     }
