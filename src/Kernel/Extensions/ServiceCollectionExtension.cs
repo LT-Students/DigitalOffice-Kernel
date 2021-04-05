@@ -4,6 +4,7 @@ using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.Kernel.Broker;
 using LT.DigitalOffice.Kernel.Enums;
+using LT.DigitalOffice.Kernel.Middlewares.ApiInformation;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -119,7 +120,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
             return services;
         }
 
-        public static IApplicationBuilder AddExceptionsHandler(
+        public static IApplicationBuilder UseExceptionsHandler(
             this IApplicationBuilder app,
             ILoggerFactory loggerFactory)
         {
@@ -132,6 +133,26 @@ namespace LT.DigitalOffice.Kernel.Extensions
             {
                 await ExceptionsHandler.Handle(context, loggerFactory.CreateLogger("Extensions"));
             }));
+
+            return app;
+        }
+
+        public static IApplicationBuilder UseApiInformation(
+            this IApplicationBuilder app,
+            string endpoint = null)
+        {
+            if (app == null)
+            {
+                return app;
+            }
+
+            string mappedEndpoint = "/apiinformation";
+            if (!string.IsNullOrEmpty(endpoint))
+            {
+                mappedEndpoint = endpoint;
+            }
+
+            app.UseMiddleware<ApiInformationMiddleware>(mappedEndpoint);
 
             return app;
         }

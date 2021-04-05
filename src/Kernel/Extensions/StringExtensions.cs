@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace LT.DigitalOffice.Kernel.Extensions
 {
@@ -43,6 +44,13 @@ namespace LT.DigitalOffice.Kernel.Extensions
             }
 
             return result.ToString();
+        }
+
+        public static string ToServiceUpTime(this DateTime time)
+        {
+            TimeSpan difference = DateTime.UtcNow - time;
+
+            return $"{difference.Days} days {difference.Hours}h {difference.Minutes}m {difference.Seconds}s";
         }
     }
 }
