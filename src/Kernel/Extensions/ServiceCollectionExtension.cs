@@ -2,7 +2,7 @@
 using LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces;
 using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.Attributes;
-using LT.DigitalOffice.Kernel.Broker;
+using LT.DigitalOffice.Kernel.Configurations;
 using LT.DigitalOffice.Kernel.Enums;
 using LT.DigitalOffice.Kernel.Middlewares.ApiInformation;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
@@ -38,7 +38,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
         /// </summary>
         public static IServiceCollectionBusConfigurator ConfigureKernelMassTransit(
             this IServiceCollectionBusConfigurator busConfigurator,
-            BaseRabbitMqOptions rabbitmqOptions)
+            BaseRabbitMqConfig rabbitmqOptions)
         {
             busConfigurator.AddRequestClient<ICheckUserIsAdminRequest>(
                 new Uri($"{rabbitmqOptions.BaseUrl}/{rabbitmqOptions.CheckUserIsAdminEndpoint}"));

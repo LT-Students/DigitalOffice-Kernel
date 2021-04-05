@@ -64,6 +64,7 @@ namespace LT.DigitalOffice.Kernel
                 errorResponse.Message = "Something wrong.";
             }
 
+            context.Response.ContentType = "application/json";
             await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse, new JsonSerializerOptions
             {
                 WriteIndented = true

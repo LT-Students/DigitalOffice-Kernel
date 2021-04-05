@@ -8,6 +8,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.ApiInformation
     public class ApiInformationMiddleware
     {
         private readonly string _endpoint;
+        private readonly RequestDelegate _next;
 
         public ApiInformationMiddleware(
             RequestDelegate next,
@@ -19,6 +20,7 @@ namespace LT.DigitalOffice.Kernel.Middlewares.ApiInformation
             }
 
             _endpoint = endpoint;
+            _next = next;
         }
 
         public async Task InvokeAsync(HttpContext httpContext)
@@ -31,12 +33,17 @@ namespace LT.DigitalOffice.Kernel.Middlewares.ApiInformation
             if (string.Equals(httpContext.Request.Method, "GET", StringComparison.OrdinalIgnoreCase) &&
                 string.Equals(httpContext.Request.Path, _endpoint, StringComparison.OrdinalIgnoreCase))
             {
+                httpContext.Response.ContentType = "application/json";
                 await httpContext.Response.WriteAsync(JsonSerializer.Serialize(
                     BaseApiInfo.GetResponse(),
                     new JsonSerializerOptions
                     {
                         WriteIndented = true
                     }));
+            }
+            else
+            {
+                await _next.Invoke(httpContext);
             }
         }
     }
