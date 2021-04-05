@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LT.DigitalOffice.Kernel</id>
+    <version>1.1.11</version>
+    <title>LT.DigitalOffice.Kernel</title>
+    <authors>LT Digital Office</authors>
+    <owners>LT Digital Office</owners>
+    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library used in the Digital Office project.</description>
+    <releaseNotes>
+      Add BaseApiInfo abstract class for inheritance.
+      Add ApiInfoResponse model.
+
+      Previous versions:
+      1.1.10 - Add auto inject for Commands, Mappers, Validators, Repositories objects.
+    </releaseNotes>
+    <repository type="git" url="https://dev.azure.com/FossAnalytical/FossConnect/_git/lib-api-common" branch="master"/>
+    <copyright>Copyright © FOSS Analytical A/S</copyright>
+    <tags>Common</tags>
+    <dependencies>
+      <group targetFramework="net5.0">
+        <dependency id="FluentValidation" version="9.5.3"/>
+        <dependency id="MassTransit" version="7.1.7"/>
+        <dependency id="MassTransit.AspNetCore" version="7.1.7"/>
+        <dependency id="MassTransit.Extensions.DependencyInjection" version="7.1.7"/>
+        <dependency id="MassTransit.RabbitMQ" version="7.1.7"/>
+        <dependency id="Microsoft.AspNetCore.Diagnostics" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Diagnostics.Abstractions" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Http" version="2.2.2"/>
+        <dependency id="Microsoft.AspNetCore.Http.Abstractions" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Http.Extensions" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.JsonPatch" version="5.0.4"/>
+        <dependency id="Microsoft.Extensions.Options.ConfigurationExtensions" version="5.0.0"/>
+        <dependency id="System.Text.Json" version="5.0.1" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="artifacts\LT.DigitalOffice.Kernel.dll" target="lib\net5.0" />
+    <file src="artifacts\LT.DigitalOffice.Kernel.pdb" target="lib\net5.0" />
+  </files>
+</package>

@@ -19,14 +19,24 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 5.0.200
+
+      - name: Setup NuGet.exe
+        uses: NuGet/setup-nuget@v1.0.5
+        with:
+          nuget-api-key: ${{secrets.NUGET}}
+
       - name: Restore
         run: dotnet restore
+
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build --no-restore --configuration Release --output ./artifacts
+
       - name: Test
         run: dotnet test --no-restore --verbosity normal
+
       - name: Pack nuget
-        run: dotnet pack --no-build --output ./artifacts --configuration Release -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+        run: nuget pack LT.DigitalOffice.Kernel.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts
+
       - name: Push nuget
         run: dotnet nuget push ./artifacts/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
 
