@@ -4,6 +4,7 @@ using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.Kernel.Configurations;
 using LT.DigitalOffice.Kernel.Enums;
+using LT.DigitalOffice.Kernel.HealthChecks;
 using LT.DigitalOffice.Kernel.Middlewares.ApiInformation;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
 using Microsoft.AspNetCore.Builder;
@@ -155,6 +156,11 @@ namespace LT.DigitalOffice.Kernel.Extensions
             app.UseMiddleware<ApiInformationMiddleware>(mappedEndpoint);
 
             return app;
+        }
+
+        public static IHealthChecksBuilder AddRabbitMqCheck(this IHealthChecksBuilder builder)
+        {
+            return builder.AddCheck<RabbitMqHealthCheck>("RabbitMQ");
         }
     }
 }

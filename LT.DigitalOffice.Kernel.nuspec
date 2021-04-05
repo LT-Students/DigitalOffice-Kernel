@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel</id>
-    <version>1.1.16</version>
+    <version>1.1.17</version>
     <title>LT.DigitalOffice.Kernel</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-1.1.16 - Fix ApiInformation middleware. Refactoring configurations models.
+1.1.17 - Add RabbitMQ health check.
 
 Previous versions:
+1.1.16 - Fix ApiInformation middleware. Refactoring configurations models.
 1.1.15 - Create ApiInformation middleware.
 1.1.14 - Remove repository tag from nuspec.
 1.1.13 - Update release notes format.
