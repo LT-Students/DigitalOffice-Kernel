@@ -13,7 +13,7 @@
       Update copyright and tags.
 
       Previous versions:
-	  1.1.11 - Add BaseApiInfo abstract class for inheritance. Add ApiInfoResponse model.
+      1.1.11 - Add BaseApiInfo abstract class for inheritance. Add ApiInfoResponse model.
       1.1.10 - Add auto inject for Commands, Mappers, Validators, Repositories objects.
     </releaseNotes>
     <repository type="git" url="https://dev.azure.com/FossAnalytical/FossConnect/_git/lib-api-common" branch="master"/>
