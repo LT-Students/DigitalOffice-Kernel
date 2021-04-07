@@ -22,7 +22,7 @@ namespace LT.DigitalOffice.Kernel.Attributes
             }
             else
             {
-                Timeout = RequestTimeout.After(ms: 500);
+                Timeout = RequestTimeout.After(s: 5);
             }
         }
     }
