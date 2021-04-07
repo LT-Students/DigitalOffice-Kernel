@@ -20,6 +20,10 @@ namespace LT.DigitalOffice.Kernel.Attributes
             {
                 Timeout = RequestTimeout.After(ms: (int)timeout);
             }
+            else
+            {
+                Timeout = RequestTimeout.After(ms: 500);
+            }
         }
     }
 }

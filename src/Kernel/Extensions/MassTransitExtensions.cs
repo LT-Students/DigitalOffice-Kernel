@@ -15,7 +15,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
         public static IServiceCollectionBusConfigurator AddRequestClients(
             this IServiceCollectionBusConfigurator busConfigurator,
             BaseRabbitMqConfig rabbitMqConfig,
-            ILogger logger)
+            ILogger logger = null)
         {
             if (busConfigurator == null)
             {

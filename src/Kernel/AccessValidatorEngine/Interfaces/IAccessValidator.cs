@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+﻿using LT.DigitalOffice.Kernel.Attributes;
 
 namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
 {
@@ -6,6 +6,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
     /// Provides access validation methods to check whether user is an administrator
     /// or has certain rights (e.g. to edit or add a new project).
     /// </summary>
+    [AutoInject]
     public interface IAccessValidator
     {
         /// <summary>

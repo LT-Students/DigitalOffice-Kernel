@@ -1,13 +1,5 @@
-﻿using LT.DigitalOffice.Kernel.AccessValidatorEngine;
-using LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces;
-using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
-using LT.DigitalOffice.Kernel.Attributes;
-using LT.DigitalOffice.Kernel.Configurations;
+﻿using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.Kernel.Enums;
-using LT.DigitalOffice.Kernel.HealthChecks;
-using LT.DigitalOffice.Kernel.Middlewares.ApiInformation;
-using MassTransit.ExtensionsDependencyInjectionIntegration;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,34 +15,6 @@ namespace LT.DigitalOffice.Kernel.Extensions
     /// </summary>
     public static class ServiceCollectionExtension
     {
-        /// <summary>
-        /// Add <see cref="AccessValidator"/> and HttpContextAccessor.
-        /// </summary>
-        public static IServiceCollection AddKernelExtensions(this IServiceCollection services)
-        {
-            services.AddHttpContextAccessor();
-
-            services.AddTransient<IAccessValidator, AccessValidator>();
-
-            return services;
-        }
-
-        /// <summary>
-        /// Add requst clients used by <see cref="AccessValidator"/>.
-        /// </summary>
-        public static IServiceCollectionBusConfigurator ConfigureKernelMassTransit(
-            this IServiceCollectionBusConfigurator busConfigurator,
-            BaseRabbitMqConfig rabbitmqOptions)
-        {
-            busConfigurator.AddRequestClient<ICheckUserIsAdminRequest>(
-                new Uri($"{rabbitmqOptions.BaseUrl}/{rabbitmqOptions.CheckUserIsAdminEndpoint}"));
-
-            busConfigurator.AddRequestClient<ICheckUserRightsRequest>(
-                new Uri($"{rabbitmqOptions.BaseUrl}/{rabbitmqOptions.CheckUserRightsEndpoint}"));
-
-            return busConfigurator;
-        }
-
         public static IServiceCollection AddBusinessObjects(
             this IServiceCollection services,
             ILogger logger = null)
@@ -139,48 +103,6 @@ namespace LT.DigitalOffice.Kernel.Extensions
             }
 
             return services;
-        }
-
-        public static IApplicationBuilder UseExceptionsHandler(
-            this IApplicationBuilder app,
-            ILoggerFactory loggerFactory)
-        {
-            if (app == null)
-            {
-                return app;
-            }
-
-            app.UseExceptionHandler(tempApp => tempApp.Run(async context =>
-            {
-                await ExceptionsHandler.Handle(context, loggerFactory.CreateLogger("Extensions"));
-            }));
-
-            return app;
-        }
-
-        public static IApplicationBuilder UseApiInformation(
-            this IApplicationBuilder app,
-            string endpoint = null)
-        {
-            if (app == null)
-            {
-                return app;
-            }
-
-            string mappedEndpoint = "/apiinformation";
-            if (!string.IsNullOrEmpty(endpoint))
-            {
-                mappedEndpoint = endpoint;
-            }
-
-            app.UseMiddleware<ApiInformationMiddleware>(mappedEndpoint);
-
-            return app;
-        }
-
-        public static IHealthChecksBuilder AddRabbitMqCheck(this IHealthChecksBuilder builder)
-        {
-            return builder.AddCheck<RabbitMqHealthCheck>("RabbitMQ");
         }
     }
 }
