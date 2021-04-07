@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -50,72 +51,78 @@ namespace LT.DigitalOffice.Kernel.Extensions
             return busConfigurator;
         }
 
-        /// <summary>
-        /// Get all needed types from assembly and inject it in services collection.
-        /// </summary>
-        public static IServiceCollection InjectObjects(
+        public static IServiceCollection AddBusinessObjects(
             this IServiceCollection services,
-            InjectObjectType objectType,
-            InjectType injectType,
-            string assemblyName,
-            ILogger logger)
+            ILogger logger = null)
         {
             if (services == null)
             {
-                logger?.LogWarning($"Service collection is null, can not '{injectType}' inject '{objectType}s'.");
+                logger?.LogWarning($"Service collection is null, can not inject business objects.");
 
                 return services;
             }
 
             try
             {
-                logger?.LogTrace($"------------------------------------------------------");
-                logger?.LogTrace($"Loading assembly '{assemblyName}'.");
+                var asmPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+                var files = Directory.GetFiles(asmPath, "*DigitalOffice*.dll");
 
-                Assembly assembly = Assembly.Load(assemblyName);
+                List<Assembly> assemblies = new();
 
-                logger?.LogTrace($"Loading '{objectType}s' from '{assemblyName}'.");
-
-                List<Type> injectObjects = assembly.ExportedTypes
-                    .Where(
-                        t =>
-                            t.IsClass
-                            && t.IsPublic
-                            && t.Name.Contains(objectType.ToString())
-                            && t.GetCustomAttribute(typeof(NotAutoInjectAttribute)) == null)
-                    .ToList();
-
-                logger?.LogTrace($"Found '{injectObjects.Count}' '{objectType}s'.");
-
-                foreach (var injectObject in injectObjects)
+                foreach (string fileName in files)
                 {
-                    Type injectObjectInterface = injectObject.GetInterface($"I{injectObject.Name}");
-                    if (injectObjectInterface == null)
+                    assemblies.Add(Assembly.LoadFrom(fileName));
+                }
+
+                foreach (Assembly assembly in assemblies)
+                {
+                    List<Type> injectInterfaces = assembly.ExportedTypes
+                        .Where(
+                            t =>
+                                t.IsInterface
+                                && t.IsPublic
+                                && t.GetCustomAttribute(typeof(AutoInjectAttribute)) != null)
+                        .ToList();
+
+                    foreach (Type injectInterface in injectInterfaces)
                     {
-                        logger?.LogWarning($"Can not find interface for '{injectObject.Name}'.");
+                        var injectObjects = assembly.GetExportedTypes().Where(t => t.GetInterface(injectInterface.Name) != null).ToList();
+                        if (!injectObjects.Any())
+                        {
+                            logger.LogWarning($"No classes were found that inherit the interface '{injectInterface.Name}'.");
+                            continue;
+                        }
 
-                        continue;
+                        if (injectObjects.Count > 1)
+                        {
+                            logger?.LogWarning(
+                                $"Found more than one class '{string.Join(',', injectObjects.Select(t => t.Name))}' inheriting the interface '{injectInterface.Name}'.");
+
+                            continue;
+                        }
+
+                        AutoInjectAttribute attr = injectInterface.GetCustomAttribute<AutoInjectAttribute>();
+                        switch (attr.InjectType)
+                        {
+                            case InjectType.Transient:
+                                services.AddTransient(injectInterface, injectObjects[0]);
+                                break;
+                            case InjectType.Scoped:
+                                services.AddScoped(injectInterface, injectObjects[0]);
+                                break;
+                            case InjectType.Singletone:
+                                services.AddSingleton(injectInterface, injectObjects[0]);
+                                break;
+                        }
+
+                        logger?.LogTrace(
+                            $"'{injectObjects[0].Name}' was successfuly '{attr.InjectType}' injected with interface '{injectInterface.Name}'.");
                     }
-
-                    switch (injectType)
-                    {
-                        case InjectType.Transient:
-                            services.AddTransient(injectObjectInterface, injectObject);
-                            break;
-                        case InjectType.Scoped:
-                            services.AddScoped(injectObjectInterface, injectObject);
-                            break;
-                        case InjectType.Singletone:
-                            services.AddSingleton(injectObjectInterface, injectObject);
-                            break;
-                    }
-
-                    logger?.LogTrace($"'{injectObject.Name}' was successfuly '{injectType}' injected with interface '{injectObjectInterface.Name}'.");
                 }
             }
             catch (Exception exc)
             {
-                logger?.LogError(exc, $"Exception while loading types from assembly '{assemblyName}'.");
+                logger?.LogError(exc, $"Exception while loading types from assemblies.");
             }
 
             return services;
