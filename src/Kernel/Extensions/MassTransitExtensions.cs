@@ -4,6 +4,7 @@ using MassTransit.ExtensionsDependencyInjectionIntegration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -14,7 +15,6 @@ namespace LT.DigitalOffice.Kernel.Extensions
         public static IServiceCollectionBusConfigurator AddRequestClients(
             this IServiceCollectionBusConfigurator busConfigurator,
             BaseRabbitMqConfig rabbitMqConfig,
-            string assemblyName,
             ILogger logger)
         {
             if (busConfigurator == null)
@@ -22,33 +22,37 @@ namespace LT.DigitalOffice.Kernel.Extensions
                 return busConfigurator;
             }
 
-            if (string.IsNullOrEmpty(assemblyName))
-            {
-                throw new ArgumentNullException(nameof(assemblyName));
-            }
-
             if (rabbitMqConfig == null)
             {
                 throw new ArgumentNullException(nameof(rabbitMqConfig));
             }
 
-            Assembly assembly = Assembly.Load(assemblyName);
-            if (assembly == null)
+            var asmPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
+            var files = Directory.GetFiles(asmPath, "*DigitalOffice*.dll");
+
+            List<Assembly> assemblies = new();
+
+            foreach (string fileName in files)
             {
-                throw new DllNotFoundException($"Can not load assembly '{assemblyName}'.");
+                assemblies.Add(Assembly.LoadFrom(fileName));
             }
 
-            List<Type> types = assembly.ExportedTypes
-                .Where(
-                    t =>
-                        t.IsInterface
-                        && t.IsPublic
-                        && t.GetCustomAttribute<AutoInjectRequestAttribute>() != null)
-                .ToList();
+            List<Type> injectInterfaces = new();
 
-            foreach (Type type in types)
+            foreach (Assembly assembly in assemblies)
             {
-                var attr = type.GetCustomAttribute<AutoInjectRequestAttribute>();
+                injectInterfaces.AddRange(assembly.ExportedTypes
+                    .Where(
+                        t =>
+                            t.IsInterface
+                            && t.IsPublic
+                            && t.GetCustomAttribute(typeof(AutoInjectRequestAttribute)) != null)
+                    .ToList());
+            }
+
+            foreach (Type injectInterface in injectInterfaces)
+            {
+                var attr = injectInterface.GetCustomAttribute<AutoInjectRequestAttribute>();
 
                 PropertyInfo property = rabbitMqConfig
                     .GetType()
@@ -69,10 +73,10 @@ namespace LT.DigitalOffice.Kernel.Extensions
 
                 Uri endpointUri = new Uri($"{rabbitMqConfig.BaseUrl}/{propertyValue}");
 
-                busConfigurator.AddRequestClient(type, endpointUri, attr.Timeout);
+                busConfigurator.AddRequestClient(injectInterface, endpointUri, attr.Timeout);
 
                 logger?.LogTrace(
-                    $"Found request type '{type.Name}'. Successfully injected with endpoint '{endpointUri}' and timeout '{attr.Timeout.Value}'.");
+                    $"Found request type '{injectInterface.Name}'. Successfully injected with endpoint '{endpointUri}' and timeout '{attr.Timeout.Value}'.");
             }
 
             return busConfigurator;

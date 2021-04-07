@@ -74,50 +74,63 @@ namespace LT.DigitalOffice.Kernel.Extensions
                     assemblies.Add(Assembly.LoadFrom(fileName));
                 }
 
+                List<Type> injectInterfaces = new();
+
                 foreach (Assembly assembly in assemblies)
                 {
-                    List<Type> injectInterfaces = assembly.ExportedTypes
+                    injectInterfaces.AddRange(assembly.ExportedTypes
                         .Where(
                             t =>
                                 t.IsInterface
                                 && t.IsPublic
                                 && t.GetCustomAttribute(typeof(AutoInjectAttribute)) != null)
-                        .ToList();
+                        .ToList());
+                }
 
-                    foreach (Type injectInterface in injectInterfaces)
+                foreach (Type injectInterface in injectInterfaces)
+                {
+                    List<Type> injectClasses = new();
+
+                    foreach (Assembly assembly in assemblies)
                     {
-                        var injectObjects = assembly.GetExportedTypes().Where(t => t.GetInterface(injectInterface.Name) != null).ToList();
-                        if (!injectObjects.Any())
-                        {
-                            logger.LogWarning($"No classes were found that inherit the interface '{injectInterface.Name}'.");
-                            continue;
-                        }
-
-                        if (injectObjects.Count > 1)
-                        {
-                            logger?.LogWarning(
-                                $"Found more than one class '{string.Join(',', injectObjects.Select(t => t.Name))}' inheriting the interface '{injectInterface.Name}'.");
-
-                            continue;
-                        }
-
-                        AutoInjectAttribute attr = injectInterface.GetCustomAttribute<AutoInjectAttribute>();
-                        switch (attr.InjectType)
-                        {
-                            case InjectType.Transient:
-                                services.AddTransient(injectInterface, injectObjects[0]);
-                                break;
-                            case InjectType.Scoped:
-                                services.AddScoped(injectInterface, injectObjects[0]);
-                                break;
-                            case InjectType.Singletone:
-                                services.AddSingleton(injectInterface, injectObjects[0]);
-                                break;
-                        }
-
-                        logger?.LogTrace(
-                            $"'{injectObjects[0].Name}' was successfuly '{attr.InjectType}' injected with interface '{injectInterface.Name}'.");
+                        injectClasses.AddRange(
+                            assembly.GetExportedTypes()
+                                .Where(t => t.GetInterface(injectInterface.Name) != null)
+                                .ToList());
                     }
+
+                    if (!injectClasses.Any())
+                    {
+                        logger.LogWarning(
+                            $"No classes were found that inherit the interface '{injectInterface.Name}'.");
+
+                        continue;
+                    }
+
+                    if (injectClasses.Count > 1)
+                    {
+                        logger?.LogWarning(
+                            $"Found more than one class '{string.Join(',', injectClasses.Select(t => t.Name))}' inheriting the interface '{injectInterface.Name}'.");
+
+                        continue;
+                    }
+
+                    AutoInjectAttribute attr = injectInterface.GetCustomAttribute<AutoInjectAttribute>();
+                    switch (attr.InjectType)
+                    {
+                        case InjectType.Transient:
+                            services.AddTransient(injectInterface, injectClasses[0]);
+                            break;
+                        case InjectType.Scoped:
+                            services.AddScoped(injectInterface, injectClasses[0]);
+                            break;
+                        case InjectType.Singletone:
+                            services.AddSingleton(injectInterface, injectClasses[0]);
+                            break;
+                    }
+
+                    logger?.LogTrace(
+                        $"'{injectClasses[0].Name}' was successfuly '{attr.InjectType}' injected with interface '{injectInterface.Name}'.");
                 }
             }
             catch (Exception exc)
