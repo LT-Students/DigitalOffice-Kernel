@@ -49,6 +49,7 @@ namespace LT.DigitalOffice.Kernel.HealthChecks
                 };
 
                 IConnection con = factory.CreateConnection();
+                con.Close();
 
                 return Task.FromResult(
                     HealthCheckResult.Healthy("Connection to RabbitMQ was established successfully."));
