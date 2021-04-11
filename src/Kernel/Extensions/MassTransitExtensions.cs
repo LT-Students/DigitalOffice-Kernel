@@ -69,6 +69,8 @@ namespace LT.DigitalOffice.Kernel.Extensions
                 if (string.IsNullOrEmpty(propertyValue))
                 {
                     logger?.LogError($"RabbitMq config does not contain value for '{attr.EndpointPropertyName}'.");
+
+                    continue;
                 }
 
                 Uri endpointUri = new Uri($"{rabbitMqConfig.BaseUrl}/{propertyValue}");
