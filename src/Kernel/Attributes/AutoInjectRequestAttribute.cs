@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.Kernel.Attributes
     {
         public string EndpointPropertyName { get; init; }
 
-        public RequestTimeout Timeout { get; init; } = RequestTimeout.Default;
+        public RequestTimeout Timeout { get; init; }
 
         public AutoInjectRequestAttribute(
             string endpointPropertyName,
@@ -22,7 +22,7 @@ namespace LT.DigitalOffice.Kernel.Attributes
             }
             else
             {
-                Timeout = RequestTimeout.After(s: 2);
+                Timeout = RequestTimeout.After(ms: 500);
             }
         }
     }
