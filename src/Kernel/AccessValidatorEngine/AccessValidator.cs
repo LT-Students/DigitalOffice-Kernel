@@ -33,14 +33,21 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         }
 
         /// <inheritdoc/>
-        public bool HasRights(params int[] rightIds)
+        public bool HasRights(Guid? userId, params int[] rightIds)
         {
             if (rightIds == null || !rightIds.Any())
             {
                 throw new ArgumentException("Can not check empty rights array.", nameof(rightIds));
             }
 
-            _userId = _httpContext.GetUserId();
+            if (userId == null)
+            {
+                _userId = _httpContext.GetUserId();
+            }
+            else
+            {
+                _userId = (Guid)userId;
+            }
 
             Response<IOperationResult<bool>> result = _requestClientCR.GetResponse<IOperationResult<bool>>(
                 ICheckUserRightsRequest.CreateObj(_userId, rightIds),
@@ -55,9 +62,16 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         }
 
         /// <inheritdoc/>
-        public bool IsAdmin()
+        public bool IsAdmin(Guid? userId = null)
         {
-            _userId = _httpContext.GetUserId();
+            if (userId == null)
+            {
+                _userId = _httpContext.GetUserId();
+            }
+            else
+            {
+                _userId = (Guid)userId;
+            }
 
             Response<IOperationResult<bool>> result = _requestClientUS.GetResponse<IOperationResult<bool>>(
                 ICheckUserIsAdminRequest.CreateObj(_userId),

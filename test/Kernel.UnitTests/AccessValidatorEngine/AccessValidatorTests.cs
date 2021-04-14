@@ -21,7 +21,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         private Mock<IOperationResult<bool>> _operationResultMock;
         private Mock<HttpContext> _httpContextMock;
 
-        private string _userId;
+        private Guid _userId;
         private IAccessValidator _accessValidator;
 
         private int[] RightIds = new [] { 5, 4 };
@@ -61,7 +61,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            _userId = Guid.NewGuid().ToString();
+            _userId = Guid.NewGuid();
 
             BrokerSetUp();
 
@@ -83,7 +83,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         {
             _httpContextMock
                 .Setup(x => x.Items[ConstStrings.UserId])
-                .Returns(_userId);
+                .Returns(_userId.ToString());
 
             _httpContextMock
                 .Setup(x => x.Items.ContainsKey(ConstStrings.UserId))
@@ -96,6 +96,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             ConfigureOperationResult(true, true);
 
             Assert.IsTrue(_accessValidator.IsAdmin());
+            Assert.IsTrue(_accessValidator.IsAdmin(_userId));
         }
 
         [Test]
@@ -104,6 +105,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             ConfigureOperationResult(true, false);
 
             Assert.IsFalse(_accessValidator.IsAdmin());
+            Assert.IsFalse(_accessValidator.IsAdmin(Guid.NewGuid()));
         }
 
         [Test]
@@ -123,7 +125,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         {
             ConfigureOperationResult(true, true);
 
-            Assert.IsTrue(_accessValidator.HasRights(RightIds));
+            Assert.IsTrue(_accessValidator.HasRights(null, RightIds));
+            Assert.IsTrue(_accessValidator.HasRights(_userId, RightIds));
         }
 
         [Test]
@@ -131,7 +134,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         {
             ConfigureOperationResult(true, false);
 
-            Assert.IsFalse(_accessValidator.HasRights(RightIds));
+            Assert.IsFalse(_accessValidator.HasRights(null, RightIds));
+            Assert.IsFalse(_accessValidator.HasRights(Guid.NewGuid(), RightIds));
         }
 
         [Test]
@@ -142,7 +146,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 .Returns((IOperationResult<bool>)null);
 
             Assert.Throws<NullReferenceException>(
-                () => _accessValidator.HasRights(RightIds),
+                () => _accessValidator.HasRights(null, RightIds),
                 "Failed to send request to CheckRightService via the broker.");
         }
 
@@ -160,7 +164,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
 
             Assert.Throws<InvalidCastException>(
-                () => _accessValidator.HasRights(RightIds),
+                () => _accessValidator.HasRights(null, RightIds),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
         }
 
@@ -176,7 +180,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 "UserId value in HttpContext is empty.");
 
             Assert.Throws<ArgumentException>(
-                () => _accessValidator.HasRights(RightIds),
+                () => _accessValidator.HasRights(null, RightIds),
                 "UserId value in HttpContext is empty.");
         }
 
@@ -192,7 +196,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 "HttpContext does not contain UserId.");
 
             Assert.Throws<ArgumentNullException>(
-                () => _accessValidator.HasRights(RightIds),
+                () => _accessValidator.HasRights(null, RightIds),
                 "HttpContext does not contain UserId.");
         }
     }
