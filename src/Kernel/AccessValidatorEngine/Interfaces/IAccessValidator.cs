@@ -13,12 +13,21 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
         /// <summary>
         /// Checks whether the user is admin or not.
         /// </summary>
+        /// <param name="userId">Id of the user.</param>
         /// <returns>True, if current user has IsAdmin property set to true in the database. False otherwise.</returns>
         bool IsAdmin(Guid? userId = null);
 
         /// <summary>
         /// Checks whether the user has certain rights.
         /// </summary>
+        /// <param name="rightIds">Ids of the rigths.</param>
+        /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
+        bool HasRights(params int[] rightIds);
+
+        /// <summary>
+        /// Checks whether the user has certain rights.
+        /// </summary>
+        /// <param name="userId">Id of the user.</param>
         /// <param name="rightIds">Ids of the rigths.</param>
         /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
         bool HasRights(Guid? userId, params int[] rightIds);

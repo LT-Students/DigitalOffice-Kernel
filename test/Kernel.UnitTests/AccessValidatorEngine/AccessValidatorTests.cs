@@ -125,6 +125,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         {
             ConfigureOperationResult(true, true);
 
+            Assert.IsTrue(_accessValidator.HasRights(RightIds));
             Assert.IsTrue(_accessValidator.HasRights(null, RightIds));
             Assert.IsTrue(_accessValidator.HasRights(_userId, RightIds));
         }
@@ -134,6 +135,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         {
             ConfigureOperationResult(true, false);
 
+            Assert.IsFalse(_accessValidator.HasRights(RightIds));
             Assert.IsFalse(_accessValidator.HasRights(null, RightIds));
             Assert.IsFalse(_accessValidator.HasRights(Guid.NewGuid(), RightIds));
         }
