@@ -13,8 +13,6 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
     /// <inheritdoc/>
     public class AccessValidator : IAccessValidator
     {
-        private Guid _userId;
-
         private readonly HttpContext _httpContext;
         private readonly IRequestClient<ICheckUserRightsRequest> _requestClientCR;
         private readonly IRequestClient<ICheckUserIsAdminRequest> _requestClientUS;
@@ -35,15 +33,24 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         /// <inheritdoc/>
         public bool HasRights(params int[] rightIds)
         {
+            return HasRights(null, rightIds);
+        }
+
+        /// <inheritdoc/>
+        public bool HasRights(Guid? userId, params int[] rightIds)
+        {
             if (rightIds == null || !rightIds.Any())
             {
                 throw new ArgumentException("Can not check empty rights array.", nameof(rightIds));
             }
 
-            _userId = _httpContext.GetUserId();
+            if (!userId.HasValue)
+            {
+                userId = _httpContext.GetUserId();
+            }
 
             Response<IOperationResult<bool>> result = _requestClientCR.GetResponse<IOperationResult<bool>>(
-                ICheckUserRightsRequest.CreateObj(_userId, rightIds),
+                ICheckUserRightsRequest.CreateObj(userId.Value, rightIds),
                 timeout: RequestTimeout.After(s: 2)).Result;
 
             if (result.Message == null)
@@ -55,12 +62,15 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         }
 
         /// <inheritdoc/>
-        public bool IsAdmin()
+        public bool IsAdmin(Guid? userId = null)
         {
-            _userId = _httpContext.GetUserId();
+            if (!userId.HasValue)
+            {
+                userId = _httpContext.GetUserId();
+            }
 
             Response<IOperationResult<bool>> result = _requestClientUS.GetResponse<IOperationResult<bool>>(
-                ICheckUserIsAdminRequest.CreateObj(_userId),
+                ICheckUserIsAdminRequest.CreateObj(userId.Value),
                 timeout: RequestTimeout.After(s: 2)).Result;
 
             if (result.Message == null)

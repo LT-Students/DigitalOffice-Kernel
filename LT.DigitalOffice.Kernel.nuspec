@@ -10,9 +10,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-1.1.22 - Change MassTransit RequestClients default timeout to (2s). Fix RabbitMQ health check (close connection).
+1.1.22 - Change MassTransit RequestClients default timeout to (2s). Fix RabbitMQ health check (close connection). Add new userId parameter to AccessValidator methods.
 
-Previous versions:
+Previous versions: 
 1.1.21 - Change MassTransit RequestClients default timeout to (5s).
 1.1.20 - Add access validator and token auto inject. Add default request timeout (500ms) to MassTransit RequestClients.
 1.1.19 - Rework inject extensions for business ojects and MassTransit RequestClients.
