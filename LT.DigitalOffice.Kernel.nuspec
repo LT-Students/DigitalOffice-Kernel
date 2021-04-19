@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel</id>
-    <version>1.1.23</version>
+    <version>1.1.24</version>
     <title>LT.DigitalOffice.Kernel</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-1.1.23 - Version just for test.
+1.1.24 - Add Rights properties to constants
 
 Previous versions:
+1.1.23 - Version just for test.
 1.1.22 - Change MassTransit RequestClients default timeout to (2s). Fix RabbitMQ health check (close connection). Add new userId parameter to AccessValidator methods.
 1.1.21 - Change MassTransit RequestClients default timeout to (5s).
 1.1.20 - Add access validator and token auto inject. Add default request timeout (500ms) to MassTransit RequestClients.
