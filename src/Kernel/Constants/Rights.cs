@@ -8,6 +8,5 @@
         public const int AddEditRemoveDepartments = 4;
         public const int AddEditRemoveNews = 5;
         public const int AddEditRemovePositions = 6;
-        public const int AddEditRemoveTasks = 7;
     }
 }
