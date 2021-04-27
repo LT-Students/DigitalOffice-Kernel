@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-1.1.26 - Add Rights property to constants
+1.1.26 - Add Rights property to constants.
 
 Previous versions:
 1.1.25 - Add complex response model.
