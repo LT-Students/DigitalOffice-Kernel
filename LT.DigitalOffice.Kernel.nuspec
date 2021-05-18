@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-1.1.26 - Add fluent validation packet.
+1.1.26 - Add fluent validation packet and fix ExceptionHandler.
 
 Previous versions:
 1.1.25 - Add complex response model.
