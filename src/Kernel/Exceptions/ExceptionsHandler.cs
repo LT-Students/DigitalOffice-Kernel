@@ -1,4 +1,5 @@
-﻿using LT.DigitalOffice.Kernel.Exceptions.Models;
+﻿using FluentValidation;
+using LT.DigitalOffice.Kernel.Exceptions.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -56,6 +57,12 @@ namespace LT.DigitalOffice.Kernel
                 context.Response.StatusCode = baseException.StatusCode;
                 errorResponse.Header = baseException.Header;
                 errorResponse.Message = baseException.Message;
+            }
+            else if (exception is ValidationException validationException)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                errorResponse.Header = HttpStatusCode.BadRequest.ToString();
+                errorResponse.Message = validationException.Message;
             }
             else
             {
