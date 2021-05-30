@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-1.1.26 - Add fluent validation packet and fix ExceptionHandler.
+1.1.27 - Reworked AutoInjectRequest attribute
 
 Previous versions:
+1.1.26 - Add fluent validation packet and fix ExceptionHandler.
 1.1.25 - Add complex response model.
 1.1.24 - Add Rights properties to constants.
 1.1.23 - Version just for test.
