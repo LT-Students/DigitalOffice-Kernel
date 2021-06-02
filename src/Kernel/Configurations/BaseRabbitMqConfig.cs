@@ -1,4 +1,8 @@
-﻿namespace LT.DigitalOffice.Kernel.Configurations
+﻿using LT.DigitalOffice.Broker.Requests;
+using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
+using LT.DigitalOffice.Kernel.Attributes;
+
+namespace LT.DigitalOffice.Kernel.Configurations
 {
     /// <summary>
     /// Base configuration class for RabbitMQ.
@@ -13,10 +17,13 @@
 
         public string Host { get; init; }
 
+        [AutoInjectRequest(typeof(ICheckUserIsAdminRequest))]
         public string CheckUserIsAdminEndpoint { get; init; }
 
+        [AutoInjectRequest(typeof(ICheckUserRightsRequest))]
         public string CheckUserRightsEndpoint { get; init; }
 
+        [AutoInjectRequest(typeof(ICheckTokenRequest))]
         public string ValidateTokenEndpoint { get; init; }
     }
 }

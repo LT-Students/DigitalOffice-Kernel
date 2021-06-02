@@ -3,18 +3,18 @@ using System;
 
 namespace LT.DigitalOffice.Kernel.Attributes
 {
-    [AttributeUsage(AttributeTargets.Interface)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class AutoInjectRequestAttribute : Attribute
     {
-        public string EndpointPropertyName { get; init; }
+        public Type Model { get; init; }
 
         public RequestTimeout Timeout { get; init; }
 
         public AutoInjectRequestAttribute(
-            string endpointPropertyName,
+            Type model,
             uint timeout = 0)
         {
-            EndpointPropertyName = endpointPropertyName;
+            Model = model;
 
             if (timeout > 0)
             {

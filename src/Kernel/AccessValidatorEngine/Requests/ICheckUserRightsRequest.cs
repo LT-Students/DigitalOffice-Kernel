@@ -7,7 +7,6 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests
     /// <summary>
     /// Message request model that is sent to UserService via MassTransit.
     /// </summary>
-    [AutoInjectRequest(nameof(BaseRabbitMqConfig.CheckUserRightsEndpoint))]
     public interface ICheckUserRightsRequest
     {
         /// <summary>
