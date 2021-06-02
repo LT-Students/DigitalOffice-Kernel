@@ -32,11 +32,18 @@ namespace LT.DigitalOffice.Kernel.Extensions
                     .GetProperties()
                     .Where(p => p.GetCustomAttribute(typeof(AutoInjectRequestAttribute)) != null).ToList();
 
-            foreach(var property in propertyInfos)
+            foreach (var property in propertyInfos)
             {
                 var attr = property.GetCustomAttribute<AutoInjectRequestAttribute>();
 
-                Uri endpointUri = new Uri($"{rabbitMqConfig.BaseUrl}/{property.GetValue(rabbitMqConfig)}");
+                string propertyValue = property.GetValue(rabbitMqConfig)?.ToString();
+                if (string.IsNullOrEmpty(propertyValue))
+                {
+                    logger?.LogError($"RabbitMq config does not contain value for '{property.Name}'.");
+                    continue;
+                }
+
+                Uri endpointUri = new Uri($"{rabbitMqConfig.BaseUrl}/{propertyValue}");
 
                 busConfigurator.AddRequestClient(attr.Model, endpointUri, attr.Timeout);
 
