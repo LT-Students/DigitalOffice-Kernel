@@ -7,5 +7,9 @@
         public const string Email = "Email";
 
         public const string Password = "Password";
+
+        public const string Host = "Host";
+
+        public const string Port = "Port";
     }
 }
