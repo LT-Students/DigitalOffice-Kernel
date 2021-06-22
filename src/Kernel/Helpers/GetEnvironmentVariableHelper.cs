@@ -5,7 +5,7 @@ namespace LT.DigitalOffice.Kernel.Helpers
 {
     public static class GetEnvironmentVariableHelper
     {
-        public static string GetVariable(string key)
+        public static string Get(string key)
         {
             return Environment.GetEnvironmentVariable(key)
                 ?? throw new NotFoundException($"No variable named {key}");
