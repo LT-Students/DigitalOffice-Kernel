@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.Kernel.Helpers
         public static string Get(string key)
         {
             return Environment.GetEnvironmentVariable(key)
-                ?? throw new NotFoundException($"No variable named {key}");
+                ?? throw new InternalServerException($"No environment variable named {key}");
         }
     }
 }
