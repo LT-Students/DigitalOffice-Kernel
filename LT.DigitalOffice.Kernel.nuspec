@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.28 - Added GetEnvironmentVariableHelper and updated ConstStrings
+      1.1.28 - Added GetEnvironmentVariableHelper, InternelServerException. Updated ConstStrings. Change MassTransit RequestClients default timeout to RequestTimeout.Default.
 
       Previous versions:
       1.1.27 - Reworked AutoInjectRequest attribute
