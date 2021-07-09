@@ -4,6 +4,7 @@
     {
         FullSuccess,
         PartialSuccess,
-        Failed
+        Failed,
+        Conflict
     }
 }
