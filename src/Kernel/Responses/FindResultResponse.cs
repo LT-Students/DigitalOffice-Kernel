@@ -12,10 +12,12 @@ namespace LT.DigitalOffice.Kernel.Responses
 
         public FindResultResponse(
             List<T> body = default,
+            int totalCount = default,
             OperationResultStatusType status = default,
             List<string> errors = default)
         {
             Body = body;
+            TotalCount = totalCount;
             Status = status.ToString();
             Errors = errors;
         }
