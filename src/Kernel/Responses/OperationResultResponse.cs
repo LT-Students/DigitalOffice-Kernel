@@ -6,7 +6,7 @@ namespace LT.DigitalOffice.Kernel.Responses
     public class OperationResultResponse<T>
     {
         public T Body { get; set; }
-        public string Status { get; set; }
+        public OperationResultStatusType Status { get; set; }
         public List<string> Errors { get; set; } = new();
 
         public OperationResultResponse(
@@ -15,8 +15,8 @@ namespace LT.DigitalOffice.Kernel.Responses
             List<string> errors = default)
         {
             Body = body;
-            Status = status.ToString();
-            Errors = errors;
+            Status = status;
+            Errors = errors ?? new();
         }
     }
 }
