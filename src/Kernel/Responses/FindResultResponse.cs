@@ -3,18 +3,21 @@ using System.Collections.Generic;
 
 namespace LT.DigitalOffice.Kernel.Responses
 {
-    public class OperationResultResponse<T>
+    public class FindResultResponse<T>
     {
-        public T Body { get; set; }
+        public List<T> Body { get; set; }
+        public int TotalCount { get; set; }
         public string Status { get; set; }
         public List<string> Errors { get; set; } = new();
 
-        public OperationResultResponse(
-            T body = default,
+        public FindResultResponse(
+            List<T> body = default,
+            int totalCount = default,
             OperationResultStatusType status = default,
             List<string> errors = default)
         {
             Body = body;
+            TotalCount = totalCount;
             Status = status.ToString();
             Errors = errors;
         }
