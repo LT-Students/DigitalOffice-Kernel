@@ -7,7 +7,7 @@ namespace LT.DigitalOffice.Kernel.Responses
     {
         public List<T> Body { get; set; }
         public int TotalCount { get; set; }
-        public string Status { get; set; }
+        public OperationResultStatusType Status { get; set; }
         public List<string> Errors { get; set; } = new();
 
         public FindResultResponse(
@@ -18,8 +18,8 @@ namespace LT.DigitalOffice.Kernel.Responses
         {
             Body = body;
             TotalCount = totalCount;
-            Status = status.ToString();
-            Errors = errors;
+            Status = status;
+            Errors = errors ?? new();
         }
     }
 }
