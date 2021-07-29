@@ -1,8 +1,6 @@
 ﻿using LT.DigitalOffice.Broker.Requests;
 using LT.DigitalOffice.Kernel.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.Attributes;
-using LT.DigitalOffice.Kernel.Middlewares.ParseEntities;
-using LT.DigitalOffice.Kernel.Middlewares.ParseEntities.Models.Requests;
 
 namespace LT.DigitalOffice.Kernel.Configurations
 {
