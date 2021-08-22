@@ -4,9 +4,9 @@ using LT.DigitalOffice.Kernel.Broker;
 using LT.DigitalOffice.Kernel.Extensions;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
 {
@@ -14,20 +14,39 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
     public class AccessValidator : IAccessValidator
     {
         private readonly HttpContext _httpContext;
+        private readonly ILogger<AccessValidator> _logger;
         private readonly IRequestClient<ICheckUserRightsRequest> _requestClientCR;
         private readonly IRequestClient<ICheckUserIsAdminRequest> _requestClientUS;
+
+        private bool IsUserAdmin(Guid userId)
+        {
+            Response<IOperationResult<bool>> result = _requestClientUS.GetResponse<IOperationResult<bool>>(
+                ICheckUserIsAdminRequest.CreateObj(userId),
+                timeout: RequestTimeout.After(s: 2)).Result;
+
+            if (result.Message == null)
+            {
+                _logger.LogWarning("Failed to send request to UserService via the broker.");
+
+                return false;
+            }
+
+            return result.Message.Body;
+        }
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public AccessValidator(
             IHttpContextAccessor httpContextAccessor,
+            ILogger<AccessValidator> logger,
             IRequestClient<ICheckUserRightsRequest> requestClientCR,
             IRequestClient<ICheckUserIsAdminRequest> requestClientUS)
         {
             _requestClientCR = requestClientCR;
             _requestClientUS = requestClientUS;
             _httpContext = httpContextAccessor.HttpContext;
+            _logger = logger;
         }
 
         /// <inheritdoc/>
@@ -49,13 +68,20 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
                 userId = _httpContext.GetUserId();
             }
 
+            if(IsUserAdmin(userId.Value))
+            {
+                return true;
+            }
+
             Response<IOperationResult<bool>> result = _requestClientCR.GetResponse<IOperationResult<bool>>(
                 ICheckUserRightsRequest.CreateObj(userId.Value, rightIds),
                 timeout: RequestTimeout.After(s: 2)).Result;
 
             if (result.Message == null)
             {
-                throw new NullReferenceException("Failed to send request to CheckRightService via the broker.");
+                _logger.LogWarning("Failed to send request to CheckRightService via the broker.");
+
+                return false;
             }
 
             return result.Message.Body;
@@ -69,16 +95,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
                 userId = _httpContext.GetUserId();
             }
 
-            Response<IOperationResult<bool>> result = _requestClientUS.GetResponse<IOperationResult<bool>>(
-                ICheckUserIsAdminRequest.CreateObj(userId.Value),
-                timeout: RequestTimeout.After(s: 2)).Result;
-
-            if (result.Message == null)
-            {
-                throw new NullReferenceException("Failed to send request to UserService via the broker.");
-            }
-
-            return result.Message.Body;
+            return IsUserAdmin(userId.Value);
         }
     }
 }
