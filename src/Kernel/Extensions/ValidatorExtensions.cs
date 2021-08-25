@@ -35,6 +35,27 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
             }
         }
 
+        public static bool ValidateCustom<T>(
+            this IValidator<T> validator,
+            T instance,
+            out List<string> errors,
+            params string[] ruleSets)
+        {
+            var result = validator.Validate(
+                instance,
+                options =>
+                {
+                    if (ruleSets != null && ruleSets.Any())
+                    {
+                        options.IncludeRuleSets(ruleSets);
+                    }
+                });
+
+            errors = result.Errors.Select(e => e.ToString()).ToList();
+
+            return result.IsValid;
+        }
+
         /// <summary>
         /// Checks that an operation that is unique in a path has an allowed operation.
         /// If there is no operation with this path, a <see cref="NullReferenceException"/> will be thrown.
