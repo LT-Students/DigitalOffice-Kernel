@@ -35,7 +35,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
 
                 foreach (string fileName in files)
                 {
-                    assemblies.Add(Assembly.Load(fileName));
+                    assemblies.Add(Assembly.LoadFrom(fileName));
                 }
 
                 List<Type> injectInterfaces = new();

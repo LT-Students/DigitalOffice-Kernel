@@ -51,9 +51,10 @@ namespace LT.DigitalOffice.Kernel.FluentValidationExtensions
                     }
                 });
 
-            errors = result.Errors.Select(e => e.ToString()).ToList();
+            errors = result?.Errors.Select(e => e.ToString()).ToList()
+                ?? new();
 
-            return result.IsValid;
+            return result == null || result.IsValid;
         }
 
         /// <summary>

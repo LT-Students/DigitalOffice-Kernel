@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel</id>
-    <version>1.1.35</version>
+    <version>1.1.36</version>
     <title>LT.DigitalOffice.Kernel</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.35 - Add ValidateCustom Extension. Add BadRequest to OperationResultStatusType.
+      1.1.36 - Update AccessValidator.
 
       Previous versions:
+      1.1.35 - Add ValidateCustom Extension. Add BadRequest to OperationResultStatusType.
       1.1.34 - Add 'AddEditRemoveTime' constant for Rights.
       1.1.33 - Add FindParseEntitiesConsumer, IFindParseEntitiesRequest/response. Add attribute ParseEntityAttribute and IgnoreParseAttribute.
       1.1.32 - Fixed Status type of FindResultResponse and OperationResultResponse
