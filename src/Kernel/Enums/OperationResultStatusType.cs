@@ -8,8 +8,6 @@ namespace LT.DigitalOffice.Kernel.Enums
     {
         FullSuccess,
         PartialSuccess,
-        Failed,
-        Conflict,
-        BadRequest
+        Failed
     }
 }
