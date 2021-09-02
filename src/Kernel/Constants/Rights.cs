@@ -9,5 +9,6 @@
         public const int AddEditRemoveNews = 5;
         public const int AddEditRemovePositions = 6;
         public const int AddEditRemoveTime = 7;
+        public const int AddEditRemoveHistroies = 8;
     }
 }
