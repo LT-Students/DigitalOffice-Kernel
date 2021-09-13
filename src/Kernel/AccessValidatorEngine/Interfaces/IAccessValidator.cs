@@ -22,7 +22,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
         /// </summary>
         /// <param name="rightIds">Ids of the rigths.</param>
         /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
-        bool HasRights(params int[] rightIds);
+        bool HasRights(bool includeIsAdminCheck = true, params int[] rightIds);
 
         /// <summary>
         /// Checks whether the user has certain rights.
@@ -30,6 +30,6 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
         /// <param name="userId">Id of the user.</param>
         /// <param name="rightIds">Ids of the rigths.</param>
         /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
-        bool HasRights(Guid? userId, params int[] rightIds);
+        bool HasRights(Guid? userId, bool includeIsAdminCheck = true, params int[] rightIds);
     }
 }
