@@ -50,13 +50,13 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         }
 
         /// <inheritdoc/>
-        public bool HasRights(params int[] rightIds)
+        public bool HasRights(bool includeIsAdminCheck = true, params int[] rightIds)
         {
-            return HasRights(null, rightIds);
+            return HasRights(null, includeIsAdminCheck, rightIds);
         }
 
         /// <inheritdoc/>
-        public bool HasRights(Guid? userId, params int[] rightIds)
+        public bool HasRights(Guid? userId, bool includeIsAdminCheck = true, params int[] rightIds)
         {
             if (rightIds == null || !rightIds.Any())
             {
@@ -68,7 +68,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
                 userId = _httpContext.GetUserId();
             }
 
-            if(IsUserAdmin(userId.Value))
+            if(includeIsAdminCheck && IsUserAdmin(userId.Value))
             {
                 return true;
             }

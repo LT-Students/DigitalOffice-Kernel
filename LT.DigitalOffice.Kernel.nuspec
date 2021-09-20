@@ -11,39 +11,39 @@
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
 		1.1.40 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator.
+      1.1.40 - Fixed methods HasRights of AccessValidator.
 
-		Previous versions:
-		1.1.39 - Added BaseEditRequestValidator.
-		1.1.38 - Add History rights to Constants.
-		1.1.37 - Remove BadRequest and Conflict from OperationResultStatusType.
-		1.1.36 - Update AccessValidator.
-		1.1.35 - Add ValidateCustom Extension. Add BadRequest to OperationResultStatusType.
-		1.1.34 - Add 'AddEditRemoveTime' constant for Rights.
-		1.1.33 - Add FindParseEntitiesConsumer, IFindParseEntitiesRequest/response. Add attribute ParseEntityAttribute and IgnoreParseAttribute.
-		1.1.32 - Fixed Status type of FindResultResponse and OperationResultResponse
-		1.1.31 - Added FindResultResponse, updated status property of OperationResultResponse
-		1.1.30 - Updated status property of OperationResultResponse
-		1.1.29 - Added Conflict to OperationResultResponse
-		1.1.28 - Added GetEnvironmentVariableHelper, InternelServerException. Updated ConstStrings. Change MassTransit RequestClients default timeout to RequestTimeout.Default.
-		1.1.27 - Reworked AutoInjectRequest attribute
-		1.1.26 - Add fluent validation packet and fix ExceptionHandler.
-		1.1.25 - Add complex response model.
-		1.1.24 - Add Rights properties to constants.
-		1.1.23 - Version just for test.
-		1.1.22 - Change MassTransit RequestClients default timeout to (2s). Fix RabbitMQ health check (close connection). Add new userId parameter to AccessValidator methods.
-		1.1.21 - Change MassTransit RequestClients default timeout to (5s).
-		1.1.20 - Add access validator and token auto inject. Add default request timeout (500ms) to MassTransit RequestClients.
-		1.1.19 - Rework inject extensions for business ojects and MassTransit RequestClients.
-		1.1.18 - Rework auto inject method. Add auto inject for MassTransit RequestClients.
-		1.1.17 - Add RabbitMQ health check.
-		1.1.16 - Fix ApiInformation middleware. Refactoring configurations models.
-		1.1.15 - Create ApiInformation middleware.
-		1.1.14 - Remove repository tag from nuspec.
-		1.1.13 - Update release notes format.
-		1.1.12 - Update copyright and tags.
-		1.1.11 - Add BaseApiInfo abstract class for inheritance. Add ApiInfoResponse model.
-		1.1.10 - Add auto inject for Commands, Mappers, Validators, Repositories objects.
-	</releaseNotes>
+      Previous versions:
+      1.1.38 - Add History rights to Constants.
+      1.1.37 - Remove BadRequest and Conflict from OperationResultStatusType.
+      1.1.36 - Update AccessValidator.
+      1.1.35 - Add ValidateCustom Extension. Add BadRequest to OperationResultStatusType.
+      1.1.34 - Add 'AddEditRemoveTime' constant for Rights.
+      1.1.33 - Add FindParseEntitiesConsumer, IFindParseEntitiesRequest/response. Add attribute ParseEntityAttribute and IgnoreParseAttribute.
+      1.1.32 - Fixed Status type of FindResultResponse and OperationResultResponse
+      1.1.31 - Added FindResultResponse, updated status property of OperationResultResponse
+      1.1.30 - Updated status property of OperationResultResponse
+      1.1.29 - Added Conflict to OperationResultResponse
+      1.1.28 - Added GetEnvironmentVariableHelper, InternelServerException. Updated ConstStrings. Change MassTransit RequestClients default timeout to RequestTimeout.Default.
+      1.1.27 - Reworked AutoInjectRequest attribute
+      1.1.26 - Add fluent validation packet and fix ExceptionHandler.
+      1.1.25 - Add complex response model.
+      1.1.24 - Add Rights properties to constants.
+      1.1.23 - Version just for test.
+      1.1.22 - Change MassTransit RequestClients default timeout to (2s). Fix RabbitMQ health check (close connection). Add new userId parameter to AccessValidator methods.
+      1.1.21 - Change MassTransit RequestClients default timeout to (5s).
+      1.1.20 - Add access validator and token auto inject. Add default request timeout (500ms) to MassTransit RequestClients.
+      1.1.19 - Rework inject extensions for business ojects and MassTransit RequestClients.
+      1.1.18 - Rework auto inject method. Add auto inject for MassTransit RequestClients.
+      1.1.17 - Add RabbitMQ health check.
+      1.1.16 - Fix ApiInformation middleware. Refactoring configurations models.
+      1.1.15 - Create ApiInformation middleware.
+      1.1.14 - Remove repository tag from nuspec.
+      1.1.13 - Update release notes format.
+      1.1.12 - Update copyright and tags.
+      1.1.11 - Add BaseApiInfo abstract class for inheritance. Add ApiInfoResponse model.
+      1.1.10 - Add auto inject for Commands, Mappers, Validators, Repositories objects.
+    </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
