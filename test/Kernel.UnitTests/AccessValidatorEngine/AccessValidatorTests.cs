@@ -147,8 +147,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         [Test]
         public void ShouldThrowExceptionWhenRequestedIdsListIsNullOrEmpty()
         {
-            Assert.Throws<ArgumentException>(() => _accessValidator.HasRights(true, null));
-            Assert.Throws<ArgumentException>(() => _accessValidator.HasRights(true));
+            Assert.Throws<ArgumentException>(() => _accessValidator.HasRights());
+            Assert.Throws<ArgumentException>(() => _accessValidator.HasRights());
             Assert.Throws<ArgumentException>(() => _accessValidator.HasRights(null, true, null));
             Assert.Throws<ArgumentException>(() => _accessValidator.HasRights(null, true));
         }
@@ -159,8 +159,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             ConfigureIsAdminResult(true, false);
             ConfigureHasRightsResult(true, true);
 
-            Assert.IsTrue(_accessValidator.HasRights(true, RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(false, RightIds));
+            Assert.IsTrue(_accessValidator.HasRights(RightIds));
+            Assert.IsTrue(_accessValidator.HasRights(RightIds));
             Assert.IsTrue(_accessValidator.HasRights(null, true, RightIds));
             Assert.IsTrue(_accessValidator.HasRights(null, false, RightIds));
             Assert.IsTrue(_accessValidator.HasRights(_userId, true, RightIds));
@@ -169,7 +169,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             ConfigureIsAdminResult(true, true);
             ConfigureHasRightsResult(true, false);
 
-            Assert.IsTrue(_accessValidator.HasRights(true, RightIds));
+            Assert.IsTrue(_accessValidator.HasRights(RightIds));
             Assert.IsTrue(_accessValidator.HasRights(null, true, RightIds));
             Assert.IsTrue(_accessValidator.HasRights(_userId, true, RightIds));
         }
@@ -180,7 +180,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
             ConfigureIsAdminResult(true, false);
             ConfigureHasRightsResult(true, false);
 
-            Assert.IsFalse(_accessValidator.HasRights(true, RightIds));
+            Assert.IsFalse(_accessValidator.HasRights(RightIds));
             Assert.IsFalse(_accessValidator.HasRights(null, true, RightIds));
             Assert.IsFalse(_accessValidator.HasRights(Guid.NewGuid(), true, RightIds));
         }
