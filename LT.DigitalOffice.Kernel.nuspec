@@ -11,7 +11,7 @@
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
 
-	  1.1.41 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator, add cache in Constants.
+	  1.1.41 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator, add cache in Constants. Fixed AccessValidator and IAccessValidator.
 
       Previous versions:
 	  1.1.40 - Fixed methods HasRights of AccessValidator.
