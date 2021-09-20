@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel</id>
-    <version>1.1.40</version>
+    <version>1.1.41</version>
     <title>LT.DigitalOffice.Kernel</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,10 +10,12 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.40 - Fixed methods HasRights of AccessValidator.
+
+	  1.1.41 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator, add cache in Constants. Fixed AccessValidator and IAccessValidator.
 
       Previous versions:
-      1.1.39 - Added BaseEditRequestValidator.
+	  1.1.40 - Fixed methods HasRights of AccessValidator.
+	  1.1.39 - Added BaseEditRequestValidator
       1.1.38 - Add History rights to Constants.
       1.1.37 - Remove BadRequest and Conflict from OperationResultStatusType.
       1.1.36 - Update AccessValidator.
