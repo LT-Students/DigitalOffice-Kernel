@@ -1,5 +1,4 @@
-﻿using LT.DigitalOffice.Kernel.Constants;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace LT.DigitalOffice.Kernel.Extensions
@@ -17,7 +16,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
                     cache += id.GetHashCode();
                 }
 
-                return $"{CachePrefix.Collectrion}{cache}";
+                return cache.ToString();
             }
         }
     }

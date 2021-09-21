@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-	  1.1.42 - Added CachePrefix, IEnumerableExtension. Added nuget StackExchange.Redis ver 2.2.50.
+	  1.1.42 - Added IEnumerableExtension. Added nuget StackExchange.Redis ver 2.2.50.
     
       Previous versions:
       1.1.41 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator, add cache in Constants. Fixed AccessValidator and IAccessValidator.
