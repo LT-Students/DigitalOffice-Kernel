@@ -7,6 +7,5 @@
         public const int Departments = 2;
         public const int Offices = 3;
         public const int Projects = 4;
-        public const int CompanyEmployees = 5;
     }
 }
