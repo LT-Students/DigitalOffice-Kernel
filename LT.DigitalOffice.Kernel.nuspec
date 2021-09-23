@@ -14,7 +14,7 @@
     
       Previous versions:
       1.1.41 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator, add cache in Constants. Fixed AccessValidator and IAccessValidator.
-	    1.1.40 - Fixed methods HasRights of AccessValidator.
+      1.1.40 - Fixed methods HasRights of AccessValidator.
 	    1.1.39 - Added BaseEditRequestValidator
       1.1.38 - Add History rights to Constants.
       1.1.37 - Remove BadRequest and Conflict from OperationResultStatusType.
@@ -52,7 +52,7 @@
       <group targetFramework="net5.0">
         <dependency id="StackExchange.Redis" Version="2.2.50"/>
         <dependency id="FluentValidation" version="9.5.3"/>
-		    <dependency id="FluentValidation.AspNetCore" version="9.5.3"/>
+        <dependency id="FluentValidation.AspNetCore" version="9.5.3"/>
         <dependency id="MassTransit" version="7.1.7"/>
         <dependency id="MassTransit.AspNetCore" version="7.1.7"/>
         <dependency id="MassTransit.Extensions.DependencyInjection" version="7.1.7"/>
