@@ -50,7 +50,7 @@
     <tags>DigitalOffice</tags>
     <dependencies>
       <group targetFramework="net5.0">
-        <dependency id="StackExchange.Redis" Version="2.2.50"/>
+        <dependency id="StackExchange.Redis" version="2.2.50"/>
         <dependency id="FluentValidation" version="9.5.3"/>
         <dependency id="FluentValidation.AspNetCore" version="9.5.3"/>
         <dependency id="MassTransit" version="7.1.7"/>
