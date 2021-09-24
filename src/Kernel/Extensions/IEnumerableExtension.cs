@@ -5,7 +5,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
 {
     public static class IEnumerableExtension
     {
-        public static string GetRedisCacheHashCode(this IEnumerable<Guid> guids)
+        public static string GetRedisCacheHashCode(this IEnumerable<Guid> guids, params object[] additionalArguments)
         {
             unchecked
             {
@@ -14,6 +14,11 @@ namespace LT.DigitalOffice.Kernel.Extensions
                 foreach(Guid id in guids)
                 {
                     cache += id.GetHashCode();
+                }
+
+                foreach (Guid arg in additionalArguments)
+                {
+                    cache += arg.GetHashCode();
                 }
 
                 return cache.ToString();
