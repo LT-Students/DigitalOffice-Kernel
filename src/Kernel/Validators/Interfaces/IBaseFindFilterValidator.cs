@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using LT.DigitalOffice.Kernel.Attributes;
-using LT.DigitalOffice.Kernel.Validators.Models;
+using LT.DigitalOffice.Kernel.Requests;
 
 namespace LT.DigitalOffice.Kernel.Validators.Interfaces
 {
     [AutoInject]
-    public interface IBaseFindRequestValidator : IValidator<BaseFindRequest>
+    public interface IBaseFindFilterValidator : IValidator<BaseFindFilter>
     {
     }
 }

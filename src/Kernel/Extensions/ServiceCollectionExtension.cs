@@ -65,7 +65,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
 
                     if (!injectClasses.Any())
                     {
-                        logger.LogWarning(
+                        logger?.LogWarning(
                             $"No classes were found that inherit the interface '{injectInterface.Name}'.");
 
                         continue;
