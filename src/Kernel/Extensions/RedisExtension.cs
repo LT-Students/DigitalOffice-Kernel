@@ -11,7 +11,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
             {
                 int cache = 0;
 
-                foreach(Guid id in guids)
+                foreach (Guid id in guids)
                 {
                     cache += id.GetHashCode();
                 }
