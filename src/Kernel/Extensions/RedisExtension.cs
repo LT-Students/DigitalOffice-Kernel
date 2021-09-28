@@ -16,7 +16,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
                     cache += id.GetHashCode();
                 }
 
-                foreach (Guid arg in additionalArguments)
+                foreach (object arg in additionalArguments)
                 {
                     cache += arg.GetHashCode();
                 }
@@ -31,7 +31,7 @@ namespace LT.DigitalOffice.Kernel.Extensions
             {
                 int cache = id.GetHashCode();
 
-                foreach (Guid arg in additionalArguments)
+                foreach (object arg in additionalArguments)
                 {
                     cache += arg.GetHashCode();
                 }
