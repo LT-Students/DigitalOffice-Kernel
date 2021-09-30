@@ -38,8 +38,6 @@ namespace LT.DigitalOffice.Kernel.Validators
             Dictionary<Func<Operation<T>, bool>, string> predicates,
             CascadeMode mode = CascadeMode.Continue)
         {
-            
-
             if (!RequestedOperation.path.EndsWith(propertyName, StringComparison.OrdinalIgnoreCase)
                 || !type(RequestedOperation.OperationType))
             {
