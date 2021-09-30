@@ -36,7 +36,7 @@ namespace LT.DigitalOffice.Kernel.Validators
             string propertyName,
             Func<OperationType, bool> type,
             Dictionary<Func<Operation<T>, bool>, string> predicates,
-            CascadeMode mode)
+            CascadeMode mode = CascadeMode.Continue)
         {
             
 
