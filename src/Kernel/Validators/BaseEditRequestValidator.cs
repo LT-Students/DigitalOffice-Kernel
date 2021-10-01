@@ -35,7 +35,8 @@ namespace LT.DigitalOffice.Kernel.Validators
         protected void AddFailureForPropertyIf(
             string propertyName,
             Func<OperationType, bool> type,
-            Dictionary<Func<Operation<T>, bool>, string> predicates)
+            Dictionary<Func<Operation<T>, bool>, string> predicates,
+            CascadeMode mode = CascadeMode.Continue)
         {
             if (!RequestedOperation.path.EndsWith(propertyName, StringComparison.OrdinalIgnoreCase)
                 || !type(RequestedOperation.OperationType))
@@ -48,6 +49,11 @@ namespace LT.DigitalOffice.Kernel.Validators
                 if (!validateDelegate.Key(RequestedOperation))
                 {
                     Context.AddFailure(propertyName, validateDelegate.Value);
+
+                    if (mode != CascadeMode.Continue)
+                    {
+                        break;
+                    }
                 }
             }
         }

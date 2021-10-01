@@ -10,5 +10,6 @@
         public const int AddEditRemovePositions = 6;
         public const int AddEditRemoveTime = 7;
         public const int AddEditRemoveHistories = 8;
+        public const int EditCompany = 9;
     }
 }
