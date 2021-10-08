@@ -9,7 +9,6 @@ namespace LT.DigitalOffice.Kernel.Helpers.Interfaces
     public interface IResponseCreater
     {
         OperationResultResponse<T> CreateFailureResponse<T>(HttpStatusCode statusCode, List<string> errors = null);
-
         FindResultResponse<T> CreateFailureFindResponse<T>(HttpStatusCode statusCode, List<string> errors = null);
     }
 }
