@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel</id>
-    <version>1.1.47</version>
+    <version>1.1.46</version>
     <title>LT.DigitalOffice.Kernel</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,10 +10,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.47 - Added RedisHelper, ResponseCreator, fixed BaseEditRequestValidator.
+      1.1.46 - Added RedisHelper, ResponseCreator, fixed BaseEditRequestValidator.
 
       Previous versions:
-      1.1.46 - Update BaseEditRequestValidator.
       1.1.45 - Update BaseEditRequestValidator.
       1.1.44 - Fix redis extensions.
       1.1.43 - Updated IEnumerableExtension. BaseFindRequest renamed to BaseFindFilter and moved to request namespace.
