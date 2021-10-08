@@ -15,7 +15,7 @@ namespace LT.DigitalOffice.Kernel.Validators
 
         protected void AddСorrectPaths(List<string> paths)
         {
-            if (paths.FirstOrDefault(p => p.EndsWith(RequestedOperation.path[1..], StringComparison.OrdinalIgnoreCase)) == null)
+            if (paths.FirstOrDefault(p => p.Equals(RequestedOperation.path[1..], StringComparison.OrdinalIgnoreCase)) == null)
             {
                 Context.AddFailure(RequestedOperation.path, $"This path {RequestedOperation.path} is not available");
             }
