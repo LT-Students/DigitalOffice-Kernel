@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.47 - Added RedisHelper and fixed BaseEditRequestValidator.
+      1.1.47 - Added RedisHelper, ResponseCreator, fixed BaseEditRequestValidator.
 
       Previous versions:
       1.1.46 - Update BaseEditRequestValidator.
