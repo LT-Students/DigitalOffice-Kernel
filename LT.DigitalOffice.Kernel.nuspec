@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.47 - Added ImageFormats class, ImageContentValidator.
+      1.1.47 - Added ImageFormats class, ImageContentValidator; edited IBaseDataProvider (void Save() to Task SaveAsync()).
 
       Previous versions:
       1.1.46 - Added RedisHelper, ResponseCreator, fixed BaseEditRequestValidator.

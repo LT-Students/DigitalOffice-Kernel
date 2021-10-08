@@ -16,7 +16,7 @@ namespace LT.DigitalOffice.Kernel.Validators
             {
                 RuleFor(content => content)
                     .Must(content => Convert.TryFromBase64String(content, new Span<byte>(new byte[content.Length]), out _))
-                    .WithMessage("Content must be base64 string");
+                    .WithMessage("Content must be base64 string.");
             });
 
         }
