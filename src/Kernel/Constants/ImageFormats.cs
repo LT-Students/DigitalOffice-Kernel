@@ -4,15 +4,15 @@ namespace LT.DigitalOffice.Kernel.Constants
 {
     public static class ImageFormats
     {
-        public const string jpgFormat = ".jpg";
-        public const string jpegFormat = ".jpeg";
-        public const string pngFormat = ".png";
-        public const string bmpFormat = ".bmp";
-        public const string gifFormat = ".gif";
-        public const string tgaFormat = ".tga";
-        public const string svgFormat = ".svg";
+        public const string jpg = ".jpg";
+        public const string jpeg = ".jpeg";
+        public const string png = ".png";
+        public const string bmp = ".bmp";
+        public const string gif = ".gif";
+        public const string tga = ".tga";
+        public const string svg = ".svg";
 
         public static ImmutableList<string> formats = ImmutableList
-          .Create(jpgFormat, jpegFormat, pngFormat, bmpFormat, gifFormat, tgaFormat, svgFormat);
+          .Create(jpg, jpeg, png, bmp, gif, tga, svg);
     }
 }

@@ -8,6 +8,10 @@ namespace LT.DigitalOffice.Kernel.Database
     public interface IBaseDataProvider
     {
         /// <summary>
+        /// Save data changes.
+        /// </summary>
+        void Save();
+        /// <summary>
         /// Async save data changes.
         /// </summary>
         Task SaveAsync();
