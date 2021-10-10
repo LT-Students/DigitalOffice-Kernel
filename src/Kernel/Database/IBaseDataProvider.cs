@@ -1,4 +1,6 @@
-﻿namespace LT.DigitalOffice.Kernel.Database
+﻿using System.Threading.Tasks;
+
+namespace LT.DigitalOffice.Kernel.Database
 {
     /// <summary>
     /// Base data provider interface.
@@ -9,6 +11,10 @@
         /// Save data changes.
         /// </summary>
         void Save();
+        /// <summary>
+        /// Async save data changes.
+        /// </summary>
+        Task SaveAsync();
         /// <summary>
         /// Detach entity.
         /// </summary>
