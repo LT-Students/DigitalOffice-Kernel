@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-		1.1.48 - Remove RedisHelper
+		1.1.48 - Remove AuthoInject RedisHelper, add async to AccessValidator and BaseEditRequestValidator
 
 		Previous versions:
 		1.1.47 - Added ImageFormats class, ImageContentValidator, ImageExtensionValidator; edited IBaseDataProvider (added Task SaveAsync()).
