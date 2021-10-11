@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.Validators
 {
@@ -47,6 +48,32 @@ namespace LT.DigitalOffice.Kernel.Validators
             foreach (var validateDelegate in predicates)
             {
                 if (!validateDelegate.Key(RequestedOperation))
+                {
+                    Context.AddFailure(propertyName, validateDelegate.Value);
+
+                    if (mode != CascadeMode.Continue)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        protected async Task AddFailureForPropertyIfAsync(
+            string propertyName,
+            Func<OperationType, bool> type,
+            Dictionary<Func<Operation<T>, Task<bool>>, string> predicates,
+            CascadeMode mode = CascadeMode.Continue)
+        {
+            if (!RequestedOperation.path.EndsWith(propertyName, StringComparison.OrdinalIgnoreCase)
+                || !type(RequestedOperation.OperationType))
+            {
+                return;
+            }
+
+            foreach (var validateDelegate in predicates)
+            {
+                if (!(await validateDelegate.Key(RequestedOperation)))
                 {
                     Context.AddFailure(propertyName, validateDelegate.Value);
 
