@@ -1,4 +1,6 @@
-﻿using LT.DigitalOffice.Kernel.Attributes;
+﻿//TO DO remove to Redis Dll
+
+/*using LT.DigitalOffice.Kernel.Attributes;
 using System;
 using System.Threading.Tasks;
 
@@ -11,3 +13,4 @@ namespace LT.DigitalOffice.Kernel.Helpers.Interfaces
         Task<T> GetAsync<T>(int database, string key);
     }
 }
+*/
