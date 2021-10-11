@@ -1,6 +1,4 @@
-﻿//TODO remove to Redis dll
-
-/*using LT.DigitalOffice.Kernel.Helpers.Interfaces;
+﻿using LT.DigitalOffice.Kernel.Helpers.Interfaces;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
@@ -43,4 +41,4 @@ namespace LT.DigitalOffice.Kernel.Helpers
             return default;
         }
     }
-}*/
+}
