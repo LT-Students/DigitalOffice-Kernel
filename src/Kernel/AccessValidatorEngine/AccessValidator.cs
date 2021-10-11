@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
 {
@@ -18,11 +19,12 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         private readonly IRequestClient<ICheckUserRightsRequest> _requestClientCR;
         private readonly IRequestClient<ICheckUserIsAdminRequest> _requestClientUS;
 
-        private bool IsUserAdmin(Guid userId)
+        private async Task<bool> IsUserAdminAsync(Guid userId)
         {
-            Response<IOperationResult<bool>> result = _requestClientUS.GetResponse<IOperationResult<bool>>(
-                ICheckUserIsAdminRequest.CreateObj(userId),
-                timeout: RequestTimeout.After(s: 2)).Result;
+            Response<IOperationResult<bool>> result =
+                await _requestClientUS.GetResponse<IOperationResult<bool>>(
+                    ICheckUserIsAdminRequest.CreateObj(userId),
+                    timeout: RequestTimeout.After(s: 2));
 
             if (result.Message == null)
             {
@@ -50,18 +52,18 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         }
 
         /// <inheritdoc/>
-        public bool HasRights(params int[] rightIds)
+        public async Task<bool> HasRightsAsync(params int[] rightIds)
         {
-            return HasRights(null, true, rightIds);
+            return await HasRightsAsync(null, true, rightIds);
         }
 
         /// <inheritdoc/>
-        public bool HasRights(Guid? userId, params int[] rightIds)
+        public async Task<bool> HasRightsAsync(Guid? userId, params int[] rightIds)
         {
-            return HasRights(userId, true, rightIds);
+            return await HasRightsAsync(userId, true, rightIds);
         }
 
-        public bool HasRights(Guid? userId, bool includeIsAdminCheck, params int[] rightIds)
+        public async Task<bool> HasRightsAsync(Guid? userId, bool includeIsAdminCheck, params int[] rightIds)
         {
             if (rightIds == null || !rightIds.Any())
             {
@@ -73,7 +75,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
                 userId = _httpContext.GetUserId();
             }
 
-            if (includeIsAdminCheck && IsUserAdmin(userId.Value))
+            if (includeIsAdminCheck && await IsUserAdminAsync(userId.Value))
             {
                 return true;
             }
@@ -93,14 +95,14 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine
         }
 
         /// <inheritdoc/>
-        public bool IsAdmin(Guid? userId = null)
+        public async Task<bool> IsAdminAsync(Guid? userId = null)
         {
             if (!userId.HasValue)
             {
                 userId = _httpContext.GetUserId();
             }
 
-            return IsUserAdmin(userId.Value);
+            return await IsUserAdminAsync(userId.Value);
         }
     }
 }

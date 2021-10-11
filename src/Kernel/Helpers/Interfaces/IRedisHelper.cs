@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.Helpers.Interfaces
 {
-    [AutoInject]
     public interface IRedisHelper
     {
         Task CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime = null);

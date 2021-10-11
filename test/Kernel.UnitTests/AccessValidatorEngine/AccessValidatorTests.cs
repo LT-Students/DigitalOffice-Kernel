@@ -117,86 +117,86 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         }
 
         [Test]
-        public void ShouldReturnTrueWhenUserIsAdmin()
+        public async Task ShouldReturnTrueWhenUserIsAdmin()
         {
             ConfigureIsAdminResult(true, true);
 
-            Assert.IsTrue(_accessValidator.IsAdmin());
-            Assert.IsTrue(_accessValidator.IsAdmin(_userId));
+            Assert.IsTrue(await _accessValidator.IsAdminAsync());
+            Assert.IsTrue(await _accessValidator.IsAdminAsync(_userId));
         }
 
         [Test]
-        public void ShouldReturnFalseWhenUserIsNotAdmin()
+        public async Task ShouldReturnFalseWhenUserIsNotAdmin()
         {
             ConfigureIsAdminResult(true, false);
 
-            Assert.IsFalse(_accessValidator.IsAdmin());
-            Assert.IsFalse(_accessValidator.IsAdmin(Guid.NewGuid()));
+            Assert.IsFalse(await _accessValidator.IsAdminAsync());
+            Assert.IsFalse(await _accessValidator.IsAdminAsync(Guid.NewGuid()));
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenUserServiceConsumerRespondsWithErrors()
+        public async Task ShouldThrowExceptionWhenUserServiceConsumerRespondsWithErrors()
         {
             _isAdminBrokerResponseMock
                 .Setup(x => x.Message)
                 .Returns((IOperationResult<bool>)null);
 
-            Assert.False(_accessValidator.IsAdmin());
+            Assert.False(await _accessValidator.IsAdminAsync());
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenRequestedIdsListIsNullOrEmpty()
+        public async Task ShouldThrowExceptionWhenRequestedIdsListIsNullOrEmpty()
         {
-            Assert.Throws<ArgumentException>(() => _accessValidator.HasRights());
-            Assert.Throws<ArgumentException>(() => _accessValidator.HasRights(null, true, null));
-            Assert.Throws<ArgumentException>(() => _accessValidator.HasRights(null, true));
+            Assert.ThrowsAsync<ArgumentException>(() => _accessValidator.HasRightsAsync());
+            Assert.ThrowsAsync<ArgumentException>(() => _accessValidator.HasRightsAsync(null, true, null));
+            Assert.ThrowsAsync<ArgumentException>(() => _accessValidator.HasRightsAsync(null, true));
         }
 
         [Test]
-        public void ShouldReturnTrueWhenUserHasRights()
+        public async Task ShouldReturnTrueWhenUserHasRights()
         {
             ConfigureIsAdminResult(true, false);
             ConfigureHasRightsResult(true, true);
 
-            Assert.IsTrue(_accessValidator.HasRights(RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(null, RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(null, true, RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(null, false, RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(_userId, true, RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(_userId, false, RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(null, RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(null, true, RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(null, false, RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(_userId, true, RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(_userId, false, RightIds));
 
             ConfigureIsAdminResult(true, true);
             ConfigureHasRightsResult(true, false);
 
-            Assert.IsTrue(_accessValidator.HasRights(RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(null, true, RightIds));
-            Assert.IsTrue(_accessValidator.HasRights(_userId, true, RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(null, true, RightIds));
+            Assert.IsTrue(await _accessValidator.HasRightsAsync(_userId, true, RightIds));
         }
 
         [Test]
-        public void ShouldReturnFalseWhenUserDoesntHaveRights()
+        public async Task ShouldReturnFalseWhenUserDoesntHaveRights()
         {
             ConfigureIsAdminResult(true, false);
             ConfigureHasRightsResult(true, false);
 
-            Assert.IsFalse(_accessValidator.HasRights(RightIds));
-            Assert.IsFalse(_accessValidator.HasRights(null, true, RightIds));
-            Assert.IsFalse(_accessValidator.HasRights(Guid.NewGuid(), true, RightIds));
+            Assert.IsFalse(await _accessValidator.HasRightsAsync(RightIds));
+            Assert.IsFalse(await _accessValidator.HasRightsAsync(null, true, RightIds));
+            Assert.IsFalse(await _accessValidator.HasRightsAsync(Guid.NewGuid(), true, RightIds));
         }
 
         [Test]
-        public void ShouldThrowExceptionWhenCheckRightsServiceConsumerRespondsWithErrors()
+        public async Task ShouldThrowExceptionWhenCheckRightsServiceConsumerRespondsWithErrors()
         {
             ConfigureIsAdminResult(true, false);
             _hasRightsBrokerResponseMock
                 .Setup(x => x.Message)
                 .Returns((IOperationResult<bool>)null);
 
-            Assert.False(_accessValidator.HasRights(null, true, RightIds));
+            Assert.False(await _accessValidator.HasRightsAsync(null, true, RightIds));
         }
 
         [Test]
-        public void ShouldThrowFormatExceptionWhenThereIsInvalidGuidInHeaders()
+        public async Task ShouldThrowFormatExceptionWhenThereIsInvalidGuidInHeaders()
         {
             string text = "Not GUID text.";
 
@@ -204,44 +204,44 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
                 .Setup(x => x.Items[ConstStrings.UserId])
                 .Returns(text);
 
-            Assert.Throws<InvalidCastException>(
-                () => _accessValidator.IsAdmin(),
+            Assert.ThrowsAsync<InvalidCastException>(
+                () => _accessValidator.IsAdminAsync(),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
 
-            Assert.Throws<InvalidCastException>(
-                () => _accessValidator.HasRights(null, true, RightIds),
+            Assert.ThrowsAsync<InvalidCastException>(
+                () => _accessValidator.HasRightsAsync(null, true, RightIds),
                 $"UserId '{text}' value in HttpContext is not in Guid format.");
         }
 
         [Test]
-        public void ShouldThrowNullReferenceExceptionWhenThereIsNoUserIdInHeaders()
+        public async Task ShouldThrowNullReferenceExceptionWhenThereIsNoUserIdInHeaders()
         {
             _httpContextMock
                 .Setup(x => x.Items[ConstStrings.UserId])
                 .Returns(null);
 
-            Assert.Throws<ArgumentException>(
-                () => _accessValidator.IsAdmin(),
+            Assert.ThrowsAsync<ArgumentException>(
+                () => _accessValidator.IsAdminAsync(),
                 "UserId value in HttpContext is empty.");
 
-            Assert.Throws<ArgumentException>(
-                () => _accessValidator.HasRights(null, true, RightIds),
+            Assert.ThrowsAsync<ArgumentException>(
+                () => _accessValidator.HasRightsAsync(null, true, RightIds),
                 "UserId value in HttpContext is empty.");
         }
 
         [Test]
-        public void HttpContextNotContainUserId()
+        public async Task HttpContextNotContainUserId()
         {
             _httpContextMock
                 .Setup(x => x.Items.ContainsKey(ConstStrings.UserId))
                 .Returns(false);
 
-            Assert.Throws<ArgumentNullException>(
-                () => _accessValidator.IsAdmin(),
+            Assert.ThrowsAsync<ArgumentNullException>(
+                () => _accessValidator.IsAdminAsync(),
                 "HttpContext does not contain UserId.");
 
-            Assert.Throws<ArgumentNullException>(
-                () => _accessValidator.HasRights(null, true, RightIds),
+            Assert.ThrowsAsync<ArgumentNullException>(
+                () => _accessValidator.HasRightsAsync(null, true, RightIds),
                 "HttpContext does not contain UserId.");
         }
     }

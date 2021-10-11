@@ -1,5 +1,6 @@
 ﻿using LT.DigitalOffice.Kernel.Attributes;
 using System;
+using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
 {
@@ -15,14 +16,14 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
         /// </summary>
         /// <param name="userId">Id of the user.</param>
         /// <returns>True, if current user has IsAdmin property set to true in the database. False otherwise.</returns>
-        bool IsAdmin(Guid? userId = null);
+        Task<bool> IsAdminAsync(Guid? userId = null);
 
         /// <summary>
         /// Checks whether the user has certain rights.
         /// </summary>
         /// <param name="rightIds">Ids of the rigths.</param>
         /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
-        bool HasRights(params int[] rightIds);
+        Task<bool> HasRightsAsync(params int[] rightIds);
 
         /// <summary>
         /// Checks whether the user has certain rights.
@@ -30,7 +31,7 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
         /// <param name="userId">Id of the user.</param>
         /// <param name="rightIds">Ids of the rigths.</param>
         /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
-        bool HasRights(Guid? userId, params int[] rightIds);
+        Task<bool> HasRightsAsync(Guid? userId, params int[] rightIds);
 
         /// <summary>
         /// Checks whether the user has certain rights.
@@ -39,6 +40,6 @@ namespace LT.DigitalOffice.Kernel.AccessValidatorEngine.Interfaces
         /// <param name="includeIsAdminCheck">If this is true, the method should be included in the check whether the user is an admin.</param>
         /// <param name="rightIds">Ids of the rigths.</param>
         /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
-        bool HasRights(Guid? userId, bool includeIsAdminCheck, params int[] rightIds);
+        Task<bool> HasRightsAsync(Guid? userId, bool includeIsAdminCheck, params int[] rightIds);
     }
 }
