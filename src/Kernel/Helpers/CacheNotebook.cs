@@ -32,12 +32,12 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
         private readonly IConnectionMultiplexer _cache;
         private readonly IMemoryCache _memoryCache;
-        private readonly IOptions<BaseRedisConfig> _options;
+        private readonly IOptions<RedisConfig> _options;
 
         public CacheNotebook(
           IConnectionMultiplexer cache,
           IMemoryCache memoryCache,
-          IOptions<BaseRedisConfig> options)
+          IOptions<RedisConfig> options)
         {
             _cache = cache;
             _memoryCache = memoryCache;

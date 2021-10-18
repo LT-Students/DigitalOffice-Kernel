@@ -1,9 +1,9 @@
 ﻿namespace LT.DigitalOffice.UserService.Models.Dto.Configurations
 {
-  public class BaseRedisConfig
+  public class RedisConfig
   {
     public const string SectionName = "Redis";
 
-    public double CacheLiveInMinutes { get; init; }
+    public double CacheLiveInMinutes { get; set; }
   }
 }
