@@ -10,7 +10,8 @@ namespace LT.DigitalOffice.Kernel.Helpers
     {
         private readonly IConnectionMultiplexer _cache;
 
-        public RedisHelper(IConnectionMultiplexer cache)
+        public RedisHelper(
+            IConnectionMultiplexer cache)
         {
             _cache = cache;
         }
