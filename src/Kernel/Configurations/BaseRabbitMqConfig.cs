@@ -16,6 +16,8 @@ namespace LT.DigitalOffice.Kernel.Configurations
         public string BaseUrl => $"{RabbitMqProtocol}://{Host}";
 
         public string Host { get; init; }
+        public string Username { get; init; }
+        public string Password { get; init; }
 
         [AutoInjectRequest(typeof(ICheckUserIsAdminRequest))]
         public string CheckUserIsAdminEndpoint { get; init; }
