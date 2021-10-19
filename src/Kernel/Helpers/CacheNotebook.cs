@@ -1,9 +1,9 @@
 ﻿using LT.DigitalOffice.Kernel.Helpers.Interfaces;
 using LT.DigitalOffice.UserService.Models.Dto.Configurations;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,16 +31,14 @@ namespace LT.DigitalOffice.Kernel.Helpers
         }
 
         private readonly IConnectionMultiplexer _cache;
-        private readonly IMemoryCache _memoryCache;
+        private static readonly ConcurrentDictionary<Guid, List<Frame>> _dictionary = new();
         private readonly IOptions<RedisConfig> _options;
 
         public CacheNotebook(
           IConnectionMultiplexer cache,
-          IMemoryCache memoryCache,
           IOptions<RedisConfig> options)
         {
             _cache = cache;
-            _memoryCache = memoryCache;
             _options = options;
         }
 
@@ -54,19 +52,23 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
         public void Add(Guid elementId, int database, string key)
         {
-            List<Frame> frames = _memoryCache.Get<List<Frame>>(elementId) ?? new List<Frame>();
+            Frame frame = new(database, key, TimeSpan.FromMinutes(_options.Value.CacheLiveInMinutes));
 
-            frames = frames.Where(f => !f.IsOverdue).ToList();
-            frames.Add(new Frame(database, key, TimeSpan.FromMinutes(_options.Value.CacheLiveInMinutes)));
+            _dictionary.AddOrUpdate(
+                elementId,
+                new List<Frame> { frame },
+                (key, value) =>
+                {
+                    value = value.Where(f => !f.IsOverdue).ToList();
+                    value.Add(frame);
 
-            _memoryCache.Set(elementId, frames);
+                    return value;
+                });
         }
 
         public async Task RemoveAsync(Guid elementId)
         {
-            List<Frame> frames = _memoryCache.Get<List<Frame>>(elementId);
-
-            if (frames == null)
+            if (!_dictionary.TryRemove(elementId, out List<Frame> frames) || frames == null)
             {
                 return;
             }
@@ -75,8 +77,6 @@ namespace LT.DigitalOffice.Kernel.Helpers
             {
                 await _cache.GetDatabase(frame.Database).KeyDeleteAsync(frame.Key);
             }
-
-            _memoryCache.Remove(elementId);
         }
     }
 }
