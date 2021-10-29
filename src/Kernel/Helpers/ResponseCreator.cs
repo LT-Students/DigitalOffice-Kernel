@@ -6,7 +6,7 @@ using System.Net;
 
 namespace LT.DigitalOffice.Kernel.Helpers
 {
-    public class ResponseCreater : IResponseCreater
+    public class ResponseCreator : IResponseCreator
     {
         private const string Forbidden = "Not enough rights.";
         private const string BadRequest = "Request is not correct.";
@@ -14,7 +14,7 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ResponseCreater(IHttpContextAccessor httpContextAccessor)
+        public ResponseCreator(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor;
         }
