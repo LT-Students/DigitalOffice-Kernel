@@ -29,13 +29,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build Kernel/ --no-restore --configuration Release --output ./artifacts/kernel
+        run: dotnet build src/Kernel/Kernel.csproj --no-restore --configuration Release --output ./artifacts/kernel
 
       - name: Test
-        run: dotnet test Kernel/ --no-restore --verbosity normal
+        run: dotnet test test/Kernel.UnitTest/Kernel.UnitTest.csproj --no-restore --verbosity normal
 
       - name: Pack nuget
-        run: nuget pack Kernel/LT.DigitalOffice.Kernel.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel
+        run: nuget pack LT.DigitalOffice.Kernel.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel
 
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}

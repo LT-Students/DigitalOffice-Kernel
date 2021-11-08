@@ -1,4 +1,4 @@
-name: Build & Test Kernel.Redis
+name: Build & Test
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the develop branch
@@ -23,8 +23,8 @@ jobs:
         with:
           dotnet-version: 5.0.200
       - name: Restore
-        run: dotnet restore Kernel.Redis/
-      - name: Build
-        run: dotnet build Kernel.Redis/ --no-restore --configuration Release
-      - name: Test
-        run: dotnet test Kernel.Redis/ --no-restore --verbosity normal
+        run: dotnet restore
+      - name: Build Kernel
+        run: dotnet build --no-restore --configuration Release
+      - name: Test Kernel.Redis
+        run: dotnet test --no-restore --verbosity normal
