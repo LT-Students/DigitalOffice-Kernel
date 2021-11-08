@@ -23,8 +23,8 @@ jobs:
         with:
           dotnet-version: 5.0.200
       - name: Restore
-        run: dotnet restore Kernel/
+        run: dotnet restore Kernel/src/Kernel/Kernel.csproj
       - name: Build
-        run: dotnet build Kernel/ --no-restore --configuration Release
+        run: dotnet build Kernel/src/Kernel/Kernel.csproj --no-restore --configuration Release
       - name: Test
-        run: dotnet test Kernel/ --no-restore --verbosity normal
+        run: dotnet test Kernel/Test/Kernel.UnitTests/Kernel.UnitTests.csproj --no-restore --verbosity normal
