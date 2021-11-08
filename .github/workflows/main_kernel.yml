@@ -27,4 +27,4 @@ jobs:
       - name: Build
         run: dotnet build Kernel/src/Kernel/Kernel.csproj --no-restore --configuration Release
       - name: Test
-        run: dotnet test Kernel/test/Kernel.UnitTests.csproj --no-restore --verbosity normal
+        run: dotnet test Kernel/test/Kernel.UnitTests/Kernel.UnitTests.csproj --no-restore --verbosity normal
