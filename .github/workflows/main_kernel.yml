@@ -26,9 +26,7 @@ jobs:
         run: dotnet restore Kernel/
       - name: Build Kernel
         run: dotnet build Kernel/src/Kernel/Kernel.csproj --no-restore --configuration Release
-      - name: Test Kernel
-        run: dotnet test Kernel/test/Kernel.UnitTests/Kernel.UnitTests.csproj --no-restore --verbosity normal
       - name: Build Kernel.Redis
         run: dotnet build Kernel/src/Kernel.Redis/Kernel.Redis.csproj --no-restore --configuration Release
       - name: Test Kernel.Redis
-        run: dotnet test Kernel/test/Kernel.Redis.UnitTests/Kernel.Redis.UnitTests.csproj --no-restore --verbosity normal
+        run: dotnet test Kernel/ --no-restore --verbosity normal
