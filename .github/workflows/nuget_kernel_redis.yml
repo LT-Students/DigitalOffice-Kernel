@@ -1,4 +1,4 @@
-name: Publish Kernel Redis NuGet package
+name: Publish Kernel RedisSupport NuGet package
 
 # Controls when the action will run.
 on: workflow_dispatch
@@ -29,13 +29,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build src/Kernel.Redis/Kernel.Redis.csproj --no-restore --configuration Release --output ./artifacts/kernel_redis
+        run: dotnet build src/Kernel.RedisSupport/Kernel.RedisSupport.csproj --no-restore --configuration Release --output ./artifacts/kernel_redis
 
       - name: Test
-        run: dotnet test test/Kernel.Redis.UnitTest/Kernel.Redis.UnitTest.csproj --no-restore --verbosity normal
+        run: dotnet test test/Kernel.RedisSupport.UnitTest/Kernel.RedisSupport.UnitTest.csproj --no-restore --verbosity normal
 
       - name: Pack nuget
-        run: nuget pack LT.DigitalOffice.Kernel.Redis.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_redis
+        run: nuget pack LT.DigitalOffice.Kernel.RedisSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_redis
 
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel_redis/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}

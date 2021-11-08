@@ -16,16 +16,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		LT.DigitalOffice.Kernel.nuspec = LT.DigitalOffice.Kernel.nuspec
-		LT.DigitalOffice.Kernel.Redis.nuspec = LT.DigitalOffice.Kernel.Redis.nuspec
+		LT.DigitalOffice.Kernel.RedisSupport.nuspec = LT.DigitalOffice.Kernel.RedisSupport.nuspec
 		.github\workflows\main.yml = .github\workflows\main.yml
 		.github\workflows\nuget_kernel.yml = .github\workflows\nuget_kernel.yml
 		.github\workflows\nuget_kernel_redis.yml = .github\workflows\nuget_kernel_redis.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.Redis", "src\Kernel.Redis\Kernel.Redis.csproj", "{C49DC78F-9354-4C7D-9F2F-D054D59B5AC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.RedisSupport", "src\Kernel.RedisSupport\Kernel.RedisSupport.csproj", "{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.Redis.UnitTests", "test\Kernel.Redis.UnitTests\Kernel.Redis.UnitTests.csproj", "{62507435-14FA-43C6-8D26-D317FBEE18BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.RedisSupport.UnitTests", "test\Kernel.RedisSupport.UnitTests\Kernel.RedisSupport.UnitTests.csproj", "{44F8FE3F-8B07-4763-BE43-519749903A10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,14 +41,14 @@ Global
 		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C49DC78F-9354-4C7D-9F2F-D054D59B5AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C49DC78F-9354-4C7D-9F2F-D054D59B5AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C49DC78F-9354-4C7D-9F2F-D054D59B5AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C49DC78F-9354-4C7D-9F2F-D054D59B5AC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62507435-14FA-43C6-8D26-D317FBEE18BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62507435-14FA-43C6-8D26-D317FBEE18BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62507435-14FA-43C6-8D26-D317FBEE18BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62507435-14FA-43C6-8D26-D317FBEE18BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F8FE3F-8B07-4763-BE43-519749903A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F8FE3F-8B07-4763-BE43-519749903A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F8FE3F-8B07-4763-BE43-519749903A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F8FE3F-8B07-4763-BE43-519749903A10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,8 +56,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{6CA4BE45-F24D-401B-B00A-85888D3E0F4F} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
 		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
-		{C49DC78F-9354-4C7D-9F2F-D054D59B5AC6} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
-		{62507435-14FA-43C6-8D26-D317FBEE18BD} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
+		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
+		{44F8FE3F-8B07-4763-BE43-519749903A10} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FACABE25-5CB9-4CCC-BD5E-D96AC398DE04}

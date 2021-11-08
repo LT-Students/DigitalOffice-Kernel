@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.Attributes;
 
-namespace LT.DigitalOffice.Kernel.Redis.Helpers.Interfaces
+namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces
 {
   [AutoInject]
   public interface IRedisHelper

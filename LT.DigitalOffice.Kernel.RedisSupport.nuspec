@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>LT.DigitalOffice.Kernel.Redis</id>
+    <id>LT.DigitalOffice.Kernel.RedisSupport</id>
     <version>1.0.0</version>
-    <title>LT.DigitalOffice.Kernel.Redis</title>
+    <title>LT.DigitalOffice.Kernel.RedisSupport</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
     <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
@@ -24,7 +24,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\LT.DigitalOffice.Kernel.Redis.dll" target="lib\net5.0" />
-    <file src="artifacts\LT.DigitalOffice.Kernel.Redis.pdb" target="lib\net5.0" />
+    <file src="artifacts\LT.DigitalOffice.Kernel.RedisSupport.dll" target="lib\net5.0" />
+    <file src="artifacts\LT.DigitalOffice.Kernel.RedisSupport.pdb" target="lib\net5.0" />
   </files>
 </package>
