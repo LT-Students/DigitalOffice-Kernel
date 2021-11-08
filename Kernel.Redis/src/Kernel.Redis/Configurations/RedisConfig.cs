@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.UserService.Models.Dto.Configurations
+﻿namespace LT.DigitalOffice.Kernel.Redis.Configurations
 {
   public class RedisConfig
   {

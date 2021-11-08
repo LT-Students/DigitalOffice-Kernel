@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using LT.DigitalOffice.Kernel.Helpers.Interfaces;
+using LT.DigitalOffice.Kernel.Redis.Helpers.Interfaces;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 
-namespace LT.DigitalOffice.Kernel.Helpers
+namespace LT.DigitalOffice.Kernel.Redis.Helpers
 {
   public class RedisHelper : IRedisHelper
   {
@@ -30,11 +30,11 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
     public async Task<T> GetAsync<T>(int database, string key)
     {
-      RedisValue projectsFromCache = await _cache.GetDatabase(database).StringGetAsync(key);
+      var projectsFromCache = await _cache.GetDatabase(database).StringGetAsync(key);
 
       if (projectsFromCache.HasValue)
       {
-        T item = JsonConvert.DeserializeObject<T>(projectsFromCache);
+        var item = JsonConvert.DeserializeObject<T>(projectsFromCache);
 
         return item;
       }

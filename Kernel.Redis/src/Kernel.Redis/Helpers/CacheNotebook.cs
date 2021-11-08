@@ -3,12 +3,12 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LT.DigitalOffice.Kernel.Helpers.Interfaces;
-using LT.DigitalOffice.UserService.Models.Dto.Configurations;
+using LT.DigitalOffice.Kernel.Redis.Configurations;
+using LT.DigitalOffice.Kernel.Redis.Helpers.Interfaces;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 
-namespace LT.DigitalOffice.Kernel.Helpers
+namespace LT.DigitalOffice.Kernel.Redis.Helpers
 {
   public class CacheNotebook : ICacheNotebook
   {
@@ -44,7 +44,7 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
     public void Add(List<Guid> elementsIds, int database, string key)
     {
-      foreach (Guid elementId in elementsIds)
+      foreach (var elementId in elementsIds)
       {
         Add(elementId, database, key);
       }
@@ -68,12 +68,12 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
     public async Task RemoveAsync(Guid elementId)
     {
-      if (!_dictionary.TryRemove(elementId, out List<Frame> frames) || frames == null)
+      if (!_dictionary.TryRemove(elementId, out var frames) || frames == null)
       {
         return;
       }
 
-      foreach (Frame frame in frames.Where(f => !f.IsOverdue))
+      foreach (var frame in frames.Where(f => !f.IsOverdue))
       {
         await _cache.GetDatabase(frame.Database).KeyDeleteAsync(frame.Key);
       }

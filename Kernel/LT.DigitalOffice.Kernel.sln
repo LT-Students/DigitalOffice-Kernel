@@ -13,11 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.UnitTests", "test\Ke
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0D82792-8BFB-48B4-893D-65E4A47595CB}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
+		.editorconfig = .editorconfig
 		LT.DigitalOffice.Kernel.nuspec = LT.DigitalOffice.Kernel.nuspec
-		.github\workflows\main.yml = .github\workflows\main.yml
-		.github\workflows\nuget.yml = .github\workflows\nuget.yml
-		README.md = README.md
+		..\.github\workflows\main.yml = ..\.github\workflows\main.yml
+		..\.github\workflows\nuget.yml = ..\.github\workflows\nuget.yml
 	EndProjectSection
 EndProject
 Global
