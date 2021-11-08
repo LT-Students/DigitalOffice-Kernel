@@ -30,11 +30,11 @@ namespace LT.DigitalOffice.Kernel.Redis.Helpers
 
     public async Task<T> GetAsync<T>(int database, string key)
     {
-      var projectsFromCache = await _cache.GetDatabase(database).StringGetAsync(key);
+      RedisValue projectsFromCache = await _cache.GetDatabase(database).StringGetAsync(key);
 
       if (projectsFromCache.HasValue)
       {
-        var item = JsonConvert.DeserializeObject<T>(projectsFromCache);
+        T item = JsonConvert.DeserializeObject<T>(projectsFromCache);
 
         return item;
       }

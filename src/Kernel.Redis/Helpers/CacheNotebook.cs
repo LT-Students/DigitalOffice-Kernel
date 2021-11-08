@@ -44,7 +44,7 @@ namespace LT.DigitalOffice.Kernel.Redis.Helpers
 
     public void Add(List<Guid> elementsIds, int database, string key)
     {
-      foreach (var elementId in elementsIds)
+      foreach (Guid elementId in elementsIds)
       {
         Add(elementId, database, key);
       }
@@ -68,7 +68,7 @@ namespace LT.DigitalOffice.Kernel.Redis.Helpers
 
     public async Task RemoveAsync(Guid elementId)
     {
-      if (!_dictionary.TryRemove(elementId, out var frames) || frames == null)
+      if (!_dictionary.TryRemove(elementId, out List<Frame> frames) || frames == null)
       {
         return;
       }
