@@ -24,7 +24,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\LT.DigitalOffice.Kernel.dll" target="lib\net5.0" />
-    <file src="artifacts\LT.DigitalOffice.Kernel.pdb" target="lib\net5.0" />
+    <file src="artifacts\LT.DigitalOffice.Kernel.Redis.dll" target="lib\net5.0" />
+    <file src="artifacts\LT.DigitalOffice.Kernel.Redis.pdb" target="lib\net5.0" />
   </files>
 </package>

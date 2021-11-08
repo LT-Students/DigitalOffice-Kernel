@@ -73,7 +73,7 @@ namespace LT.DigitalOffice.Kernel.Redis.Helpers
         return;
       }
 
-      foreach (var frame in frames.Where(f => !f.IsOverdue))
+      foreach (Frame frame in frames.Where(f => !f.IsOverdue))
       {
         await _cache.GetDatabase(frame.Database).KeyDeleteAsync(frame.Key);
       }
