@@ -24,7 +24,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\LT.DigitalOffice.Kernel.RedisSupport.dll" target="lib\net5.0" />
-    <file src="artifacts\LT.DigitalOffice.Kernel.RedisSupport.pdb" target="lib\net5.0" />
+    <file src="artifacts\kernel_redis\LT.DigitalOffice.Kernel.RedisSupport.dll" target="lib\net5.0" />
+    <file src="artifacts\kernel_redis\LT.DigitalOffice.Kernel.RedisSupport.pdb" target="lib\net5.0" />
   </files>
 </package>
