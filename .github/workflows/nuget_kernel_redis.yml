@@ -32,7 +32,7 @@ jobs:
         run: dotnet build src/Kernel.RedisSupport/Kernel.RedisSupport.csproj --no-restore --configuration Release --output ./artifacts/kernel_redis
 
       - name: Test
-        run: dotnet test test/Kernel.RedisSupport.UnitTest/Kernel.RedisSupport.UnitTest.csproj --no-restore --verbosity normal
+        run: dotnet test test/Kernel.RedisSupport.UnitTests/Kernel.RedisSupport.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Pack nuget
         run: nuget pack LT.DigitalOffice.Kernel.RedisSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_redis

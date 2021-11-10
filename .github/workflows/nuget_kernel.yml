@@ -32,7 +32,7 @@ jobs:
         run: dotnet build src/Kernel/Kernel.csproj --no-restore --configuration Release --output ./artifacts/kernel
 
       - name: Test
-        run: dotnet test test/Kernel.UnitTest/Kernel.UnitTest.csproj --no-restore --verbosity normal
+        run: dotnet test test/Kernel.UnitTests/Kernel.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Pack nuget
         run: nuget pack LT.DigitalOffice.Kernel.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel
