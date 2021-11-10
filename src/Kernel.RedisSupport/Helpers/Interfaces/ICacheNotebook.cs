@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LT.DigitalOffice.Kernel.Attributes;
 
-namespace LT.DigitalOffice.Kernel.Helpers.Interfaces
+namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces
 {
-  //[AutoInject]
+  [AutoInject]
   public interface ICacheNotebook
   {
     void Add(List<Guid> elementsIds, int database, string key);

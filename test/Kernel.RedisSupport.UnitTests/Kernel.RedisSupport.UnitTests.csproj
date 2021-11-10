@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Kernel\Kernel.csproj" />
+    <ProjectReference Include="..\..\src\Kernel.RedisSupport\Kernel.RedisSupport.csproj" />
   </ItemGroup>
 
 </Project>
