@@ -1,30 +1,32 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>LT.DigitalOffice.Kernel.RedisSupport</id>
+    <id>LT.DigitalOffice.Kernel.ImageSupport</id>
     <version>1.0.0</version>
-    <title>LT.DigitalOffice.Kernel.RedisSupport</title>
+    <title>LT.DigitalOffice.Kernel.ImageSupport</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
     <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.0.0 - Initial.
 
       Previous versions:
+      1.0.0 - Initial version.
+
     </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
       <group targetFramework="net5.0">
-        <dependency id="StackExchange.Redis" version="2.2.50" />
-        <dependency id="LT.DigitalOffice.Kernel" version="1.1.51" />
+        <dependency id="SixLabors.ImageSharp" version="1.0.4"/>
+        <dependency id="LT.DigitalOffice.Kernel" version="1.1.47"/>
+        <dependency id="Svg" version="3.3.0"/>
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_redis\LT.DigitalOffice.Kernel.RedisSupport.dll" target="lib\net5.0" />
-    <file src="artifacts\kernel_redis\LT.DigitalOffice.Kernel.RedisSupport.pdb" target="lib\net5.0" />
+    <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.dll" target="lib\net5.0" />
+    <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.pdb" target="lib\net5.0" />
   </files>
 </package>

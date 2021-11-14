@@ -61,10 +61,6 @@
       <group targetFramework="net5.0">
         <dependency id="FluentValidation" version="9.5.3"/>
         <dependency id="FluentValidation.AspNetCore" version="9.5.3"/>
-        <dependency id="MassTransit" version="7.1.7"/>
-        <dependency id="MassTransit.AspNetCore" version="7.1.7"/>
-        <dependency id="MassTransit.Extensions.DependencyInjection" version="7.1.7"/>
-        <dependency id="MassTransit.RabbitMQ" version="7.1.7"/>
         <dependency id="Microsoft.AspNetCore.Diagnostics" version="2.2.0"/>
         <dependency id="Microsoft.AspNetCore.Diagnostics.Abstractions" version="2.2.0"/>
         <dependency id="Microsoft.AspNetCore.Http" version="2.2.2"/>

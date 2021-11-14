@@ -1,0 +1,42 @@
+name: Publish Kernel BrokerSupport NuGet package
+
+# Controls when the action will run.
+on: workflow_dispatch
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Setup .NET 5
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.200
+
+      - name: Setup NuGet.exe
+        uses: NuGet/setup-nuget@v1.0.5
+        with:
+          nuget-api-key: ${{secrets.NUGET}}
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build src/Kernel.BrokerSupport/Kernel.BrokerSupport.csproj --no-restore --configuration Release --output ./artifacts/kernel_broker
+
+      - name: Test
+        run: dotnet test test/Kernel.BrokerSupport.UnitTests/Kernel.BrokerSupport.UnitTests.csproj --no-restore --verbosity normal
+
+      - name: Pack nuget
+        run: nuget pack LT.DigitalOffice.Kernel.BrokerSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_broker
+
+      - name: Push nuget
+        run: dotnet nuget push ./artifacts/kernel_broker/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
+
