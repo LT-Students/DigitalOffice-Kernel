@@ -11,8 +11,8 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes
     public RequestTimeout Timeout { get; init; }
 
     public AutoInjectRequestAttribute(
-        Type model,
-        uint timeout = 0)
+      Type model,
+      uint timeout = 0)
     {
       Model = model;
 

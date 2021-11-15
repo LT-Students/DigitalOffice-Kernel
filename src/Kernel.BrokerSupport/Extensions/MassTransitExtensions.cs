@@ -1,5 +1,4 @@
-﻿using LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
-using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
+﻿using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
 using MassTransit.ExtensionsDependencyInjectionIntegration;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,9 +10,9 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Extensions
   public static class MassTransitExtensions
   {
     public static IServiceCollectionBusConfigurator AddRequestClients(
-        this IServiceCollectionBusConfigurator busConfigurator,
-        BaseRabbitMqConfig rabbitMqConfig,
-        ILogger logger = null)
+      this IServiceCollectionBusConfigurator busConfigurator,
+      BaseRabbitMqConfig rabbitMqConfig,
+      ILogger logger = null)
     {
       if (busConfigurator == null)
       {
@@ -29,11 +28,16 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Extensions
         rabbitMqConfig
           .GetType()
           .GetProperties()
-          .Where(p => p.GetCustomAttribute(typeof(AutoInjectRequestAttribute)) != null).ToList();
+          .ToList();
 
       foreach (var property in propertyInfos)
       {
-        var attr = property.GetCustomAttribute<AutoInjectRequestAttribute>();
+        var attr = property.GetCustomAttribute<Attributes.AutoInjectRequestAttribute>();
+
+        if (attr is null)
+        {
+          continue;
+        }
 
         var propertyValue = property.GetValue(rabbitMqConfig)?.ToString();
         if (string.IsNullOrEmpty(propertyValue))
