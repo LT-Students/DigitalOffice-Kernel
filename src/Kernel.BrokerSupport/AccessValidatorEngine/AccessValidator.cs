@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
 {
-  /// <inheritdoc/>
   public class AccessValidator : IAccessValidator
   {
     private readonly HttpContext _httpContext;
@@ -80,9 +79,9 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
         return true;
       }
 
-      var result = _requestClientCR.GetResponse<IOperationResult<bool>>(
-          ICheckUserRightsRequest.CreateObj(userId.Value, rightIds),
-          timeout: RequestTimeout.After(s: 2)).Result;
+      var result = await _requestClientCR.GetResponse<IOperationResult<bool>>(
+        ICheckUserRightsRequest.CreateObj(userId.Value, rightIds),
+        timeout: RequestTimeout.After(s: 2));
 
       if (result.Message == null)
       {

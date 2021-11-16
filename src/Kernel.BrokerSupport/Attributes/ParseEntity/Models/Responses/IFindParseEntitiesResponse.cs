@@ -29,12 +29,12 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Re
       foreach (var assembly in assemblies)
       {
         parsedEntities.AddRange(assembly.ExportedTypes
-            .Where(
-                t =>
-                    t.IsClass
-                    && t.IsPublic
-                    && t.GetCustomAttribute(typeof(ParseEntityAttribute)) != null)
-            .ToList());
+          .Where(
+            t =>
+              t.IsClass
+              && t.IsPublic
+              && t.GetCustomAttribute(typeof(ParseEntityAttribute)) != null)
+          .ToList());
       }
 
       foreach (var entity in parsedEntities)
@@ -42,10 +42,10 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Re
         var attr = entity.GetCustomAttribute<ParseEntityAttribute>();
 
         var parsedProperties = entity
-            .GetProperties()
-            .Where(p => p.GetCustomAttribute(typeof(IgnoreParseAttribute)) == null)
-            .Select(p => p.Name)
-            .ToList();
+          .GetProperties()
+          .Where(p => p.GetCustomAttribute(typeof(IgnoreParseAttribute)) == null)
+          .Select(p => p.Name)
+          .ToList();
 
         if (parsedEntities != null && parsedProperties.Any())
         {
