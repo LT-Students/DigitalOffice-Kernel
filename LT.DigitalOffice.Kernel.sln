@@ -9,23 +9,43 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BCFECB30-2AD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{12F33343-2D9F-4585-9B0E-02DDF4046625}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.UnitTests", "test\Kernel.UnitTests\Kernel.UnitTests.csproj", "{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0D82792-8BFB-48B4-893D-65E4A47595CB}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		LT.DigitalOffice.Kernel.nuspec = LT.DigitalOffice.Kernel.nuspec
-		LT.DigitalOffice.Kernel.RedisSupport.nuspec = LT.DigitalOffice.Kernel.RedisSupport.nuspec
-		.github\workflows\main.yml = .github\workflows\main.yml
-		.github\workflows\nuget_kernel.yml = .github\workflows\nuget_kernel.yml
-		.github\workflows\nuget_kernel_redis.yml = .github\workflows\nuget_kernel_redis.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.RedisSupport", "src\Kernel.RedisSupport\Kernel.RedisSupport.csproj", "{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.RedisSupport.UnitTests", "test\Kernel.RedisSupport.UnitTests\Kernel.RedisSupport.UnitTests.csproj", "{44F8FE3F-8B07-4763-BE43-519749903A10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{BE32B5DF-5B67-42C9-BDC5-39BC145EB6CB}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main.yml = .github\workflows\main.yml
+		.github\workflows\nuget_kernel.yml = .github\workflows\nuget_kernel.yml
+		.github\workflows\nuget_kernel_broker.yml = .github\workflows\nuget_kernel_broker.yml
+		.github\workflows\nuget_kernel_image.yml = .github\workflows\nuget_kernel_image.yml
+		.github\workflows\nuget_kernel_redis.yml = .github\workflows\nuget_kernel_redis.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{5FD294CA-DC1E-436A-82D4-7D87935F7F0C}"
+	ProjectSection(SolutionItems) = preProject
+		LT.DigitalOffice.Kernel.BrokerSupport.nuspec = LT.DigitalOffice.Kernel.BrokerSupport.nuspec
+		LT.DigitalOffice.Kernel.ImageSupport.nuspec = LT.DigitalOffice.Kernel.ImageSupport.nuspec
+		LT.DigitalOffice.Kernel.nuspec = LT.DigitalOffice.Kernel.nuspec
+		LT.DigitalOffice.Kernel.RedisSupport.nuspec = LT.DigitalOffice.Kernel.RedisSupport.nuspec
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.ImageSupport", "src\Kernel.ImageSupport\Kernel.ImageSupport.csproj", "{37C93BC8-4D62-41A3-A65A-64662B7647C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.BrokerSupport", "src\Kernel.BrokerSupport\Kernel.BrokerSupport.csproj", "{4741CFEE-8B9C-4EAB-8E7E-717A2D55CEF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.ImageSupport.UnitTests", "test\Kernel.ImageSupport.UnitTests\Kernel.ImageSupport.UnitTests.csproj", "{3262DFF7-DDBD-4DFA-99AD-A0CDD53FB3BC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.BrokerSupport.UnitTests", "test\Kernel.BrokerSupport.UnitTests\Kernel.BrokerSupport.UnitTests.csproj", "{2996219E-B23B-4EFB-B9D0-F2D6CD7ADE39}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.UnitTests", "test\Kernel.UnitTests\Kernel.UnitTests.csproj", "{F5589FA6-12C9-485A-BCB1-D241905221CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +57,6 @@ Global
 		{6CA4BE45-F24D-401B-B00A-85888D3E0F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CA4BE45-F24D-401B-B00A-85888D3E0F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CA4BE45-F24D-401B-B00A-85888D3E0F4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,15 +65,41 @@ Global
 		{44F8FE3F-8B07-4763-BE43-519749903A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44F8FE3F-8B07-4763-BE43-519749903A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44F8FE3F-8B07-4763-BE43-519749903A10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37C93BC8-4D62-41A3-A65A-64662B7647C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37C93BC8-4D62-41A3-A65A-64662B7647C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37C93BC8-4D62-41A3-A65A-64662B7647C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37C93BC8-4D62-41A3-A65A-64662B7647C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4741CFEE-8B9C-4EAB-8E7E-717A2D55CEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4741CFEE-8B9C-4EAB-8E7E-717A2D55CEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4741CFEE-8B9C-4EAB-8E7E-717A2D55CEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4741CFEE-8B9C-4EAB-8E7E-717A2D55CEF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3262DFF7-DDBD-4DFA-99AD-A0CDD53FB3BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3262DFF7-DDBD-4DFA-99AD-A0CDD53FB3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3262DFF7-DDBD-4DFA-99AD-A0CDD53FB3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3262DFF7-DDBD-4DFA-99AD-A0CDD53FB3BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2996219E-B23B-4EFB-B9D0-F2D6CD7ADE39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2996219E-B23B-4EFB-B9D0-F2D6CD7ADE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2996219E-B23B-4EFB-B9D0-F2D6CD7ADE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2996219E-B23B-4EFB-B9D0-F2D6CD7ADE39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5589FA6-12C9-485A-BCB1-D241905221CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5589FA6-12C9-485A-BCB1-D241905221CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5589FA6-12C9-485A-BCB1-D241905221CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5589FA6-12C9-485A-BCB1-D241905221CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6CA4BE45-F24D-401B-B00A-85888D3E0F4F} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
-		{1B1410E4-CC9D-49A0-96D0-DA844C6FE7FA} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
 		{93B7EF68-ACBC-4732-AA8D-2F243A5DFB50} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
 		{44F8FE3F-8B07-4763-BE43-519749903A10} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
+		{BE32B5DF-5B67-42C9-BDC5-39BC145EB6CB} = {C0D82792-8BFB-48B4-893D-65E4A47595CB}
+		{5FD294CA-DC1E-436A-82D4-7D87935F7F0C} = {C0D82792-8BFB-48B4-893D-65E4A47595CB}
+		{37C93BC8-4D62-41A3-A65A-64662B7647C0} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
+		{4741CFEE-8B9C-4EAB-8E7E-717A2D55CEF5} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
+		{3262DFF7-DDBD-4DFA-99AD-A0CDD53FB3BC} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
+		{2996219E-B23B-4EFB-B9D0-F2D6CD7ADE39} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
+		{F5589FA6-12C9-485A-BCB1-D241905221CF} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FACABE25-5CB9-4CCC-BD5E-D96AC398DE04}

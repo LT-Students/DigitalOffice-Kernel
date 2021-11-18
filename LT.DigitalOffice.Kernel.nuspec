@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel</id>
-    <version>1.1.51</version>
+    <version>1.1.52</version>
     <title>LT.DigitalOffice.Kernel</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.51 - Removed cache classes.
+      1.1.52 - Removed broker classes.
 
       Previous versions:
+      1.1.51 - Removed cache classes.
       1.1.50 - Add CacheNotebook.
       1.1.49 - Add Director Department rights to Constants and add HidePassword method
       1.1.48 - Remove AuthoInject RedisHelper, add async to AccessValidator and BaseEditRequestValidator
@@ -61,10 +62,6 @@
       <group targetFramework="net5.0">
         <dependency id="FluentValidation" version="9.5.3"/>
         <dependency id="FluentValidation.AspNetCore" version="9.5.3"/>
-        <dependency id="MassTransit" version="7.1.7"/>
-        <dependency id="MassTransit.AspNetCore" version="7.1.7"/>
-        <dependency id="MassTransit.Extensions.DependencyInjection" version="7.1.7"/>
-        <dependency id="MassTransit.RabbitMQ" version="7.1.7"/>
         <dependency id="Microsoft.AspNetCore.Diagnostics" version="2.2.0"/>
         <dependency id="Microsoft.AspNetCore.Diagnostics.Abstractions" version="2.2.0"/>
         <dependency id="Microsoft.AspNetCore.Http" version="2.2.2"/>
