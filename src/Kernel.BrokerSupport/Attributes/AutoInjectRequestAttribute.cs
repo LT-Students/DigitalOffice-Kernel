@@ -7,7 +7,6 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes
   public class AutoInjectRequestAttribute : Attribute
   {
     public Type Model { get; init; }
-
     public RequestTimeout Timeout { get; init; }
 
     public AutoInjectRequestAttribute(
