@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel.BrokerSupport</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>LT.DigitalOffice.Kernel.BrokerSupport</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,14 +10,15 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.0.0 - Initial.
+      1.0.1 - Update to .net 6.
 
       Previous versions:
+      1.0.0 - Initial.
     </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
-      <group targetFramework="net5.0">
+      <group targetFramework="net6.0">
         <dependency id="MassTransit" version="7.1.7"/>
         <dependency id="MassTransit.AspNetCore" version="7.1.7"/>
         <dependency id="MassTransit.Extensions.DependencyInjection" version="7.1.7"/>
@@ -27,7 +28,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.dll" target="lib\net5.0" />
-    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.pdb" target="lib\net5.0" />
+    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.pdb" target="lib\net6.0" />
   </files>
 </package>
