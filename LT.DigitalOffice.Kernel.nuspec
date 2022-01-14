@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.53 - Update to .Net 6.
+      1.1.54 - Add ExtendedEditValidator.
 
       Previous versions:
+      1.1.53 - Update to .Net 6.
       1.1.52 - Removed broker classes.
       1.1.51 - Removed cache classes.
       1.1.50 - Add CacheNotebook.
