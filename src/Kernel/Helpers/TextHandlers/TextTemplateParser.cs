@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using LT.DigitalOffice.Kernel.Helpers.TextHandlers.Interfaces;
 
 namespace LT.DigitalOffice.Kernel.Helpers.TextHandlers
 {
-  public static class TextTemplatePerser
+  public class TextTemplateParser : ITextTemplateParser
   {
-    public static string Parse(Dictionary<string, string> values, string text)
+    public string Parse(Dictionary<string, string> values, string text)
     {
       string[] textArray = text.Split('{', '}');
 
@@ -21,7 +22,7 @@ namespace LT.DigitalOffice.Kernel.Helpers.TextHandlers
       return string.Join("", textArray);
     }
 
-    public static string ParseModel<T>(T values, string text) where T : class
+    public string ParseModel<T>(T values, string text) where T : class
     {
       string[] textArray = text.Split('{', '}');
 
