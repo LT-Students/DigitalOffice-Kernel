@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace LT.DigitalOffice.Kernel.Helpers
 {
-    public static class HidePasswordHelper
+    public static class PasswordHider
     {
-        public static string HidePassword(string line)
+        public static string Hide(string line)
         {
             string password = "Password";
 
