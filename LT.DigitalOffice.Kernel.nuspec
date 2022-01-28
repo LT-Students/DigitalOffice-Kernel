@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.55 - renamed HidePasswordHelper to PasswordHider, added TextTemplatePerser.
+      1.1.55 - renamed HidePasswordHelper to PasswordHider, added TextTemplateParser.
 
       Previous versions:
       1.1.54 - Add ExtendedEditValidator, KeywordAttribute, KeywordCollecor, renamed const EditDepartmentUsers to AddRemoveDepartmentData.
