@@ -12,11 +12,13 @@ namespace LT.DigitalOffice.Kernel.Helpers.TextHandlers
 
       for (int i = 0; i < textArray.Length; i++)
       {
-        textArray[i] =
-            textArray[i].StartsWith('[') && textArray[i].EndsWith(']')
-            && values.TryGetValue(textArray[i].Substring(1, textArray[i].Length - 2), out string value)
-          ? value
-          : ('{' + textArray[i] + '}');
+        if (textArray[i].StartsWith('[') && textArray[i].EndsWith(']'))
+        {
+          textArray[i] =
+            values.TryGetValue(textArray[i].Substring(1, textArray[i].Length - 2), out string value)
+            ? value
+            : ('{' + textArray[i] + '}');
+        }
       }
 
       return string.Join("", textArray);
