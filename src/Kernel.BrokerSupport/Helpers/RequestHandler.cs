@@ -30,13 +30,13 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Helpers
         if (!response.IsSuccess())
         {
           errors?.Add("Request was not success.");
-        }
 
-        if (response.Message.Errors.Any())
-        {
-          logger?.LogWarning(
-            "Errors while processing request:\n {Errors}",
-            string.Join('\n', response.Message.Errors));
+          if (response.Message.Errors.Any())
+          {
+            logger?.LogWarning(
+              "Errors while processing request:\n {Errors}",
+              string.Join('\n', response.Message.Errors));
+          }
         }
 
         result = response.Message;
