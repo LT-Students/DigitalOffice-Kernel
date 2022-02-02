@@ -43,7 +43,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Helpers
       }
       catch (Exception exc)
       {
-        logger?.LogError(exc, "Can not process request.");
+        logger?.LogError(exc, $"Can not process request {typeof(U).FullName}.");
       }
 
       return result != null ? result.Body : default;
