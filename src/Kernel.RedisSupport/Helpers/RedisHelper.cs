@@ -18,6 +18,11 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 
     public async Task CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime)
     {
+      if (!_cache.IsConnected)
+      {
+        return;
+      }
+
       if (lifeTime.HasValue)
       {
         await _cache.GetDatabase(database).StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
@@ -30,6 +35,11 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 
     public async Task<T> GetAsync<T>(int database, string key)
     {
+      if (!_cache.IsConnected)
+      {
+        return default;
+      }
+
       var projectsFromCache = await _cache.GetDatabase(database).StringGetAsync(key);
 
       if (projectsFromCache.HasValue)
