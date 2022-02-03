@@ -68,7 +68,7 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 
     public async Task RemoveAsync(Guid elementId)
     {
-      if (!_dictionary.TryRemove(elementId, out var frames) || frames == null)
+      if (!_cache.IsConnected || !_dictionary.TryRemove(elementId, out var frames) || frames == null)
       {
         return;
       }
