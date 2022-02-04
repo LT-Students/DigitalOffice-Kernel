@@ -2,11 +2,9 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.RedisSupport.Configurations;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Options;
-using StackExchange.Redis;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 {
@@ -30,15 +28,12 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
       public bool IsOverdue { get { return CreatedAtUtc + LifeTime < DateTime.UtcNow; } }
     }
 
-    private readonly IConnectionMultiplexer _cache;
     private static readonly ConcurrentDictionary<Guid, List<Frame>> _dictionary = new();
     private readonly IOptions<RedisConfig> _options;
 
     public CacheNotebook(
-      IConnectionMultiplexer cache,
       IOptions<RedisConfig> options)
     {
-      _cache = cache;
       _options = options;
     }
 
@@ -66,17 +61,19 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
         });
     }
 
-    public async Task RemoveAsync(Guid elementId)
+    public List<(int database, string key)> GetKeys(Guid elementId)
     {
-      if (!_cache.IsConnected || !_dictionary.TryRemove(elementId, out var frames) || frames == null)
+      if (!_dictionary.TryGetValue(elementId, out var frames) || frames is null)
       {
-        return;
+        return new List<(int database, string key)>();
       }
 
-      foreach (var frame in frames.Where(f => !f.IsOverdue))
-      {
-        await _cache.GetDatabase(frame.Database).KeyDeleteAsync(frame.Key);
-      }
+      return frames.Where(frame => !frame.IsOverdue).Select(frame => (frame.Database, frame.Key)).ToList();
+    }
+
+    public void Remove(Guid elementId)
+    {
+      _dictionary.TryRemove(elementId, out var frames);
     }
   }
 }

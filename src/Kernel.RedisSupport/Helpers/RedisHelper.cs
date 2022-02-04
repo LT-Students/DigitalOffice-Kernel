@@ -20,11 +20,11 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
       _cacheNotebook = cacheNotebook;
     }
 
-    public async Task CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime)
+    public async Task<bool> CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime)
     {
       if (!_cache.IsConnected)
       {
-        return;
+        return false;
       }
 
       if (lifeTime.HasValue)
@@ -35,20 +35,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
       {
         await _cache.GetDatabase(database).StringSetAsync(key, JsonConvert.SerializeObject(item));
       }
-    }
 
-    public async Task CreateAsync<T>(int database, string key, T item, List<Guid> elementsIds, TimeSpan? lifeTime)
-    {
-      await CreateAsync<T>(database, key, item, lifeTime);
-
-      _cacheNotebook.Add(elementsIds, database, key);
-    }
-
-    public async Task CreateAsync<T>(int database, string key, T item, Guid elementId, TimeSpan? lifeTime)
-    {
-      await CreateAsync<T>(database, key, item, lifeTime);
-
-      _cacheNotebook.Add(elementId, database, key);
+      return true;
     }
 
     public async Task<T> GetAsync<T>(int database, string key)
@@ -68,6 +56,18 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
       }
 
       return default;
+    }
+
+    public async Task<bool> RemoveAsync(int database, string key)
+    {
+      if (!_cache.IsConnected)
+      {
+        return false;
+      }
+
+      await _cache.GetDatabase(database).KeyDeleteAsync(key);
+
+      return true;
     }
   }
 }
