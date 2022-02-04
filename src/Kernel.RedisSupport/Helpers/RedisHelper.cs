@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Newtonsoft.Json;
@@ -10,14 +9,11 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
   public class RedisHelper : IRedisHelper
   {
     private readonly IConnectionMultiplexer _cache;
-    private readonly ICacheNotebook _cacheNotebook;
 
     public RedisHelper(
-      IConnectionMultiplexer cache,
-      ICacheNotebook cacheNotebook)
+      IConnectionMultiplexer cache)
     {
       _cache = cache;
-      _cacheNotebook = cacheNotebook;
     }
 
     public async Task<bool> CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime)
