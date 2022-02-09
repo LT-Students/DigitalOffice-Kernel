@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.51" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="StackExchange.Redis" Version="2.2.50" />
   </ItemGroup>
 
