@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Net;
-using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 {
   public static class FlushRedisDbHelper
   {
-    public static void FlushDatabase(
+    public static string FlushDatabase(
       string redisConnStr,
-      int database,
-      ILogger logger = null)
+      int database)
     {
       try
       {
@@ -22,13 +20,14 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
           {
             IServer server = cm.GetServer(endpoint);
             server.FlushDatabase(database);
-            logger?.LogInformation($"Redis database {database} successfully flushed.");
           }
         }
+
+        return null;
       }
       catch (Exception ex)
       {
-        logger?.LogError($"Error while flushing Redis database. Text: {ex.Message}");
+        return $"Error while flushing Redis database №{database}. Text: {ex.Message}";
       }
     }
   }
