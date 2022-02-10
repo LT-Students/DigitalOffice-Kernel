@@ -4,8 +4,8 @@ using LT.DigitalOffice.Kernel.Requests;
 
 namespace LT.DigitalOffice.Kernel.Validators.Interfaces
 {
-    [AutoInject]
-    public interface IBaseFindFilterValidator : IValidator<BaseFindFilter>
-    {
-    }
+  [AutoInject]
+  public interface IBaseFindFilterValidator : IValidator<BaseFindFilter>
+  {
+  }
 }

@@ -1,6 +1,6 @@
-﻿using LT.DigitalOffice.Kernel.Attributes;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using LT.DigitalOffice.Kernel.Attributes;
 
 namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces
 {
