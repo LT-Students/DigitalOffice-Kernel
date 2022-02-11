@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.1.56 - fixed Parse method of TextTemplateParser.
+      1.1.57(not published) - removed KeywordAttribute, KeywordCollector;
 
       Previous versions:
+      1.1.56 - fixed Parse method of TextTemplateParser.
       1.1.55 - renamed HidePasswordHelper to PasswordHider, added TextTemplateParser.
       1.1.54 - Add ExtendedEditValidator, KeywordAttribute, KeywordCollecor, renamed const EditDepartmentUsers to AddRemoveDepartmentData.
       1.1.53 - Update to .Net 6.

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using LT.DigitalOffice.Kernel.Attributes;
+using LT.DigitalOffice.Kernel.KeywordSupport.Attributes;
 
-namespace LT.DigitalOffice.Kernel.Helpers
+namespace LT.DigitalOffice.Kernel.KeywordSupport.Helpers
 {
   public static class KeywordCollector
   {
