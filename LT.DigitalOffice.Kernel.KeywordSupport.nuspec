@@ -27,7 +27,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.dll" target="lib\net6.0" />
-    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.pdb" target="lib\net6.0" />
+    <file src="artifacts\kernel_keyword\LT.DigitalOffice.Kernel.KeywordSupport.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel_keyword\LT.DigitalOffice.Kernel.KeywordSupport.pdb" target="lib\net6.0" />
   </files>
 </package>

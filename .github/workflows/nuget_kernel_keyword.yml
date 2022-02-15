@@ -30,7 +30,7 @@ jobs:
 
       - name: Build
         run: dotnet build src/Kernel.KeywordSupport/Kernel.KeywordSupport.csproj --no-restore --configuration Release --output ./artifacts/kernel_keyword
-
+                              
       - name: Test
         run: dotnet test test/Kernel.KeywordSupport.UnitTests/Kernel.KeywordSupport.UnitTests.csproj --no-restore --verbosity normal
 
