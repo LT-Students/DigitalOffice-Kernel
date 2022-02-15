@@ -1,4 +1,4 @@
-name: Publish Kernel BrokerKeyword NuGet package
+name: Publish Kernel KeywordSupport NuGet package
 
 # Controls when the action will run.
 on: workflow_dispatch
