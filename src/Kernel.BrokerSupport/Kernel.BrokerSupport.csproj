@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.51" />
+    <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.56" />
 
     <PackageReference Include="MassTransit" Version="7.1.7" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.1.7" />

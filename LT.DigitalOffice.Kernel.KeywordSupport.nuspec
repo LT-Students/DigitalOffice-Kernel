@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LT.DigitalOffice.Kernel.KeywordSupport</id>
+    <version>1.0.0</version>
+    <title>LT.DigitalOffice.Kernel.KeywordSupport</title>
+    <authors>LT Digital Office</authors>
+    <owners>LT Digital Office</owners>
+    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library used in the Digital Office project.</description>
+    <releaseNotes>
+        1.0.0 - Init dll.
+
+        Previous versions:
+
+    </releaseNotes>
+    <copyright>Copyright © LT Digital Office</copyright>
+    <tags>DigitalOffice</tags>
+    <dependencies>
+      <group targetFramework="net6.0">
+          
+        <dependency id="LT.DigitalOffice.Kernel" version="1.1.56" />
+        <dependency id="LT.DigitalOffice.Kernel.BrokerSupport" version="1.0.4" />
+          
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel_broker\LT.DigitalOffice.Kernel.BrokerSupport.pdb" target="lib\net6.0" />
+  </files>
+</package>

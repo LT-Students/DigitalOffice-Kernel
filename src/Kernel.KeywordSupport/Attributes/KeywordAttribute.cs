@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LT.DigitalOffice.Kernel.Attributes
+namespace LT.DigitalOffice.Kernel.KeywordSupport.Attributes
 {
   [AttributeUsage(AttributeTargets.Property)]
   public class KeywordAttribute : Attribute
