@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using LT.DigitalOffice.Kernel.KeywordSupport.Broker.Models.TextTemplate.Models;
+using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Models.TextTemplate.Models;
 
-namespace LT.DigitalOffice.Kernel.KeywordSupport.Broker.Models.TextTemplate
+namespace LT.DigitalOffice.Kernel.EndpointSupport.Broker.Models.TextTemplate
 {
   public interface ICreateKeywordsRequest
   {

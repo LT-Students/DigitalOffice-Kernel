@@ -25,16 +25,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{BE32B5DF-5B6
 		.github\workflows\main.yml = .github\workflows\main.yml
 		.github\workflows\nuget_kernel.yml = .github\workflows\nuget_kernel.yml
 		.github\workflows\nuget_kernel_broker.yml = .github\workflows\nuget_kernel_broker.yml
+		.github\workflows\nuget_kernel_endpoint.yml = .github\workflows\nuget_kernel_endpoint.yml
 		.github\workflows\nuget_kernel_image.yml = .github\workflows\nuget_kernel_image.yml
-		.github\workflows\nuget_kernel_keyword.yml = .github\workflows\nuget_kernel_keyword.yml
 		.github\workflows\nuget_kernel_redis.yml = .github\workflows\nuget_kernel_redis.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{5FD294CA-DC1E-436A-82D4-7D87935F7F0C}"
 	ProjectSection(SolutionItems) = preProject
 		LT.DigitalOffice.Kernel.BrokerSupport.nuspec = LT.DigitalOffice.Kernel.BrokerSupport.nuspec
+		LT.DigitalOffice.Kernel.EndpointSupport.nuspec = LT.DigitalOffice.Kernel.EndpointSupport.nuspec
 		LT.DigitalOffice.Kernel.ImageSupport.nuspec = LT.DigitalOffice.Kernel.ImageSupport.nuspec
-		LT.DigitalOffice.Kernel.KeywordSupport.nuspec = LT.DigitalOffice.Kernel.KeywordSupport.nuspec
 		LT.DigitalOffice.Kernel.nuspec = LT.DigitalOffice.Kernel.nuspec
 		LT.DigitalOffice.Kernel.RedisSupport.nuspec = LT.DigitalOffice.Kernel.RedisSupport.nuspec
 	EndProjectSection
@@ -49,9 +49,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.BrokerSupport.UnitTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.UnitTests", "test\Kernel.UnitTests\Kernel.UnitTests.csproj", "{F5589FA6-12C9-485A-BCB1-D241905221CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.KeywordSupport", "src\Kernel.KeywordSupport\Kernel.KeywordSupport.csproj", "{46BF3A9E-B765-4254-9362-B20CB63A3CBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.EndpointSupport", "src\Kernel.KeywordSupport\Kernel.EndpointSupport.csproj", "{46BF3A9E-B765-4254-9362-B20CB63A3CBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.KeywordSupport.UnitTests", "test\Kernel.KeywordSupport.UnitTests\Kernel.KeywordSupport.UnitTests.csproj", "{9FB9FB9A-3D56-4B85-80BC-C18311369E16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.KeywordSupport.UnitTests", "test\Kernel.KeywordSupport.UnitTests\Kernel.KeywordSupport.UnitTests.csproj", "{9FB9FB9A-3D56-4B85-80BC-C18311369E16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
