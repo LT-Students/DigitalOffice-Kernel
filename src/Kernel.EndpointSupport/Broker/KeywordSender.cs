@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
-using LT.DigitalOffice.Kernel.Configurations;
-using LT.DigitalOffice.Kernel.EndpointSupport.Broker;
 using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Configurations;
 using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Models.TextTemplate;
 using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Models.TextTemplate.Models;
 using LT.DigitalOffice.Kernel.EndpointSupport.Helpers;
 using Microsoft.AspNetCore.Builder;
 
-namespace LT.DigitalOffice.Kernel.KeywordSupport.Broker
+namespace LT.DigitalOffice.Kernel.EndpointSupport.Broker
 {
   public static class KeywordSender
   {
-    public static async Task Send(
+    public static async Task SendT(
       this IApplicationBuilder app,
-      ExtendedBaseRabbitMqConfig rabbitConfig,
-      BaseServiceInfoConfig serviceConfig)
+      ExtendedBaseRabbitMqConfig rabbitConfig)
     {
       Dictionary<Guid, List<string>> endpointsKeywords = KeywordCollector
         .GetEndpointKeywords();
