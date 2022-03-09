@@ -35,7 +35,7 @@ jobs:
         run: dotnet test test/Kernel.EndpointSupport.UnitTests/Kernel.EndpointSupport.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Pack nuget
-        run: nuget pack LT.DigitalOffice.Kernel.EndpointSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/endpoint_keyword
+        run: nuget pack LT.DigitalOffice.Kernel.EndpointSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_endpoint
 
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel_endpoint/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
