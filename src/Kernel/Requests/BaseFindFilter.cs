@@ -9,5 +9,13 @@ namespace LT.DigitalOffice.Kernel.Requests
 
     [FromQuery(Name = "takecount")]
     public int TakeCount { get; set; }
+
+    public BaseFindFilter(
+      int skipCount = 0,
+      int takeCount = 1)
+    {
+      SkipCount = skipCount;
+      TakeCount = takeCount;
+    }
   }
 }
