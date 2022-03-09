@@ -13,7 +13,7 @@ namespace LT.DigitalOffice.Kernel.EndpointSupport.Broker
 {
   public static class KeywordSender
   {
-    public static async Task SendT(
+    public static async Task Send(
       this IApplicationBuilder app,
       ExtendedBaseRabbitMqConfig rabbitConfig)
     {
