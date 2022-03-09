@@ -1,12 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Version>1.0.0</Version>
 
         <TargetFramework>net6.0</TargetFramework>
 
-        <AssemblyName>LT.DigitalOffice.Kernel.KeywordSupport</AssemblyName>
-        <RootNamespace>LT.DigitalOffice.Kernel.KeywordSupport</RootNamespace>
+        <AssemblyName>LT.DigitalOffice.Kernel.EndpointSupport</AssemblyName>
+        <RootNamespace>LT.DigitalOffice.Kernel.EndpointSupport</RootNamespace>
         <IsPackable>true</IsPackable>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>

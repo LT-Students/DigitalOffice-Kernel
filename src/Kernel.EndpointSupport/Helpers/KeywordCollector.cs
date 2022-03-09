@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using LT.DigitalOffice.Kernel.KeywordSupport.Attributes;
+using LT.DigitalOffice.Kernel.EndpointSupport.Attributes;
 
-namespace LT.DigitalOffice.Kernel.KeywordSupport.Helpers
+namespace LT.DigitalOffice.Kernel.EndpointSupport.Helpers
 {
   public static class KeywordCollector
   {
-    public static Dictionary<int, List<string>> GetEndpointKeywords()
+    public static Dictionary<Guid, List<string>> GetEndpointKeywords()
     {
-      Dictionary<int, List<string>> endpointsKeywords = new();
+      Dictionary<Guid, List<string>> endpointsKeywords = new();
 
       IEnumerable<Type> assemblyTargets = AppDomain.CurrentDomain
         .GetAssemblies()
@@ -25,15 +25,15 @@ namespace LT.DigitalOffice.Kernel.KeywordSupport.Helpers
 
         foreach (PropertyInfo property in properties)
         {
-          foreach (int endpoint in
+          foreach (Guid endpointId in
             (property.GetCustomAttributes(typeof(KeywordAttribute), true).FirstOrDefault() as KeywordAttribute).Endpoints)
           {
-            if (!endpointsKeywords.ContainsKey(endpoint))
+            if (!endpointsKeywords.ContainsKey(endpointId))
             {
-              endpointsKeywords.Add(endpoint, new List<string>());
+              endpointsKeywords.Add(endpointId, new List<string>());
             }
 
-            endpointsKeywords[endpoint].Add(property.Name);
+            endpointsKeywords[endpointId].Add(property.Name);
           }
         }
       }
