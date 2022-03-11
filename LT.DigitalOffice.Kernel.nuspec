@@ -10,8 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.1.58(not published) - removed KeywordAttribute, KeywordCollector;
-        1.1.57 - add default skipCount takeCount
+        1.1.57 - add default skipCount takeCount, removed KeywordAttribute and KeywordCollector, added AddEditRemoveCompanyData and AddRemoveUserRole to Rights enum.
 
         Previous versions:
         1.1.56 - fixed Parse method of TextTemplateParser.
