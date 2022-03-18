@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LT.DigitalOffice.Kernel.DataSupport</id>
+    <version>1.0.0</version>
+    <title>LT.DigitalOffice.Kernel.DataSupport</title>
+    <authors>LT Digital Office</authors>
+    <owners>LT Digital Office</owners>
+    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library used in the Digital Office project with databases.</description>
+    <releaseNotes>
+      1.0.0 - Initial version.
+
+      Previous versions:
+    </releaseNotes>
+    <copyright>Copyright © LT Digital Office</copyright>
+    <tags>DigitalOffice</tags>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="LT.DigitalOffice.Kernel" version="1.1.57"/>
+        <dependency id="Microsoft.EntityFrameworkCore" version="6.0.0"/>
+        <dependency id="Microsoft.EntityFrameworkCore.InMemory" version="6.0.0"/>
+        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="6.0.0"/>
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="6.0.0"/>
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="artifacts\kernel_data\LT.DigitalOffice.Kernel.DataSupport.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel_data\LT.DigitalOffice.Kernel.DataSupport.pdb" target="lib\net6.0" />
+  </files>
+</package>

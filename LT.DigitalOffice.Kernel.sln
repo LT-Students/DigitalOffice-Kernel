@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{BE32B5DF-5B6
 		.github\workflows\main.yml = .github\workflows\main.yml
 		.github\workflows\nuget_kernel.yml = .github\workflows\nuget_kernel.yml
 		.github\workflows\nuget_kernel_broker.yml = .github\workflows\nuget_kernel_broker.yml
+		.github\workflows\nuget_kernel_data.yml = .github\workflows\nuget_kernel_data.yml
 		.github\workflows\nuget_kernel_endpoint.yml = .github\workflows\nuget_kernel_endpoint.yml
 		.github\workflows\nuget_kernel_image.yml = .github\workflows\nuget_kernel_image.yml
 		.github\workflows\nuget_kernel_redis.yml = .github\workflows\nuget_kernel_redis.yml
@@ -33,6 +34,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{5FD294CA-DC1E-436A-82D4-7D87935F7F0C}"
 	ProjectSection(SolutionItems) = preProject
 		LT.DigitalOffice.Kernel.BrokerSupport.nuspec = LT.DigitalOffice.Kernel.BrokerSupport.nuspec
+		LT.DigitalOffice.Kernel.DataSupport.nuspec = LT.DigitalOffice.Kernel.DataSupport.nuspec
 		LT.DigitalOffice.Kernel.EndpointSupport.nuspec = LT.DigitalOffice.Kernel.EndpointSupport.nuspec
 		LT.DigitalOffice.Kernel.ImageSupport.nuspec = LT.DigitalOffice.Kernel.ImageSupport.nuspec
 		LT.DigitalOffice.Kernel.nuspec = LT.DigitalOffice.Kernel.nuspec
@@ -50,8 +52,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.UnitTests", "test\Kernel.UnitTests\Kernel.UnitTests.csproj", "{F5589FA6-12C9-485A-BCB1-D241905221CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.EndpointSupport", "src\Kernel.EndpointSupport\Kernel.EndpointSupport.csproj", "{46BF3A9E-B765-4254-9362-B20CB63A3CBF}"
-EndProjectk
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.EndpointSupport.UnitTests", "test\Kernel.EndpointSupport.UnitTests\Kernel.EndpointSupport.UnitTests.csproj", "{9FB9FB9A-3D56-4B85-80BC-C18311369E16}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.DataSupport", "src\Kernel.DataSupport\Kernel.DataSupport.csproj", "{9C9568CA-3954-4EE7-8A9A-7F98371EA843}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +103,10 @@ Global
 		{9FB9FB9A-3D56-4B85-80BC-C18311369E16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FB9FB9A-3D56-4B85-80BC-C18311369E16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FB9FB9A-3D56-4B85-80BC-C18311369E16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9568CA-3954-4EE7-8A9A-7F98371EA843}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9568CA-3954-4EE7-8A9A-7F98371EA843}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9568CA-3954-4EE7-8A9A-7F98371EA843}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9568CA-3954-4EE7-8A9A-7F98371EA843}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +124,7 @@ Global
 		{F5589FA6-12C9-485A-BCB1-D241905221CF} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
 		{46BF3A9E-B765-4254-9362-B20CB63A3CBF} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
 		{9FB9FB9A-3D56-4B85-80BC-C18311369E16} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
+		{9C9568CA-3954-4EE7-8A9A-7F98371EA843} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FACABE25-5CB9-4CCC-BD5E-D96AC398DE04}
