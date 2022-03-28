@@ -6,6 +6,20 @@ namespace LT.DigitalOffice.Kernel.Extensions
 {
   public static class HttpContextExtensions
   {
+    public static Guid UserIdOrDefault(this HttpContext context)
+    {
+      if (!context.Items.ContainsKey(ConstStrings.UserId))
+      {
+        return default;
+      }
+
+      string valueFromContext = context.Items[ConstStrings.UserId]?.ToString();
+
+      return string.IsNullOrEmpty(valueFromContext)
+        || !Guid.TryParse(valueFromContext, out Guid id)
+        ? default
+        : id;
+    }
     public static Guid GetUserId(this HttpContext context)
     {
       if (!context.Items.ContainsKey(ConstStrings.UserId))
