@@ -8,5 +8,6 @@
     public const int Offices = 3;
     public const int Projects = 4;
     public const int Companies = 5;
+    public const int Rights = 6;
   }
 }
