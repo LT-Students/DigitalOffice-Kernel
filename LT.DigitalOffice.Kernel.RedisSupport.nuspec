@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.5 - Add roles in Cache.
+        1.0.5 - Add rights in Cache.
 
         Previous versions:
         1.0.4 - Add FlushRedisDbHelper.
