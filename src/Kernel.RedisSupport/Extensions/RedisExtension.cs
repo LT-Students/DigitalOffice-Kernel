@@ -18,7 +18,17 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
 
         foreach (var arg in additionalArguments)
         {
-          cache += arg.GetHashCode();
+          if (arg is string)
+          {
+            foreach (char value in arg.ToString().Replace(" ", ""))
+            {
+              cache += cache * 17 + value.GetHashCode();
+            }
+          }
+          else
+          {
+            cache += arg.GetHashCode();
+          }
         }
 
         return cache.ToString();
