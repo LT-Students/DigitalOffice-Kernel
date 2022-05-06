@@ -20,6 +20,7 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
         {
           if (arg is string)
           {
+            //ToDo update cache for string
             foreach (char value in arg.ToString().Replace(" ", ""))
             {
               cache += cache * 17 + value.GetHashCode();
