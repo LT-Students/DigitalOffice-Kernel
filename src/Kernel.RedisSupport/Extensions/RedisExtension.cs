@@ -10,6 +10,7 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
       unchecked
       {
         var cache = 0;
+        var coef = 1;
 
         foreach (var id in guids)
         {
@@ -23,7 +24,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
             //ToDo update cache for string
             foreach (char value in arg.ToString().Replace(" ", ""))
             {
-              cache += cache * 17 + value.GetHashCode();
+              cache += coef * value.GetHashCode();
+              coef++;
             }
           }
           else
