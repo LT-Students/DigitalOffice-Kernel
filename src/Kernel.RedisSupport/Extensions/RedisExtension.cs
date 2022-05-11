@@ -9,8 +9,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
     {
       unchecked
       {
-        var cache = 0;
-        var coef = 1;
+        int cache = 0;
+        int charPosition = 1;
 
         foreach (var id in guids)
         {
@@ -24,8 +24,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
             //ToDo update cache for string
             foreach (char value in arg.ToString().Replace(" ", ""))
             {
-              cache += coef * value.GetHashCode();
-              coef++;
+              cache += charPosition * value.GetHashCode();
+              charPosition++;
             }
           }
           else
@@ -43,8 +43,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
       unchecked
       {
 
-        var cache = id.GetHashCode();
-        var coef = 1;
+        int cache = id.GetHashCode();
+        int charPosition = 1;
 
         foreach (var arg in additionalArguments)
         {
@@ -53,8 +53,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
             //ToDo update cache for string
             foreach (char value in arg.ToString().Replace(" ", ""))
             {
-              cache += coef * value.GetHashCode();
-              coef++;
+              cache += charPosition * value.GetHashCode();
+              charPosition++;
             }
           }
           else
