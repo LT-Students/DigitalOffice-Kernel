@@ -42,11 +42,25 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
     {
       unchecked
       {
+
         var cache = id.GetHashCode();
+        var coef = 1;
 
         foreach (var arg in additionalArguments)
         {
-          cache += arg.GetHashCode();
+          if (arg is string)
+          {
+            //ToDo update cache for string
+            foreach (char value in arg.ToString().Replace(" ", ""))
+            {
+              cache += coef * value.GetHashCode();
+              coef++;
+            }
+          }
+          else
+          {
+            cache += arg.GetHashCode();
+          }
         }
 
         return cache.ToString();
