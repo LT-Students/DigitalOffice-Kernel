@@ -72,7 +72,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token
         }
         else
         {
-          throw new ForbiddenException(response.Message.Errors);
+          throw new UnauthorizedException(response.Message.Errors);
         }
       }
     }
