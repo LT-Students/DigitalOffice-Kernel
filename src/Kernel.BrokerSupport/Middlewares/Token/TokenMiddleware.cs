@@ -55,7 +55,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token
 
         if (string.IsNullOrEmpty(token))
         {
-          throw new ForbiddenException(DonNotHaveTokenMessage);
+          throw new UnauthorizedException(DonNotHaveTokenMessage);
         }
 
         Response<IOperationResult<Guid>> response = null;
@@ -72,7 +72,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token
         }
         else
         {
-          throw new ForbiddenException(response.Message.Errors);
+          throw new UnauthorizedException(response.Message.Errors);
         }
       }
     }
