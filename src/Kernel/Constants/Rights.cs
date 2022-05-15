@@ -14,5 +14,6 @@
     public const int AddRemoveDepartmentData = 10;
     public const int AddEditRemoveCompanyData = 11;
     public const int AddRemoveUsersRoles = 12;
+    public const int AddEditRemoveWiki = 13;
   }
 }
