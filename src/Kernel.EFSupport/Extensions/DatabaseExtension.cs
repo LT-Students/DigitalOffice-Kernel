@@ -11,13 +11,6 @@ namespace LT.DigitalOffice.Kernel.EFSupport.Extensions
       (this IApplicationBuilder app)
       where TDbContext : DbContext
     {
-     /* string connStr = Environment.GetEnvironmentVariable("ConnectionString");
-
-      _services.AddDbContext<TDbContext>(options =>
-      {
-        options.UseSqlServer(connStr);
-      });*/
-
       using IServiceScope serviceScope = app.ApplicationServices
           .GetRequiredService<IServiceScopeFactory>()
           .CreateScope();
