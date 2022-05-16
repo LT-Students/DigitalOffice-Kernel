@@ -7,13 +7,11 @@ namespace LT.DigitalOffice.Kernel.EFSupport.Extensions
 {
   public static class DatabaseExtension
   {
-    public static void UpdateDatabase<TDbContext>
-      (this IApplicationBuilder app)
-      where TDbContext : DbContext
+    public static void UpdateDatabase<TDbContext>(this IApplicationBuilder app) where TDbContext : DbContext
     {
       using IServiceScope serviceScope = app.ApplicationServices
-          .GetRequiredService<IServiceScopeFactory>()
-          .CreateScope();
+        .GetRequiredService<IServiceScopeFactory>()
+        .CreateScope();
 
       using TDbContext context = serviceScope.ServiceProvider.GetService<TDbContext>();
 

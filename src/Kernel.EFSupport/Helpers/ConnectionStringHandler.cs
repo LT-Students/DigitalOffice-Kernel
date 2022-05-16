@@ -6,9 +6,9 @@ using Serilog;
 
 namespace LT.DigitalOffice.Kernel.EFSupport.Helpers
 {
-  public static class ConnectionStringExtension
+  public static class ConnectionStringHandler
   {
-    public static string AddConnectionString(this IServiceCollection services, IConfiguration _configuration)
+    public static string GetConnectionString(this IServiceCollection services, IConfiguration _configuration)
     {
       string connStr = Environment.GetEnvironmentVariable("ConnectionString");
 
