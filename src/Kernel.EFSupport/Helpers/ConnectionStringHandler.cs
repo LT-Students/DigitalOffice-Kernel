@@ -7,7 +7,7 @@ namespace LT.DigitalOffice.Kernel.EFSupport.Helpers
 {
   public static class ConnectionStringHandler
   {
-    public static string GetConnectionString(IConfiguration configuration)
+    public static string Get(IConfiguration configuration)
     {
       string connStr = Environment.GetEnvironmentVariable("ConnectionString");
 
