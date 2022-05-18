@@ -1,90 +1,90 @@
 <?xml version="1.0"?>
 <package >
-    <metadata>
-        <id>LT.DigitalOffice.Kernel</id>
-        <version>1.1.61</version>
-        <title>LT.DigitalOffice.Kernel</title>
-        <authors>LT Digital Office</authors>
-        <owners>LT Digital Office</owners>
-        <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Library used in the Digital Office project.</description>
-        <releaseNotes>
-            1.1.61 - Removed IBaseDataProvider. Added "Serilog.AspNetCore" PackageReference.
+  <metadata>
+    <id>LT.DigitalOffice.Kernel</id>
+    <version>1.1.61</version>
+    <title>LT.DigitalOffice.Kernel</title>
+    <authors>LT Digital Office</authors>
+    <owners>LT Digital Office</owners>
+    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library used in the Digital Office project.</description>
+    <releaseNotes>
+        1.1.61 - Removed IBaseDataProvider. Added "Serilog.AspNetCore" PackageReference.
 
-            Previous versions:
-            1.1.60 - Added 'AddEditRemoveWiki' constant for Rights.
-            1.1.59 - added UnauthorizedException.
-            1.1.58 - added UserIdOrDefault to HttpContextExtensions
-            1.1.57 - add default skipCount takeCount, removed KeywordAttribute and KeywordCollector, added AddEditRemoveCompanyData and AddRemoveUserRole to Rights enum.
-            1.1.56 - fixed Parse method of TextTemplateParser.
-            1.1.55 - renamed HidePasswordHelper to PasswordHider, added TextTemplateParser.
-            1.1.54 - Add ExtendedEditValidator, KeywordAttribute, KeywordCollecor, renamed const EditDepartmentUsers to AddRemoveDepartmentData.
-            1.1.53 - Update to .Net 6.
-            1.1.52 - Removed broker classes.
-            1.1.51 - Removed cache classes.
-            1.1.50 - Add CacheNotebook.
-            1.1.49 - Add Director Department rights to Constants and add HidePassword method
-            1.1.48 - Remove AuthoInject RedisHelper, add async to AccessValidator and BaseEditRequestValidator
-            1.1.47 - Added ImageFormats class, ImageContentValidator, ImageExtensionValidator; edited IBaseDataProvider (added Task SaveAsync()).
-            1.1.46 - Added RedisHelper, ResponseCreator, fixed BaseEditRequestValidator.
-            1.1.45 - Update BaseEditRequestValidator.
-            1.1.44 - Fix redis extensions.
-            1.1.43 - Updated IEnumerableExtension. BaseFindRequest renamed to BaseFindFilter and moved to request namespace.
-            1.1.42 - Added IEnumerableExtension. Added nuget StackExchange.Redis ver 2.2.50.
-            1.1.41 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator, add cache in Constants. Fixed AccessValidator and IAccessValidator.
-            1.1.40 - Fixed methods HasRights of AccessValidator.
-            1.1.39 - Added BaseEditRequestValidator
-            1.1.38 - Add History rights to Constants.
-            1.1.37 - Remove BadRequest and Conflict from OperationResultStatusType.
-            1.1.36 - Update AccessValidator.
-            1.1.35 - Add ValidateCustom Extension. Add BadRequest to OperationResultStatusType.
-            1.1.34 - Add 'AddEditRemoveTime' constant for Rights.
-            1.1.33 - Add FindParseEntitiesConsumer, IFindParseEntitiesRequest/response. Add attribute ParseEntityAttribute and IgnoreParseAttribute.
-            1.1.32 - Fixed Status type of FindResultResponse and OperationResultResponse
-            1.1.31 - Added FindResultResponse, updated status property of OperationResultResponse
-            1.1.30 - Updated status property of OperationResultResponse
-            1.1.29 - Added Conflict to OperationResultResponse
-            1.1.28 - Added GetEnvironmentVariableHelper, InternelServerException. Updated ConstStrings. Change MassTransit RequestClients default timeout to RequestTimeout.Default.
-            1.1.27 - Reworked AutoInjectRequest attribute
-            1.1.26 - Add fluent validation packet and fix ExceptionHandler.
-            1.1.25 - Add complex response model.
-            1.1.24 - Add Rights properties to constants.
-            1.1.23 - Version just for test.
-            1.1.22 - Change MassTransit RequestClients default timeout to (2s). Fix RabbitMQ health check (close connection). Add new userId parameter to AccessValidator methods.
-            1.1.21 - Change MassTransit RequestClients default timeout to (5s).
-            1.1.20 - Add access validator and token auto inject. Add default request timeout (500ms) to MassTransit RequestClients.
-            1.1.19 - Rework inject extensions for business ojects and MassTransit RequestClients.
-            1.1.18 - Rework auto inject method. Add auto inject for MassTransit RequestClients.
-            1.1.17 - Add RabbitMQ health check.
-            1.1.16 - Fix ApiInformation middleware. Refactoring configurations models.
-            1.1.15 - Create ApiInformation middleware.
-            1.1.14 - Remove repository tag from nuspec.
-            1.1.13 - Update release notes format.
-            1.1.12 - Update copyright and tags.
-            1.1.11 - Add BaseApiInfo abstract class for inheritance. Add ApiInfoResponse model.
-            1.1.10 - Add auto inject for Commands, Mappers, Validators, Repositories objects.
-        </releaseNotes>
-        <copyright>Copyright © LT Digital Office</copyright>
-        <tags>DigitalOffice</tags>
-        <dependencies>
-            <group targetFramework="net6.0">
-                <dependency id="FluentValidation" version="9.5.3"/>
-                <dependency id="FluentValidation.AspNetCore" version="9.5.3"/>
-                <dependency id="Microsoft.AspNetCore.Diagnostics" version="2.2.0"/>
-                <dependency id="Microsoft.AspNetCore.Diagnostics.Abstractions" version="2.2.0"/>
-                <dependency id="Microsoft.AspNetCore.Http" version="2.2.2"/>
-                <dependency id="Microsoft.AspNetCore.Http.Abstractions" version="2.2.0"/>
-                <dependency id="Microsoft.AspNetCore.Http.Extensions" version="2.2.0"/>
-                <dependency id="Microsoft.AspNetCore.JsonPatch" version="6.0.0"/>
-                <dependency id="Microsoft.Extensions.Options.ConfigurationExtensions" version="6.0.0"/>
-                <dependency id="System.Text.Json" version="6.0.0" />
-                <dependency id="Serilog.AspNetCore" version="5.0.0" />
-            </group>
-        </dependencies>
-    </metadata>
-    <files>
-        <file src="artifacts\kernel\LT.DigitalOffice.Kernel.dll" target="lib\net6.0" />
-        <file src="artifacts\kernel\LT.DigitalOffice.Kernel.pdb" target="lib\net6.0" />
-    </files>
+        Previous versions:
+        1.1.60 - Added 'AddEditRemoveWiki' constant for Rights.
+        1.1.59 - added UnauthorizedException
+        1.1.58 - added UserIdOrDefault to HttpContextExtensions
+        1.1.57 - add default skipCount takeCount, removed KeywordAttribute and KeywordCollector, added AddEditRemoveCompanyData and AddRemoveUserRole to Rights enum.
+        1.1.56 - fixed Parse method of TextTemplateParser.
+        1.1.55 - renamed HidePasswordHelper to PasswordHider, added TextTemplateParser.
+        1.1.54 - Add ExtendedEditValidator, KeywordAttribute, KeywordCollecor, renamed const EditDepartmentUsers to AddRemoveDepartmentData.
+        1.1.53 - Update to .Net 6.
+        1.1.52 - Removed broker classes.
+        1.1.51 - Removed cache classes.
+        1.1.50 - Add CacheNotebook.
+        1.1.49 - Add Director Department rights to Constants and add HidePassword method
+        1.1.48 - Remove AuthoInject RedisHelper, add async to AccessValidator and BaseEditRequestValidator
+        1.1.47 - Added ImageFormats class, ImageContentValidator, ImageExtensionValidator; edited IBaseDataProvider (added Task SaveAsync()).
+        1.1.46 - Added RedisHelper, ResponseCreator, fixed BaseEditRequestValidator.
+        1.1.45 - Update BaseEditRequestValidator.
+        1.1.44 - Fix redis extensions.
+        1.1.43 - Updated IEnumerableExtension. BaseFindRequest renamed to BaseFindFilter and moved to request namespace.
+        1.1.42 - Added IEnumerableExtension. Added nuget StackExchange.Redis ver 2.2.50.
+        1.1.41 - Added BaseFindRequestValidator, IBaseFindRequestValidator, add folder models in validators and BaseFindValidator, add cache in Constants. Fixed AccessValidator and IAccessValidator.
+        1.1.40 - Fixed methods HasRights of AccessValidator.
+        1.1.39 - Added BaseEditRequestValidator
+        1.1.38 - Add History rights to Constants.
+        1.1.37 - Remove BadRequest and Conflict from OperationResultStatusType.
+        1.1.36 - Update AccessValidator.
+        1.1.35 - Add ValidateCustom Extension. Add BadRequest to OperationResultStatusType.
+        1.1.34 - Add 'AddEditRemoveTime' constant for Rights.
+        1.1.33 - Add FindParseEntitiesConsumer, IFindParseEntitiesRequest/response. Add attribute ParseEntityAttribute and IgnoreParseAttribute.
+        1.1.32 - Fixed Status type of FindResultResponse and OperationResultResponse
+        1.1.31 - Added FindResultResponse, updated status property of OperationResultResponse
+        1.1.30 - Updated status property of OperationResultResponse
+        1.1.29 - Added Conflict to OperationResultResponse
+        1.1.28 - Added GetEnvironmentVariableHelper, InternelServerException. Updated ConstStrings. Change MassTransit RequestClients default timeout to RequestTimeout.Default.
+        1.1.27 - Reworked AutoInjectRequest attribute
+        1.1.26 - Add fluent validation packet and fix ExceptionHandler.
+        1.1.25 - Add complex response model.
+        1.1.24 - Add Rights properties to constants.
+        1.1.23 - Version just for test.
+        1.1.22 - Change MassTransit RequestClients default timeout to (2s). Fix RabbitMQ health check (close connection). Add new userId parameter to AccessValidator methods.
+        1.1.21 - Change MassTransit RequestClients default timeout to (5s).
+        1.1.20 - Add access validator and token auto inject. Add default request timeout (500ms) to MassTransit RequestClients.
+        1.1.19 - Rework inject extensions for business ojects and MassTransit RequestClients.
+        1.1.18 - Rework auto inject method. Add auto inject for MassTransit RequestClients.
+        1.1.17 - Add RabbitMQ health check.
+        1.1.16 - Fix ApiInformation middleware. Refactoring configurations models.
+        1.1.15 - Create ApiInformation middleware.
+        1.1.14 - Remove repository tag from nuspec.
+        1.1.13 - Update release notes format.
+        1.1.12 - Update copyright and tags.
+        1.1.11 - Add BaseApiInfo abstract class for inheritance. Add ApiInfoResponse model.
+        1.1.10 - Add auto inject for Commands, Mappers, Validators, Repositories objects.
+    </releaseNotes>
+    <copyright>Copyright © LT Digital Office</copyright>
+    <tags>DigitalOffice</tags>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="FluentValidation" version="9.5.3"/>
+        <dependency id="FluentValidation.AspNetCore" version="9.5.3"/>
+        <dependency id="Microsoft.AspNetCore.Diagnostics" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Diagnostics.Abstractions" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Http" version="2.2.2"/>
+        <dependency id="Microsoft.AspNetCore.Http.Abstractions" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.Http.Extensions" version="2.2.0"/>
+        <dependency id="Microsoft.AspNetCore.JsonPatch" version="6.0.0"/>
+        <dependency id="Microsoft.Extensions.Options.ConfigurationExtensions" version="6.0.0"/>
+        <dependency id="System.Text.Json" version="6.0.0" />
+        <dependency id="Serilog.AspNetCore" version="5.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="artifacts\kernel\LT.DigitalOffice.Kernel.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel\LT.DigitalOffice.Kernel.pdb" target="lib\net6.0" />
+  </files>
 </package>
