@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Version>1.0.6</Version>
@@ -18,14 +18,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.59" />
+    <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.61" />
 
     <PackageReference Include="MassTransit" Version="7.1.7" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.1.7" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.1.7" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="7.1.7" />
-
-    <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
   </ItemGroup>
 
 </Project>

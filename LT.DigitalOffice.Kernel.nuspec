@@ -14,7 +14,7 @@
 
         Previous versions:
         1.1.60 - Added 'AddEditRemoveWiki' constant for Rights.
-        1.1.59 - added UnauthorizedException
+        1.1.59 - added UnauthorizedException.
         1.1.58 - added UserIdOrDefault to HttpContextExtensions
         1.1.57 - add default skipCount takeCount, removed KeywordAttribute and KeywordCollector, added AddEditRemoveCompanyData and AddRemoveUserRole to Rights enum.
         1.1.56 - fixed Parse method of TextTemplateParser.
