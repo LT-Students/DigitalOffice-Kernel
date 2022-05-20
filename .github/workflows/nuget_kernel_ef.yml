@@ -1,4 +1,4 @@
-name: Publish EFSupport NuGet package
+name: Publish Kernel EFSupport NuGet package
 
 # Controls when the action will run.
 on: workflow_dispatch
