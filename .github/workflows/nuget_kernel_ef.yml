@@ -31,9 +31,6 @@ jobs:
       - name: Build
         run: dotnet build src/Kernel.EFSupport/Kernel.EFSupport.csproj --no-restore --configuration Release --output ./artifacts/kernel_ef
 
-      - name: Test
-        run: dotnet test test/Kernel.EFSupport.UnitTests/Kernel.EFSupport.UnitTests.csproj --no-restore --verbosity normal
-
       - name: Pack nuget
         run: nuget pack LT.DigitalOffice.Kernel.EFSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_ef
 
