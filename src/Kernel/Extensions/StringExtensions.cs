@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace LT.DigitalOffice.Kernel.Extensions
@@ -51,6 +54,53 @@ namespace LT.DigitalOffice.Kernel.Extensions
       TimeSpan difference = DateTime.UtcNow - time;
 
       return $"{difference.Days} days {difference.Hours}h {difference.Minutes}m {difference.Seconds}s";
+    }
+
+    public static T TrimSpaces<T>(this T obj, Type modelType)
+    {
+      IEnumerable<PropertyInfo> properties = modelType
+        .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+        .Where(p => p.PropertyType == typeof(string) && p.CanWrite && p.CanRead);
+
+      foreach (PropertyInfo property in properties)
+      {
+        string value = (string)property.GetValue(obj);
+        if (!string.IsNullOrWhiteSpace(value))
+        {
+          var newValue = (object)value.Trim();
+          property.SetValue(obj, newValue);
+        }
+      }
+
+      Type baseTypeInfo = obj.GetType().BaseType;
+      if (baseTypeInfo != null && baseTypeInfo.FullName.Contains("List"))
+      {
+        int listCount = (int)obj.GetType().GetProperty("Count").GetValue(obj, null);
+        for (int innerIndex = 0; innerIndex < listCount; innerIndex++)
+        {
+          object item = obj.GetType()
+            .GetMethod("get_Item", new Type[] { typeof(int) })
+            .Invoke(obj, new object[] { innerIndex });
+          item.TrimSpaces(modelType);
+        }
+      }
+
+      IEnumerable<PropertyInfo> customTypes =
+        obj.GetType()
+          .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+          .Where(prop =>
+              !prop.GetType().IsPrimitive && prop.GetType().IsClass &&
+              !prop.PropertyType.FullName.StartsWith("System"));
+
+      foreach (PropertyInfo customType in customTypes)
+      {
+        if (customType.GetIndexParameters().Length == 0)
+        {
+          customType.GetValue(obj).TrimSpaces(modelType);
+        }
+      }
+
+      return obj;
     }
   }
 }
