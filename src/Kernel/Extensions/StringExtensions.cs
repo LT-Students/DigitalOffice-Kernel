@@ -65,38 +65,46 @@ namespace LT.DigitalOffice.Kernel.Extensions
       foreach (PropertyInfo property in properties)
       {
         string value = (string)property.GetValue(obj);
-        if (!string.IsNullOrWhiteSpace(value))
+        if (value != null)
         {
-          var newValue = (object)value.Trim();
+          object newValue = (object)value.Trim();
           property.SetValue(obj, newValue);
         }
       }
 
-      Type baseTypeInfo = obj.GetType().BaseType;
-      if (baseTypeInfo != null && baseTypeInfo.FullName.Contains("List"))
+      PropertyInfo baseTypeInfo = modelType
+        .GetProperties()
+        .FirstOrDefault(p => p.PropertyType.FullName != null && p.PropertyType.FullName.Contains("List"));
+      if (baseTypeInfo is not null)
       {
-        int listCount = (int)obj.GetType().GetProperty("Count").GetValue(obj, null);
+        object listValue = baseTypeInfo.GetValue(obj);
+
+        int listCount = (int)baseTypeInfo.PropertyType.GetProperty("Count")?.GetValue(listValue)!;
         for (int innerIndex = 0; innerIndex < listCount; innerIndex++)
         {
-          object item = obj.GetType()
-            .GetMethod("get_Item", new Type[] { typeof(int) })
-            .Invoke(obj, new object[] { innerIndex });
-          item.TrimSpaces(modelType);
+          object item = baseTypeInfo.PropertyType
+            .GetMethod("get_Item", new[] { typeof(int) })
+            ?.Invoke(listValue, new object[] { innerIndex });
+          item?.TrimSpaces(item.GetType());
         }
       }
 
       IEnumerable<PropertyInfo> customTypes =
-        obj.GetType()
+        modelType
           .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-          .Where(prop =>
-              !prop.GetType().IsPrimitive && prop.GetType().IsClass &&
-              !prop.PropertyType.FullName.StartsWith("System"));
+          .Where(
+            prop =>
+              prop.PropertyType.FullName != null
+              && !prop.PropertyType.IsPrimitive
+              && !prop.PropertyType.IsEnum
+              && prop.PropertyType.IsClass
+              && !prop.PropertyType.FullName.StartsWith("System"));
 
       foreach (PropertyInfo customType in customTypes)
       {
         if (customType.GetIndexParameters().Length == 0)
         {
-          customType.GetValue(obj).TrimSpaces(modelType);
+          customType.GetValue(obj).TrimSpaces(customType.GetType());
         }
       }
 
