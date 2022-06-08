@@ -11,7 +11,9 @@ namespace LT.DigitalOffice.Kernel.CustomModelBinderProviders
     public IModelBinder GetBinder(ModelBinderProviderContext context)
     {
       if (context is null)
+      {
         throw new ArgumentNullException(nameof(context));
+      }
 
       return context.Metadata.ModelType.GetCustomAttribute<TrimAttribute>() is not null
         ? new StringTrimmerBinder()
