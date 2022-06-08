@@ -65,9 +65,9 @@ namespace LT.DigitalOffice.Kernel.Extensions
       foreach (PropertyInfo property in properties)
       {
         string value = (string)property.GetValue(obj);
-        if (value != null)
+        if (value is not null)
         {
-          object newValue = (object)value.Trim();
+          object newValue = value.Trim();
           property.SetValue(obj, newValue);
         }
       }
