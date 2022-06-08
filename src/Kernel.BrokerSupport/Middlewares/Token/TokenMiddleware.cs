@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.BrokerSupport.Broker;
 using LT.DigitalOffice.Kernel.Constants;
-using LT.DigitalOffice.Kernel.Exceptions.Models;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -17,7 +17,6 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token
   {
     private const string Token = "token";
     private const string OptionsMethod = "OPTIONS";
-    private const string DonNotHaveTokenMessage = "Enter token";
 
     private readonly RequestDelegate requestDelegate;
     private readonly TokenConfiguration tokenConfiguration;
@@ -55,7 +54,9 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token
 
         if (string.IsNullOrEmpty(token))
         {
-          throw new UnauthorizedException(DonNotHaveTokenMessage);
+          context.Response.Headers.AccessControlAllowOrigin = "*";
+          context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+          return;
         }
 
         Response<IOperationResult<Guid>> response = null;
@@ -72,7 +73,8 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token
         }
         else
         {
-          throw new UnauthorizedException(response.Message.Errors);
+          context.Response.Headers.AccessControlAllowOrigin = "*";
+          context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
         }
       }
     }
