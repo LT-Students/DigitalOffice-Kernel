@@ -41,7 +41,6 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
       return new OperationResultResponse<T>
       {
-        Status = Enums.OperationResultStatusType.Failed,
         Body = default,
         Errors = errors
       };
@@ -70,7 +69,6 @@ namespace LT.DigitalOffice.Kernel.Helpers
       return new FindResultResponse<T>
       {
         TotalCount = 0,
-        Status = Enums.OperationResultStatusType.Failed,
         Body = default,
         Errors = errors
       };
