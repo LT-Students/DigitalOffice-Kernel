@@ -13,6 +13,11 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
     private static IHttpContextAccessor _httpContextAccessor;
 
+    /// <summary>
+    /// Method that allows to initialize the IHttpContextAccessor. 
+    /// It needs to be called in the Startup class that uses the ResponseCreator(ResponseCreator.ResponseCreatorConfigure(app.ApplicationServices.GetService<IHttpContextAccessor>());).
+    /// Otherwise, the code of all responses will be 200.
+    /// </summary>
     public static void ResponseCreatorConfigure(IHttpContextAccessor httpContextAccessor)
     {
       _httpContextAccessor = httpContextAccessor;
