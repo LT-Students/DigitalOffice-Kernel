@@ -23,7 +23,7 @@ namespace LT.DigitalOffice.Kernel.Helpers
       _httpContextAccessor = httpContextAccessor;
     }
 
-    public static OperationResultResponse<T> CreateResponse<T>(HttpStatusCode statusCode, T body = default, List<string> errors = null)
+    public static OperationResultResponse<T> CreateResponse<T>(HttpStatusCode statusCode = HttpStatusCode.OK, T body = default, List<string> errors = default)
     {
       if (_httpContextAccessor is not null)
       {
@@ -49,7 +49,7 @@ namespace LT.DigitalOffice.Kernel.Helpers
       return new OperationResultResponse<T>
       {
         Body = body,
-        Errors = errors
+        Errors = errors is not null ? errors : new()
       };
     }
 
