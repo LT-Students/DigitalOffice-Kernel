@@ -1,34 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.Net;
+using LT.DigitalOffice.Kernel.Helpers.Interfaces;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Http;
 
 namespace LT.DigitalOffice.Kernel.Helpers
 {
-  public static class ResponseCreator
+  public class ResponseCreator : IResponseCreator
   {
     private const string Forbidden = "Not enough rights.";
     private const string BadRequest = "Request is not correct.";
     private const string NotFound = "Nothing found on request.";
 
-    private static IHttpContextAccessor _httpContextAccessor;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    /// <summary>
-    /// Method that allows to initialize the IHttpContextAccessor. 
-    /// It needs to be called in the Startup class that uses the ResponseCreator(ResponseCreator.ResponseCreatorConfigure(app.ApplicationServices.GetService<IHttpContextAccessor>());).
-    /// Otherwise, the code of all responses will be 200.
-    /// </summary>
-    public static void ResponseCreatorConfigure(IHttpContextAccessor httpContextAccessor)
+    public ResponseCreator(IHttpContextAccessor httpContextAccessor)
     {
       _httpContextAccessor = httpContextAccessor;
     }
 
-    public static OperationResultResponse<T> CreateResponse<T>(HttpStatusCode statusCode = HttpStatusCode.OK, T body = default, List<string> errors = default)
+    public OperationResultResponse<T> CreateFailureResponse<T>(HttpStatusCode statusCode, List<string> errors = null)
     {
-      if (_httpContextAccessor is not null)
-      {
-        _httpContextAccessor.HttpContext.Response.StatusCode = (int)statusCode;
-      }
+      _httpContextAccessor.HttpContext.Response.StatusCode = (int)statusCode;
 
       if (errors == null)
       {
@@ -48,17 +41,14 @@ namespace LT.DigitalOffice.Kernel.Helpers
 
       return new OperationResultResponse<T>
       {
-        Body = body,
-        Errors = errors is not null ? errors : new()
+        Body = default,
+        Errors = errors
       };
     }
 
-    public static FindResultResponse<T> CreateFailureFindResponse<T>(HttpStatusCode statusCode, List<string> errors = null)
+    public FindResultResponse<T> CreateFailureFindResponse<T>(HttpStatusCode statusCode, List<string> errors = null)
     {
-      if (_httpContextAccessor is not null)
-      {
-        _httpContextAccessor.HttpContext.Response.StatusCode = (int)statusCode;
-      }
+      _httpContextAccessor.HttpContext.Response.StatusCode = (int)statusCode;
 
       if (errors == null)
       {

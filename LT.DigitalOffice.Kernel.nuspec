@@ -11,7 +11,7 @@
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
 
-        1.1.63 - Remove status from FindResultResponse and OperationResultResponse, also make ResponseCreator static.
+        1.1.63 - Remove status from FindResultResponse and OperationResultResponse, add ResponseCreatorStatic.
 
         Previous versions:
         1.1.62 - Add custom model binder provider with model trimming binder.
