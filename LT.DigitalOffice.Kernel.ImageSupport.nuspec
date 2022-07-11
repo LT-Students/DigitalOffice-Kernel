@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.0.2 - Add ResizePreciselyAsync method to ImageResizeHelper.
+      1.0.2 - Make ResizeAsync more accurately.
 
       Previous versions:
       1.0.1 - Update to .Net 6.

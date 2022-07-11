@@ -16,21 +16,6 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
   {
     #region private methods
 
-    private (bool isSuccess, string resizedContent, string extension) MakeNewSvgImage(Bitmap image, int newWidth, int newHeight)
-    {
-      Bitmap newImage = new Bitmap(newWidth, newHeight);
-      Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
-
-      ImageConverter converter = new ImageConverter();
-
-      byte[] byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-      string extension = ImageFormats.png;
-
-      return (isSuccess: true,
-        resizedContent: Convert.ToBase64String(byteString),
-        extension);
-    }
-
     private Task<(bool isSuccess, string resizedContent, string extension)> SvgResize(string inputBase64, string extension, int resizeMinValue)
     {
       return Task.Run(() =>
@@ -50,35 +35,21 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
 
           double maxSize = Math.Max(image.Width, image.Height);
 
-          int ratio = Convert.ToInt32(Math.Ceiling(maxSize / resizeMinValue));
+          double ratio = maxSize / resizeMinValue;
+          int newWidth = (int)(image.Width / ratio);
+          int newHeight = (int)(image.Height / ratio);
 
-          return MakeNewSvgImage(image, image.Width / ratio, image.Height / ratio);
-        }
-        catch
-        {
-          return (isSuccess: false, resizedContent: null, extension);
-        }
-      });
-    }
+          Bitmap newImage = new Bitmap(newWidth, newHeight);
+          Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
 
-    private Task<(bool isSuccess, string resizedContent, string extension)> SvgPreciselyResize(string inputBase64, string extension, int newWidth, int newHeight)
-    {
-      return Task.Run(() =>
-      {
-        try
-        {
-          byte[] byteString = Convert.FromBase64String(inputBase64);
+          ImageConverter converter = new ImageConverter();
 
-          using MemoryStream ms = new MemoryStream(byteString);
-          SvgDocument svgDocument = SvgDocument.Open<SvgDocument>(ms);
-          Bitmap image = svgDocument.Draw();
+          byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
+          extension = ImageFormats.png;
 
-          if (image.Width <= newWidth || image.Height <= newHeight)
-          {
-            return (isSuccess: true, resizedContent: null, extension);
-          }
-
-          return MakeNewSvgImage(image, newWidth, newHeight);
+          return (isSuccess: true,
+            resizedContent: Convert.ToBase64String(byteString),
+            extension);
         }
         catch
         {
@@ -102,35 +73,9 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
 
           double maxSize = Math.Max(image.Width, image.Height);
 
-          int ratio = Convert.ToInt32(Math.Ceiling(maxSize / resizeMinValue));
+          double ratio = maxSize / resizeMinValue;
 
-          image.Mutate(x => x.Resize(image.Width / ratio, image.Height / ratio));
-
-          return (isSuccess: true,
-            resizedContent: image.ToBase64String(FormatsDictionary.formatsInstances[extension]).Split(',')[1],
-            extension);
-        }
-        catch
-        {
-          return (isSuccess: false, resizedContent: null, extension);
-        }
-      });
-    }
-
-    private Task<(bool isSuccess, string resizedContent, string extension)> BasePreciselyResize(string inputBase64, string extension, int newWidth, int newHeight)
-    {
-      return Task.Run(() =>
-      {
-        try
-        {
-          Image image = Image.Load(Convert.FromBase64String(inputBase64));
-
-          if (image.Width <= newWidth || image.Height <= newHeight)
-          {
-            return (isSuccess: true, resizedContent: null, extension);
-          }
-
-          image.Mutate(x => x.Resize(newWidth, newHeight));
+          image.Mutate(x => x.Resize((int)(image.Width / ratio), (int)(image.Height / ratio)));
 
           return (isSuccess: true,
             resizedContent: image.ToBase64String(FormatsDictionary.formatsInstances[extension]).Split(',')[1],
@@ -150,13 +95,6 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
       return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
         ? await SvgResize(inputBase64, extension, resizeMinValue)
         : await BaseResize(inputBase64, extension, resizeMinValue);
-    }
-
-    public async Task<(bool isSuccess, string resizedContent, string extension)> ResizePreciselyAsync(string inputBase64, string extension, int newWidth = 150, int newHeight = 150)
-    {
-      return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
-        ? await SvgPreciselyResize(inputBase64, extension, newWidth, newHeight)
-        : await BasePreciselyResize(inputBase64, extension, newWidth, newHeight);
     }
   }
 }
