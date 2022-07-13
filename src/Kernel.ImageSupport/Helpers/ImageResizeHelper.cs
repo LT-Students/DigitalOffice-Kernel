@@ -1,13 +1,14 @@
-﻿using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Processing;
-using Svg;
-using System;
-using Drawing = System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.Constants;
 using LT.DigitalOffice.Kernel.ImageSupport.Constants;
 using LT.DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using Svg;
+using Image = SixLabors.ImageSharp.Image;
 
 namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
 {
@@ -15,40 +16,43 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
   {
     #region private methods
 
-    private Task<(bool isSuccess, string resizedContent, string extension)> SvgResize(string inputBase64, string extension, int resizeMinValue)
+    private Task<(bool isSuccess, string resizedContent, string extension)> SvgResize(
+      string inputBase64,
+      string extension,
+      int resizeMaxValue)
     {
       return Task.Run(() =>
       {
         try
         {
-          var byteString = Convert.FromBase64String(inputBase64);
+          byte[] byteString = Convert.FromBase64String(inputBase64);
 
-          using (var ms = new MemoryStream(byteString))
+          using MemoryStream ms = new MemoryStream(byteString);
+          SvgDocument svgDocument = SvgDocument.Open<SvgDocument>(ms);
+          Bitmap image = svgDocument.Draw();
+
+          double maxSize = Math.Max(image.Width, image.Height);
+
+          if (maxSize <= resizeMaxValue)
           {
-            var svgDocument = SvgDocument.Open<SvgDocument>(ms);
-            var image = svgDocument.Draw();
-
-            if (image.Width <= resizeMinValue || image.Height <= resizeMinValue)
-            {
-              return (isSuccess: true, resizedContent: null, extension);
-            }
-
-            double maxSize = Math.Max(image.Width, image.Height);
-
-            var ratio = Convert.ToInt32(Math.Ceiling(maxSize / resizeMinValue));
-
-            var newImage = new Drawing.Bitmap(image.Width / ratio, image.Height / ratio);
-            Drawing.Graphics.FromImage(newImage).DrawImage(image, 0, 0, image.Width / ratio, image.Height / ratio);
-
-            var converter = new Drawing.ImageConverter();
-
-            byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-            extension = ImageFormats.png;
-
-            return (isSuccess: true,
-              resizedContent: Convert.ToBase64String(byteString),
-              extension);
+            return (isSuccess: true, resizedContent: null, extension);
           }
+
+          double ratio = maxSize / resizeMaxValue;
+          int newWidth = (int)(image.Width / ratio);
+          int newHeight = (int)(image.Height / ratio);
+
+          Bitmap newImage = new Bitmap(newWidth, newHeight);
+          Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
+
+          ImageConverter converter = new ImageConverter();
+
+          byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
+          extension = ImageFormats.png;
+
+          return (isSuccess: true,
+            resizedContent: Convert.ToBase64String(byteString),
+            extension);
         }
         catch
         {
@@ -57,7 +61,73 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
       });
     }
 
-    private Task<(bool isSuccess, string resizedContent, string extension)> BaseResize(string inputBase64, string extension, int resizeMinValue)
+    private Task<(bool isSuccess, string resizedContent, string extension)> SvgResizeForPreview(
+      string inputBase64,
+      string extension,
+      int conditionalWidth,
+      int conditionalHeight,
+      int resizeMaxValue)
+    {
+      return Task.Run(() =>
+      {
+        try
+        {
+          byte[] byteString = Convert.FromBase64String(inputBase64);
+
+          using MemoryStream ms = new MemoryStream(byteString);
+          SvgDocument svgDocument = SvgDocument.Open<SvgDocument>(ms);
+          Bitmap image = svgDocument.Draw();
+          Bitmap newImage = image;
+
+          if ((double)image.Width / image.Height > (double)conditionalWidth / conditionalHeight)
+          {
+            int width = image.Height * conditionalWidth / conditionalHeight;
+            newImage = new Bitmap(width, image.Height);
+            Graphics g = Graphics.FromImage(newImage);
+            g.DrawImage(image, -width, -image.Height);
+          }
+          else if ((double)image.Width / image.Height < (double)conditionalWidth / conditionalHeight)
+          {
+            int height = image.Height * conditionalWidth / conditionalHeight;
+            newImage = new Bitmap(image.Width, height);
+            Graphics g = Graphics.FromImage(newImage);
+            g.DrawImage(image, -image.Width, -height);
+          }
+
+          double maxSize = Math.Max(newImage.Width, newImage.Height);
+
+          if (maxSize <= resizeMaxValue)
+          {
+            return (isSuccess: true, resizedContent: null, extension);
+          }
+
+          double ratio = maxSize / resizeMaxValue;
+          int newWidth = (int)(newImage.Width / ratio);
+          int newHeight = (int)(newImage.Height / ratio);
+
+          newImage = new Bitmap(newWidth, newHeight);
+          Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
+
+          ImageConverter converter = new ImageConverter();
+
+          byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
+          extension = ImageFormats.png;
+
+          return (isSuccess: true,
+            resizedContent: Convert.ToBase64String(byteString),
+            extension);
+        }
+        catch
+        {
+          return (isSuccess: false, resizedContent: null, extension);
+        }
+      });
+    }
+
+    private Task<(bool isSuccess, string resizedContent, string extension)> BaseResize(
+      string inputBase64,
+      string extension,
+      int resizeMaxValue)
     {
       return Task.Run(() =>
       {
@@ -65,16 +135,60 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
         {
           Image image = Image.Load(Convert.FromBase64String(inputBase64));
 
-          if (image.Width <= resizeMinValue || image.Height <= resizeMinValue)
+          double maxSize = Math.Max(image.Width, image.Height);
+
+          if (maxSize <= resizeMaxValue)
           {
             return (isSuccess: true, resizedContent: null, extension);
           }
 
+          double ratio = maxSize / resizeMaxValue;
+
+          image.Mutate(x => x.Resize((int)(image.Width / ratio), (int)(image.Height / ratio)));
+
+          return (isSuccess: true,
+            resizedContent: image.ToBase64String(FormatsDictionary.formatsInstances[extension]).Split(',')[1],
+            extension);
+        }
+        catch
+        {
+          return (isSuccess: false, resizedContent: null, extension);
+        }
+      });
+    }
+
+    private Task<(bool isSuccess, string resizedContent, string extension)> BaseResizeForPreview(
+      string inputBase64,
+      string extension,
+      int conditionalWidth,
+      int conditionalHeight,
+      int resizeMaxValue)
+    {
+      return Task.Run(() =>
+      {
+        try
+        {
+          Image image = Image.Load(Convert.FromBase64String(inputBase64));
+
+          if ((double)image.Width / image.Height > (double)conditionalWidth / conditionalHeight)
+          {
+            image.Mutate(x => x.Crop(image.Height * conditionalWidth / conditionalHeight, image.Height));
+          }
+          else if ((double)image.Width / image.Height < (double)conditionalWidth / conditionalHeight)
+          {
+            image.Mutate(x => x.Crop(image.Width, image.Width * conditionalHeight / conditionalWidth));
+          }
+
           double maxSize = Math.Max(image.Width, image.Height);
 
-          var ratio = Convert.ToInt32(Math.Ceiling(maxSize / resizeMinValue));
+          if (maxSize <= resizeMaxValue)
+          {
+            return (isSuccess: true, resizedContent: null, extension);
+          }
 
-          image.Mutate(x => x.Resize(image.Width / ratio, image.Height / ratio));
+          double ratio = maxSize / resizeMaxValue;
+
+          image.Mutate(x => x.Resize((int)(image.Width / ratio), (int)(image.Height / ratio)));
 
           return (isSuccess: true,
             resizedContent: image.ToBase64String(FormatsDictionary.formatsInstances[extension]).Split(',')[1],
@@ -89,11 +203,26 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
 
     #endregion
 
-    public async Task<(bool isSuccess, string resizedContent, string extension)> ResizeAsync(string inputBase64, string extension, int resizeMinValue = 150)
+    public Task<(bool isSuccess, string resizedContent, string extension)> ResizeAsync(
+      string inputBase64,
+      string extension,
+      int resizeMaxValue = 150)
     {
       return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
-        ? await SvgResize(inputBase64, extension, resizeMinValue)
-        : await BaseResize(inputBase64, extension, resizeMinValue);
+        ? SvgResize(inputBase64, extension, resizeMaxValue)
+        : BaseResize(inputBase64, extension, resizeMaxValue);
+    }
+
+    public Task<(bool isSuccess, string resizedContent, string extension)> ResizeForPreviewAsync(
+      string inputBase64,
+      string extension,
+      int conditionalWidth = 1,
+      int conditionalHeight = 1,
+      int resizeMaxValue = 150)
+    {
+      return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
+        ? SvgResizeForPreview(inputBase64, extension, conditionalWidth, conditionalHeight, resizeMaxValue)
+        : BaseResizeForPreview(inputBase64, extension, conditionalWidth, conditionalWidth, resizeMaxValue);
     }
   }
 }
