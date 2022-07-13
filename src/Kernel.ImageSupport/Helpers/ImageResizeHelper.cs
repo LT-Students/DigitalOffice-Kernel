@@ -16,7 +16,10 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
   {
     #region private methods
 
-    private Task<(bool isSuccess, string resizedContent, string extension)> SvgResize(string inputBase64, string extension, int resizeMaxValue)
+    private Task<(bool isSuccess, string resizedContent, string extension)> SvgResize(
+      string inputBase64,
+      string extension,
+      int resizeMaxValue)
     {
       return Task.Run(() =>
       {
@@ -58,7 +61,12 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
       });
     }
 
-    private Task<(bool isSuccess, string resizedContent, string extension)> SvgResizeForAvatar(string inputBase64, string extension, int conditionalWidth, int conditionalHeight, int resizeMaxValue)
+    private Task<(bool isSuccess, string resizedContent, string extension)> SvgResizeForPreview(
+      string inputBase64,
+      string extension,
+      int conditionalWidth,
+      int conditionalHeight,
+      int resizeMaxValue)
     {
       return Task.Run(() =>
       {
@@ -116,7 +124,10 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
       });
     }
 
-    private Task<(bool isSuccess, string resizedContent, string extension)> BaseResize(string inputBase64, string extension, int resizeMaxValue)
+    private Task<(bool isSuccess, string resizedContent, string extension)> BaseResize(
+      string inputBase64,
+      string extension,
+      int resizeMaxValue)
     {
       return Task.Run(() =>
       {
@@ -146,7 +157,12 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
       });
     }
 
-    private Task<(bool isSuccess, string resizedContent, string extension)> BaseResizeForAvatar(string inputBase64, string extension, int conditionalWidth, int conditionalHeight, int resizeMaxValue)
+    private Task<(bool isSuccess, string resizedContent, string extension)> BaseResizeForPreview(
+      string inputBase64,
+      string extension,
+      int conditionalWidth,
+      int conditionalHeight,
+      int resizeMaxValue)
     {
       return Task.Run(() =>
       {
@@ -187,18 +203,26 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
 
     #endregion
 
-    public Task<(bool isSuccess, string resizedContent, string extension)> ResizeAsync(string inputBase64, string extension, int resizeMaxValue = 150)
+    public Task<(bool isSuccess, string resizedContent, string extension)> ResizeAsync(
+      string inputBase64,
+      string extension,
+      int resizeMaxValue = 150)
     {
       return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
         ? SvgResize(inputBase64, extension, resizeMaxValue)
         : BaseResize(inputBase64, extension, resizeMaxValue);
     }
 
-    public Task<(bool isSuccess, string resizedContent, string extension)> ResizeForAvatarAsync(string inputBase64, string extension, int conditionalWidth = 1, int conditionalHeight = 1, int resizeMaxValue = 150)
+    public Task<(bool isSuccess, string resizedContent, string extension)> ResizeForPreviewAsync(
+      string inputBase64,
+      string extension,
+      int conditionalWidth = 1,
+      int conditionalHeight = 1,
+      int resizeMaxValue = 150)
     {
       return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
-        ? SvgResizeForAvatar(inputBase64, extension, conditionalWidth, conditionalHeight, resizeMaxValue)
-        : BaseResizeForAvatar(inputBase64, extension, conditionalWidth, conditionalWidth, resizeMaxValue);
+        ? SvgResizeForPreview(inputBase64, extension, conditionalWidth, conditionalHeight, resizeMaxValue)
+        : BaseResizeForPreview(inputBase64, extension, conditionalWidth, conditionalWidth, resizeMaxValue);
     }
   }
 }
