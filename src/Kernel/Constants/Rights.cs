@@ -15,5 +15,6 @@
     public const int AddEditRemoveCompanyData = 11;
     public const int AddRemoveUsersRoles = 12;
     public const int AddEditRemoveWiki = 13;
+    public const int AddEditRemoveBookings = 14;
   }
 }
