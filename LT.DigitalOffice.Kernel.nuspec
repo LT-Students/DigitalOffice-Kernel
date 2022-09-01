@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel</id>
-    <version>1.1.58</version>
+    <version>1.1.63</version>
     <title>LT.DigitalOffice.Kernel</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,9 +10,15 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.1.58 - added UserIdOrDefault to HttpContextExtensions
+
+        1.1.63 - Remove status from FindResultResponse and OperationResultResponse, add ResponseCreatorStatic.
 
         Previous versions:
+        1.1.62 - Add custom model binder provider with model trimming binder.
+        1.1.61 - Removed IBaseDataProvider. Added "Serilog.AspNetCore" PackageReference.
+        1.1.60 - Added 'AddEditRemoveWiki' constant for Rights.
+        1.1.59 - added UnauthorizedException.
+        1.1.58 - added UserIdOrDefault to HttpContextExtensions
         1.1.57 - add default skipCount takeCount, removed KeywordAttribute and KeywordCollector, added AddEditRemoveCompanyData and AddRemoveUserRole to Rights enum.
         1.1.56 - fixed Parse method of TextTemplateParser.
         1.1.55 - renamed HidePasswordHelper to PasswordHider, added TextTemplateParser.
@@ -76,6 +82,7 @@
         <dependency id="Microsoft.AspNetCore.JsonPatch" version="6.0.0"/>
         <dependency id="Microsoft.Extensions.Options.ConfigurationExtensions" version="6.0.0"/>
         <dependency id="System.Text.Json" version="6.0.0" />
+        <dependency id="Serilog.AspNetCore" version="5.0.0" />
       </group>
     </dependencies>
   </metadata>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LT.DigitalOffice.Kernel.EFSupport</id>
+    <version>1.0.1</version>
+    <title>LT.DigitalOffice.Kernel.EFSupport</title>
+    <authors>LT Digital Office</authors>
+    <owners>LT Digital Office</owners>
+    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library used in the Digital Office project.</description>
+    <releaseNotes>
+        1.0.1 - Added dependensy from EntityFrameworkCore packages.
+
+        Previous versions:
+        1.0.0 - Initial.
+    </releaseNotes>
+    <copyright>Copyright © LT Digital Office</copyright>
+    <tags>DigitalOffice</tags>
+    <dependencies>
+      <group targetFramework="net6.0">
+        <dependency id="LT.DigitalOffice.Kernel" version="1.1.61"/>
+        <dependency id="Microsoft.EntityFrameworkCore" version="6.0.5" />
+        <dependency id="Microsoft.EntityFrameworkCore.InMemory" version="6.0.5" />
+        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="6.0.5" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="6.0.5" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="artifacts\kernel_ef\LT.DigitalOffice.Kernel.EFSupport.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel_ef\LT.DigitalOffice.Kernel.EFSupport.pdb" target="lib\net6.0" />
+  </files>
+</package>

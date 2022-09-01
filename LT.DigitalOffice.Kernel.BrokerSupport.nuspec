@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel.BrokerSupport</id>
-    <version>1.0.5</version>
+    <version>1.0.7</version>
     <title>LT.DigitalOffice.Kernel.BrokerSupport</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,9 +10,11 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.5 - Added ApplicationRequestClientCreator.
+        1.0.7 - changed Unauthorized exception to return, added header.
 
         Previous versions:
+        1.0.6 - changed TokenMiddleware not success broker response from ForbiddenException to UnauthorizedException.
+        1.0.5 - Added ApplicationRequestClientCreator.
         1.0.4 - Added request name to logger of RequestHandler.
         1.0.3 - Fixed RequestHandler.
         1.0.2 - Added RequestHandler.

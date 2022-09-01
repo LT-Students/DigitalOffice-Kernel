@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
 
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>LT.DigitalOffice.Kernel.ImageSupport</AssemblyName>
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.47" />
+    <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.61" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
     <PackageReference Include="Svg" Version="3.3.0" />
   </ItemGroup>
