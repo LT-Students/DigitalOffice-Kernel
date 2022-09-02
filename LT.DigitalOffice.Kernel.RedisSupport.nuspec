@@ -2,30 +2,24 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel.RedisSupport</id>
-    <version>1.0.6</version>
-    <title>LT.DigitalOffice.Kernel.RedisSupport</title>
+    <version>1.0.0</version>
+    <title>DigitalOffice.Kernel.RedisSupport</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
     <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.6 - Add cache extention for string .
+      1.0.0 - Initial.
 
-        Previous versions:
-        1.0.5 - Add rights in Cache.
-        1.0.4 - Add FlushRedisDbHelper.
-        1.0.3 - Rework redis.Helpers methods, added IGlobalCacheRepository.
-        1.0.2 - Add companies Cache.
-        1.0.1 - Update to .Net 6.
-        1.0.0 - Initial.
+      Previous versions:
     </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
       <group targetFramework="net6.0">
         <dependency id="StackExchange.Redis" version="2.2.50" />
-        <dependency id="LT.DigitalOffice.Kernel" version="1.1.51" />
+        <dependency id="LT.DigitalOffice.Kernel" version="1.1.61" />
       </group>
     </dependencies>
   </metadata>
