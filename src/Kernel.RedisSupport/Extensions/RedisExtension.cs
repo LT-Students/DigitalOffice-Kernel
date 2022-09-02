@@ -33,12 +33,12 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
       {
         int hashCode = 1;
 
-        foreach (var id in guids)
+        foreach (Guid id in guids)
         {
           hashCode += id.GetHashCode();
         }
 
-        foreach (var arg in additionalArguments)
+        foreach ((string variableName, object value) arg in additionalArguments)
         {
           if (arg.value is null)
           {
@@ -65,7 +65,7 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
       {
         int hashCode = 1 + id.GetHashCode();
 
-        foreach (var arg in additionalArguments)
+        foreach ((string variableName, object value) arg in additionalArguments)
         {
           if (arg.value is null)
           {
