@@ -1,89 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
 {
   public static class RedisExtension
   {
-    private static int GetStringHashCode(this string arg)
-    {
-      if (!arg.Any())
-      {
-        return 0;
-      }
-
-      int hash = 17;
-      int coef = 31;
-
-      unchecked
-      {
-        foreach (char ch in arg)
-        {
-          hash += hash * coef + ch.GetHashCode();
-        }
-      }
-
-      return hash;
-    }
-
     public static string GetRedisCacheHashCode(this IEnumerable<Guid> guids, params (string variableName, object value)[] additionalArguments)
     {
+      StringBuilder sb = new();
+
       unchecked
       {
-        int hashCode = 1;
+        int idsHashCode = 0;
 
         foreach (Guid id in guids)
         {
-          hashCode += id.GetHashCode();
+          idsHashCode += id.GetHashCode();
         }
 
-        foreach ((string variableName, object value) arg in additionalArguments)
-        {
-          if (arg.value is null)
-          {
-            continue;
-          }
-
-          if (arg.value is string)
-          {
-            hashCode += hashCode * (arg.value.ToString().GetStringHashCode() + arg.variableName.GetStringHashCode());
-          }
-          else
-          {
-            hashCode += hashCode * (arg.value.GetHashCode() + arg.variableName.GetStringHashCode());
-          }
-        }
-
-        return hashCode.ToString();
+        sb.Append(idsHashCode);
       }
+
+      foreach ((string variableName, object value) arg in additionalArguments)
+      {
+        if (arg.value is null)
+        {
+          continue;
+        }
+
+        sb.Append($"{arg.variableName}{arg.value}");
+      }
+
+      return sb.ToString();
     }
 
     public static string GetRedisCacheHashCode(this Guid id, params (string variableName, object value)[] additionalArguments)
     {
-      unchecked
+      StringBuilder sb = new(id.GetHashCode().ToString());
+
+      foreach ((string variableName, object value) arg in additionalArguments)
       {
-        int hashCode = 1 + id.GetHashCode();
-
-        foreach ((string variableName, object value) arg in additionalArguments)
+        if (arg.value is null)
         {
-          if (arg.value is null)
-          {
-            continue;
-          }
-
-          if (arg.value is string)
-          {
-            hashCode += hashCode * (arg.value.ToString().GetStringHashCode() + arg.variableName.GetStringHashCode());
-          }
-          else
-          {
-            hashCode += hashCode * (arg.value.GetHashCode() + arg.variableName.GetStringHashCode());
-          }
+          continue;
         }
 
-        return hashCode.ToString();
+        sb.Append($"{arg.variableName}{arg.value}");
       }
+
+      return sb.ToString();
     }
   }
 }
