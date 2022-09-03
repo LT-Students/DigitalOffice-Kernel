@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
 {
   public static class RedisExtension
   {
-    public static string GetRedisCacheHashCode(this IEnumerable<Guid> guids, params (string variableName, object value)[] additionalArguments)
+    public static string GetRedisCacheKey(this IEnumerable<Guid> guids, params (string variableName, object value)[] additionalArguments)
     {
       StringBuilder sb = new();
 
@@ -36,7 +35,7 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
       return sb.ToString();
     }
 
-    public static string GetRedisCacheHashCode(this Guid id, params (string variableName, object value)[] additionalArguments)
+    public static string GetRedisCacheKey(this Guid id, params (string variableName, object value)[] additionalArguments)
     {
       StringBuilder sb = new(id.GetHashCode().ToString());
 
