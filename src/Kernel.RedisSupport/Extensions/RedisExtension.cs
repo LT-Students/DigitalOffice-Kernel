@@ -6,7 +6,7 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
 {
   public static class RedisExtension
   {
-    public static string GetRedisCacheKey(this IEnumerable<Guid> guids, params (string variableName, object value)[] additionalArguments)
+    public static string GetRedisCacheKey(this IEnumerable<Guid> guids, IEnumerable<(string variableName, object value)> additionalArguments = null)
     {
       StringBuilder sb = new();
 
@@ -22,31 +22,37 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
         sb.Append(idsHashCode);
       }
 
-      foreach ((string variableName, object value) arg in additionalArguments)
+      if (additionalArguments is not null)
       {
-        if (arg.value is null)
+        foreach ((string variableName, object value) arg in additionalArguments)
         {
-          continue;
-        }
+          if (arg.value is null)
+          {
+            continue;
+          }
 
-        sb.Append($"{arg.variableName}{arg.value}");
+          sb.Append($"{arg.variableName}{arg.value}");
+        }
       }
 
       return sb.ToString();
     }
 
-    public static string GetRedisCacheKey(this Guid id, params (string variableName, object value)[] additionalArguments)
+    public static string GetRedisCacheKey(this Guid id, IEnumerable<(string variableName, object value)> additionalArguments = null)
     {
       StringBuilder sb = new(id.GetHashCode().ToString());
 
-      foreach ((string variableName, object value) arg in additionalArguments)
+      if (additionalArguments is not null)
       {
-        if (arg.value is null)
+        foreach ((string variableName, object value) arg in additionalArguments)
         {
-          continue;
-        }
+          if (arg.value is null)
+          {
+            continue;
+          }
 
-        sb.Append($"{arg.variableName}{arg.value}");
+          sb.Append($"{arg.variableName}{arg.value}");
+        }
       }
 
       return sb.ToString();
