@@ -16,6 +16,11 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers
   {
     private readonly ILogger<ImageResizeHelper> _logger;
 
+    public ImageResizeHelper(ILogger<ImageResizeHelper> logger)
+    {
+      _logger = logger;
+    }
+
     #region private methods
 
     private Task<(bool isSuccess, string resizedContent, string extension)> SvgResize(
