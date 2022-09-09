@@ -64,7 +64,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
     /// Returns all properties from passed object exclude collections. Properties are used for redis key creating
     /// </summary>
     /// <param name="obj">Object containing properties</param>
-    /// <returns>All properties from passed object exclude collections</returns>
+    /// <returns>Tuple with properties' <see langword="string" /> name and <see langword="object" /> value
+    /// from passed object exclude collections, <see langword="null" /> if obj is null</returns>
     public static IEnumerable<(string variableName, object value)> GetBasicProperties(this object obj)
     {
       return obj?.GetType().GetProperties().Where(p => !p.GetIndexParameters().Any()).Select(x => (variableName: x.Name, value: x.GetValue(obj)))
