@@ -67,8 +67,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
     /// <returns>All properties from passed object exclude collections</returns>
     public static IEnumerable<(string variableName, object value)> GetBasicProperties(this object obj)
     {
-      return obj.GetType().GetProperties().Where(p => !p.GetIndexParameters().Any()).Select(x => (variableName: x.Name, value: x.GetValue(obj)))
-        .Where(x => !(x.value.GetType().IsAssignableTo(typeof(IEnumerable)) && x.value is not string));
+      return obj?.GetType().GetProperties().Where(p => !p.GetIndexParameters().Any()).Select(x => (variableName: x.Name, value: x.GetValue(obj)))
+        .Where(x => x.value is not null && (!x.value.GetType().IsAssignableTo(typeof(IEnumerable)) || x.value is string));
     }
   }
 }
