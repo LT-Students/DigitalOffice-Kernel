@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
@@ -56,6 +58,17 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
       }
 
       return sb.ToString();
+    }
+
+    /// <summary>
+    /// Returns all properties from passed object exclude collections. Properties are used for redis key creating
+    /// </summary>
+    /// <param name="obj">Object containing properties</param>
+    /// <returns>All properties from passed object exclude collections</returns>
+    public static IEnumerable<(string variableName, object value)> GetBasicProperties(this object obj)
+    {
+      return obj.GetType().GetProperties().Where(p => !p.GetIndexParameters().Any()).Select(x => (variableName: x.Name, value: x.GetValue(obj)))
+        .Where(x => !(x.value.GetType().IsAssignableTo(typeof(IEnumerable)) && x.value is not string));
     }
   }
 }
