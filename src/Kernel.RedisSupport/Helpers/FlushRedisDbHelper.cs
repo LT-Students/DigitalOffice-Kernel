@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Net;
+using Serilog;
 using StackExchange.Redis;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 {
   public static class FlushRedisDbHelper
   {
-    public static string FlushDatabase(
+    public static void FlushDatabase(
       string redisConnStr,
       int database)
     {
@@ -22,12 +23,10 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
             server.FlushDatabase(database);
           }
         }
-
-        return null;
       }
       catch (Exception ex)
       {
-        return $"Error while flushing Redis database №{database}. Text: {ex.Message}";
+        Log.Error($"Error while flushing Redis database №{database}. Text: {ex.Message}");
       }
     }
   }
