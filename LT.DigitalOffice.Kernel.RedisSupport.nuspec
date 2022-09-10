@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>LT.DigitalOffice.Kernel.RedisSupport</id>
+    <id>DigitalOffice.Kernel.RedisSupport</id>
     <version>1.0.0</version>
     <title>DigitalOffice.Kernel.RedisSupport</title>
-    <authors>LT Digital Office</authors>
-    <owners>LT Digital Office</owners>
+    <authors>Lanit-Tercom Digital Office Team</authors>
+    <owners>Lanit-Tercom Digital Office</owners>
     <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
@@ -24,7 +24,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_redis\LT.DigitalOffice.Kernel.RedisSupport.dll" target="lib\net6.0" />
-    <file src="artifacts\kernel_redis\LT.DigitalOffice.Kernel.RedisSupport.pdb" target="lib\net6.0" />
+    <file src="artifacts\kernel_redis\DigitalOffice.Kernel.RedisSupport.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel_redis\DigitalOffice.Kernel.RedisSupport.pdb" target="lib\net6.0" />
   </files>
 </package>
