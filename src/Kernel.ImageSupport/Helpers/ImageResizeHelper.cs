@@ -15,7 +15,6 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers;
 public class ImageResizeHelper : IImageResizeHelper
 {
   private readonly ILogger<ImageResizeHelper> _logger;
-
   public const string png = ".png";
   public const string svg = ".svg";
 
