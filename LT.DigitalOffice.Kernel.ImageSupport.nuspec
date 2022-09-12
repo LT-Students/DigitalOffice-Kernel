@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LT.DigitalOffice.Kernel.ImageSupport</id>
-    <version>1.0.3</version>
+    <version>1.0.0</version>
     <title>LT.DigitalOffice.Kernel.ImageSupport</title>
     <authors>LT Digital Office</authors>
     <owners>LT Digital Office</owners>
@@ -10,12 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.3 - Remove FormatsDictionary, update BaseResize methods, add logging to ImageResizehelper.
-
-        Previous versions:
-        1.0.2 - Make ResizeAsync more accurately and add ResizeForAvatarAsync method.
-        1.0.1 - Update to .Net 6.
-        1.0.0 - Initial version.
+        1.0.0 - Init.
 
     </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>

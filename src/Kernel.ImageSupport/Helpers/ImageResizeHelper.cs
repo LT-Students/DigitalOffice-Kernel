@@ -66,7 +66,7 @@ public class ImageResizeHelper : IImageResizeHelper
       }
       catch (Exception ex)
       {
-        _logger.LogWarning("Can't resize svg-image: " + ex);
+        _logger.LogWarning("Can't resize svg-image: " + ex.Message);
         return (isSuccess: false, resizedContent: null, extension);
       }
     });
@@ -130,7 +130,7 @@ public class ImageResizeHelper : IImageResizeHelper
       }
       catch (Exception ex)
       {
-        _logger.LogWarning("Can't resize svg-image: " + ex);
+        _logger.LogWarning("Can't resize svg-image: " + ex.Message);
         return (isSuccess: false, resizedContent: null, extension);
       }
     });
@@ -164,7 +164,7 @@ public class ImageResizeHelper : IImageResizeHelper
       }
       catch (Exception ex)
       {
-        _logger.LogWarning("Can't resize image: content is damaged or format is wrong. " + ex);
+        _logger.LogWarning("Can't resize image: content is damaged or format is wrong. " + ex.Message);
         return (isSuccess: false, resizedContent: null, extension);
       }
     });
@@ -209,7 +209,7 @@ public class ImageResizeHelper : IImageResizeHelper
       }
       catch (Exception ex)
       {
-        _logger.LogWarning("Can't resize image: content is damaged or format is wrong. " + ex);
+        _logger.LogWarning("Can't resize image: content is damaged or format is wrong. " + ex.Message);
         return (isSuccess: false, resizedContent: null, extension);
       }
     });
