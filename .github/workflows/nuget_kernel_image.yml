@@ -29,14 +29,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build src/Kernel.ImageSupport/Kernel.ImageSupport.csproj --no-restore --configuration Release --output ./artifacts/image
+        run: dotnet build src/Kernel.ImageSupport/Kernel.ImageSupport.csproj --no-restore --configuration Release --output ./artifacts/kernel_image
 
       - name: Test
         run: dotnet test test/Kernel.ImageSupport.UnitTests/Kernel.ImageSupport.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Pack nuget
-        run: nuget pack LT.DigitalOffice.Kernel.ImageSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/image
+        run: nuget pack LT.DigitalOffice.Kernel.ImageSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_image
 
       - name: Push nuget
-        run: dotnet nuget push ./artifacts/image/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
-
+        run: dotnet nuget push ./artifacts/kernel_image/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
