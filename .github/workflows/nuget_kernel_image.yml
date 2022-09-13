@@ -1,4 +1,4 @@
-name: Publish ImageSupport NuGet package
+name: Publish Kernel ImageSupport NuGet package
 
 # Controls when the action will run.
 on: workflow_dispatch
