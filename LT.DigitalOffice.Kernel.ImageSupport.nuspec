@@ -25,7 +25,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.dll" target="lib\net6.0" />
-        <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.pdb" target="lib\net6.0" />
+        <file src="artifacts\kernel_image\DigitalOffice.Kernel.ImageSupport.dll" target="lib\net6.0" />
+        <file src="artifacts\kernel_image\DigitalOffice.Kernel.ImageSupport.pdb" target="lib\net6.0" />
     </files>
 </package>
