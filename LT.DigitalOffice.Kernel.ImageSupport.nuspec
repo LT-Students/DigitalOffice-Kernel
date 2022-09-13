@@ -1,34 +1,31 @@
 <?xml version="1.0"?>
 <package >
-  <metadata>
-    <id>LT.DigitalOffice.Kernel.ImageSupport</id>
-    <version>1.0.2</version>
-    <title>LT.DigitalOffice.Kernel.ImageSupport</title>
-    <authors>LT Digital Office</authors>
-    <owners>LT Digital Office</owners>
-    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Library used in the Digital Office project.</description>
-    <releaseNotes>
-      1.0.2 - Make ResizeAsync more accurately and add ResizeForAvatarAsync method.
+    <metadata>
+        <id>DigitalOffice.Kernel.ImageSupport</id>
+        <version>1.0.0</version>
+        <title>DigitalOffice.Kernel.ImageSupport</title>
+        <authors>Lanit-Tercom Digital Office Team</authors>
+        <owners>Lanit-Tercom Digital Office</owners>
+        <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Library used in the Digital Office project.</description>
+        <releaseNotes>
+            1.0.0 - Initial.
 
-      Previous versions:
-      1.0.1 - Update to .Net 6.
-      1.0.0 - Initial version.
-
-    </releaseNotes>
-    <copyright>Copyright © LT Digital Office</copyright>
-    <tags>DigitalOffice</tags>
-    <dependencies>
-      <group targetFramework="net6.0">
-        <dependency id="SixLabors.ImageSharp" version="1.0.4"/>
-        <dependency id="LT.DigitalOffice.Kernel" version="1.1.47"/>
-        <dependency id="Svg" version="3.3.0"/>
-      </group>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.dll" target="lib\net6.0" />
-    <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.pdb" target="lib\net6.0" />
-  </files>
+            Previous versions:
+        </releaseNotes>
+        <copyright>Copyright © LT Digital Office</copyright>
+        <tags>DigitalOffice</tags>
+        <dependencies>
+            <group targetFramework="net6.0">
+                <dependency id="SixLabors.ImageSharp" version="2.1.3"/>
+                <dependency id="LT.DigitalOffice.Kernel" version="1.1.63"/>
+                <dependency id="Svg" version="3.3.0"/>
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.dll" target="lib\net6.0" />
+        <file src="artifacts\image\LT.DigitalOffice.Kernel.ImageSupport.pdb" target="lib\net6.0" />
+    </files>
 </package>
