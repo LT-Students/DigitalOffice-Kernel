@@ -12,7 +12,7 @@ namespace LT.DigitalOffice.Kernel.Validators
   public abstract class BaseEditRequestValidator<T> : AbstractValidator<JsonPatchDocument<T>> where T : class
   {
     protected Operation<T> RequestedOperation { get; set; }
-    protected CustomContext Context { get; set; }
+    protected ValidationContext<JsonPatchDocument<T>> Context { get; set; }
 
     protected void AddСorrectPaths(List<string> paths)
     {

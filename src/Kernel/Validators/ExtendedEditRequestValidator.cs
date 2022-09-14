@@ -12,7 +12,7 @@ namespace LT.DigitalOffice.Kernel.Validators
     where T : class
   {
     protected Operation<T> RequestedOperation { get; set; }
-    protected FluentValidation.Validators.CustomContext Context { get; set; }
+    protected ValidationContext<(I, JsonPatchDocument<T>)> Context { get; set; }
 
     protected void AddСorrectPaths(List<string> paths)
     {
