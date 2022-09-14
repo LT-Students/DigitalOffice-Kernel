@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.7</Version>
+    <Version>1.0.0</Version>
 
     <TargetFramework>net6.0</TargetFramework>
 
-    <AssemblyName>LT.DigitalOffice.Kernel.BrokerSupport</AssemblyName>
-    <RootNamespace>LT.DigitalOffice.Kernel.BrokerSupport</RootNamespace>
+    <AssemblyName>DigitalOffice.Kernel.BrokerSupport</AssemblyName>
+    <RootNamespace>DigitalOffice.Kernel.BrokerSupport</RootNamespace>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.61" />
+    <PackageReference Include="DigitalOffice.Kernel" Version="1.0.0" />
 
     <PackageReference Include="MassTransit" Version="7.1.7" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.1.7" />

@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.0 - Init dll.
+        1.0.0 - Initial.
 
         Previous versions:
 
@@ -20,7 +20,7 @@
     <dependencies>
       <group targetFramework="net6.0">
           
-        <dependency id="LT.DigitalOffice.Kernel" version="1.1.56" />
+        <dependency id="DigitalOffice.Kernel" version="1.0.0" />
         <dependency id="LT.DigitalOffice.Kernel.BrokerSupport" version="1.0.4" />
           
       </group>
