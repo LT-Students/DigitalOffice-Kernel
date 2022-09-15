@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Newtonsoft.Json;
@@ -60,7 +61,7 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
         return false;
       }
 
-      foreach ((int database, string key) element in elements)
+      foreach ((int database, string key) element in elements.ToList())
       {
         await _cache.GetDatabase(element.database).KeyDeleteAsync(element.key);
       }
