@@ -73,7 +73,8 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 
     public IEnumerable<(int database, string key)> GetKeys()
     {
-      return _dictionary.Values.SelectMany(frames => frames.Where(frame => frame != null && !frame.IsOverdue).Select(frame => (frame.Database, frame.Key)));
+      return _dictionary.Values.SelectMany(frames => frames.Where(frame => frame is not null && !frame.IsOverdue)
+        .Select(frame => (frame.Database, frame.Key)));
     }
 
     public void Remove(Guid elementId)
