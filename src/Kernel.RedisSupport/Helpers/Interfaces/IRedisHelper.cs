@@ -10,6 +10,6 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces
   {
     Task<bool> CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime = null);
     Task<T> GetAsync<T>(int database, string key);
-    Task<bool> RemoveAsync(IEnumerable<(int database, string key)> elements);
+    Task<bool> RemoveAsync(List<(int database, string key)> elements);
   }
 }

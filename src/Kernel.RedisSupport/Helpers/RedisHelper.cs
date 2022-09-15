@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Newtonsoft.Json;
@@ -54,14 +53,14 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
       return default;
     }
 
-    public async Task<bool> RemoveAsync(IEnumerable<(int database, string key)> elements)
+    public async Task<bool> RemoveAsync(List<(int database, string key)> elements)
     {
       if (!_cache.IsConnected || elements is null)
       {
         return false;
       }
 
-      foreach ((int database, string key) element in elements.ToList())
+      foreach ((int database, string key) element in elements)
       {
         await _cache.GetDatabase(element.database).KeyDeleteAsync(element.key);
       }
