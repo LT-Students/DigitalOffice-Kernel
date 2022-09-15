@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
 
         <TargetFramework>net6.0</TargetFramework>
 
@@ -19,7 +19,7 @@
 
     <ItemGroup>
         <PackageReference Include="DigitalOffice.Kernel" Version="1.0.0" />
-        <PackageReference Include="LT.DigitalOffice.Kernel.BrokerSupport" Version="1.0.5" />
+        <PackageReference Include="DigitalOffice.Kernel.BrokerSupport" Version="1.0.0" />
     </ItemGroup>
 
 </Project>
