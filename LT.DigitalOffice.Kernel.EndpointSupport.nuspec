@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>LT.DigitalOffice.Kernel.EndpointSupport</id>
+    <id>DigitalOffice.Kernel.EndpointSupport</id>
     <version>1.0.0</version>
-    <title>LT.DigitalOffice.Kernel.EndpointSupport</title>
-    <authors>LT Digital Office</authors>
-    <owners>LT Digital Office</owners>
+    <title>DigitalOffice.Kernel.EndpointSupport</title>
+    <authors>Lanit-Tercom Digital Office Team</authors>
+    <owners>Lanit-Tercom Digital Office</owners>
     <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.0 - Init dll.
+        1.0.0 - Initial.
 
         Previous versions:
 
@@ -20,14 +20,14 @@
     <dependencies>
       <group targetFramework="net6.0">
           
-        <dependency id="LT.DigitalOffice.Kernel" version="1.1.56" />
+        <dependency id="DigitalOffice.Kernel" version="1.0.0" />
         <dependency id="LT.DigitalOffice.Kernel.BrokerSupport" version="1.0.4" />
           
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_endpoint\LT.DigitalOffice.Kernel.EndpointSupport.dll" target="lib\net6.0" />
-    <file src="artifacts\kernel_endpoint\LT.DigitalOffice.Kernel.EndpointSupport.pdb" target="lib\net6.0" />
+    <file src="artifacts\kernel_endpoint\DigitalOffice.Kernel.EndpointSupport.dll" target="lib\net6.0" />
+    <file src="artifacts\kernel_endpoint\DigitalOffice.Kernel.EndpointSupport.pdb" target="lib\net6.0" />
   </files>
 </package>

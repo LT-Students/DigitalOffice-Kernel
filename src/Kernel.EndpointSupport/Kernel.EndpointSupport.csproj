@@ -5,8 +5,8 @@
 
         <TargetFramework>net6.0</TargetFramework>
 
-        <AssemblyName>LT.DigitalOffice.Kernel.EndpointSupport</AssemblyName>
-        <RootNamespace>LT.DigitalOffice.Kernel.EndpointSupport</RootNamespace>
+        <AssemblyName>DigitalOffice.Kernel.EndpointSupport</AssemblyName>
+        <RootNamespace>DigitalOffice.Kernel.EndpointSupport</RootNamespace>
         <IsPackable>true</IsPackable>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -18,7 +18,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="LT.DigitalOffice.Kernel" Version="1.1.61" />
+        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.0" />
         <PackageReference Include="LT.DigitalOffice.Kernel.BrokerSupport" Version="1.0.5" />
     </ItemGroup>
 
