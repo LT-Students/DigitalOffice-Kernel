@@ -52,28 +52,38 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
       _dictionary.AddOrUpdate(
         elementId,
         new List<Frame> { frame },
-        (key, value) =>
+        (key, frames) =>
         {
-          value = value.Where(f => !f.IsOverdue).ToList();
-          value.Add(frame);
+          frames = frames.Where(f => !f.IsOverdue).ToList();
+          frames.Add(frame);
 
-          return value;
+          return frames;
         });
     }
 
-    public List<(int database, string key)> GetKeys(Guid elementId)
+    public IEnumerable<(int database, string key)> GetKeys(Guid elementId)
     {
       if (!_dictionary.TryGetValue(elementId, out var frames) || frames is null)
       {
-        return new List<(int database, string key)>();
+        return Enumerable.Empty<(int database, string key)>();
       }
 
       return frames.Where(frame => !frame.IsOverdue).Select(frame => (frame.Database, frame.Key)).ToList();
     }
 
+    public IEnumerable<(int database, string key)> GetKeys()
+    {
+      return _dictionary.Values.SelectMany(frames => frames.Where(frame => frame != null && !frame.IsOverdue).Select(frame => (frame.Database, frame.Key)));
+    }
+
     public void Remove(Guid elementId)
     {
-      _dictionary.TryRemove(elementId, out var frames);
+      _dictionary.TryRemove(elementId, out _);
+    }
+
+    public void Clear()
+    {
+      _dictionary.Clear();
     }
   }
 }

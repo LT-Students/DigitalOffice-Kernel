@@ -9,7 +9,9 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces
   {
     void Add(List<Guid> elementsIds, int database, string key);
     void Add(Guid elementId, int database, string key);
-    List<(int database, string key)> GetKeys(Guid elementId);
+    IEnumerable<(int database, string key)> GetKeys(Guid elementId);
+    IEnumerable<(int database, string key)> GetKeys();
     void Remove(Guid elementId);
+    void Clear();
   }
 }
