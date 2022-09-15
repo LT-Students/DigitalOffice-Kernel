@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 
@@ -45,17 +46,24 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
 
     public async Task<bool> RemoveAsync(Guid elementId)
     {
-      var frames = _cacheNotebook.GetKeys(elementId);
-
-      foreach (var frame in frames)
+      if (!await _redisHelper.RemoveAsync(_cacheNotebook.GetKeys(elementId).ToList()))
       {
-        if (!await _redisHelper.RemoveAsync(frame.database, frame.key))
-        {
-          return false;
-        }
+        return false;
       }
 
       _cacheNotebook.Remove(elementId);
+
+      return true;
+    }
+
+    public async Task<bool> Clear()
+    {
+      if (!await _redisHelper.RemoveAsync(_cacheNotebook.GetKeys().ToList()))
+      {
+        return false;
+      }
+
+      _cacheNotebook.Clear();
 
       return true;
     }
