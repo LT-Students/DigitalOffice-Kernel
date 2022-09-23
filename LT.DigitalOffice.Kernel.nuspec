@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -11,9 +11,10 @@
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
 
-        1.0.0 - Initial.
+        1.0.1 - Add ".webp" to ImageFormats.
 
         Previous versions:
+        1.0.0 - Initial.
     </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>

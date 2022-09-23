@@ -14,7 +14,7 @@ public interface IImageResizeHelper
   /// Reduces image to given maximal value with given height-width ratio.
   /// </summary>
   /// <remarks>
-  /// Allows to resize images of following formats: ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tga", ".svg", ".webp", ".tiff", ".pbm", ".svg".
+  /// Allows to resize images of following formats: ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tga", ".svg", ".webp", ".tiff", ".pbm".
   /// Has different private methods to resize vector-based format (".svg") and pixel-based formats (all other of allowed).
   /// If resizing of the svg image is successfull, final image extension is ".png".
   /// If resizing of pixel-based image is successfull, final image extension is equal to original one.
@@ -38,9 +38,9 @@ public interface IImageResizeHelper
   /// Required maximal value of final size, default value = 150.
   /// </param>
   /// <returns>
-  /// The value of<paramref name="isSuccess" />
-  /// The value of<paramref name="resizedContent" />
-  /// The value of<paramref name="extension" />
+  /// The value of <paramref name="isSuccess" />
+  /// The value of <paramref name="resizedContent" />
+  /// The value of <paramref name="extension" />
   /// </returns>
   /// <param name="isSuccess">A boolean.</param>
   /// <param name="resizedContent">Content of resized image.</param>
@@ -70,9 +70,9 @@ public interface IImageResizeHelper
   /// Required maximal value of final size, default value = 150.
   /// </param>
   /// <returns>
-  /// The value of<paramref name="isSuccess" />
-  /// The value of<paramref name="resizedContent" />
-  /// The value of<paramref name="extension" />
+  /// The value of <paramref name="isSuccess" />
+  /// The value of <paramref name="resizedContent" />
+  /// The value of <paramref name="extension" />
   /// </returns>
   /// <param name="isSuccess">A boolean.</param>
   /// <param name="resizedContent">Content of resized image.</param>
