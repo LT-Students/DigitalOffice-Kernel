@@ -11,8 +11,9 @@ namespace LT.DigitalOffice.Kernel.Constants
     public const string gif = ".gif";
     public const string tga = ".tga";
     public const string svg = ".svg";
+    public const string webp = ".webp";
 
     public static ImmutableList<string> formats = ImmutableList
-      .Create(jpg, jpeg, png, bmp, gif, tga, svg);
+      .Create(jpg, jpeg, png, bmp, gif, tga, svg, webp);
   }
 }
