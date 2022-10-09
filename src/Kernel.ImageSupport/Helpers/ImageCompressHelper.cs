@@ -11,74 +11,88 @@ using SixLabors.ImageSharp.Processing;
 using Svg;
 using Image = SixLabors.ImageSharp.Image;
 
-namespace DigitalOffice.Kernel.ImageSupport.Helpers
+namespace DigitalOffice.Kernel.ImageSupport.Helpers;
+
+public class ImageCompressHelper : IImageCompressHelper
 {
-  public class ImageCompressHelper : IImageCompressHelper
+  private readonly ILogger<ImageCompressHelper> _logger;
+
+  public const string png = ".png";
+  public const string svg = ".svg";
+  public const string jpeg = ".jpeg";
+
+  private string ConvertSvgToPng(string inputContent)
   {
-    private readonly ILogger<ImageCompressHelper> _logger;
+    byte[] byteString = Convert.FromBase64String(inputContent);
+    using MemoryStream ms = new MemoryStream(byteString);
+    Bitmap bmp = SvgDocument.Open<SvgDocument>(ms).Draw();
+    ImageConverter converter = new ImageConverter();
+    byteString = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
+    string outputContent = Convert.ToBase64String(byteString);
+    return outputContent;
+  }
 
-    public const string png = ".png";
-    public const string svg = ".svg";
-    public const string jpeg = ".jpeg";
-
-    public ImageCompressHelper(ILogger<ImageCompressHelper> logger)
+  private string CompressJpeg(string inputContent, int quality)
+  {
+    Configuration.Default.ImageFormatsManager.SetEncoder(JpegFormat.Instance, new JpegEncoder()
     {
-      _logger = logger;
-    }
+      Quality = quality
+    });
 
-    public Task<(bool isSuccess, string compressedContent, string extension)> CompressAsync(string inputBase64, string extension, int MaxWeighInKB)
+    Image image = Image.Load(Convert.FromBase64String(inputContent), out IImageFormat imageFormat);
+    string outputContent = image.ToBase64String(imageFormat).Split(',')[1];
+    return outputContent;
+  }
+
+  private string ConvertPixelTypesToJpeg(string inputContent)
+  {
+    Image image = Image.Load(Convert.FromBase64String(inputContent));
+    image.Mutate(x => x.BackgroundColor(SixLabors.ImageSharp.Color.White));
+    string outputContent = image.ToBase64String(JpegFormat.Instance).Split(',')[1];
+    return outputContent;
+  }
+
+  public ImageCompressHelper(ILogger<ImageCompressHelper> logger)
+  {
+    _logger = logger;
+  }
+
+  public Task<(bool isSuccess, string compressedContent, string extension)> CompressAsync(string inputBase64, string extension, int MaxWeighInKB)
+  {
+    return Task.Run(() =>
     {
-      return Task.Run(() =>
+      try
       {
-        try
-        {
-          string compressedContent = inputBase64;
-          int quality = 90;
+        string compressedContent = inputBase64;
+        int quality = 90;
 
-          while (Convert.FromBase64String(compressedContent).Length / 1000 > MaxWeighInKB)
+        while (Convert.FromBase64String(compressedContent).Length / 1000 > MaxWeighInKB && quality > 0)
+        {
+          switch (extension)
           {
-            if (extension == svg)
-            {
-              byte[] byteString = Convert.FromBase64String(inputBase64);
-              using MemoryStream ms = new MemoryStream(byteString);
-              Bitmap bmp = SvgDocument.Open<SvgDocument>(ms).Draw();
-              ImageConverter converter = new ImageConverter();
-              byteString = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
-              compressedContent = Convert.ToBase64String(byteString);
+            case svg:
+              compressedContent = ConvertSvgToPng(compressedContent);
               extension = png;
-            }
-            else if (extension == jpeg)
-            {
-              Configuration.Default.ImageFormatsManager.SetEncoder(JpegFormat.Instance, new JpegEncoder()
-              {
-                Quality = quality
-              });
+              break;
 
-              Image image = Image.Load(Convert.FromBase64String(compressedContent), out IImageFormat imageFormat);
-              compressedContent = image.ToBase64String(imageFormat).Split(',')[1];
+            case jpeg:
+              compressedContent = CompressJpeg(compressedContent, quality);
               quality -= 10;
+              break;
 
-              if (quality == 0)
-              {
-                break;
-              }
-            }
-            else
-            {
-              Image image = Image.Load(Convert.FromBase64String(inputBase64));
-              image.Mutate(x => x.BackgroundColor(SixLabors.ImageSharp.Color.White));
-              compressedContent = image.ToBase64String(JpegFormat.Instance).Split(',')[1];
+            default:
+              compressedContent = ConvertPixelTypesToJpeg(compressedContent);
               extension = jpeg;
-            }
+              break;
           }
-          return (isSuccess: true, compressedContent, extension);
         }
-        catch (Exception ex)
-        {
-          _logger.LogWarning("Can't compress image: content is damaged or format is wrong. " + ex.Message);
-          return (isSuccess: false, compressedContent: null, extension);
-        }
-      });
-    }
+        return (isSuccess: true, compressedContent, extension);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogWarning("Can't compress image: content is damaged or format is wrong. " + ex.Message);
+        return (isSuccess: false, compressedContent: null, extension);
+      }
+    });
   }
 }
