@@ -11,7 +11,7 @@
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
 
-        1.0.1 - Add ".webp" to ImageFormats.
+        1.0.1 - Add FindResult.
 
         Previous versions:
         1.0.0 - Initial.
