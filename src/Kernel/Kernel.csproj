@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
 
         <TargetFramework>net6.0</TargetFramework>
 
@@ -20,6 +20,7 @@
     <ItemGroup>
       <PackageReference Include="FluentValidation" Version="11.2.2" />
       <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+      <PackageReference Include="MediatR" Version="10.0.1" />
 
       <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.2.0" />
       <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Abstractions" Version="2.2.0" />
