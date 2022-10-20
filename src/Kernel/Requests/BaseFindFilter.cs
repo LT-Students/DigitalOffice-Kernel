@@ -10,13 +10,7 @@ namespace LT.DigitalOffice.Kernel.Requests
     public int SkipCount
     {
       get => _skipCount;
-      set
-      {
-        if (value > -1)
-        {
-          _skipCount = value;
-        }
-      }
+      set => _skipCount = value > -1 ? value : 0;
     }
 
     private int _takeCount;
@@ -25,13 +19,7 @@ namespace LT.DigitalOffice.Kernel.Requests
     public int TakeCount 
     { 
       get => _takeCount; 
-      set
-      {
-        if (value > 0)
-        {
-          _takeCount = value;
-        }
-      }
+      set => _takeCount = value > 0 ? value : 1;
     }
 
     public BaseFindFilter(
