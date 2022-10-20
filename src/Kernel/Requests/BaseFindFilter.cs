@@ -21,13 +21,5 @@ namespace LT.DigitalOffice.Kernel.Requests
       get => _takeCount; 
       set => _takeCount = value > 0 ? value : 1;
     }
-
-    public BaseFindFilter(
-      int skipCount = 0,
-      int takeCount = 1)
-    {
-      SkipCount = skipCount;
-      TakeCount = takeCount;
-    }
   }
 }
