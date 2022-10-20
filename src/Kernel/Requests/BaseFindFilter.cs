@@ -4,22 +4,21 @@ namespace LT.DigitalOffice.Kernel.Requests
 {
   public record BaseFindFilter
   {
-    private int _skipCount;
+    private int skipCount;
+    private int takeCount;
 
     [FromQuery(Name = "skipcount")]
     public int SkipCount
     {
-      get => _skipCount;
-      set => _skipCount = value > -1 ? value : 0;
+      get => skipCount;
+      set => skipCount = value > -1 ? value : 0;
     }
-
-    private int _takeCount;
 
     [FromQuery(Name = "takecount")]
     public int TakeCount 
     { 
-      get => _takeCount; 
-      set => _takeCount = value > 0 ? value : 1;
+      get => takeCount; 
+      set => takeCount = value > 0 ? value : 1;
     }
   }
 }
