@@ -8,9 +8,9 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
 {
   public static class RedisExtension
   {
-    public static string GetRedisCacheKey(this IEnumerable<Guid> guids, IEnumerable<(string variableName, object value)> additionalArguments = null)
+    public static string GetRedisCacheKey(this IEnumerable<Guid> guids, string requestName, IEnumerable<(string variableName, object value)> additionalArguments = null)
     {
-      StringBuilder sb = new();
+      StringBuilder sb = new(requestName);
 
       unchecked
       {
@@ -40,9 +40,9 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions
       return sb.ToString();
     }
 
-    public static string GetRedisCacheKey(this Guid id, IEnumerable<(string variableName, object value)> additionalArguments = null)
+    public static string GetRedisCacheKey(this Guid id, string requestName, IEnumerable<(string variableName, object value)> additionalArguments = null)
     {
-      StringBuilder sb = new(id.GetHashCode().ToString());
+      StringBuilder sb = new StringBuilder(requestName).Append(id.GetHashCode().ToString());
 
       if (additionalArguments is not null)
       {
