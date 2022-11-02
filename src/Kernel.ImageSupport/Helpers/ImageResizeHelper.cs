@@ -11,14 +11,14 @@ using Svg;
 using Image = SixLabors.ImageSharp.Image;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
 
-namespace DigitalOffice.Kernel.ImageSupport.Helpers;
+namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers;
 
 public class ImageResizeHelper : IImageResizeHelper
 {
   private readonly ILogger<ImageResizeHelper> _logger;
 
-  public const string png = ".png";
-  public const string svg = ".svg";
+  public const string Png = ".png";
+  public const string Svg = ".svg";
 
   public ImageResizeHelper(ILogger<ImageResizeHelper> logger)
   {
@@ -59,7 +59,7 @@ public class ImageResizeHelper : IImageResizeHelper
         ImageConverter converter = new ImageConverter();
 
         byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-        extension = png;
+        extension = Png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -146,7 +146,7 @@ public class ImageResizeHelper : IImageResizeHelper
 
         ImageConverter converter = new ImageConverter();
         byteString = (byte[])converter.ConvertTo(resizedImage, typeof(byte[]));
-        extension = ".png";
+        extension = Png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -254,7 +254,7 @@ public class ImageResizeHelper : IImageResizeHelper
     string extension,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResize(inputBase64, extension, resizeMaxValue)
       : BaseResize(inputBase64, extension, resizeMaxValue);
   }
@@ -266,7 +266,7 @@ public class ImageResizeHelper : IImageResizeHelper
     int conditionalHeight = 1,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResizeForPreview(inputBase64, extension, conditionalWidth, conditionalHeight, resizeMaxValue)
       : BaseResizeForPreview(inputBase64, extension, conditionalWidth, conditionalWidth, resizeMaxValue);
   }
