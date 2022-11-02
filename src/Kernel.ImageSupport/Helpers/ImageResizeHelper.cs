@@ -89,32 +89,42 @@ public class ImageResizeHelper : IImageResizeHelper
         using MemoryStream ms = new MemoryStream(byteString);
         SvgDocument svgDocument = SvgDocument.Open<SvgDocument>(ms);
         Bitmap image = svgDocument.Draw();
-        Bitmap newImage;
+        Bitmap croppedImage;
 
         if ((double)image.Width / image.Height > (double)conditionalWidth / conditionalHeight)
         {
           int targetWidth = image.Height * conditionalWidth / conditionalHeight;
           int targetHeight = image.Height;
-          newImage = new(targetWidth, targetHeight);
+          croppedImage = new(targetWidth, targetHeight);
           System.Drawing.Rectangle cropArea = new(image.Width / 2 - targetWidth / 2, 0, targetWidth, targetHeight);
-          Graphics g = Graphics.FromImage(newImage);
-          g.DrawImage(image, new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight), cropArea, GraphicsUnit.Pixel);
+
+          Graphics croppedImageGraphics = Graphics.FromImage(croppedImage);
+          croppedImageGraphics.DrawImage(
+            image,
+            new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight),
+            cropArea,
+            GraphicsUnit.Pixel);
         }
         else if ((double)image.Width / image.Height < (double)conditionalWidth / conditionalHeight)
         {
           int targetWidth = image.Width;
           int targetHeight = image.Width * conditionalHeight / conditionalWidth;
-          newImage = new(targetWidth, targetHeight);
+          croppedImage = new(targetWidth, targetHeight);
           System.Drawing.Rectangle cropArea = new(0, image.Height / 2 - targetHeight / 2, targetWidth, targetHeight);
-          Graphics g = Graphics.FromImage(newImage);
-          g.DrawImage(image, new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight), cropArea, GraphicsUnit.Pixel);
+
+          Graphics g = Graphics.FromImage(croppedImage);
+          g.DrawImage(
+            image,
+            new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight),
+            cropArea,
+            GraphicsUnit.Pixel);
         }
         else
         {
-          newImage = image.Clone(new System.Drawing.Rectangle(0, 0, image.Width, image.Height), image.PixelFormat);
+          croppedImage = image.Clone(new System.Drawing.Rectangle(0, 0, image.Width, image.Height), image.PixelFormat);
         }
 
-        double maxSize = Math.Max(newImage.Width, newImage.Height);
+        double maxSize = Math.Max(croppedImage.Width, croppedImage.Height);
 
         if (maxSize <= resizeMaxValue)
         {
@@ -122,16 +132,20 @@ public class ImageResizeHelper : IImageResizeHelper
         }
 
         double ratio = maxSize / resizeMaxValue;
-        int newWidth = (int)(newImage.Width / ratio);
-        int newHeight = (int)(newImage.Height / ratio);
+        int newWidth = (int)(croppedImage.Width / ratio);
+        int newHeight = (int)(croppedImage.Height / ratio);
 
-        Bitmap finalImage = new(newWidth, newHeight);
-        System.Drawing.Rectangle newCropArea = new(0, 0, newImage.Width, newImage.Height);
-        Graphics gs = Graphics.FromImage(finalImage);
-        gs.DrawImage(newImage, new System.Drawing.Rectangle(0, 0, newWidth, newHeight), newCropArea, GraphicsUnit.Pixel);
+        Bitmap resizedImage = new(newWidth, newHeight);
+        System.Drawing.Rectangle newCropArea = new(0, 0, croppedImage.Width, croppedImage.Height);
+        Graphics resizedImageGraphics = Graphics.FromImage(resizedImage);
+        resizedImageGraphics.DrawImage(
+          croppedImage,
+          new System.Drawing.Rectangle(0, 0, newWidth, newHeight),
+          newCropArea,
+          GraphicsUnit.Pixel);
 
         ImageConverter converter = new ImageConverter();
-        byteString = (byte[])converter.ConvertTo(finalImage, typeof(byte[]));
+        byteString = (byte[])converter.ConvertTo(resizedImage, typeof(byte[]));
         extension = ".png";
 
         return (isSuccess: true,
