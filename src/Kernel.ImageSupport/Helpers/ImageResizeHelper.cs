@@ -9,8 +9,9 @@ using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Processing;
 using Svg;
 using Image = SixLabors.ImageSharp.Image;
+using Rectangle = SixLabors.ImageSharp.Rectangle;
 
-namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers;
+namespace DigitalOffice.Kernel.ImageSupport.Helpers;
 
 public class ImageResizeHelper : IImageResizeHelper
 {
@@ -88,21 +89,29 @@ public class ImageResizeHelper : IImageResizeHelper
         using MemoryStream ms = new MemoryStream(byteString);
         SvgDocument svgDocument = SvgDocument.Open<SvgDocument>(ms);
         Bitmap image = svgDocument.Draw();
-        Bitmap newImage = image;
+        Bitmap newImage;
 
         if ((double)image.Width / image.Height > (double)conditionalWidth / conditionalHeight)
         {
-          int width = image.Height * conditionalWidth / conditionalHeight;
-          newImage = new Bitmap(width, image.Height);
+          int targetWidth = image.Height * conditionalWidth / conditionalHeight;
+          int targetHeight = image.Height;
+          newImage = new(targetWidth, targetHeight);
+          System.Drawing.Rectangle cropArea = new(image.Width / 2 - targetWidth / 2, 0, targetWidth, targetHeight);
           Graphics g = Graphics.FromImage(newImage);
-          g.DrawImage(image, -width, -image.Height);
+          g.DrawImage(image, new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight), cropArea, GraphicsUnit.Pixel);
         }
         else if ((double)image.Width / image.Height < (double)conditionalWidth / conditionalHeight)
         {
-          int height = image.Height * conditionalWidth / conditionalHeight;
-          newImage = new Bitmap(image.Width, height);
+          int targetWidth = image.Width;
+          int targetHeight = image.Width * conditionalHeight / conditionalWidth;
+          newImage = new(targetWidth, targetHeight);
+          System.Drawing.Rectangle cropArea = new(0, image.Height / 2 - targetHeight / 2, targetWidth, targetHeight);
           Graphics g = Graphics.FromImage(newImage);
-          g.DrawImage(image, -image.Width, -height);
+          g.DrawImage(image, new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight), cropArea, GraphicsUnit.Pixel);
+        }
+        else
+        {
+          newImage = image.Clone(new System.Drawing.Rectangle(0, 0, image.Width, image.Height), image.PixelFormat);
         }
 
         double maxSize = Math.Max(newImage.Width, newImage.Height);
@@ -116,13 +125,14 @@ public class ImageResizeHelper : IImageResizeHelper
         int newWidth = (int)(newImage.Width / ratio);
         int newHeight = (int)(newImage.Height / ratio);
 
-        newImage = new Bitmap(newWidth, newHeight);
-        Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
+        Bitmap finalImage = new(newWidth, newHeight);
+        System.Drawing.Rectangle newCropArea = new(0, 0, newImage.Width, newImage.Height);
+        Graphics gs = Graphics.FromImage(finalImage);
+        gs.DrawImage(newImage, new System.Drawing.Rectangle(0, 0, newWidth, newHeight), newCropArea, GraphicsUnit.Pixel);
 
         ImageConverter converter = new ImageConverter();
-
-        byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-        extension = png;
+        byteString = (byte[])converter.ConvertTo(finalImage, typeof(byte[]));
+        extension = ".png";
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -185,11 +195,19 @@ public class ImageResizeHelper : IImageResizeHelper
 
         if ((double)image.Width / image.Height > (double)conditionalWidth / conditionalHeight)
         {
-          image.Mutate(x => x.Crop(image.Height * conditionalWidth / conditionalHeight, image.Height));
+          int targetWidth = image.Height * conditionalWidth / conditionalHeight;
+          int targetHeight = image.Height;
+          Rectangle cropArea = new(image.Width / 2 - targetWidth / 2, 0, targetWidth, targetHeight);
+
+          image.Mutate(x => x.Crop(cropArea));
         }
         else if ((double)image.Width / image.Height < (double)conditionalWidth / conditionalHeight)
         {
-          image.Mutate(x => x.Crop(image.Width, image.Width * conditionalHeight / conditionalWidth));
+          int targetWidth = image.Width;
+          int targetHeight = image.Width * conditionalHeight / conditionalWidth;
+          Rectangle cropArea = new(0, image.Height / 2 - targetHeight / 2, targetWidth, targetHeight);
+
+          image.Mutate(x => x.Crop(cropArea));
         }
 
         double maxSize = Math.Max(image.Width, image.Height);
