@@ -5,7 +5,7 @@
 
     <TargetFramework>net6.0</TargetFramework>
 
-      <AssemblyName>DigitalOffice.Kernel.ImageSupport</AssemblyName>
+    <AssemblyName>DigitalOffice.Kernel.ImageSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.ImageSupport</RootNamespace>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>
