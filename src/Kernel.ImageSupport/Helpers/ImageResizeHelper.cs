@@ -9,6 +9,7 @@ using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Processing;
 using Svg;
 using Image = SixLabors.ImageSharp.Image;
+using Rectangle = SixLabors.ImageSharp.Rectangle;
 
 namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers;
 
@@ -16,8 +17,8 @@ public class ImageResizeHelper : IImageResizeHelper
 {
   private readonly ILogger<ImageResizeHelper> _logger;
 
-  public const string png = ".png";
-  public const string svg = ".svg";
+  public const string Png = ".png";
+  public const string Svg = ".svg";
 
   public ImageResizeHelper(ILogger<ImageResizeHelper> logger)
   {
@@ -58,7 +59,7 @@ public class ImageResizeHelper : IImageResizeHelper
         ImageConverter converter = new ImageConverter();
 
         byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-        extension = png;
+        extension = Png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -88,24 +89,42 @@ public class ImageResizeHelper : IImageResizeHelper
         using MemoryStream ms = new MemoryStream(byteString);
         SvgDocument svgDocument = SvgDocument.Open<SvgDocument>(ms);
         Bitmap image = svgDocument.Draw();
-        Bitmap newImage = image;
+        Bitmap croppedImage;
 
         if ((double)image.Width / image.Height > (double)conditionalWidth / conditionalHeight)
         {
-          int width = image.Height * conditionalWidth / conditionalHeight;
-          newImage = new Bitmap(width, image.Height);
-          Graphics g = Graphics.FromImage(newImage);
-          g.DrawImage(image, -width, -image.Height);
+          int targetWidth = image.Height * conditionalWidth / conditionalHeight;
+          int targetHeight = image.Height;
+          croppedImage = new(targetWidth, targetHeight);
+          System.Drawing.Rectangle cropArea = new(image.Width / 2 - targetWidth / 2, 0, targetWidth, targetHeight);
+
+          Graphics croppedImageGraphics = Graphics.FromImage(croppedImage);
+          croppedImageGraphics.DrawImage(
+            image,
+            new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight),
+            cropArea,
+            GraphicsUnit.Pixel);
         }
         else if ((double)image.Width / image.Height < (double)conditionalWidth / conditionalHeight)
         {
-          int height = image.Height * conditionalWidth / conditionalHeight;
-          newImage = new Bitmap(image.Width, height);
-          Graphics g = Graphics.FromImage(newImage);
-          g.DrawImage(image, -image.Width, -height);
+          int targetWidth = image.Width;
+          int targetHeight = image.Width * conditionalHeight / conditionalWidth;
+          croppedImage = new(targetWidth, targetHeight);
+          System.Drawing.Rectangle cropArea = new(0, image.Height / 2 - targetHeight / 2, targetWidth, targetHeight);
+
+          Graphics g = Graphics.FromImage(croppedImage);
+          g.DrawImage(
+            image,
+            new System.Drawing.Rectangle(0, 0, targetWidth, targetHeight),
+            cropArea,
+            GraphicsUnit.Pixel);
+        }
+        else
+        {
+          croppedImage = image.Clone(new System.Drawing.Rectangle(0, 0, image.Width, image.Height), image.PixelFormat);
         }
 
-        double maxSize = Math.Max(newImage.Width, newImage.Height);
+        double maxSize = Math.Max(croppedImage.Width, croppedImage.Height);
 
         if (maxSize <= resizeMaxValue)
         {
@@ -113,16 +132,21 @@ public class ImageResizeHelper : IImageResizeHelper
         }
 
         double ratio = maxSize / resizeMaxValue;
-        int newWidth = (int)(newImage.Width / ratio);
-        int newHeight = (int)(newImage.Height / ratio);
+        int newWidth = (int)(croppedImage.Width / ratio);
+        int newHeight = (int)(croppedImage.Height / ratio);
 
-        newImage = new Bitmap(newWidth, newHeight);
-        Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
+        Bitmap resizedImage = new(newWidth, newHeight);
+        System.Drawing.Rectangle newCropArea = new(0, 0, croppedImage.Width, croppedImage.Height);
+        Graphics resizedImageGraphics = Graphics.FromImage(resizedImage);
+        resizedImageGraphics.DrawImage(
+          croppedImage,
+          new System.Drawing.Rectangle(0, 0, newWidth, newHeight),
+          newCropArea,
+          GraphicsUnit.Pixel);
 
         ImageConverter converter = new ImageConverter();
-
-        byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-        extension = png;
+        byteString = (byte[])converter.ConvertTo(resizedImage, typeof(byte[]));
+        extension = Png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -185,11 +209,19 @@ public class ImageResizeHelper : IImageResizeHelper
 
         if ((double)image.Width / image.Height > (double)conditionalWidth / conditionalHeight)
         {
-          image.Mutate(x => x.Crop(image.Height * conditionalWidth / conditionalHeight, image.Height));
+          int targetWidth = image.Height * conditionalWidth / conditionalHeight;
+          int targetHeight = image.Height;
+          Rectangle cropArea = new(image.Width / 2 - targetWidth / 2, 0, targetWidth, targetHeight);
+
+          image.Mutate(x => x.Crop(cropArea));
         }
         else if ((double)image.Width / image.Height < (double)conditionalWidth / conditionalHeight)
         {
-          image.Mutate(x => x.Crop(image.Width, image.Width * conditionalHeight / conditionalWidth));
+          int targetWidth = image.Width;
+          int targetHeight = image.Width * conditionalHeight / conditionalWidth;
+          Rectangle cropArea = new(0, image.Height / 2 - targetHeight / 2, targetWidth, targetHeight);
+
+          image.Mutate(x => x.Crop(cropArea));
         }
 
         double maxSize = Math.Max(image.Width, image.Height);
@@ -222,7 +254,7 @@ public class ImageResizeHelper : IImageResizeHelper
     string extension,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResize(inputBase64, extension, resizeMaxValue)
       : BaseResize(inputBase64, extension, resizeMaxValue);
   }
@@ -234,7 +266,7 @@ public class ImageResizeHelper : IImageResizeHelper
     int conditionalHeight = 1,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResizeForPreview(inputBase64, extension, conditionalWidth, conditionalHeight, resizeMaxValue)
       : BaseResizeForPreview(inputBase64, extension, conditionalWidth, conditionalWidth, resizeMaxValue);
   }
