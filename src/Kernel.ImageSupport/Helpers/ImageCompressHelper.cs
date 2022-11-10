@@ -31,7 +31,7 @@ public class ImageCompressHelper : IImageCompressHelper
 
   private string CompressJpeg(string inputContent, int quality)
   {
-    Configuration.Default.ImageFormatsManager.SetEncoder(JpegFormat.Instance, new JpegEncoder()
+    Configuration.Default.ImageFormatsManager.SetEncoder(JpegFormat.Instance, new JpegEncoder
     {
       Quality = quality
     });

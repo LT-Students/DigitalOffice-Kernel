@@ -12,7 +12,7 @@ using Svg;
 using Image = SixLabors.ImageSharp.Image;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
 
-namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers;
+namespace DigitalOffice.Kernel.ImageSupport.Helpers;
 
 public class ImageResizeHelper : IImageResizeHelper
 {
@@ -169,7 +169,6 @@ public class ImageResizeHelper : IImageResizeHelper
       try
       {
         Image image = Image.Load(Convert.FromBase64String(inputBase64), out IImageFormat imageFormat);
-
         double maxSize = Math.Max(image.Width, image.Height);
 
         if (maxSize <= resizeMaxValue)
