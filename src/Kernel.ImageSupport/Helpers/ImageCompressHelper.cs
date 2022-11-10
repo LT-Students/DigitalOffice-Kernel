@@ -3,6 +3,7 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
+using LT.DigitalOffice.Kernel.Constants;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -16,10 +17,6 @@ namespace DigitalOffice.Kernel.ImageSupport.Helpers;
 public class ImageCompressHelper : IImageCompressHelper
 {
   private readonly ILogger<ImageCompressHelper> _logger;
-
-  public const string png = ".png";
-  public const string svg = ".svg";
-  public const string jpeg = ".jpeg";
 
   private string ConvertSvgToPng(string inputContent)
   {
@@ -57,7 +54,7 @@ public class ImageCompressHelper : IImageCompressHelper
     _logger = logger;
   }
 
-  public Task<(bool isSuccess, string compressedContent, string extension)> CompressAsync(string inputBase64, string extension, int MaxWeighInKB)
+  public Task<(bool isSuccess, string compressedContent, string extension)> CompressAsync(string inputBase64, string extension, int maxSizeKb)
   {
     return Task.Run(() =>
     {
@@ -66,23 +63,27 @@ public class ImageCompressHelper : IImageCompressHelper
         string compressedContent = inputBase64;
         int quality = 90;
 
-        while (Convert.FromBase64String(compressedContent).Length / 1000 > MaxWeighInKB && quality > 0)
+        while (Convert.FromBase64String(compressedContent).Length / 1000 > maxSizeKb && quality > 0)
         {
           switch (extension)
           {
-            case svg:
+            case ImageFormats.svg:
               compressedContent = ConvertSvgToPng(compressedContent);
-              extension = png;
+              extension = ImageFormats.png;
               break;
 
-            case jpeg:
+            case ImageFormats.jpeg:
               compressedContent = CompressJpeg(compressedContent, quality);
               quality -= 10;
               break;
 
+            case ImageFormats.gif:
+              quality = 0;
+              break;
+
             default:
               compressedContent = ConvertPixelTypesToJpeg(compressedContent);
-              extension = jpeg;
+              extension = ImageFormats.jpeg;
               break;
           }
         }

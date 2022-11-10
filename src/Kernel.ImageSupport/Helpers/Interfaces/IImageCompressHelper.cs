@@ -31,7 +31,7 @@ public interface IImageCompressHelper
   /// <param name="extension">
   /// Image original extension.
   /// </param>
-  /// <param name="MaxWeighInKB">
+  /// <param name="maxSizeKb">
   /// Required maximal value of final weight in KB.
   /// </param>
   /// <returns>
@@ -42,5 +42,5 @@ public interface IImageCompressHelper
   /// <param name="isSuccess">A boolean.</param>
   /// <param name="compressedContent">Content of compressed image.</param>
   /// <param name="extension">Extension of compressed image.</param>
-  Task<(bool isSuccess, string compressedContent, string extension)> CompressAsync(string inputBase64, string extension, int MaxWeighInKB);
+  Task<(bool isSuccess, string compressedContent, string extension)> CompressAsync(string inputBase64, string extension, int maxSizeKb);
 }
