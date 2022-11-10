@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
+using LT.DigitalOffice.Kernel.Constants;
 using LT.DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
@@ -16,9 +17,6 @@ namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers;
 public class ImageResizeHelper : IImageResizeHelper
 {
   private readonly ILogger<ImageResizeHelper> _logger;
-
-  public const string Png = ".png";
-  public const string Svg = ".svg";
 
   public ImageResizeHelper(ILogger<ImageResizeHelper> logger)
   {
@@ -54,12 +52,13 @@ public class ImageResizeHelper : IImageResizeHelper
         int newHeight = (int)(image.Height / ratio);
 
         Bitmap newImage = new Bitmap(newWidth, newHeight);
+
         Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
 
         ImageConverter converter = new ImageConverter();
 
         byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-        extension = Png;
+        extension = ImageFormats.png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -146,7 +145,7 @@ public class ImageResizeHelper : IImageResizeHelper
 
         ImageConverter converter = new ImageConverter();
         byteString = (byte[])converter.ConvertTo(resizedImage, typeof(byte[]));
-        extension = Png;
+        extension = ImageFormats.png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -254,7 +253,7 @@ public class ImageResizeHelper : IImageResizeHelper
     string extension,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResize(inputBase64, extension, resizeMaxValue)
       : BaseResize(inputBase64, extension, resizeMaxValue);
   }
@@ -266,7 +265,7 @@ public class ImageResizeHelper : IImageResizeHelper
     int conditionalHeight = 1,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResizeForPreview(inputBase64, extension, conditionalWidth, conditionalHeight, resizeMaxValue)
       : BaseResizeForPreview(inputBase64, extension, conditionalWidth, conditionalWidth, resizeMaxValue);
   }
