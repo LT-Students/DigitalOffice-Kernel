@@ -2,7 +2,7 @@
 <package >
     <metadata>
         <id>DigitalOffice.Kernel.ImageSupport</id>
-        <version>1.0.3</version>
+        <version>1.0.4</version>
         <title>DigitalOffice.Kernel.ImageSupport</title>
         <authors>Lanit-Tercom Digital Office Team</authors>
         <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Library used in the Digital Office project.</description>
         <releaseNotes>
-            1.0.3 - Make ImageResizeHelper to crop pictures for preview in the middle.
+            1.0.4 - Modify ImageCompressHelper.
 
             Previous versions:
+            1.0.3 - Make ImageResizeHelper to crop pictures for preview in the middle.
             1.0.2 - Add ImageCompressHelper.
             1.0.1 - Update kernel version used in this lib.
             1.0.0 - Initial.
