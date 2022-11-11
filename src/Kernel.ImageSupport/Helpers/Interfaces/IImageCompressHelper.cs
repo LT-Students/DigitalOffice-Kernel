@@ -21,6 +21,7 @@ public interface IImageCompressHelper
   /// Jpeg(jpg) on first iteration compresses with quality 90%,
   /// then on each iteration reduces quality by 10% (second iteration - 80%, third - 70% and so one);
   /// minimal quality value is 10% - compressing stops even if current size is bigger then required.
+  /// Gif images aren't compressed.
   /// If compressing is successful, returns boolean "true", compressed image content and final extension.
   /// If weight of original image is less than given maximal value, returns boolean "true", original image content and original extension.
   /// If compressing is not successful, returns boolean "false", null image content and original image extension.
