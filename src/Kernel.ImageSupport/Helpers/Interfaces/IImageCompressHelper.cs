@@ -14,7 +14,7 @@ public interface IImageCompressHelper
   /// Compresses image to given maximal value.
   /// </summary>
   /// <remarks>
-  /// Allows to compress images of following formats: ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tga", ".svg", ".webp", ".tiff", ".pbm".
+  /// Allows to compress images of following formats: ".jpg", ".jpeg", ".png", ".bmp", ".tga", ".svg", ".webp", ".tiff", ".pbm".
   /// Compresses images step by step until receiving required weight value.
   /// Svg image on first iteration converts to png image.
   /// Png, bmp, gif, tga, webp, tiff, pbm images on first iteration converts to jpeg(jpg).
