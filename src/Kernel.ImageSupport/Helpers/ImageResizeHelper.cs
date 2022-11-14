@@ -2,7 +2,8 @@
 using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
-using LT.DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
+using DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
+using LT.DigitalOffice.Kernel.Constants;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -11,14 +12,11 @@ using Svg;
 using Image = SixLabors.ImageSharp.Image;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
 
-namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers;
+namespace DigitalOffice.Kernel.ImageSupport.Helpers;
 
 public class ImageResizeHelper : IImageResizeHelper
 {
   private readonly ILogger<ImageResizeHelper> _logger;
-
-  public const string Png = ".png";
-  public const string Svg = ".svg";
 
   public ImageResizeHelper(ILogger<ImageResizeHelper> logger)
   {
@@ -54,12 +52,13 @@ public class ImageResizeHelper : IImageResizeHelper
         int newHeight = (int)(image.Height / ratio);
 
         Bitmap newImage = new Bitmap(newWidth, newHeight);
+
         Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
 
         ImageConverter converter = new ImageConverter();
 
         byteString = (byte[])converter.ConvertTo(newImage, typeof(byte[]));
-        extension = Png;
+        extension = ImageFormats.png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -146,7 +145,7 @@ public class ImageResizeHelper : IImageResizeHelper
 
         ImageConverter converter = new ImageConverter();
         byteString = (byte[])converter.ConvertTo(resizedImage, typeof(byte[]));
-        extension = Png;
+        extension = ImageFormats.png;
 
         return (isSuccess: true,
           resizedContent: Convert.ToBase64String(byteString),
@@ -170,7 +169,6 @@ public class ImageResizeHelper : IImageResizeHelper
       try
       {
         Image image = Image.Load(Convert.FromBase64String(inputBase64), out IImageFormat imageFormat);
-
         double maxSize = Math.Max(image.Width, image.Height);
 
         if (maxSize <= resizeMaxValue)
@@ -254,7 +252,7 @@ public class ImageResizeHelper : IImageResizeHelper
     string extension,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResize(inputBase64, extension, resizeMaxValue)
       : BaseResize(inputBase64, extension, resizeMaxValue);
   }
@@ -266,7 +264,7 @@ public class ImageResizeHelper : IImageResizeHelper
     int conditionalHeight = 1,
     int resizeMaxValue = 150)
   {
-    return string.Equals(extension, Svg, StringComparison.OrdinalIgnoreCase)
+    return string.Equals(extension, ImageFormats.svg, StringComparison.OrdinalIgnoreCase)
       ? SvgResizeForPreview(inputBase64, extension, conditionalWidth, conditionalHeight, resizeMaxValue)
       : BaseResizeForPreview(inputBase64, extension, conditionalWidth, conditionalWidth, resizeMaxValue);
   }

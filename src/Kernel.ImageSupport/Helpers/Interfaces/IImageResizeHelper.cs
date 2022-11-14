@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using LT.DigitalOffice.Kernel.Attributes;
 
-namespace LT.DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
+namespace DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
 
 /// <summary>
 /// Represents interface for a helper.
@@ -16,11 +16,11 @@ public interface IImageResizeHelper
   /// <remarks>
   /// Allows to resize images of following formats: ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tga", ".svg", ".webp", ".tiff", ".pbm".
   /// Has different private methods to resize vector-based format (".svg") and pixel-based formats (all other of allowed).
-  /// If resizing of the svg image is successfull, final image extension is ".png".
-  /// If resizing of pixel-based image is successfull, final image extension is equal to original one.
-  /// If resizing is successfull, returns boolean "true", resized image content and final extension.
+  /// If resizing of the svg image is successful, final image extension is ".png".
+  /// If resizing of pixel-based image is successful, final image extension is equal to original one.
+  /// If resizing is successful, returns boolean "true", resized image content and final extension.
   /// If width and height of original image is less than given maximal value, returns boolean "true", null image content and original image extension.
-  /// If resizing is not successfull, returns boolean "false", null image content and original image extension.
+  /// If resizing is not successful, returns boolean "false", null image content and original image extension.
   /// </remarks>
   /// <param name="inputBase64">
   /// Image original content.
@@ -52,13 +52,13 @@ public interface IImageResizeHelper
   /// Reduces image to given maximal value.
   /// </summary>
   /// <remarks>
-  /// Allows to resize images of following formats: ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tga", ".svg", ".webp", ".tiff", ".pbm", ".svg".
+  /// Allows to resize images of following formats: ".jpg", ".jpeg", ".png", ".bmp", ".gif", ".tga", ".svg", ".webp", ".tiff", ".pbm".
   /// Has different private methods to resize vector-based format (".svg") and pixel-based formats (all other of allowed).
-  /// If resizing of the svg image is successfull, final image extension is ".png".
-  /// If resizing of pixel-based image is successfull, final image extension is equal to original one.
-  /// If resizing is successfull, returns boolean "true", resized image content and final extension.
+  /// If resizing of the svg image is successful, final image extension is ".png".
+  /// If resizing of pixel-based image is successful, final image extension is equal to original one.
+  /// If resizing is successful, returns boolean "true", resized image content and final extension.
   /// If width and height of original image is less than given maximal value, returns boolean "true", null image content and original image extension.
-  /// If resizing is not successfull, returns boolean "false", null image content and original image extension.
+  /// If resizing is not successful, returns boolean "false", null image content and original image extension.
   /// </remarks>
   /// <param name="inputBase64">
   /// Image original content.
