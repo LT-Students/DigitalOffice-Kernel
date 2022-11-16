@@ -24,9 +24,9 @@
     public const int AddEditRemoveNews = 5;
     public const int AddEditRemovePositions = 6;
     public const int AddEditRemoveTime = 7;
-    public const int AddEditRemoveHistories = 8; // can be reused
+    public const int AddEditRemoveOffices = 8;
     public const int AddEditRemoveCompanies = 9;
-    public const int AddRemoveDepartmentData = 10; // reuse the int, we do not need the right 
+    public const int AddEditRemoveBookings = 10;
     public const int AddEditRemoveCompanyData = 11;
     public const int AddRemoveUsersRoles = 12;
     public const int AddEditRemoveWiki = 13;
