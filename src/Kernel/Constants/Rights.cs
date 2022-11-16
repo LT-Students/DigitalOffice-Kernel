@@ -2,7 +2,7 @@
 {
   /// <summary>
   /// Rights give access to admin rights to the corresponding services or blocks
-  /// Admin, Feddback, Email, create/update Roles only work with admin rights
+  /// Admin, Feedback, Email, create/update Roles only work with admin rights
   /// </summary>
   /// <param name="AddEditRemoveUsers">Right grants admin rights to user, family, education, skill, office users, achievement </param>
   /// <param name="AddEditRemoveProjects">Right grants admin rights to project, task services</param>
