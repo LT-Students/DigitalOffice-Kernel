@@ -102,6 +102,12 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
       return await HasAnyRightAsync(null, true, rightIds);
     }
 
+    /// <inheritdoc/>
+    public async Task<bool> HasAnyRightAsync(Guid? userId, params int[] rightIds)
+    {
+      return await HasAnyRightAsync(userId, true, rightIds);
+    }
+
     public async Task<bool> HasAnyRightAsync(Guid? userId, bool includeIsAdminCheck, params int[] rightIds)
     {
       if (rightIds == null || !rightIds.Any())

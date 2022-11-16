@@ -53,6 +53,14 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces
     /// Checks whether the user has any of specified rights.
     /// </summary>
     /// <param name="userId">Id of the user.</param>
+    /// <param name="rightIds">Ids of the rights.</param>
+    /// <returns>True, if there's a UserId-RightId pair for at least one of requested rights in the database. False otherwise.</returns>
+    Task<bool> HasAnyRightAsync(Guid? userId, params int[] rightIds);
+
+    /// <summary>
+    /// Checks whether the user has any of specified rights.
+    /// </summary>
+    /// <param name="userId">Id of the user.</param>
     /// <param name="includeIsAdminCheck">If this is true, the method should be included in the check whether the user is an admin.</param>
     /// <param name="rightIds">Ids of the rights.</param>
     /// <returns>True, if there's a UserId-RightId pair for at least one of requested rights in the database. False otherwise.</returns>
