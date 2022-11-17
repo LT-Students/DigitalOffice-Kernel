@@ -17,6 +17,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
   {
     private Mock<IRequestClient<ICheckUserIsAdminRequest>> _requestClientUSMock;
     private Mock<IRequestClient<ICheckUserRightsRequest>> _requestClientCRSMock;
+    private Mock<IRequestClient<ICheckUserAnyRightRequest>> _requestClientARMock;
     private Mock<Response<IOperationResult<bool>>> _isAdminBrokerResponseMock;
     private Mock<Response<IOperationResult<bool>>> _hasRightsBrokerResponseMock;
     private Mock<IHttpContextAccessor> _httpContextAccessorMock;
@@ -59,6 +60,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
 
       _requestClientUSMock = new Mock<IRequestClient<ICheckUserIsAdminRequest>>();
       _requestClientCRSMock = new Mock<IRequestClient<ICheckUserRightsRequest>>();
+      _requestClientARMock = new Mock<IRequestClient<ICheckUserAnyRightRequest>>();
 
       _isAdminBrokerResponseMock = new Mock<Response<IOperationResult<bool>>>();
       _isAdminBrokerResponseMock
@@ -99,7 +101,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         _httpContextAccessorMock.Object,
         _loggerMock.Object,
         _requestClientCRSMock.Object,
-        _requestClientUSMock.Object);
+        _requestClientUSMock.Object,
+        _requestClientARMock.Object);
     }
 
     [SetUp]

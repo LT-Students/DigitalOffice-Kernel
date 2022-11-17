@@ -21,16 +21,16 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces
     /// <summary>
     /// Checks whether the user has certain rights.
     /// </summary>
-    /// <param name="rightIds">Ids of the rigths.</param>
-    /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
+    /// <param name="rightIds">Ids of the rights.</param>
+    /// <returns>True, if there's a UserId-RightId pair for all requested rights in the database. False otherwise.</returns>
     Task<bool> HasRightsAsync(params int[] rightIds);
 
     /// <summary>
     /// Checks whether the user has certain rights.
     /// </summary>
     /// <param name="userId">Id of the user.</param>
-    /// <param name="rightIds">Ids of the rigths.</param>
-    /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
+    /// <param name="rightIds">Ids of the rights.</param>
+    /// <returns>True, if there's a UserId-RightId pair for all requested rights in the database. False otherwise.</returns>
     Task<bool> HasRightsAsync(Guid? userId, params int[] rightIds);
 
     /// <summary>
@@ -38,8 +38,32 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces
     /// </summary>
     /// <param name="userId">Id of the user.</param>
     /// <param name="includeIsAdminCheck">If this is true, the method should be included in the check whether the user is an admin.</param>
-    /// <param name="rightIds">Ids of the rigths.</param>
-    /// <returns>True, if there's a UserId-RightId pair for all requsted rights in the database. False otherwise.</returns>
+    /// <param name="rightIds">Ids of the rights.</param>
+    /// <returns>True, if there's a UserId-RightId pair for all requested rights in the database. False otherwise.</returns>
     Task<bool> HasRightsAsync(Guid? userId, bool includeIsAdminCheck, params int[] rightIds);
+
+    /// <summary>
+    /// Checks whether the user has any of specified rights.
+    /// </summary>
+    /// <param name="rightIds">Ids of the rights.</param>
+    /// <returns>True, if there's a UserId-RightId pair for at least one of requested rights in the database. False otherwise.</returns>
+    Task<bool> HasAnyRightAsync(params int[] rightIds);
+
+    /// <summary>
+    /// Checks whether the user has any of specified rights.
+    /// </summary>
+    /// <param name="userId">Id of the user.</param>
+    /// <param name="rightIds">Ids of the rights.</param>
+    /// <returns>True, if there's a UserId-RightId pair for at least one of requested rights in the database. False otherwise.</returns>
+    Task<bool> HasAnyRightAsync(Guid? userId, params int[] rightIds);
+
+    /// <summary>
+    /// Checks whether the user has any of specified rights.
+    /// </summary>
+    /// <param name="userId">Id of the user.</param>
+    /// <param name="includeIsAdminCheck">If this is true, the method should be included in the check whether the user is an admin.</param>
+    /// <param name="rightIds">Ids of the rights.</param>
+    /// <returns>True, if there's a UserId-RightId pair for at least one of requested rights in the database. False otherwise.</returns>
+    Task<bool> HasAnyRightAsync(Guid? userId, bool includeIsAdminCheck, params int[] rightIds);
   }
 }
