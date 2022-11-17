@@ -14,7 +14,7 @@
   /// <value name="AddEditRemoveOffices">Right grants admin rights to office service</value>
   /// <value name="AddEditRemoveCompanies">Right grants admin rights to company service</value>
   /// <value name="AddEditRemoveBooking">Right grants admin rights to booking service</value>
-  /// <value name="AddEditRemoveCompanyData">Right grants admin rights to company service</value>
+  /// <value name="AddEditRemoveCompanyData">Right grants admin rights to company service to work with company users</value>
   /// <value name="AddRemoveUsersRoles">Right grants admin rights to right service to work with users roles</value>
   /// <value name="AddEditRemoveWiki">Right grants admin rights to wiki service</value>
   public static class Rights
