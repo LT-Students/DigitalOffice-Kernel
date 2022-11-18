@@ -25,6 +25,9 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations
     [AutoInjectRequest(typeof(ICheckUserRightsRequest))]
     public string CheckUserRightsEndpoint { get; init; }
 
+    [AutoInjectRequest(typeof(ICheckUserAnyRightRequest))]
+    public string CheckUserAnyRightEndpoint { get; init; }
+
     [AutoInjectRequest(typeof(ICheckTokenRequest))]
     public string ValidateTokenEndpoint { get; init; }
   }
