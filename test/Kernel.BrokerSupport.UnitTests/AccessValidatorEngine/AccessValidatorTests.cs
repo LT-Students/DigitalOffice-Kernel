@@ -64,6 +64,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
       _requestClientUSMock = new Mock<IRequestClient<ICheckUserIsAdminRequest>>();
       _requestClientCRSMock = new Mock<IRequestClient<ICheckUserRightsRequest>>();
       _requestClientARMock = new Mock<IRequestClient<ICheckUserAnyRightRequest>>();
+      _requestClientPM = new Mock<IRequestClient<ICheckProjectManagerRequest>>();
+      _requestClientDM = new Mock<IRequestClient<ICheckDepartmentManagerRequest>>();
 
       _isAdminBrokerResponseMock = new Mock<Response<IOperationResult<bool>>>();
       _isAdminBrokerResponseMock
