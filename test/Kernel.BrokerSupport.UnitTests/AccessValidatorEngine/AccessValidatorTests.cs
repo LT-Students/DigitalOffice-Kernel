@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
@@ -18,6 +19,8 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
     private Mock<IRequestClient<ICheckUserIsAdminRequest>> _requestClientUSMock;
     private Mock<IRequestClient<ICheckUserRightsRequest>> _requestClientCRSMock;
     private Mock<IRequestClient<ICheckUserAnyRightRequest>> _requestClientARMock;
+    private Mock<IRequestClient<ICheckProjectManagerRequest>> _requestClientPM;
+    private Mock<IRequestClient<ICheckDepartmentManagerRequest>> _requestClientDM;
     private Mock<Response<IOperationResult<bool>>> _isAdminBrokerResponseMock;
     private Mock<Response<IOperationResult<bool>>> _hasRightsBrokerResponseMock;
     private Mock<IHttpContextAccessor> _httpContextAccessorMock;
@@ -102,7 +105,9 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         _loggerMock.Object,
         _requestClientCRSMock.Object,
         _requestClientUSMock.Object,
-        _requestClientARMock.Object);
+        _requestClientARMock.Object,
+        _requestClientPM.Object,
+        _requestClientDM.Object);
     }
 
     [SetUp]
