@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.BrokerSupport.Broker;
+using LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
 using LT.DigitalOffice.Kernel.Extensions;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +21,8 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
     private readonly IRequestClient<ICheckUserRightsRequest> _requestClientCR;
     private readonly IRequestClient<ICheckUserIsAdminRequest> _requestClientUS;
     private readonly IRequestClient<ICheckUserAnyRightRequest> _requestClientAR;
+    private readonly IRequestClient<ICheckProjectManagerRequest> _requestClientPM;
+    private readonly IRequestClient<ICheckDepartmentManagerRequest> _requestClientDM;
 
     private async Task<bool> IsUserAdminAsync(Guid userId)
     {
@@ -44,11 +49,15 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
       ILogger<AccessValidator> logger,
       IRequestClient<ICheckUserRightsRequest> requestClientCR,
       IRequestClient<ICheckUserIsAdminRequest> requestClientUS,
-      IRequestClient<ICheckUserAnyRightRequest> requestClientAR)
+      IRequestClient<ICheckUserAnyRightRequest> requestClientAR,
+      IRequestClient<ICheckProjectManagerRequest> requestClientPM,
+      IRequestClient<ICheckDepartmentManagerRequest> requestClientDM)
     {
       _requestClientCR = requestClientCR;
       _requestClientUS = requestClientUS;
       _requestClientAR = requestClientAR;
+      _requestClientPM = requestClientPM;
+      _requestClientDM = requestClientDM;
       _httpContext = httpContextAccessor.HttpContext;
       _logger = logger;
     }
@@ -148,6 +157,38 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
       }
 
       return await IsUserAdminAsync(userId.Value);
+    }
+
+    public async Task<bool> IsManagerAsync(ManagerSource managerSource, Guid entityId)
+    {
+      Guid userId = _httpContext.GetUserId();
+
+      Response<IOperationResult<bool>> result = null;
+
+      switch (managerSource)
+      {
+        case ManagerSource.Project:
+          result = await _requestClientPM.GetResponse<IOperationResult<bool>>(
+            ICheckProjectManagerRequest.CreateObj(userId, entityId),
+            timeout: 5000);
+          break;
+        case ManagerSource.Department:
+          result = await _requestClientDM.GetResponse<IOperationResult<bool>>(
+            ICheckDepartmentManagerRequest.CreateObj(userId, entityId),
+            timeout: 5000);
+          break;
+        default: 
+          return false;
+      }
+
+      if (!result.IsSuccess())
+      {
+        _logger.LogWarning("Failed to send request to CheckEntityManager via the broker.");
+
+        return false;
+      }
+
+      return result.Message.Body;
     }
   }
 }

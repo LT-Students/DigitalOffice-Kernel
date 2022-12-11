@@ -1,4 +1,5 @@
-﻿using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+﻿using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
 using LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
 
@@ -30,5 +31,11 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations
 
     [AutoInjectRequest(typeof(ICheckTokenRequest))]
     public string ValidateTokenEndpoint { get; init; }
+
+    [AutoInjectRequest(typeof(ICheckProjectManagerRequest))]
+    public string CheckProjectManagerEndpoint { get; init; }
+
+    [AutoInjectRequest(typeof(ICheckDepartmentManagerRequest))]
+    public string CheckDepartmentManagerEndpoint { get; init; }
   }
 }
