@@ -183,7 +183,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
 
       if (!result.IsSuccess())
       {
-        _logger.LogWarning("Failed to send request to CheckEntityManager via the broker.");
+        _logger.LogWarning($"Failed to send request to check {managerSource} manager via the broker.");
 
         return false;
       }

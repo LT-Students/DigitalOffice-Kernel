@@ -68,7 +68,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces
     Task<bool> HasAnyRightAsync(Guid? userId, bool includeIsAdminCheck, params int[] rightIds);
 
     /// <summary>
-    /// Checks whether the user is mamager or not.
+    /// Checks whether the user is manager or not.
     /// </summary>
     /// <param name="managerSource">Type of the entity.</param>
     /// <param name="entityId">Id of the entity.</param>
