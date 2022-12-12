@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
 using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
@@ -23,10 +24,12 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
     private Mock<IRequestClient<ICheckDepartmentManagerRequest>> _requestClientDM;
     private Mock<Response<IOperationResult<bool>>> _isAdminBrokerResponseMock;
     private Mock<Response<IOperationResult<bool>>> _hasRightsBrokerResponseMock;
+    private Mock<Response<IOperationResult<bool>>> _isManagerBrokerResponseMock;
     private Mock<IHttpContextAccessor> _httpContextAccessorMock;
     private Mock<ILogger<AccessValidator>> _loggerMock;
     private Mock<IOperationResult<bool>> _isAdminResultMock;
     private Mock<IOperationResult<bool>> _hasRightsResultMock;
+    private Mock<IOperationResult<bool>> _isManagerMock;
     private Mock<HttpContext> _httpContextMock;
 
     private Guid _userId;
@@ -56,10 +59,22 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         .Returns(body);
     }
 
+    private void ConfigureIsManagerResult(bool isSuccess, bool body)
+    {
+      _isManagerMock
+        .Setup(x => x.IsSuccess)
+        .Returns(isSuccess);
+
+      _isManagerMock
+        .Setup(x => x.Body)
+        .Returns(body);
+    }
+
     private void BrokerSetUp()
     {
       _isAdminResultMock = new Mock<IOperationResult<bool>>();
       _hasRightsResultMock = new Mock<IOperationResult<bool>>();
+      _isManagerMock = new Mock<IOperationResult<bool>>();
 
       _requestClientUSMock = new Mock<IRequestClient<ICheckUserIsAdminRequest>>();
       _requestClientCRSMock = new Mock<IRequestClient<ICheckUserRightsRequest>>();
@@ -77,6 +92,11 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
         .Setup(x => x.Message)
         .Returns(_hasRightsResultMock.Object);
 
+      _isManagerBrokerResponseMock = new Mock<Response<IOperationResult<bool>>>();
+      _isManagerBrokerResponseMock
+        .Setup(x => x.Message)
+        .Returns(_isManagerMock.Object);
+
       _requestClientUSMock
         .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, It.IsAny<RequestTimeout>()))
         .Returns(Task.FromResult(_isAdminBrokerResponseMock.Object));
@@ -84,6 +104,14 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
       _requestClientCRSMock
         .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, It.IsAny<RequestTimeout>()))
         .Returns(Task.FromResult(_hasRightsBrokerResponseMock.Object));
+
+      _requestClientPM
+        .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, It.IsAny<RequestTimeout>()))
+        .Returns(Task.FromResult(_isManagerBrokerResponseMock.Object));
+
+      _requestClientDM
+        .Setup(x => x.GetResponse<IOperationResult<bool>>(It.IsAny<object>(), default, It.IsAny<RequestTimeout>()))
+        .Returns(Task.FromResult(_isManagerBrokerResponseMock.Object));
     }
 
     [OneTimeSetUp]
@@ -253,6 +281,40 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
       Assert.ThrowsAsync<ArgumentNullException>(
         () => _accessValidator.HasRightsAsync(null, true, RightIds),
         "HttpContext does not contain UserId.");
+    }
+
+    [TestCase(true, true)]
+    [TestCase(true, false)]
+    [TestCase(false, false)]
+    public async Task ShouldReturnIsUserProjectManager(bool isSuccess, bool isManager)
+    {
+      ConfigureIsManagerResult(isSuccess, isManager);
+      
+      if (isManager)
+      {
+        Assert.IsTrue(await _accessValidator.IsManagerAsync(ManagerSource.Project, Guid.NewGuid()));
+      }
+      else
+      {
+        Assert.IsFalse(await _accessValidator.IsManagerAsync(ManagerSource.Project, Guid.NewGuid()));
+      }
+    }
+
+    [TestCase(true, true)]
+    [TestCase(true, false)]
+    [TestCase(false, false)]
+    public async Task ShouldReturnIsUserDepartmentManager(bool isSuccess, bool isManager)
+    {
+      ConfigureIsManagerResult(isSuccess, isManager);
+
+      if (isManager)
+      {
+        Assert.IsTrue(await _accessValidator.IsManagerAsync(ManagerSource.Department, Guid.NewGuid()));
+      }
+      else
+      {
+        Assert.IsFalse(await _accessValidator.IsManagerAsync(ManagerSource.Department, Guid.NewGuid()));
+      }
     }
   }
 }
