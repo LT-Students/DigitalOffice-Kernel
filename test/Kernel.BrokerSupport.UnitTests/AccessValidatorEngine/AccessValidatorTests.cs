@@ -35,7 +35,7 @@ namespace LT.DigitalOffice.Kernel.UnitTests.AccessValidatorEngine
     private Guid _userId;
     private IAccessValidator _accessValidator;
 
-    private int[] RightIds = new[] { 5, 4 };
+    private readonly int[] RightIds = new[] { 5, 4 };
 
     private void ConfigureIsAdminResult(bool isSuccess, bool body)
     {
