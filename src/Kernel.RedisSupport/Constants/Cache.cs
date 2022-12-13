@@ -9,5 +9,6 @@
     public const int Projects = 4;
     public const int Companies = 5;
     public const int Rights = 6;
+    public const int Tokens = 7;
   }
 }
