@@ -41,11 +41,11 @@ namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
         return default;
       }
 
-      var projectsFromCache = await _cache.GetDatabase(database).StringGetAsync(key);
+      RedisValue data = await _cache.GetDatabase(database).StringGetAsync(key);
 
-      if (projectsFromCache.HasValue)
+      if (data.HasValue)
       {
-        var item = JsonConvert.DeserializeObject<T>(projectsFromCache);
+        var item = JsonConvert.DeserializeObject<T>(data);
 
         return item;
       }
