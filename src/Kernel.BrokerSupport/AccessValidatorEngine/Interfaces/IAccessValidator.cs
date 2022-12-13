@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
 using LT.DigitalOffice.Kernel.Attributes;
 
 namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces
@@ -65,5 +66,13 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces
     /// <param name="rightIds">Ids of the rights.</param>
     /// <returns>True, if there's a UserId-RightId pair for at least one of requested rights in the database. False otherwise.</returns>
     Task<bool> HasAnyRightAsync(Guid? userId, bool includeIsAdminCheck, params int[] rightIds);
+
+    /// <summary>
+    /// Checks whether the user is manager or not.
+    /// </summary>
+    /// <param name="managerSource">Type of the entity.</param>
+    /// <param name="entityId">Id of the entity.</param>
+    /// <returns></returns>
+    Task<bool> IsManagerAsync(ManagerSource managerSource, Guid entityId);
   }
 }

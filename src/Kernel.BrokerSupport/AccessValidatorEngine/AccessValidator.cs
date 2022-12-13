@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
 using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
-using LT.DigitalOffice.Kernel.BrokerSupport.Broker;
+using LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
 using LT.DigitalOffice.Kernel.Extensions;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
@@ -15,25 +17,18 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
   {
     private readonly HttpContext _httpContext;
     private readonly ILogger<AccessValidator> _logger;
-    private readonly IRequestClient<ICheckUserRightsRequest> _requestClientCR;
-    private readonly IRequestClient<ICheckUserIsAdminRequest> _requestClientUS;
-    private readonly IRequestClient<ICheckUserAnyRightRequest> _requestClientAR;
+    private readonly IRequestClient<ICheckUserRightsRequest> _rcCheckRights;
+    private readonly IRequestClient<ICheckUserIsAdminRequest> _rcCheckAdmin;
+    private readonly IRequestClient<ICheckUserAnyRightRequest> _rcCheckAnyRights;
+    private readonly IRequestClient<ICheckProjectManagerRequest> _rcCheckProjectManager;
+    private readonly IRequestClient<ICheckDepartmentManagerRequest> _rcCheckDepartmentManager;
 
     private async Task<bool> IsUserAdminAsync(Guid userId)
     {
-      Response<IOperationResult<bool>> result =
-        await _requestClientUS.GetResponse<IOperationResult<bool>>(
-          ICheckUserIsAdminRequest.CreateObj(userId),
-          timeout: RequestTimeout.After(s: 2));
-
-      if (result.Message == null)
-      {
-        _logger.LogWarning("Failed to send request to UserService via the broker.");
-
-        return false;
-      }
-
-      return result.Message.Body;
+      return await RequestHandler.ProcessRequest<ICheckUserIsAdminRequest, bool>(
+      _rcCheckAdmin,
+      ICheckUserIsAdminRequest.CreateObj(userId),
+      logger: _logger);
     }
 
     /// <summary>
@@ -42,13 +37,17 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
     public AccessValidator(
       IHttpContextAccessor httpContextAccessor,
       ILogger<AccessValidator> logger,
-      IRequestClient<ICheckUserRightsRequest> requestClientCR,
-      IRequestClient<ICheckUserIsAdminRequest> requestClientUS,
-      IRequestClient<ICheckUserAnyRightRequest> requestClientAR)
+      IRequestClient<ICheckUserRightsRequest> rcCheckRights,
+      IRequestClient<ICheckUserIsAdminRequest> rcCheckAdmin,
+      IRequestClient<ICheckUserAnyRightRequest> rcCheckAnyRights,
+      IRequestClient<ICheckProjectManagerRequest> rcCheckProjectManager,
+      IRequestClient<ICheckDepartmentManagerRequest> rcCheckDepartmentManager)
     {
-      _requestClientCR = requestClientCR;
-      _requestClientUS = requestClientUS;
-      _requestClientAR = requestClientAR;
+      _rcCheckRights = rcCheckRights;
+      _rcCheckAdmin = rcCheckAdmin;
+      _rcCheckAnyRights = rcCheckAnyRights;
+      _rcCheckProjectManager = rcCheckProjectManager;
+      _rcCheckDepartmentManager = rcCheckDepartmentManager;
       _httpContext = httpContextAccessor.HttpContext;
       _logger = logger;
     }
@@ -82,18 +81,10 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
         return true;
       }
 
-      var result = await _requestClientCR.GetResponse<IOperationResult<bool>>(
+      return await RequestHandler.ProcessRequest<ICheckUserRightsRequest, bool>(
+        _rcCheckRights,
         ICheckUserRightsRequest.CreateObj(userId.Value, rightIds),
-        timeout: RequestTimeout.After(s: 2));
-
-      if (result.Message == null)
-      {
-        _logger.LogWarning("Failed to send request to CheckRightService via the broker.");
-
-        return false;
-      }
-
-      return result.Message.Body;
+        logger: _logger);
     }
 
     /// <inheritdoc/>
@@ -125,18 +116,10 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
         return true;
       }
 
-      var result = await _requestClientAR.GetResponse<IOperationResult<bool>>(
+      return await RequestHandler.ProcessRequest<ICheckUserAnyRightRequest, bool>(
+        _rcCheckAnyRights,
         ICheckUserAnyRightRequest.CreateObj(userId.Value, rightIds),
-        timeout: RequestTimeout.After(s: 2));
-
-      if (result.Message == null)
-      {
-        _logger.LogWarning("Failed to send request to CheckRightService via the broker.");
-
-        return false;
-      }
-
-      return result.Message.Body;
+        logger: _logger);
     }
 
     /// <inheritdoc/>
@@ -148,6 +131,27 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine
       }
 
       return await IsUserAdminAsync(userId.Value);
+    }
+
+    public async Task<bool> IsManagerAsync(ManagerSource managerSource, Guid entityId)
+    {
+      Guid userId = _httpContext.GetUserId();
+
+      switch (managerSource)
+      {
+        case ManagerSource.Project:
+          return await RequestHandler.ProcessRequest<ICheckProjectManagerRequest, bool>(
+            _rcCheckProjectManager,
+            ICheckProjectManagerRequest.CreateObj(userId, entityId),
+            logger: _logger);
+        case ManagerSource.Department:
+          return await RequestHandler.ProcessRequest<ICheckDepartmentManagerRequest, bool>(
+            _rcCheckDepartmentManager,
+            ICheckDepartmentManagerRequest.CreateObj(userId, entityId),
+            logger: _logger);
+        default: 
+          return false;
+      }
     }
   }
 }
