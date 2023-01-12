@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel</id>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.0.7 - Added 'AddEditRemoveLibrary' constant for Rights.
+      1.0.8 - Changed namespace in Validation Behaviour
 
       Previous versions:
+      1.0.7 - Added 'AddEditRemoveLibrary' constant for Rights.
       1.0.6 - Add new rights.
       1.0.5 - Update BaseFindFilter.
       1.0.4 - Update MediatR version to 11.0.0.
