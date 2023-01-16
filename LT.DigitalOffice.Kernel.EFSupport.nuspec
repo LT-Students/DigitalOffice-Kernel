@@ -18,7 +18,7 @@
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
-      <group targetFramework="net6.0">
+      <group targetFramework="net7.0">
         <dependency id="DigitalOffice.Kernel" version="1.0.0"/>
         <dependency id="Microsoft.EntityFrameworkCore" version="6.0.5" />
         <dependency id="Microsoft.EntityFrameworkCore.InMemory" version="6.0.5" />
@@ -28,7 +28,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.dll" target="lib\net6.0" />
-    <file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.pdb" target="lib\net6.0" />
+    <file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.dll" target="lib\net7.0" />
+    <file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.pdb" target="lib\net7.0" />
   </files>
 </package>
