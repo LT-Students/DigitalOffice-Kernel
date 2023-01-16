@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
 
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
 
     <AssemblyName>DigitalOffice.Kernel.ImageSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.ImageSupport</RootNamespace>

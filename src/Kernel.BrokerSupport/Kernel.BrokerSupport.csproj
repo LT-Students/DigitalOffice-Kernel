@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Version>1.0.3</Version>
 
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
 
     <AssemblyName>DigitalOffice.Kernel.BrokerSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.BrokerSupport</RootNamespace>
