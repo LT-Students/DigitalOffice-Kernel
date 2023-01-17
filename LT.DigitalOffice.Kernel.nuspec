@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel</id>
-    <version>1.0.8</version>
+    <version>1.0.9</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,22 +10,23 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.0.8 - Changed namespace in Validation Behaviour
+        1.0.9 - Update to .NET 7.0.
 
-      Previous versions:
-      1.0.7 - Added 'AddEditRemoveLibrary' constant for Rights.
-      1.0.6 - Add new rights.
-      1.0.5 - Update BaseFindFilter.
-      1.0.4 - Update MediatR version to 11.0.0.
-      1.0.3 - Add Validation Behaviour.
-      1.0.2 - Add ".webp" to ImageFormats.
-      1.0.1 - Add FindResult.
-      1.0.0 - Initial.
+        Previous versions:
+        1.0.8 - Changed namespace in Validation Behaviour
+        1.0.7 - Added 'AddEditRemoveLibrary' constant for Rights.
+        1.0.6 - Add new rights.
+        1.0.5 - Update BaseFindFilter.
+        1.0.4 - Update MediatR version to 11.0.0.
+        1.0.3 - Add Validation Behaviour.
+        1.0.2 - Add ".webp" to ImageFormats.
+        1.0.1 - Add FindResult.
+        1.0.0 - Initial.
     </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
-      <group targetFramework="net6.0">
+      <group targetFramework="net7.0">
         <dependency id="MediatR" version="11.0.0" />
         <dependency id="FluentValidation" version="11.2.2"/>
         <dependency id="FluentValidation.AspNetCore" version="11.2.2"/>
@@ -42,7 +43,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel\DigitalOffice.Kernel.dll" target="lib\net6.0" />
-    <file src="artifacts\kernel\DigitalOffice.Kernel.pdb" target="lib\net6.0" />
+    <file src="artifacts\kernel\DigitalOffice.Kernel.dll" target="lib\net7.0" />
+    <file src="artifacts\kernel\DigitalOffice.Kernel.pdb" target="lib\net7.0" />
   </files>
 </package>
