@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.0 - Update to .NET 7.0.
+        1.0.1 - Update to .NET 7.0.
 
         Previous versions:
         1.0.0 - Initial.
