@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
 
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
 
     <AssemblyName>DigitalOffice.Kernel.BrokerSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.BrokerSupport</RootNamespace>
@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DigitalOffice.Kernel" Version="1.0.6" />
+    <PackageReference Include="DigitalOffice.Kernel" Version="1.0.9" />
 
     <PackageReference Include="MassTransit" Version="7.1.7" />
     <PackageReference Include="MassTransit.AspNetCore" Version="7.1.7" />

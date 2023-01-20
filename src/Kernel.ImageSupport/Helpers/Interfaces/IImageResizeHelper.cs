@@ -77,5 +77,5 @@ public interface IImageResizeHelper
   /// <param name="isSuccess">A boolean.</param>
   /// <param name="resizedContent">Content of resized image.</param>
   /// <param name="extension">Extension of resized image.</param>
-  Task<(bool isSuccess, string resizedContent, string extension)> ResizeAsync(string inputBase64, string extension, int resizeMinValue = 150);
+  Task<(bool isSuccess, string resizedContent, string extension)> ResizeAsync(string inputBase64, string extension, int resizeMaxValue = 150);
 }
