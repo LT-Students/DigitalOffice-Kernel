@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
 
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
 
         <AssemblyName>DigitalOffice.Kernel.EndpointSupport</AssemblyName>
         <RootNamespace>DigitalOffice.Kernel.EndpointSupport</RootNamespace>
@@ -18,8 +18,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.0" />
-        <PackageReference Include="DigitalOffice.Kernel.BrokerSupport" Version="1.0.0" />
+        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.9" />
+        <PackageReference Include="DigitalOffice.Kernel.BrokerSupport" Version="1.0.4" />
     </ItemGroup>
 
 </Project>
