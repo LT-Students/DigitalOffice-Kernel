@@ -17,7 +17,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations
 
     public string BaseUrl => $"{RabbitMqProtocol}://{Host}";
 
-    private string host = Environment.GetEnvironmentVariable("RabbitMQHost");
+    private string host = Environment.GetEnvironmentVariable("RabbitMQ_Host");
     public string Host
     {
       get
@@ -26,14 +26,14 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations
       }
       init
       {
-        if (host is null)
+        if (string.IsNullOrWhiteSpace(host))
         {
           host = value;
         }
       }
     }
 
-    private string virtualHost = Environment.GetEnvironmentVariable("RabbitMQVirtualHost");
+    private string virtualHost = Environment.GetEnvironmentVariable("RabbitMQ_VirtualHost");
     public string VirtualHost
     {
       get
@@ -42,14 +42,14 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations
       }
       init
       {
-        if (virtualHost is null)
+        if (string.IsNullOrWhiteSpace(virtualHost))
         {
           virtualHost = value;
         }
       }
     }
 
-    private string username = Environment.GetEnvironmentVariable("RabbitMQUsername");
+    private string username = Environment.GetEnvironmentVariable("RabbitMQ_Username");
     public string Username
     {
       get
@@ -58,14 +58,14 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations
       }
       init
       {
-        if (username is null)
+        if (string.IsNullOrWhiteSpace(username))
         {
           username = value;
         }
       }
     }
 
-    private string password = Environment.GetEnvironmentVariable("RabbitMQPassword");
+    private string password = Environment.GetEnvironmentVariable("RabbitMQ_Password");
     public string Password
     {
       get
@@ -74,7 +74,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations
       }
       init
       {
-        if (password is null)
+        if (string.IsNullOrWhiteSpace(password))
         {
           password = value;
         }
