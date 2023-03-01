@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel.BrokerSupport</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <title>DigitalOffice.Kernel.BrokerSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.4 - Update to .NET 7.0.
+        1.0.5 - Addded MassTransitEndpointAttribute, added ConfigureMassTransit method to MassTransitExtensions.
 
         Previous versions:
+        1.0.4 - Update to .NET 7.0.
         1.0.3 - Add IsManagerAsync method to AccessValidator.
         1.0.2 - Add CheckUserAnyRight endpoint to BaseRabbitMqConfig.
         1.0.1 - Add method to check if user has any of specified rights.
@@ -26,7 +27,7 @@
         <dependency id="MassTransit.AspNetCore" version="7.1.7"/>
         <dependency id="MassTransit.Extensions.DependencyInjection" version="7.1.7"/>
         <dependency id="MassTransit.RabbitMQ" version="7.1.7"/>
-        <dependency id="DigitalOffice.Kernel" version="1.0.9" />
+        <dependency id="DigitalOffice.Kernel" version="1.0.10" />
       </group>
     </dependencies>
   </metadata>

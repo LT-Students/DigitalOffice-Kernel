@@ -1,8 +1,8 @@
-﻿using LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
+﻿using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
+using LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
 using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
-using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Models.TextTemplate;
 
-namespace LT.DigitalOffice.Kernel.EndpointSupport.Broker.Configurations
+namespace DigitalOffice.Kernel.BrokerSupport.Configurations
 {
   public class ExtendedBaseRabbitMqConfig : BaseRabbitMqConfig
   {
