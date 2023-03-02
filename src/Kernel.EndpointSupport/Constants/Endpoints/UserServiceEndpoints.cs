@@ -2,7 +2,7 @@
 
 namespace LT.DigitalOffice.Kernel.EndpointSupport.Constants.Endpoints
 {
-  static public class UserSrviceEndpoints
+  static public class UserServiceEndpoints
   {
     public const string AvatarCreateSt = "9abbc3ae4e854c9cbffb874d0c1f2453";
     public static Guid AvatarCreate = new Guid(AvatarCreateSt);

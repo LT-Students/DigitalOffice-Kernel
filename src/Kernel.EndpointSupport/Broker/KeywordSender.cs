@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DigitalOffice.Kernel.BrokerSupport.Configurations;
+using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels;
+using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
 using LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
-using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Configurations;
-using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Models.TextTemplate;
-using LT.DigitalOffice.Kernel.EndpointSupport.Broker.Models.TextTemplate.Models;
 using LT.DigitalOffice.Kernel.EndpointSupport.Helpers;
 using Microsoft.AspNetCore.Builder;
 
