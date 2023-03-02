@@ -23,27 +23,30 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Extensions
         return busConfigurator;
       }
 
-      List<PropertyInfo> propertyInfos = rabbitMqConfiguration.GetType().GetProperties()
+      List<PropertyInfo> requestEndpointsInfos = rabbitMqConfiguration.GetType().GetProperties()
         .Where(property => Attribute.IsDefined(property, typeof(AutoInjectRequestAttribute)))
         .ToList();
 
-      foreach (var property in propertyInfos)
+      foreach (PropertyInfo requestEndpointInfo in requestEndpointsInfos)
       {
-        AutoInjectRequestAttribute attr = property.GetCustomAttribute<AutoInjectRequestAttribute>();
+        AutoInjectRequestAttribute attr = requestEndpointInfo.GetCustomAttribute<AutoInjectRequestAttribute>();
 
-        string propertyValue = property.GetValue(rabbitMqConfiguration)?.ToString();
+        string requestEndpoint = requestEndpointInfo.GetValue(rabbitMqConfiguration)?.ToString();
 
-        if (string.IsNullOrEmpty(propertyValue))
+        if (string.IsNullOrEmpty(requestEndpoint))
         {
-          throw new ArgumentNullException(property.Name);
+          throw new ArgumentNullException(requestEndpointInfo.Name);
         }
 
-        Uri endpointUri = new Uri($"{rabbitMqConfiguration.BaseUrl}/{propertyValue}");
+        Uri endpointUri = new Uri($"{rabbitMqConfiguration.BaseUrl}/{requestEndpoint}");
 
         busConfigurator.AddRequestClient(attr.Model, endpointUri, attr.Timeout);
 
         Log.Information(
-          $"Found request type '{attr.Model.Name}'. Successfully injected with endpoint '{endpointUri}' and timeout '{attr.Timeout.Value}'.");
+          "Found request type {0}. Successfully injected with endpoint {1} and timeout {2}.",
+          attr.Model.Name,
+          requestEndpoint,
+          attr.Timeout.Value);
       }
 
       return busConfigurator;
@@ -59,22 +62,22 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Extensions
         throw new ArgumentNullException(nameof(rabbitMQConfiguration));
       }
 
-      List<(string queueName, Type consumerType)> endpoints = rabbitMQConfiguration.GetType().GetProperties()
+      List<(string queueName, Type consumerType)> receiveEndpoints = rabbitMQConfiguration.GetType().GetProperties()
         .Where(property => Attribute.IsDefined(property, typeof(MassTransitEndpointAttribute)))
-        .Select((endpoint) =>
+        .Select((receiveEndpoint) =>
         {
           (string queueName, Type consumerType) tuple =
-            (queueName: endpoint.GetValue(rabbitMQConfiguration)?.ToString(),
-            consumerType: endpoint.GetCustomAttribute<MassTransitEndpointAttribute>()?.ConsumerType);
+            (queueName: receiveEndpoint.GetValue(rabbitMQConfiguration)?.ToString(),
+            consumerType: receiveEndpoint.GetCustomAttribute<MassTransitEndpointAttribute>()?.ConsumerType);
 
           if (tuple.queueName is null)
           {
-            throw new ArgumentNullException(endpoint.Name);
+            throw new ArgumentNullException(receiveEndpoint.Name);
           }
 
           if (tuple.consumerType is null)
           {
-            throw new ArgumentNullException(nameof(tuple.consumerType), $"{nameof(tuple.consumerType)} is null in {endpoint.Name}.");
+            throw new ArgumentNullException(nameof(tuple.consumerType), $"{nameof(tuple.consumerType)} is null in {receiveEndpoint.Name}.");
           }
 
           return tuple;
@@ -83,6 +86,11 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Extensions
 
       services.AddMassTransit(busConfigurator =>
       {
+        foreach ((string queueName, Type consumerType) receiveEndpoint in receiveEndpoints)
+        {
+          busConfigurator.AddConsumer(receiveEndpoint.consumerType);
+        }
+
         busConfigurator.UsingRabbitMq((context, cfg) =>
         {
           cfg.Host(rabbitMQConfiguration.Host, rabbitMQConfiguration.VirtualHost, configurator =>
@@ -91,25 +99,19 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.Extensions
             configurator.Password(rabbitMQConfiguration.Password);
           });
 
-          foreach ((string queueName, Type consumerType) endpoint in endpoints)
+          //configurating receive endpoints
+          foreach ((string queueName, Type consumerType) receiveEndpoint in receiveEndpoints)
           {
-            busConfigurator.AddConsumer(endpoint.consumerType);
-            
-            Log.Information($"Consumer '{endpoint.consumerType}' was successfully added.");
-          }
-
-          foreach ((string queueName, Type consumerType) endpoint in endpoints)
-          {
-            cfg.ReceiveEndpoint(endpoint.queueName, ep =>
+            cfg.ReceiveEndpoint(receiveEndpoint.queueName, ep =>
             {
-              ep.ConfigureConsumer(context, endpoint.consumerType);
+              ep.ConfigureConsumer(context, receiveEndpoint.consumerType);
             });
-
-            Log.Information($"Recieve endpoint '{endpoint.queueName}' for consumer '{endpoint.consumerType}' was successfully configured.");
           }
         });
 
         busConfigurator.AddRequestClients(rabbitMQConfiguration);
+
+        services.AddMassTransitHostedService();
       });
     }
   }

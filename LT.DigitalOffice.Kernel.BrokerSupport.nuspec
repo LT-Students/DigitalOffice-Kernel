@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel.BrokerSupport</id>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <title>DigitalOffice.Kernel.BrokerSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,14 +10,15 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.5 - Addded MassTransitEndpointAttribute, added ConfigureMassTransit method to MassTransitExtensions.
+      1.0.6 - Update logging in MassTransitExtensions, added services.AddMassTransitHostedService() call to MassTransitExtensions.
 
-        Previous versions:
-        1.0.4 - Update to .NET 7.0.
-        1.0.3 - Add IsManagerAsync method to AccessValidator.
-        1.0.2 - Add CheckUserAnyRight endpoint to BaseRabbitMqConfig.
-        1.0.1 - Add method to check if user has any of specified rights.
-        1.0.0 - Initial.
+      Previous versions:
+      1.0.5 - Addded MassTransitEndpointAttribute, added ConfigureMassTransit method to MassTransitExtensions.
+      1.0.4 - Update to .NET 7.0.
+      1.0.3 - Add IsManagerAsync method to AccessValidator.
+      1.0.2 - Add CheckUserAnyRight endpoint to BaseRabbitMqConfig.
+      1.0.1 - Add method to check if user has any of specified rights.
+      1.0.0 - Initial.
     </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
