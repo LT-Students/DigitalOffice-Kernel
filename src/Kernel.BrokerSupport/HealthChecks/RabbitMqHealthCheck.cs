@@ -41,11 +41,14 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.HealthChecks
     {
       try
       {
+        string name = _rabbitMqConfig.Username ?? $"{_serviceInfoConfig.Name}_{_serviceInfoConfig.Id}";
+        string password = _rabbitMqConfig.Password ?? _serviceInfoConfig.Id;
+
         var factory = new ConnectionFactory
         {
           RequestedConnectionTimeout = TimeSpan.FromMilliseconds(200),
           Uri = new Uri(
-            $"amqp://{_serviceInfoConfig.Name}_{_serviceInfoConfig.Id}:{_serviceInfoConfig.Id}@{_rabbitMqConfig.Host}:5672/"),
+            $"amqp://{name}:{password}@{_rabbitMqConfig.Host}:5672/"),
         };
 
         var con = factory.CreateConnection();
