@@ -1,5 +1,4 @@
 ﻿using LT.DigitalOffice.Kernel.Configurations;
-using MediatR;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -42,7 +41,7 @@ namespace LT.DigitalOffice.Kernel.BrokerSupport.HealthChecks
     {
       try
       {
-        _logger.LogInformation(_rabbitMqConfig.Host);
+        _logger.LogInformation("Host: " + _rabbitMqConfig.Host);
 
         string name = _rabbitMqConfig.Username ?? $"{_serviceInfoConfig.Name}_{_serviceInfoConfig.Id}";
         string password = _rabbitMqConfig.Password ?? _serviceInfoConfig.Id;
