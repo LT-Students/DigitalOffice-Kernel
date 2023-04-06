@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel</id>
-    <version>1.0.10</version>
+    <version>1.0.11</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.10 - Fix dependencies.
+        1.0.11 - Remove BaseFindFilterValidator.
 
         Previous versions:
+        1.0.10 - Fix dependencies.
         1.0.9 - Update to .NET 7.0.
         1.0.8 - Changed namespace in Validation Behaviour
         1.0.7 - Added 'AddEditRemoveLibrary' constant for Rights.
