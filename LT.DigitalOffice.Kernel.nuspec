@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.11 - Remove BaseFindFilterValidator.
+        1.0.11 - Add TokenOperationFilter, replace EndWith() with Equals() in Base and Extended EditRequestValidators, remove BaseFindFilterValidator.
 
         Previous versions:
         1.0.10 - Fix dependencies.
@@ -41,6 +41,8 @@
         <dependency id="Microsoft.Extensions.Options.ConfigurationExtensions" version="7.0.0"/>
         <dependency id="System.Text.Json" version="7.0.1" />
         <dependency id="Serilog.AspNetCore" version="6.1.0" />
+        <dependency id="Swashbuckle.AspNetCore" version="6.5.0" />
+        <dependency id="Swashbuckle.AspNetCore.Annotations" version="6.5.0" />
       </group>
     </dependencies>
   </metadata>
