@@ -26,7 +26,7 @@ namespace LT.DigitalOffice.Kernel.Validators
       string propertyName,
       List<OperationType> types)
     {
-      if (RequestedOperation.path.EndsWith(propertyName, StringComparison.OrdinalIgnoreCase)
+      if (RequestedOperation.path.Equals(propertyName, StringComparison.OrdinalIgnoreCase)
         && !types.Contains(RequestedOperation.OperationType))
       {
         Context.AddFailure(propertyName, $"This operation {RequestedOperation.OperationType} is prohibited for {propertyName}");
@@ -39,7 +39,7 @@ namespace LT.DigitalOffice.Kernel.Validators
       Dictionary<Func<Operation<T>, bool>, string> predicates,
       CascadeMode mode = CascadeMode.Continue)
     {
-      if (!RequestedOperation.path.EndsWith(propertyName, StringComparison.OrdinalIgnoreCase)
+      if (!RequestedOperation.path.Equals(propertyName, StringComparison.OrdinalIgnoreCase)
         || !type(RequestedOperation.OperationType))
       {
         return;
@@ -65,7 +65,7 @@ namespace LT.DigitalOffice.Kernel.Validators
       Dictionary<Func<Operation<T>, Task<bool>>, string> predicates,
       CascadeMode mode = CascadeMode.Continue)
     {
-      if (!RequestedOperation.path.EndsWith(propertyName, StringComparison.OrdinalIgnoreCase)
+      if (!RequestedOperation.path.Equals(propertyName, StringComparison.OrdinalIgnoreCase)
         || !type(RequestedOperation.OperationType))
       {
         return;
