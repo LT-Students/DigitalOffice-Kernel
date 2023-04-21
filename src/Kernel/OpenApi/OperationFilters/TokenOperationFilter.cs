@@ -29,7 +29,8 @@ namespace DigitalOffice.Kernel.OpenApi.OperationFilters
         Name = ParameterName,
         In = ParameterLocation.Header,
         Schema = TokenScheme,
-        Description = @"Введите JWT токен авторизации.",
+        Description = "JWT access token.",
+        Required = true,
       });
     }
   }
