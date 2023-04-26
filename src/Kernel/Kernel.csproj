@@ -1,20 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.0.12</Version>
+      <Version>1.0.13</Version>
 
-        <TargetFramework>net7.0</TargetFramework>
+      <TargetFramework>net7.0</TargetFramework>
 
-        <AssemblyName>DigitalOffice.Kernel</AssemblyName>
-        <RootNamespace>DigitalOffice.Kernel</RootNamespace>
-        <IsPackable>true</IsPackable>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+      <AssemblyName>DigitalOffice.Kernel</AssemblyName>
+      <RootNamespace>DigitalOffice.Kernel</RootNamespace>
+      <IsPackable>true</IsPackable>
+      <IncludeSymbols>true</IncludeSymbols>
+      <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+      <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 
-        <GenerateDocumentationFile>false</GenerateDocumentationFile>
+      <GenerateDocumentationFile>true</GenerateDocumentationFile>
+      <NoWarn>$(NoWarn);1591</NoWarn>
+      <NoWarn>$(NoWarn);1573</NoWarn>
 
-        <OutputType>Library</OutputType>
+      <OutputType>Library</OutputType>
     </PropertyGroup>
 
     <ItemGroup>

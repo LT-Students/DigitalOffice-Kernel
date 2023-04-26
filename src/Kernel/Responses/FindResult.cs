@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DigitalOffice.Kernel.Responses;
 
 public class FindResult<T>
 {
   public List<T> Body { get; set; }
+
+  [Required]
   public int TotalCount { get; set; }
 
   public FindResult(
