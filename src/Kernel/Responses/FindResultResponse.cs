@@ -1,18 +1,21 @@
 ﻿using System.Collections.Generic;
-using LT.DigitalOffice.Kernel.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace LT.DigitalOffice.Kernel.Responses
 {
   public class FindResultResponse<T>
   {
     public List<T> Body { get; set; }
+
+    [Required]
     public int TotalCount { get; set; }
+
+    [Required]
     public List<string> Errors { get; set; } = new();
 
     public FindResultResponse(
       List<T> body = default,
       int totalCount = default,
-      OperationResultStatusType status = default,
       List<string> errors = default)
     {
       Body = body;

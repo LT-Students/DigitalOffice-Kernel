@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LT.DigitalOffice.Kernel.Requests
 {
@@ -7,14 +8,22 @@ namespace LT.DigitalOffice.Kernel.Requests
     private int skipCount;
     private int takeCount;
 
+    /// <summary>
+    /// Number of entries to skip.
+    /// </summary>
     [FromQuery(Name = "skipcount")]
+    [Required]
     public int SkipCount
     {
       get => skipCount;
       set => skipCount = value > -1 ? value : 0;
     }
 
+    /// <summary>
+    /// Number of entries to take.
+    /// </summary>
     [FromQuery(Name = "takecount")]
+    [Required]
     public int TakeCount 
     { 
       get => takeCount; 

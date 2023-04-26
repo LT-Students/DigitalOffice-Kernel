@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace LT.DigitalOffice.Kernel.Responses
 {
   public class OperationResultResponse<T>
   {
     public T Body { get; set; }
+
+    [Required]
     public List<string> Errors { get; set; } = new();
 
     public OperationResultResponse(
