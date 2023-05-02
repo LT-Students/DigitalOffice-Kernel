@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <Version>1.0.13</Version>
+      <Version>1.0.14</Version>
 
       <TargetFramework>net7.0</TargetFramework>
 
@@ -10,9 +10,10 @@
       <IsPackable>true</IsPackable>
       <IncludeSymbols>true</IncludeSymbols>
       <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-      <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-
+      
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
       <GenerateDocumentationFile>true</GenerateDocumentationFile>
+      
       <NoWarn>$(NoWarn);1591</NoWarn>
       <NoWarn>$(NoWarn);1573</NoWarn>
 
