@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <Version>1.0.14</Version>
+      <Version>1.0.15</Version>
 
       <TargetFramework>net7.0</TargetFramework>
 
@@ -16,6 +16,7 @@
       
       <NoWarn>$(NoWarn);1591</NoWarn>
       <NoWarn>$(NoWarn);1573</NoWarn>
+      <NoWarn>$(NoWarn);1570</NoWarn>
 
       <OutputType>Library</OutputType>
     </PropertyGroup>
