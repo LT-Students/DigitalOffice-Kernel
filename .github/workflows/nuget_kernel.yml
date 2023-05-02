@@ -34,9 +34,6 @@ jobs:
       - name: Test
         run: dotnet test test/Kernel.UnitTests/Kernel.UnitTests.csproj --no-restore --verbosity normal
 
-      - name: Pack nuget
-        run: nuget pack LT.DigitalOffice.Kernel.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel
-
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
 
