@@ -10,5 +10,6 @@
     public const int Companies = 5;
     public const int Rights = 6;
     public const int Tokens = 7;
+    public const int Skills = 8;
   }
 }
