@@ -18,6 +18,8 @@
   /// <value name="AddRemoveUsersRoles">Right grants admin rights to right service to work with users roles</value>
   /// <value name="AddEditRemoveWiki">Right grants admin rights to wiki service</value>
   /// <value name="AddEditRemoveLibrary">Right grants admin rights to library service</value>
+  /// <value name="AddEditRemoveCompanyStructure">Right grants admin rights to company structure service</value>
+  /// <value name="AddEditRemoveEvents">Right grants admin rights to event service</value>
   public static class Rights
   {
     public const int AddEditRemoveUsers = 1;
@@ -34,5 +36,7 @@
     public const int AddRemoveUsersRoles = 12;
     public const int AddEditRemoveWiki = 13;
     public const int AddEditRemoveLibrary = 14;
+    public const int AddEditRemoveCompanyStructure = 15;
+    public const int AddEditRemoveEvents = 16;
   }
 }
