@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel</id>
-    <version>1.0.17</version>
+    <version>1.0.18</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.17 - Add 'AddEditRemoveCompanyStructure' and 'AddEditRemoveEvents' constants for Rights.
+        1.0.18 - Add JsonPatchDocumentSchemaFilter, SwaggerConfiguration.
 
         Previous versions:
+        1.0.17 - Add 'AddEditRemoveCompanyStructure' and 'AddEditRemoveEvents' constants for Rights.
         1.0.16 - Fix BaseEditRequestValidator and ExtendedEditRequestValidator.
         1.0.15 - Remove pack step from nuget_kernel.yml
         1.0.14 - Set true to GeneratePackageOnBuild option.
