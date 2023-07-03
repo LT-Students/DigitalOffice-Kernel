@@ -4,9 +4,10 @@ namespace DigitalOffice.Kernel.Configurations;
 
 public class SwaggerConfiguration
 {
+  private string servicePath = Environment.GetEnvironmentVariable("Service_Path");
+
   public const string SectionName = "Swagger";
 
-  private string servicePath = Environment.GetEnvironmentVariable("Service_Path");
   public string ServicePath
   {
     get
