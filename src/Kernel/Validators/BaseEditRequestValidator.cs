@@ -13,7 +13,7 @@ namespace LT.DigitalOffice.Kernel.Validators
     protected Operation<T> RequestedOperation { get; set; }
     protected ValidationContext<JsonPatchDocument<T>> Context { get; set; }
 
-    protected void AddСorrectPaths(List<string> paths)
+    protected void AddCorrectPaths(List<string> paths)
     {
       if (paths.FirstOrDefault(p => p.Equals(RequestedOperation.path[1..], StringComparison.OrdinalIgnoreCase)) == null)
       {
@@ -21,7 +21,7 @@ namespace LT.DigitalOffice.Kernel.Validators
       }
     }
 
-    protected void AddСorrectOperations(
+    protected void AddCorrectOperations(
       string propertyName,
       List<OperationType> types)
     {
@@ -32,7 +32,7 @@ namespace LT.DigitalOffice.Kernel.Validators
       }
     }
 
-    protected void AddFailureForPropertyIf(
+    protected void AddFailureForPropertyIfNot(
       string propertyName,
       Func<OperationType, bool> type,
       Dictionary<Func<Operation<T>, bool>, string> predicates,
@@ -44,7 +44,7 @@ namespace LT.DigitalOffice.Kernel.Validators
         return;
       }
 
-      foreach (var validateDelegate in predicates)
+      foreach (KeyValuePair<Func<Operation<T>, bool>, string> validateDelegate in predicates)
       {
         if (!validateDelegate.Key(RequestedOperation))
         {
@@ -58,7 +58,7 @@ namespace LT.DigitalOffice.Kernel.Validators
       }
     }
 
-    protected async Task AddFailureForPropertyIfAsync(
+    protected async Task AddFailureForPropertyIfNotAsync(
       string propertyName,
       Func<OperationType, bool> type,
       Dictionary<Func<Operation<T>, Task<bool>>, string> predicates,
