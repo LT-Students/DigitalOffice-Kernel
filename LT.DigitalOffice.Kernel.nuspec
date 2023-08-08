@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel</id>
-    <version>1.0.20</version>
+    <version>1.0.21</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.0.20 - Rename AddFailureForPropertyIf to AddFailureForPropertyIfNot in BaseEditRequestValidator and ExtendedEditRequestValidator, set default value to takeCount in BaseFindFilter.
+      1.0.21 - Update libs.
 
       Previous versions:
+			1.0.20 - Rename AddFailureForPropertyIf to AddFailureForPropertyIfNot in BaseEditRequestValidator and ExtendedEditRequestValidator, set default value to takeCount in BaseFindFilter.
       1.0.19 - Add 'AddEditRemoveSurvey' constant for Rights.
       1.0.18 - Add JsonPatchDocumentSchemaFilter, SwaggerConfiguration.
       1.0.17 - Add 'AddEditRemoveCompanyStructure' and 'AddEditRemoveEvents' constants for Rights.
@@ -38,18 +39,13 @@
     <tags>DigitalOffice</tags>
     <dependencies>
       <group targetFramework="net7.0">
-        <dependency id="MediatR" version="11.1.0" />
-        <dependency id="FluentValidation" version="11.4.0"/>
-        <dependency id="FluentValidation.AspNetCore" version="11.2.2"/>
-        <dependency id="Microsoft.AspNetCore.Diagnostics" version="2.2.0"/>
-        <dependency id="Microsoft.AspNetCore.Diagnostics.Abstractions" version="2.2.0"/>
-        <dependency id="Microsoft.AspNetCore.Http" version="2.2.2"/>
-        <dependency id="Microsoft.AspNetCore.Http.Abstractions" version="2.2.0"/>
-        <dependency id="Microsoft.AspNetCore.Http.Extensions" version="2.2.0"/>
-        <dependency id="Microsoft.AspNetCore.JsonPatch" version="7.0.2"/>
+        <dependency id="MediatR" version="12.1.1" />
+        <dependency id="FluentValidation" version="11.6.0"/>
+        <dependency id="FluentValidation.AspNetCore" version="11.3.0"/>
+        <dependency id="Microsoft.AspNetCore.JsonPatch" version="7.0.9"/>
         <dependency id="Microsoft.Extensions.Options.ConfigurationExtensions" version="7.0.0"/>
-        <dependency id="System.Text.Json" version="7.0.1" />
-        <dependency id="Serilog.AspNetCore" version="6.1.0" />
+        <dependency id="System.Text.Json" version="7.0.3" />
+        <dependency id="Serilog.AspNetCore" version="7.0.0" />
         <dependency id="Swashbuckle.AspNetCore" version="6.5.0" />
         <dependency id="Swashbuckle.AspNetCore.Annotations" version="6.5.0" />
       </group>

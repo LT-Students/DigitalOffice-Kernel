@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace LT.DigitalOffice.Kernel.Helpers
+namespace LT.DigitalOffice.Kernel.Helpers;
+
+public static class PasswordHider
 {
-  public static class PasswordHider
+  public static string Hide(string line)
   {
-    public static string Hide(string line)
+    string password = "Password";
+
+    int index = line.IndexOf(password, 0, StringComparison.OrdinalIgnoreCase);
+
+    if (index != -1)
     {
-      string password = "Password";
+      string[] words = Regex.Split(line, @"[=,; ]");
 
-      int index = line.IndexOf(password, 0, StringComparison.OrdinalIgnoreCase);
-
-      if (index != -1)
+      for (int i = 0; i < words.Length; i++)
       {
-        string[] words = Regex.Split(line, @"[=,; ]");
-
-        for (int i = 0; i < words.Length; i++)
+        if (string.Equals(password, words[i], StringComparison.OrdinalIgnoreCase))
         {
-          if (string.Equals(password, words[i], StringComparison.OrdinalIgnoreCase))
-          {
-            line = line.Replace(words[i + 1], "****");
-            break;
-          }
+          line = line.Replace(words[i + 1], "****");
+          break;
         }
       }
-
-      return line;
     }
+
+    return line;
   }
 }
