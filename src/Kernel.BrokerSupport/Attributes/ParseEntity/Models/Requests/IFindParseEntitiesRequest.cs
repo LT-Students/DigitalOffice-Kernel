@@ -1,10 +1,9 @@
-﻿namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Requests
+﻿namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Requests;
+
+public interface IFindParseEntitiesRequest
 {
-  public interface IFindParseEntitiesRequest
+  static object CreateObj()
   {
-    static object CreateObj()
-    {
-      return new();
-    }
+    return new();
   }
 }

@@ -1,33 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.Broker
+namespace LT.DigitalOffice.Kernel.BrokerSupport.Broker;
+
+/// <summary>
+/// Wraps the returned object from a function in OperationResult.
+/// </summary>
+public static class OperationResultWrapper
 {
-  /// <summary>
-  /// Wraps the returned object from a function in OperationResult.
-  /// </summary>
-  public static class OperationResultWrapper
+  /// <typeparam name="T">Parameter of the called function.</typeparam>
+  /// <typeparam name="TRes">Response from the called function, which will be wrapped in OperationResult.</typeparam>
+  public static object CreateResponse<T, TRes>(Func<T, TRes> func, T arg)
   {
-    /// <typeparam name="T">Parameter of the called function.</typeparam>
-    /// <typeparam name="TRes">Response from the called function, which will be wrapped in OperationResult.</typeparam>
-    public static object CreateResponse<T, TRes>(Func<T, TRes> func, T arg)
+    try
     {
-      try
+      return new
       {
-        return new
-        {
-          Body = func.Invoke(arg),
-          IsSuccess = true
-        };
-      }
-      catch (Exception e)
+        Body = func.Invoke(arg),
+        IsSuccess = true
+      };
+    }
+    catch (Exception e)
+    {
+      return new
       {
-        return new
-        {
-          IsSuccess = false,
-          Errors = new List<string> { e.Message }
-        };
-      }
+        IsSuccess = false,
+        Errors = new List<string> { e.Message }
+      };
     }
   }
 }

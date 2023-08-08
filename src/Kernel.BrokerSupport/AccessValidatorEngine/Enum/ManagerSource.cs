@@ -1,8 +1,7 @@
-﻿namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum
+﻿namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
+
+public enum ManagerSource
 {
-  public enum ManagerSource
-  {
-    Project,
-    Department
-  }
+  Project,
+  Department
 }
