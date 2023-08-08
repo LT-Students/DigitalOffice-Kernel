@@ -1,44 +1,43 @@
-﻿using System;
+﻿using LT.DigitalOffice.Kernel.EndpointSupport.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using LT.DigitalOffice.Kernel.EndpointSupport.Attributes;
 
-namespace LT.DigitalOffice.Kernel.EndpointSupport.Helpers
+namespace LT.DigitalOffice.Kernel.EndpointSupport.Helpers;
+
+public static class KeywordCollector
 {
-  public static class KeywordCollector
+  public static Dictionary<Guid, List<string>> GetEndpointKeywords()
   {
-    public static Dictionary<Guid, List<string>> GetEndpointKeywords()
+    Dictionary<Guid, List<string>> endpointsKeywords = new();
+
+    IEnumerable<Type> assemblyTargets = AppDomain.CurrentDomain
+      .GetAssemblies()
+      .SingleOrDefault(assembly => assembly.GetName().Name.EndsWith("Models.Db"))
+      .ExportedTypes;
+
+    foreach (Type dbModel in assemblyTargets)
     {
-      Dictionary<Guid, List<string>> endpointsKeywords = new();
+      IEnumerable<PropertyInfo> properties = dbModel
+        .GetProperties()
+        .Where(p => p.GetCustomAttributes(typeof(KeywordAttribute), true).Any());
 
-      IEnumerable<Type> assemblyTargets = AppDomain.CurrentDomain
-        .GetAssemblies()
-        .SingleOrDefault(assembly => assembly.GetName().Name.EndsWith("Models.Db"))
-        .ExportedTypes;
-
-      foreach (Type dbModel in assemblyTargets)
+      foreach (PropertyInfo property in properties)
       {
-        IEnumerable<PropertyInfo> properties = dbModel
-          .GetProperties()
-          .Where(p => p.GetCustomAttributes(typeof(KeywordAttribute), true).Any());
-
-        foreach (PropertyInfo property in properties)
+        foreach (Guid endpointId in
+          (property.GetCustomAttributes(typeof(KeywordAttribute), true).FirstOrDefault() as KeywordAttribute).Endpoints)
         {
-          foreach (Guid endpointId in
-            (property.GetCustomAttributes(typeof(KeywordAttribute), true).FirstOrDefault() as KeywordAttribute).Endpoints)
+          if (!endpointsKeywords.ContainsKey(endpointId))
           {
-            if (!endpointsKeywords.ContainsKey(endpointId))
-            {
-              endpointsKeywords.Add(endpointId, new List<string>());
-            }
-
-            endpointsKeywords[endpointId].Add(property.Name);
+            endpointsKeywords.Add(endpointId, new List<string>());
           }
+
+          endpointsKeywords[endpointId].Add(property.Name);
         }
       }
-
-      return endpointsKeywords;
     }
+
+    return endpointsKeywords;
   }
 }
