@@ -1,14 +1,14 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Threading.Tasks;
-using DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
+﻿using DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
 using LT.DigitalOffice.Kernel.Constants;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using SixLabors.ImageSharp.Processing;
 using Svg;
+using System;
+using System.Drawing;
+using System.IO;
+using System.Threading.Tasks;
 using Image = SixLabors.ImageSharp.Image;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
 
