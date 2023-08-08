@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace LT.DigitalOffice.Kernel.Exceptions.Models
+namespace LT.DigitalOffice.Kernel.Exceptions.Models;
+
+public class ErrorResponse
 {
-  public class ErrorResponse
-  {
-    public DateTime UtcTime { get; set; }
-    public string Header { get; set; }
-    public string Message { get; set; }
-  }
+  public DateTime UtcTime { get; set; }
+  public string Header { get; set; }
+  public string Message { get; set; }
 }

@@ -1,33 +1,32 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-namespace LT.DigitalOffice.Kernel.Requests
+namespace LT.DigitalOffice.Kernel.Requests;
+
+public record BaseFindFilter
 {
-  public record BaseFindFilter
+  private int skipCount;
+  private int takeCount = 1;
+
+  /// <summary>
+  /// Number of entries to skip.
+  /// </summary>
+  [FromQuery(Name = "skipcount")]
+  [Required]
+  public int SkipCount
   {
-    private int skipCount;
-    private int takeCount = 1;
+    get => skipCount;
+    set => skipCount = value > -1 ? value : 0;
+  }
 
-    /// <summary>
-    /// Number of entries to skip.
-    /// </summary>
-    [FromQuery(Name = "skipcount")]
-    [Required]
-    public int SkipCount
-    {
-      get => skipCount;
-      set => skipCount = value > -1 ? value : 0;
-    }
-
-    /// <summary>
-    /// Number of entries to take.
-    /// </summary>
-    [FromQuery(Name = "takecount")]
-    [Required]
-    public int TakeCount 
-    { 
-      get => takeCount; 
-      set => takeCount = value > 0 ? value : 1;
-    }
+  /// <summary>
+  /// Number of entries to take.
+  /// </summary>
+  [FromQuery(Name = "takecount")]
+  [Required]
+  public int TakeCount
+  {
+    get => takeCount;
+    set => takeCount = value > 0 ? value : 1;
   }
 }

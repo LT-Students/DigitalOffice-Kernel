@@ -1,9 +1,8 @@
 ﻿using System;
 
-namespace LT.DigitalOffice.Kernel.Attributes
+namespace LT.DigitalOffice.Kernel.Attributes;
+
+[AttributeUsage(AttributeTargets.Class)]
+public class TrimAttribute : Attribute
 {
-  [AttributeUsage(AttributeTargets.Class)]
-  public class TrimAttribute : Attribute
-  {
-  }
 }

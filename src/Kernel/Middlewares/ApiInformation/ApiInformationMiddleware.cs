@@ -1,50 +1,49 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
-namespace LT.DigitalOffice.Kernel.Middlewares.ApiInformation
+namespace LT.DigitalOffice.Kernel.Middlewares.ApiInformation;
+
+public class ApiInformationMiddleware
 {
-  public class ApiInformationMiddleware
+  private readonly string _endpoint;
+  private readonly RequestDelegate _next;
+
+  public ApiInformationMiddleware(
+    RequestDelegate next,
+    string endpoint)
   {
-    private readonly string _endpoint;
-    private readonly RequestDelegate _next;
-
-    public ApiInformationMiddleware(
-      RequestDelegate next,
-      string endpoint)
+    if (string.IsNullOrEmpty(endpoint))
     {
-      if (string.IsNullOrEmpty(endpoint))
-      {
-        throw new ArgumentNullException(nameof(endpoint));
-      }
-
-      _endpoint = endpoint;
-      _next = next;
+      throw new ArgumentNullException(nameof(endpoint));
     }
 
-    public async Task InvokeAsync(HttpContext httpContext)
-    {
-      if (httpContext == null)
-      {
-        throw new ArgumentNullException(nameof(httpContext));
-      }
+    _endpoint = endpoint;
+    _next = next;
+  }
 
-      if (string.Equals(httpContext.Request.Method, "GET", StringComparison.OrdinalIgnoreCase) &&
-        string.Equals(httpContext.Request.Path, _endpoint, StringComparison.OrdinalIgnoreCase))
-      {
-        httpContext.Response.ContentType = "application/json";
-        await httpContext.Response.WriteAsync(JsonSerializer.Serialize(
-          BaseApiInfo.GetResponse(),
-          new JsonSerializerOptions
-          {
-            WriteIndented = true
-          }));
-      }
-      else
-      {
-        await _next.Invoke(httpContext);
-      }
+  public async Task InvokeAsync(HttpContext httpContext)
+  {
+    if (httpContext == null)
+    {
+      throw new ArgumentNullException(nameof(httpContext));
+    }
+
+    if (string.Equals(httpContext.Request.Method, "GET", StringComparison.OrdinalIgnoreCase) &&
+      string.Equals(httpContext.Request.Path, _endpoint, StringComparison.OrdinalIgnoreCase))
+    {
+      httpContext.Response.ContentType = "application/json";
+      await httpContext.Response.WriteAsync(JsonSerializer.Serialize(
+        BaseApiInfo.GetResponse(),
+        new JsonSerializerOptions
+        {
+          WriteIndented = true
+        }));
+    }
+    else
+    {
+      await _next.Invoke(httpContext);
     }
   }
 }

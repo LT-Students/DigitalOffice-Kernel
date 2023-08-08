@@ -1,16 +1,15 @@
-﻿using System;
-using LT.DigitalOffice.Kernel.Enums;
+﻿using LT.DigitalOffice.Kernel.Enums;
+using System;
 
-namespace LT.DigitalOffice.Kernel.Attributes
+namespace LT.DigitalOffice.Kernel.Attributes;
+
+[AttributeUsage(AttributeTargets.Interface)]
+public class AutoInjectAttribute : Attribute
 {
-  [AttributeUsage(AttributeTargets.Interface)]
-  public class AutoInjectAttribute : Attribute
-  {
-    public InjectType InjectType { get; init; }
+  public InjectType InjectType { get; init; }
 
-    public AutoInjectAttribute(InjectType type = InjectType.Transient)
-    {
-      InjectType = type;
-    }
+  public AutoInjectAttribute(InjectType type = InjectType.Transient)
+  {
+    InjectType = type;
   }
 }

@@ -1,10 +1,9 @@
-﻿namespace LT.DigitalOffice.Kernel.Enums
+﻿namespace LT.DigitalOffice.Kernel.Enums;
+
+public enum InjectObjectType
 {
-  public enum InjectObjectType
-  {
-    Command,
-    Repository,
-    Mapper,
-    Validator
-  }
+  Command,
+  Repository,
+  Mapper,
+  Validator
 }

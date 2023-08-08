@@ -1,9 +1,8 @@
-﻿namespace LT.DigitalOffice.Kernel.Enums
+﻿namespace LT.DigitalOffice.Kernel.Enums;
+
+public enum InjectType
 {
-  public enum InjectType
-  {
-    Transient,
-    Scoped,
-    Singletone
-  }
+  Transient,
+  Scoped,
+  Singletone
 }

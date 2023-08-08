@@ -1,15 +1,14 @@
-﻿namespace LT.DigitalOffice.Kernel.Constants
+﻿namespace LT.DigitalOffice.Kernel.Constants;
+
+public static class ConstStrings
 {
-  public static class ConstStrings
-  {
-    public const string UserId = "UserId";
+  public const string UserId = "UserId";
 
-    public const string Email = "Email";
+  public const string Email = "Email";
 
-    public const string Password = "Password";
+  public const string Password = "Password";
 
-    public const string Host = "Host";
+  public const string Host = "Host";
 
-    public const string Port = "Port";
-  }
+  public const string Port = "Port";
 }
