@@ -1,71 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
+﻿using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
+namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
+
+public class RedisHelper : IRedisHelper
 {
-  public class RedisHelper : IRedisHelper
+  private readonly IConnectionMultiplexer _cache;
+
+  public RedisHelper(
+    IConnectionMultiplexer cache)
   {
-    private readonly IConnectionMultiplexer _cache;
+    _cache = cache;
+  }
 
-    public RedisHelper(
-      IConnectionMultiplexer cache)
+  public Task<bool> CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime)
+  {
+    if (!_cache.IsConnected)
     {
-      _cache = cache;
+      return Task.FromResult(false);
     }
 
-    public Task<bool> CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime)
+    if (lifeTime.HasValue)
     {
-      if (!_cache.IsConnected)
-      {
-        return Task.FromResult(false);
-      }
-
-      if (lifeTime.HasValue)
-      {
-        return _cache.GetDatabase(database).StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
-      }
-      else
-      {
-        return _cache.GetDatabase(database).StringSetAsync(key, JsonConvert.SerializeObject(item));
-      }
+      return _cache.GetDatabase(database).StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
     }
-
-    public async Task<T> GetAsync<T>(int database, string key)
+    else
     {
-      if (!_cache.IsConnected)
-      {
-        return default;
-      }
+      return _cache.GetDatabase(database).StringSetAsync(key, JsonConvert.SerializeObject(item));
+    }
+  }
 
-      RedisValue data = await _cache.GetDatabase(database).StringGetAsync(key);
-
-      if (data.HasValue)
-      {
-        var item = JsonConvert.DeserializeObject<T>(data);
-
-        return item;
-      }
-
+  public async Task<T> GetAsync<T>(int database, string key)
+  {
+    if (!_cache.IsConnected)
+    {
       return default;
     }
 
-    public async Task<bool> RemoveAsync(List<(int database, string key)> elements)
+    RedisValue data = await _cache.GetDatabase(database).StringGetAsync(key);
+
+    if (data.HasValue)
     {
-      if (!_cache.IsConnected || elements is null)
-      {
-        return false;
-      }
+      T item = JsonConvert.DeserializeObject<T>(data);
 
-      foreach ((int database, string key) element in elements)
-      {
-        await _cache.GetDatabase(element.database).KeyDeleteAsync(element.key);
-      }
-
-      return true;
+      return item;
     }
+
+    return default;
+  }
+
+  public async Task<bool> RemoveAsync(List<(int database, string key)> elements)
+  {
+    if (!_cache.IsConnected || elements is null)
+    {
+      return false;
+    }
+
+    foreach ((int database, string key) element in elements)
+    {
+      await _cache.GetDatabase(element.database).KeyDeleteAsync(element.key);
+    }
+
+    return true;
   }
 }
