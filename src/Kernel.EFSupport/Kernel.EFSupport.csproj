@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <Version>1.0.1</Version>
-        
+        <Version>1.0.2</Version>
+
         <TargetFramework>net7.0</TargetFramework>
-        
+
         <AssemblyName>DigitalOffice.Kernel.EFSupport</AssemblyName>
         <RootNamespace>DigitalOffice.Kernel.EFSupport</RootNamespace>
         <IsPackable>true</IsPackable>
@@ -15,13 +15,13 @@
 
         <OutputType>Library</OutputType>
     </PropertyGroup>
-    
+
     <ItemGroup>
-        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.9" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.2" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
+        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.21" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
     </ItemGroup>
 
 </Project>

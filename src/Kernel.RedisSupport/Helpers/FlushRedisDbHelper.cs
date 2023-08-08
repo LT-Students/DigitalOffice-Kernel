@@ -1,33 +1,32 @@
-﻿using System;
-using System.Net;
-using Serilog;
+﻿using Serilog;
 using StackExchange.Redis;
+using System;
+using System.Net;
 
-namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers
+namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
+
+public static class FlushRedisDbHelper
 {
-  public static class FlushRedisDbHelper
+  public static void FlushDatabase(
+    string redisConnStr,
+    int database)
   {
-    public static void FlushDatabase(
-      string redisConnStr,
-      int database)
+    try
     {
-      try
+      using (ConnectionMultiplexer cm = ConnectionMultiplexer.Connect(redisConnStr + ",allowAdmin=true,connectRetry=1,connectTimeout=2000"))
       {
-        using (ConnectionMultiplexer cm = ConnectionMultiplexer.Connect(redisConnStr + ",allowAdmin=true,connectRetry=1,connectTimeout=2000"))
-        {
-          EndPoint[] endpoints = cm.GetEndPoints(true);
+        EndPoint[] endpoints = cm.GetEndPoints(true);
 
-          foreach (EndPoint endpoint in endpoints)
-          {
-            IServer server = cm.GetServer(endpoint);
-            server.FlushDatabase(database);
-          }
+        foreach (EndPoint endpoint in endpoints)
+        {
+          IServer server = cm.GetServer(endpoint);
+          server.FlushDatabase(database);
         }
       }
-      catch (Exception ex)
-      {
-        Log.Error($"Error while flushing Redis database №{database}. Text: {ex.Message}");
-      }
+    }
+    catch (Exception ex)
+    {
+      Log.Error($"Error while flushing Redis database №{database}. Text: {ex.Message}");
     }
   }
 }

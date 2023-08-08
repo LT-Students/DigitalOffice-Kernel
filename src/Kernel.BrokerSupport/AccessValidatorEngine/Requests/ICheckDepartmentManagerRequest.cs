@@ -1,20 +1,19 @@
 ﻿using System;
 
-namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests
+namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+
+public interface ICheckDepartmentManagerRequest
 {
-  public interface ICheckDepartmentManagerRequest
+  Guid UserId { get; }
+
+  Guid DepartmentId { get; }
+
+  static object CreateObj(Guid userId, Guid departmentId)
   {
-    Guid UserId { get; }
-
-    Guid DepartmentId { get; }
-
-    static object CreateObj(Guid userId, Guid departmentId)
+    return new
     {
-      return new
-      {
-        UserId = userId,
-        DepartmentId = departmentId
-      };
-    }
+      UserId = userId,
+      DepartmentId = departmentId
+    };
   }
 }

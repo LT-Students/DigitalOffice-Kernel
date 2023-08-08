@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using LT.DigitalOffice.Kernel.Attributes;
+﻿using LT.DigitalOffice.Kernel.Attributes;
+using System.Threading.Tasks;
 
 namespace DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
 
 /// <summary>
 /// Represents interface for a helper.
-/// Provides methods for resezing images.
+/// Provides methods for resizing images.
 /// </summary>
 [AutoInject]
 public interface IImageResizeHelper

@@ -2,11 +2,10 @@
 using LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
 using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
 
-namespace DigitalOffice.Kernel.BrokerSupport.Configurations
+namespace DigitalOffice.Kernel.BrokerSupport.Configurations;
+
+public class ExtendedBaseRabbitMqConfig : BaseRabbitMqConfig
 {
-  public class ExtendedBaseRabbitMqConfig : BaseRabbitMqConfig
-  {
-    [AutoInjectRequest(typeof(ICreateKeywordsRequest))]
-    public virtual string CreateKeywordsEndpoint { get; init; }
-  }
+  [AutoInjectRequest(typeof(ICreateKeywordsRequest))]
+  public virtual string CreateKeywordsEndpoint { get; init; }
 }
