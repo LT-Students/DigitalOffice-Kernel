@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DigitalOffice.Kernel.EndpointSupport</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>DigitalOffice.Kernel.EndpointSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.3 - Remove broker models to BrokerSupport.
+        1.0.4 - Update libs.
 
         Previous versions:
+				1.0.3 - Remove broker models to BrokerSupport
         1.0.2 - Update to .NET 7.0.
         1.0.1 - Update reference on BrokerSupport.
         1.0.0 - Initial.
@@ -22,10 +23,10 @@
     <tags>DigitalOffice</tags>
     <dependencies>
       <group targetFramework="net7.0">
-          
-        <dependency id="DigitalOffice.Kernel" version="1.0.10" />
-        <dependency id="DigitalOffice.Kernel.BrokerSupport" version="1.0.6" />
-          
+
+        <dependency id="DigitalOffice.Kernel" version="1.0.21" />
+        <dependency id="DigitalOffice.Kernel.BrokerSupport" version="1.0.8" />
+
       </group>
     </dependencies>
   </metadata>
