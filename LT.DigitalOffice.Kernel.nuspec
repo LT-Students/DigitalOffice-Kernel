@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      1.0.21 - Update libs.
+      1.0.22 - Add AddEditRemoveHrProcesses right.
 
       Previous versions:
+			1.0.21 - Update libs.
 			1.0.20 - Rename AddFailureForPropertyIf to AddFailureForPropertyIfNot in BaseEditRequestValidator and ExtendedEditRequestValidator, set default value to takeCount in BaseFindFilter.
       1.0.19 - Add 'AddEditRemoveSurvey' constant for Rights.
       1.0.18 - Add JsonPatchDocumentSchemaFilter, SwaggerConfiguration.
