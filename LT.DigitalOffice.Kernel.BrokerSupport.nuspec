@@ -1,39 +1,40 @@
 <?xml version="1.0"?>
 <package >
-  <metadata>
-    <id>DigitalOffice.Kernel.BrokerSupport</id>
-    <version>1.0.8</version>
-    <title>DigitalOffice.Kernel.BrokerSupport</title>
-    <authors>Lanit-Tercom Digital Office Team</authors>
-    <owners>Lanit-Tercom Digital Office</owners>
-    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Library used in the Digital Office project.</description>
-    <releaseNotes>
-        1.0.8 - Update libs.
+	<metadata>
+		<id>DigitalOffice.Kernel.BrokerSupport</id>
+		<version>1.0.9</version>
+		<title>DigitalOffice.Kernel.BrokerSupport</title>
+		<authors>Lanit-Tercom Digital Office Team</authors>
+		<owners>Lanit-Tercom Digital Office</owners>
+		<projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Library used in the Digital Office project.</description>
+		<releaseNotes>
+			1.0.9 - add timeout parameter to RequestHandler.
 
-        Previous versions:
-				1.0.7 - Update Uri in RabbitMqHealthCheck.
-        1.0.6 - Update logging in MassTransitExtensions, added services.AddMassTransitHostedService() call to MassTransitExtensions.
-        1.0.5 - Addded MassTransitEndpointAttribute, added ConfigureMassTransit method to MassTransitExtensions.
-        1.0.4 - Update to .NET 7.0.
-        1.0.3 - Add IsManagerAsync method to AccessValidator.
-        1.0.2 - Add CheckUserAnyRight endpoint to BaseRabbitMqConfig.
-        1.0.1 - Add method to check if user has any of specified rights.
-        1.0.0 - Initial.
-    </releaseNotes>
-    <copyright>Copyright © LT Digital Office</copyright>
-    <tags>DigitalOffice</tags>
-    <dependencies>
-      <group targetFramework="net7.0">
-        <dependency id="MassTransit" version="8.0.16"/>
-        <dependency id="MassTransit.RabbitMQ" version="8.0.16"/>
-        <dependency id="DigitalOffice.Kernel" version="1.0.21" />
-      </group>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="artifacts\kernel_broker\DigitalOffice.Kernel.BrokerSupport.dll" target="lib\net7.0" />
-    <file src="artifacts\kernel_broker\DigitalOffice.Kernel.BrokerSupport.pdb" target="lib\net7.0" />
-  </files>
+			Previous versions:
+			1.0.8 - Update libs.
+			1.0.7 - Update Uri in RabbitMqHealthCheck.
+			1.0.6 - Update logging in MassTransitExtensions, added services.AddMassTransitHostedService() call to MassTransitExtensions.
+			1.0.5 - Addded MassTransitEndpointAttribute, added ConfigureMassTransit method to MassTransitExtensions.
+			1.0.4 - Update to .NET 7.0.
+			1.0.3 - Add IsManagerAsync method to AccessValidator.
+			1.0.2 - Add CheckUserAnyRight endpoint to BaseRabbitMqConfig.
+			1.0.1 - Add method to check if user has any of specified rights.
+			1.0.0 - Initial.
+		</releaseNotes>
+		<copyright>Copyright © LT Digital Office</copyright>
+		<tags>DigitalOffice</tags>
+		<dependencies>
+			<group targetFramework="net7.0">
+				<dependency id="MassTransit" version="8.0.16"/>
+				<dependency id="MassTransit.RabbitMQ" version="8.0.16"/>
+				<dependency id="DigitalOffice.Kernel" version="1.0.21" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="artifacts\kernel_broker\DigitalOffice.Kernel.BrokerSupport.dll" target="lib\net7.0" />
+		<file src="artifacts\kernel_broker\DigitalOffice.Kernel.BrokerSupport.pdb" target="lib\net7.0" />
+	</files>
 </package>

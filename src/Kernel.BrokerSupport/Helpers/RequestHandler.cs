@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
@@ -19,13 +20,18 @@ public static class RequestHandler
     this IRequestClient<U> requestClient,
     object request,
     List<string> errors = null,
-    ILogger logger = null) where U : class
+    ILogger logger = null,
+    int? timeout = 5000,
+    CancellationToken ct = default) where U : class
   {
     IOperationResult<T> result = default;
 
     try
     {
-      Response<IOperationResult<T>> response = await requestClient.GetResponse<IOperationResult<T>>(request, timeout: 5000);
+      Response<IOperationResult<T>> response = await requestClient.GetResponse<IOperationResult<T>>(
+        values: request,
+        cancellationToken: ct,
+        timeout: RequestTimeout.After(ms: timeout));
 
       if (!response.IsSuccess())
       {
