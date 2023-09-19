@@ -6,7 +6,7 @@ namespace LT.DigitalOffice.Kernel.Requests;
 public record BaseFindFilter
 {
   private int skipCount;
-  private int takeCount = 1;
+  private int takeCount = 0;
 
   /// <summary>
   /// Number of entries to skip.
@@ -27,6 +27,6 @@ public record BaseFindFilter
   public int TakeCount
   {
     get => takeCount;
-    set => takeCount = value > 0 ? value : 1;
+    set => takeCount = value > -1 ? value : 0;
   }
 }
