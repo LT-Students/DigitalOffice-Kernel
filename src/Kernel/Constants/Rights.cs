@@ -22,6 +22,9 @@
 /// <value name="AddEditRemoveEvents">Right grants admin rights to event service</value>
 /// <value name="AddEditRemoveSurvey">Right grants admin rights to survey service</value>
 /// <value name="AddEditRemoveHrProcesses">Right grants admin rights to HR processes automation</value>
+/// <value name="AddEditRemoveClaims">Right grants rights to manage claims as a department worker</value>
+/// <value name="AddEditRemoveClaimsManager">Right grants rights to manage claims as a manager</value>
+/// <value name="AddEditRemoveClaimsDepartmentManager">Right grants rights to manage claims as a department manager</value>
 public static class Rights
 {
   public const int AddEditRemoveUsers = 1;
@@ -42,4 +45,7 @@ public static class Rights
   public const int AddEditRemoveEvents = 16;
   public const int AddEditRemoveSurvey = 17;
   public const int AddEditRemoveHrProcesses = 18;
+  public const int AddEditRemoveClaims = 19;
+  public const int AddEditRemoveClaimsManager = 20;
+  public const int AddEditRemoveClaimsDepartmentManager = 21;
 }
