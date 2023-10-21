@@ -30,7 +30,7 @@
 		</dependencies>
 	</metadata>
 	<files>
-		<file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.dll" target="lib\net7.0" />
-		<file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.pdb" target="lib\net7.0" />
+		<file src="artifacts\kernel_ef\LTDO.Kernel.EFSupport.dll" target="lib\net7.0" />
+		<file src="artifacts\kernel_ef\LTDO.Kernel.EFSupport.pdb" target="lib\net7.0" />
 	</files>
 </package>

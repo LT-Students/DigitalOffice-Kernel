@@ -32,7 +32,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_redis\DigitalOffice.Kernel.RedisSupport.dll" target="lib\net7.0" />
-    <file src="artifacts\kernel_redis\DigitalOffice.Kernel.RedisSupport.pdb" target="lib\net7.0" />
+    <file src="artifacts\kernel_redis\LTDO.Kernel.RedisSupport.dll" target="lib\net7.0" />
+    <file src="artifacts\kernel_redis\LTDO.Kernel.RedisSupport.pdb" target="lib\net7.0" />
   </files>
 </package>
