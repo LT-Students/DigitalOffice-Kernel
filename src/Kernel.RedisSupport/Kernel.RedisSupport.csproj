@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.7</Version>
+    <Version>1.0.8</Version>
 
     <TargetFramework>net7.0</TargetFramework>
 
-    <AssemblyName>DigitalOffice.Kernel.RedisSupport</AssemblyName>
+    <AssemblyName>LTDO.Kernel.RedisSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.RedisSupport</RootNamespace>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>
@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DigitalOffice.Kernel" Version="1.0.21" />
+    <PackageReference Include="LTDO.Kernel" Version="1.0.25" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.122" />
   </ItemGroup>
 
