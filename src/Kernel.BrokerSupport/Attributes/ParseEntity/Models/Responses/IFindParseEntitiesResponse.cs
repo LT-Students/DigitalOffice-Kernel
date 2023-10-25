@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Responses;
+namespace LTDO.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Responses;
 
 public interface IFindParseEntitiesResponse
 {

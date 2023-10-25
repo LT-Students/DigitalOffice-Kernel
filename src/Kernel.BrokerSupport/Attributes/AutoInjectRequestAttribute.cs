@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using System;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
+namespace LTDO.Kernel.BrokerSupport.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class AutoInjectRequestAttribute : Attribute

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigitalOffice.Kernel.BrokerSupport.Attributes;
+namespace LTDO.Kernel.BrokerSupport.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class MassTransitEndpointAttribute : Attribute

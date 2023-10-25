@@ -3,7 +3,7 @@ using StackExchange.Redis;
 using System;
 using System.Net;
 
-namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
+namespace LTDO.Kernel.RedisSupport.Helpers;
 
 public static class FlushRedisDbHelper
 {

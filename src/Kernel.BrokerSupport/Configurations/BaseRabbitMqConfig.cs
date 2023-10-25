@@ -1,10 +1,9 @@
-﻿using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
-using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
-using LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
-using LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
+﻿using LTDO.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+using LTDO.Kernel.BrokerSupport.Attributes;
+using LTDO.Kernel.BrokerSupport.Middlewares.Token;
 using System;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
+namespace LTDO.Kernel.BrokerSupport.Configurations;
 
 /// <summary>
 /// Base configuration class for RabbitMQ.
@@ -17,66 +16,66 @@ public class BaseRabbitMqConfig
 
   public string BaseUrl => $"{RabbitMqProtocol}://{Host}";
 
-  private string host = Environment.GetEnvironmentVariable("RabbitMQ_Host");
+  private string _host = Environment.GetEnvironmentVariable("RabbitMQ_Host");
   public string Host
   {
     get
     {
-      return host;
+      return _host;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(host))
+      if (string.IsNullOrWhiteSpace(_host))
       {
-        host = value;
+        _host = value;
       }
     }
   }
 
-  private string virtualHost = Environment.GetEnvironmentVariable("RabbitMQ_VirtualHost");
+  private string _virtualHost = Environment.GetEnvironmentVariable("RabbitMQ_VirtualHost");
   public string VirtualHost
   {
     get
     {
-      return virtualHost;
+      return _virtualHost;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(virtualHost))
+      if (string.IsNullOrWhiteSpace(_virtualHost))
       {
-        virtualHost = value;
+        _virtualHost = value;
       }
     }
   }
 
-  private string username = Environment.GetEnvironmentVariable("RabbitMQ_Username");
+  private string _username = Environment.GetEnvironmentVariable("RabbitMQ_Username");
   public string Username
   {
     get
     {
-      return username;
+      return _username;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(username))
+      if (string.IsNullOrWhiteSpace(_username))
       {
-        username = value;
+        _username = value;
       }
     }
   }
 
-  private string password = Environment.GetEnvironmentVariable("RabbitMQ_Password");
+  private string _password = Environment.GetEnvironmentVariable("RabbitMQ_Password");
   public string Password
   {
     get
     {
-      return password;
+      return _password;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(password))
+      if (string.IsNullOrWhiteSpace(_password))
       {
-        password = value;
+        _password = value;
       }
     }
   }

@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>LTDO.Kernel.EFSupport</id>
-		<version>1.0.3</version>
+		<version>1.0.4</version>
 		<title>LTDO.Kernel.EFSupport</title>
 		<authors>Lanit-Tercom Digital Office Team</authors>
 		<owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library used in the Digital Office project.</description>
 		<releaseNotes>
-			1.0.3 - change deps.
+			1.0.4 - change root namespace.
 
 			Previous versions:
+			1.0.3 - change deps.
 			1.0.2 - update libs.
 			1.0.1 - Update to .NET 7.0.
 			1.0.0 - Initial.

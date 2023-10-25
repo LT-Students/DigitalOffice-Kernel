@@ -1,5 +1,5 @@
-﻿using DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
-using LT.DigitalOffice.Kernel.Constants;
+﻿using LTDO.Kernel.Constants;
+using LTDO.Kernel.ImageSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Image = SixLabors.ImageSharp.Image;
 using Rectangle = SixLabors.ImageSharp.Rectangle;
 
-namespace DigitalOffice.Kernel.ImageSupport.Helpers;
+namespace LTDO.Kernel.ImageSupport.Helpers;
 
 public class ImageResizeHelper : IImageResizeHelper
 {

@@ -2,7 +2,7 @@
 <package >
     <metadata>
         <id>LTDO.Kernel.ImageSupport</id>
-        <version>1.0.7</version>
+        <version>1.0.8</version>
         <title>LTDO.Kernel.ImageSupport</title>
         <authors>Lanit-Tercom Digital Office Team</authors>
         <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Library used in the Digital Office project.</description>
         <releaseNotes>
-					1.0.7 - change deps.
+					1.0.8 - change root namespace.
 
 					Previous versions:
+					1.0.7 - change deps.
 					1.0.6 - Update libs.
 					1.0.5 - Update to .NET 7.0.
 					1.0.4 - Modify ImageCompressHelper.

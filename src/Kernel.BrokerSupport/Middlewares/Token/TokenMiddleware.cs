@@ -1,5 +1,5 @@
-﻿using LT.DigitalOffice.Kernel.BrokerSupport.Broker;
-using LT.DigitalOffice.Kernel.Constants;
+﻿using LTDO.Kernel.BrokerSupport.Broker;
+using LTDO.Kernel.Constants;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
+namespace LTDO.Kernel.BrokerSupport.Middlewares.Token;
 
 /// <summary>
 /// Check JW token middleware.

@@ -1,11 +1,11 @@
-﻿using LT.DigitalOffice.Kernel.Helpers;
+﻿using LTDO.Kernel.Helpers.TextHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using StackExchange.Redis;
 using System;
 
-namespace DigitalOffice.Kernel.RedisSupport.Extensions;
+namespace LTDO.Kernel.RedisSupport.Extensions;
 
 public static class RedisServiceExtension
 {

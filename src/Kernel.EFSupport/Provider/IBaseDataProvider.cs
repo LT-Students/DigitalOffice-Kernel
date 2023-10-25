@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.EFSupport.Provider;
+namespace LTDO.Kernel.EFSupport.Provider;
 
 /// <summary>
 /// Base data provider interface.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+namespace LTDO.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 
 public interface ICheckProjectManagerRequest
 {

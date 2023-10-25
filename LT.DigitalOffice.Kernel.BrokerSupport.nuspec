@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>LTDO.Kernel.BrokerSupport</id>
-		<version>1.0.10</version>
+		<version>1.0.11</version>
 		<title>LTDO.Kernel.BrokerSupport</title>
 		<authors>Lanit-Tercom Digital Office Team</authors>
 		<owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library used in the Digital Office project.</description>
 		<releaseNotes>
-			1.0.10 - change deps.
+			1.0.11 - change root namespace.
 
 			Previous versions:
+			1.0.10 - change deps.
 			1.0.9 - add timeout parameter to RequestHandler.
 			1.0.8 - Update libs.
 			1.0.7 - Update Uri in RabbitMqHealthCheck.

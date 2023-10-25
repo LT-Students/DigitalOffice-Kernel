@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace LT.DigitalOffice.Kernel.EndpointSupport.Attributes;
+namespace LTDO.Kernel.EndpointSupport.Attributes;
 
 [AttributeUsage(AttributeTargets.Property)]
 public class KeywordAttribute : Attribute

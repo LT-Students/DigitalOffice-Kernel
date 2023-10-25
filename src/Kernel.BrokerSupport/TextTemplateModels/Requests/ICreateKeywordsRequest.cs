@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
+namespace LTDO.Kernel.BrokerSupport.TextTemplateModels.Requests;
 
 public interface ICreateKeywordsRequest
 {

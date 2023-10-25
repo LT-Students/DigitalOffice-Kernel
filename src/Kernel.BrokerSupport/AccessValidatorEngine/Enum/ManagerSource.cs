@@ -1,4 +1,4 @@
-﻿namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
+﻿namespace LTDO.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
 
 public enum ManagerSource
 {

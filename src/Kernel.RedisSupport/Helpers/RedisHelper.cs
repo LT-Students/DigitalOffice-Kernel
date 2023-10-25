@@ -1,11 +1,11 @@
-﻿using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
+﻿using LTDO.Kernel.RedisSupport.Helpers.Interfaces;
 using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
+namespace LTDO.Kernel.RedisSupport.Helpers;
 
 public class RedisHelper : IRedisHelper
 {
