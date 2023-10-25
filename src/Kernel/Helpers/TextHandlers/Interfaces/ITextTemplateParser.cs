@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LTDO.Kernel.Attributes;
+using System.Collections.Generic;
 
 namespace LTDO.Kernel.Helpers.TextHandlers.Interfaces;
 

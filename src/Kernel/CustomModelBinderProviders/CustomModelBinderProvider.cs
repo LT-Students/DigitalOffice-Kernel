@@ -1,4 +1,5 @@
 ﻿using LTDO.Kernel.Attributes;
+using LTDO.Kernel.CustomModelBinderProviders.Binders;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Reflection;

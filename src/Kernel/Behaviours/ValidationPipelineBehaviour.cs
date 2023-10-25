@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
+using LTDO.Kernel.Exceptions.Models;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;

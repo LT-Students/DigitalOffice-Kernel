@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using LTDO.Kernel.Attributes;
 
 namespace LTDO.Kernel.Validators.Interfaces;
 

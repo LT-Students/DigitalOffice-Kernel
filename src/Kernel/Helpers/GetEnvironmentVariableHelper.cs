@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LTDO.Kernel.Exceptions.Models;
+using System;
 
 namespace LTDO.Kernel.Helpers;
 
