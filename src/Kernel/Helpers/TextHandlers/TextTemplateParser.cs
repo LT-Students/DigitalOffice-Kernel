@@ -1,8 +1,8 @@
-﻿using LT.DigitalOffice.Kernel.Helpers.TextHandlers.Interfaces;
+﻿using LTDO.Kernel.Helpers.TextHandlers.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace LT.DigitalOffice.Kernel.Helpers.TextHandlers;
+namespace LTDO.Kernel.Helpers.TextHandlers;
 
 public class TextTemplateParser : ITextTemplateParser
 {
@@ -17,7 +17,7 @@ public class TextTemplateParser : ITextTemplateParser
         textArray[i] =
           values.TryGetValue(textArray[i].Substring(1, textArray[i].Length - 2), out string value)
           ? value
-          : ('{' + textArray[i] + '}');
+          : '{' + textArray[i] + '}';
       }
     }
 
@@ -37,7 +37,7 @@ public class TextTemplateParser : ITextTemplateParser
         textArray[i] = type
           .GetProperty(textArray[i].Substring(1, textArray[i].Length - 2))
           ?.GetValue(values)
-          .ToString() ?? ('{' + textArray[i] + '}');
+          .ToString() ?? '{' + textArray[i] + '}';
       }
     }
 

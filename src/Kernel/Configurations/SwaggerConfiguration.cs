@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigitalOffice.Kernel.Configurations;
+namespace LTDO.Kernel.Configurations;
 
 public class SwaggerConfiguration
 {

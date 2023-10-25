@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 
-namespace DigitalOffice.Kernel.OpenApi.OperationFilters;
+namespace LTDO.Kernel.OpenApi.OperationFilters;
 
 public class TokenOperationFilter : IOperationFilter
 {

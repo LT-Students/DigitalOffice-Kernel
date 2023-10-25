@@ -1,5 +1,5 @@
-﻿using LT.DigitalOffice.Kernel.Attributes;
-using LT.DigitalOffice.Kernel.Enums;
+﻿using LTDO.Kernel.Attributes;
+using LTDO.Kernel.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace LT.DigitalOffice.Kernel.Extensions;
+namespace LTDO.Kernel.Extensions;
 
 /// <summary>
 /// Helper class for services extensions.

@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.Kernel.Constants;
+﻿namespace LTDO.Kernel.Constants;
 
 /// <summary>
 /// Rights give access to admin rights to the corresponding services or blocks

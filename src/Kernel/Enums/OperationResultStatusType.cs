@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace LT.DigitalOffice.Kernel.Enums;
+namespace LTDO.Kernel.Enums;
 
 [JsonConverter(typeof(StringEnumConverter))]
 public enum OperationResultStatusType

@@ -1,8 +1,9 @@
-﻿using LT.DigitalOffice.Kernel.Middlewares.ApiInformation;
+﻿using LTDO.Kernel.Exceptions;
+using LTDO.Kernel.Middlewares.ApiInformation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Logging;
 
-namespace LT.DigitalOffice.Kernel.Extensions;
+namespace LTDO.Kernel.Extensions;
 
 public static class ApplicationBuilderExtensions
 {

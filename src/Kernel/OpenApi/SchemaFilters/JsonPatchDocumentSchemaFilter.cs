@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DigitalOffice.Kernel.OpenApi.SchemaFilters;
+namespace LTDO.Kernel.OpenApi.SchemaFilters;
 
 public class JsonPatchDocumentSchemaFilter : ISchemaFilter
 {

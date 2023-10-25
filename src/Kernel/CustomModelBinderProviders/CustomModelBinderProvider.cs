@@ -1,10 +1,9 @@
-﻿using LT.DigitalOffice.Kernel.Attributes;
-using LT.DigitalOffice.Kernel.CustomModelBinderProviders.Binders;
+﻿using LTDO.Kernel.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Reflection;
 
-namespace LT.DigitalOffice.Kernel.CustomModelBinderProviders;
+namespace LTDO.Kernel.CustomModelBinderProviders;
 
 public class CustomModelBinderProvider : IModelBinderProvider
 {

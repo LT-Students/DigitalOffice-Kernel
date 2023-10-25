@@ -1,7 +1,7 @@
-﻿using LT.DigitalOffice.Kernel.Enums;
+﻿using LTDO.Kernel.Enums;
 using System;
 
-namespace LT.DigitalOffice.Kernel.Attributes;
+namespace LTDO.Kernel.Attributes;
 
 [AttributeUsage(AttributeTargets.Interface)]
 public class AutoInjectAttribute : Attribute

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace LT.DigitalOffice.Kernel.Extensions;
+namespace LTDO.Kernel.Extensions;
 
 public static class StringExtensions
 {

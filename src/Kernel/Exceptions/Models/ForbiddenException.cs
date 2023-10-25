@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace LT.DigitalOffice.Kernel.Exceptions.Models;
+namespace LTDO.Kernel.Exceptions.Models;
 
 /// <summary>
 /// Indicates that the request contained valid data and was understood by the server, but the server is refusing action.

@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <Version>1.0.26</Version>
+      <Version>1.0.27</Version>
 
       <TargetFramework>net7.0</TargetFramework>
 
       <AssemblyName>LTDO.Kernel</AssemblyName>
-      <RootNamespace>DigitalOffice.Kernel</RootNamespace>
+      <RootNamespace>LTDO.Kernel</RootNamespace>
       <IsPackable>true</IsPackable>
       <IncludeSymbols>true</IncludeSymbols>
       <SymbolPackageFormat>snupkg</SymbolPackageFormat>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DigitalOffice.Kernel.Responses;
+namespace LTDO.Kernel.Responses;
 
 public class FindResult<T>
 {

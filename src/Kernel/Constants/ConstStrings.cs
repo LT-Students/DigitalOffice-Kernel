@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.Kernel.Constants;
+﻿namespace LTDO.Kernel.Constants;
 
 public static class ConstStrings
 {
