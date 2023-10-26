@@ -16,66 +16,66 @@ public class BaseRabbitMqConfig
 
   public string BaseUrl => $"{RabbitMqProtocol}://{Host}";
 
-  private string _host = Environment.GetEnvironmentVariable("RabbitMQ_Host");
+  private string host = Environment.GetEnvironmentVariable("RabbitMQ_Host");
   public string Host
   {
     get
     {
-      return _host;
+      return host;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(_host))
+      if (string.IsNullOrWhiteSpace(host))
       {
-        _host = value;
+        host = value;
       }
     }
   }
 
-  private string _virtualHost = Environment.GetEnvironmentVariable("RabbitMQ_VirtualHost");
+  private string virtualHost = Environment.GetEnvironmentVariable("RabbitMQ_VirtualHost");
   public string VirtualHost
   {
     get
     {
-      return _virtualHost;
+      return virtualHost;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(_virtualHost))
+      if (string.IsNullOrWhiteSpace(virtualHost))
       {
-        _virtualHost = value;
+        virtualHost = value;
       }
     }
   }
 
-  private string _username = Environment.GetEnvironmentVariable("RabbitMQ_Username");
+  private string username = Environment.GetEnvironmentVariable("RabbitMQ_Username");
   public string Username
   {
     get
     {
-      return _username;
+      return username;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(_username))
+      if (string.IsNullOrWhiteSpace(username))
       {
-        _username = value;
+        username = value;
       }
     }
   }
 
-  private string _password = Environment.GetEnvironmentVariable("RabbitMQ_Password");
+  private string password = Environment.GetEnvironmentVariable("RabbitMQ_Password");
   public string Password
   {
     get
     {
-      return _password;
+      return password;
     }
     init
     {
-      if (string.IsNullOrWhiteSpace(_password))
+      if (string.IsNullOrWhiteSpace(password))
       {
-        _password = value;
+        password = value;
       }
     }
   }
