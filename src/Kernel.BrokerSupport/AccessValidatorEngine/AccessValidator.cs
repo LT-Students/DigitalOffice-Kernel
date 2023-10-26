@@ -24,7 +24,8 @@ public class AccessValidator : IAccessValidator
 
   private async Task<bool> IsUserAdminAsync(Guid userId)
   {
-    return await _rcCheckAdmin.ProcessRequest<ICheckUserIsAdminRequest, bool>(
+    return await RequestHandler.ProcessRequest<ICheckUserIsAdminRequest, bool>(
+    _rcCheckAdmin,
     ICheckUserIsAdminRequest.CreateObj(userId),
     logger: _logger);
   }
@@ -79,7 +80,8 @@ public class AccessValidator : IAccessValidator
       return true;
     }
 
-    return await _rcCheckRights.ProcessRequest<ICheckUserRightsRequest, bool>(
+    return await RequestHandler.ProcessRequest<ICheckUserRightsRequest, bool>(
+      _rcCheckRights,
       ICheckUserRightsRequest.CreateObj(userId.Value, rightIds),
       logger: _logger);
   }
@@ -113,7 +115,8 @@ public class AccessValidator : IAccessValidator
       return true;
     }
 
-    return await _rcCheckAnyRights.ProcessRequest<ICheckUserAnyRightRequest, bool>(
+    return await RequestHandler.ProcessRequest<ICheckUserAnyRightRequest, bool>(
+      _rcCheckAnyRights,
       ICheckUserAnyRightRequest.CreateObj(userId.Value, rightIds),
       logger: _logger);
   }
@@ -136,11 +139,13 @@ public class AccessValidator : IAccessValidator
     switch (managerSource)
     {
       case ManagerSource.Project:
-        return await _rcCheckProjectManager.ProcessRequest<ICheckProjectManagerRequest, bool>(
+        return await RequestHandler.ProcessRequest<ICheckProjectManagerRequest, bool>(
+          _rcCheckProjectManager,
           ICheckProjectManagerRequest.CreateObj(userId, entityId),
           logger: _logger);
       case ManagerSource.Department:
-        return await _rcCheckDepartmentManager.ProcessRequest<ICheckDepartmentManagerRequest, bool>(
+        return await RequestHandler.ProcessRequest<ICheckDepartmentManagerRequest, bool>(
+          _rcCheckDepartmentManager,
           ICheckDepartmentManagerRequest.CreateObj(userId, entityId),
           logger: _logger);
       default:

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LTDO.Kernel</id>
-    <version>1.0.27</version>
+    <version>1.0.28</version>
     <title>LTDO.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-			1.0.27 - Change root namespace in Kernel.
+			1.0.28 - Revert access validator.
 
 			Previous versions:
+			1.0.27 - Change root namespace in Kernel.
 			1.0.26 - Test update version.
 			1.0.25 - Edit ClaimService rights.
 			1.0.24 - Add ClaimService rights.
