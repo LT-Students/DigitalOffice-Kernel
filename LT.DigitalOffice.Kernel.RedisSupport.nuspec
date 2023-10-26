@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LTDO.Kernel.RedisSupport</id>
-    <version>1.0.9</version>
+    <version>1.0.10</version>
     <title>LTDO.Kernel.RedisSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-			1.0.9 - change root namespace.
+			1.0.10 - target new kernel.
 
 			Previous versions:
 			1.0.8 - change deps.
@@ -28,7 +28,7 @@
     <dependencies>
       <group targetFramework="net7.0">
         <dependency id="StackExchange.Redis" version="2.2.50" />
-        <dependency id="LTDO.Kernel" version="1.0.25" />
+        <dependency id="LTDO.Kernel" version="1.0.29" />
       </group>
     </dependencies>
   </metadata>
