@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>LTDO.Kernel.BrokerSupport</id>
-		<version>1.0.11</version>
+		<version>1.0.12</version>
 		<title>LTDO.Kernel.BrokerSupport</title>
 		<authors>Lanit-Tercom Digital Office Team</authors>
 		<owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library used in the Digital Office project.</description>
 		<releaseNotes>
-			1.0.11 - change root namespace.
+			1.0.12 - revert access validator.
 
 			Previous versions:
+			1.0.11 - change root namespace.
 			1.0.10 - change deps.
 			1.0.9 - add timeout parameter to RequestHandler.
 			1.0.8 - Update libs.
@@ -31,7 +32,7 @@
 			<group targetFramework="net7.0">
 				<dependency id="MassTransit" version="8.0.16"/>
 				<dependency id="MassTransit.RabbitMQ" version="8.0.16"/>
-				<dependency id="LTDO.Kernel" version="1.0.25" />
+				<dependency id="LTDO.Kernel" version="1.0.28" />
 			</group>
 		</dependencies>
 	</metadata>
