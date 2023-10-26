@@ -1,7 +1,7 @@
-﻿using DigitalOffice.Kernel.BrokerSupport.Configurations;
-using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels;
-using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
-using LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
+﻿using LTDO.Kernel.BrokerSupport.Configurations;
+using LTDO.Kernel.BrokerSupport.Helpers;
+using LTDO.Kernel.BrokerSupport.TextTemplateModels;
+using LTDO.Kernel.BrokerSupport.TextTemplateModels.Requests;
 using LTDO.Kernel.EndpointSupport.Helpers;
 using Microsoft.AspNetCore.Builder;
 using System;
