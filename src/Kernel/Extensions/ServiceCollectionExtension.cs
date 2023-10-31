@@ -29,7 +29,7 @@ public static class ServiceCollectionExtension
     try
     {
       var asmPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-      var files = Directory.GetFiles(asmPath, "*LTDO*.dll");
+      var files = Directory.GetFiles(asmPath, "*LT*.dll");
 
       List<Assembly> assemblies = new();
 
