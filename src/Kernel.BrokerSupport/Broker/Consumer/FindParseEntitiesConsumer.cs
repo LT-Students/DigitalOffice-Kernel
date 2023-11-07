@@ -1,11 +1,11 @@
-﻿using LTDO.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Requests;
-using LTDO.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Responses;
+﻿using DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Requests;
+using DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Responses;
 using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.BrokerSupport.Broker.Consumer;
+namespace DigitalOffice.Kernel.BrokerSupport.Broker.Consumer;
 
 public class FindParseEntitiesConsumer : IConsumer<IFindParseEntitiesRequest>
 {

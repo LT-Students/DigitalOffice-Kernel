@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LTDO.Kernel.BrokerSupport.Middlewares.Token;
+namespace DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
 
 /// <summary>
 /// Check token middleware configuration.

@@ -1,5 +1,5 @@
-﻿using LTDO.Kernel.BrokerSupport.Attributes;
-using LTDO.Kernel.BrokerSupport.Configurations;
+﻿using DigitalOffice.Kernel.BrokerSupport.Attributes;
+using DigitalOffice.Kernel.BrokerSupport.Configurations;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace LTDO.Kernel.BrokerSupport.Extensions;
+namespace DigitalOffice.Kernel.BrokerSupport.Extensions;
 
 public static class MassTransitExtensions
 {

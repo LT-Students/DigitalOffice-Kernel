@@ -2,17 +2,18 @@
 <package >
   <metadata>
     <id>LTDO.Kernel.RedisSupport</id>
-    <version>1.0.11</version>
-    <title>LTDO.Kernel.RedisSupport</title>
+    <version>1.0.12</version>
+    <title>DigitalOffice.Kernel.RedisSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
     <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-			1.0.10 - target new kernel.
+			1.0.12 - target new kernel.
 
 			Previous versions:
+			1.0.11 - target new kernel.
 			1.0.10 - target new kernel.
 			1.0.8 - change deps.
 			1.0.7 - update libs.
@@ -29,7 +30,7 @@
     <dependencies>
       <group targetFramework="net7.0">
         <dependency id="StackExchange.Redis" version="2.2.50" />
-        <dependency id="LTDO.Kernel" version="1.0.31" />
+        <dependency id="LTDO.Kernel" version="1.0.32" />
       </group>
     </dependencies>
   </metadata>

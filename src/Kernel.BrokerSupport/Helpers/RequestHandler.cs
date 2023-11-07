@@ -1,4 +1,4 @@
-﻿using LTDO.Kernel.BrokerSupport.Broker;
+﻿using DigitalOffice.Kernel.BrokerSupport.Broker;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.BrokerSupport.Helpers;
+namespace DigitalOffice.Kernel.BrokerSupport.Helpers;
 
 public static class RequestHandler
 {

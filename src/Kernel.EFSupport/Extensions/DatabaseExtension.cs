@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LTDO.Kernel.EFSupport.Extensions;
+namespace DigitalOffice.Kernel.EFSupport.Extensions;
 
 public static class DatabaseExtension
 {

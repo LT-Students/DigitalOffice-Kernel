@@ -1,7 +1,7 @@
-﻿using LTDO.Kernel.Attributes;
+﻿using DigitalOffice.Kernel.Attributes;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.ImageSupport.Helpers.Interfaces;
+namespace DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
 
 /// <summary>
 /// Represents interface for a helper.

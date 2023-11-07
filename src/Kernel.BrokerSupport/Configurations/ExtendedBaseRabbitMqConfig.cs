@@ -1,7 +1,7 @@
-﻿using LTDO.Kernel.BrokerSupport.Attributes;
-using LTDO.Kernel.BrokerSupport.TextTemplateModels.Requests;
+﻿using DigitalOffice.Kernel.BrokerSupport.Attributes;
+using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
 
-namespace LTDO.Kernel.BrokerSupport.Configurations;
+namespace DigitalOffice.Kernel.BrokerSupport.Configurations;
 
 public class ExtendedBaseRabbitMqConfig : BaseRabbitMqConfig
 {

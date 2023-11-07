@@ -1,9 +1,9 @@
-﻿using LTDO.Kernel.Helpers.TextHandlers;
+﻿using DigitalOffice.Kernel.Helpers.TextHandlers;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 
-namespace LTDO.Kernel.EFSupport.Helpers;
+namespace DigitalOffice.Kernel.EFSupport.Helpers;
 
 public static class ConnectionStringHandler
 {

@@ -1,10 +1,10 @@
-﻿using LTDO.Kernel.BrokerSupport.Configurations;
+﻿using DigitalOffice.Kernel.BrokerSupport.Configurations;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace LTDO.Kernel.BrokerSupport.Helpers;
+namespace DigitalOffice.Kernel.BrokerSupport.Helpers;
 
 public static class ApplicationRequestClientCreator
 {

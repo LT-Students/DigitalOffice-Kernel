@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LTDO.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
 
 /// <summary>
 /// Message request model that is sent to UserService via MassTransit.

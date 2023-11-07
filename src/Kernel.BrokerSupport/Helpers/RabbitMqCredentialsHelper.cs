@@ -1,9 +1,9 @@
-﻿using LTDO.Kernel.BrokerSupport.Configurations;
-using LTDO.Kernel.Configurations;
+﻿using DigitalOffice.Kernel.BrokerSupport.Configurations;
+using DigitalOffice.Kernel.Configurations;
 using Serilog;
 using System;
 
-namespace LTDO.Kernel.BrokerSupport.Helpers;
+namespace DigitalOffice.Kernel.BrokerSupport.Helpers;
 
 public class RabbitMqCredentialsHelper
 {

@@ -1,7 +1,7 @@
-﻿using LTDO.Kernel.BrokerSupport.HealthChecks;
+﻿using DigitalOffice.Kernel.BrokerSupport.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LTDO.Kernel.BrokerSupport.Extensions;
+namespace DigitalOffice.Kernel.BrokerSupport.Extensions;
 
 public static class HealthCheckExtensions
 {

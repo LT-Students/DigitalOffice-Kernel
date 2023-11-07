@@ -1,5 +1,5 @@
-﻿using LTDO.Kernel.Constants;
-using LTDO.Kernel.ImageSupport.Helpers.Interfaces;
+﻿using DigitalOffice.Kernel.Constants;
+using DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
@@ -12,7 +12,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Image = SixLabors.ImageSharp.Image;
 
-namespace LTDO.Kernel.ImageSupport.Helpers;
+namespace DigitalOffice.Kernel.ImageSupport.Helpers;
 
 public class ImageCompressHelper : IImageCompressHelper
 {

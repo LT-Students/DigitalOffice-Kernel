@@ -1,9 +1,9 @@
-﻿using LTDO.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
-using LTDO.Kernel.BrokerSupport.Attributes;
-using LTDO.Kernel.BrokerSupport.Middlewares.Token;
+﻿using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+using DigitalOffice.Kernel.BrokerSupport.Attributes;
+using DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
 using System;
 
-namespace LTDO.Kernel.BrokerSupport.Configurations;
+namespace DigitalOffice.Kernel.BrokerSupport.Configurations;
 
 /// <summary>
 /// Base configuration class for RabbitMQ.

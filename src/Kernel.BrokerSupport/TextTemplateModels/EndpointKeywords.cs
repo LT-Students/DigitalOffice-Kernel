@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LTDO.Kernel.BrokerSupport.TextTemplateModels;
+namespace DigitalOffice.Kernel.BrokerSupport.TextTemplateModels;
 
 public class EndpointKeywords
 {

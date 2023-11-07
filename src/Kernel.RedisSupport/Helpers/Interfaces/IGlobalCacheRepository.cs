@@ -1,4 +1,4 @@
-﻿using LTDO.Kernel.Attributes;
+﻿using DigitalOffice.Kernel.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

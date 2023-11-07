@@ -1,4 +1,4 @@
-﻿using LTDO.Kernel.Helpers.TextHandlers;
+﻿using DigitalOffice.Kernel.Helpers.TextHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
