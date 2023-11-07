@@ -15,7 +15,7 @@ public interface IFindParseEntitiesResponse
     Dictionary<string, List<string>> entitiesProperties = new();
 
     var asmPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-    var files = Directory.GetFiles(asmPath, "*LTDO*.dll");
+    var files = Directory.GetFiles(asmPath, "*LT*.dll");
 
     List<Assembly> assemblies = new();
 
