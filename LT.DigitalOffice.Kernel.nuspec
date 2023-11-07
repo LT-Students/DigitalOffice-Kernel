@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LTDO.Kernel</id>
-    <version>1.0.31</version>
+    <version>1.0.32</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-			1.0.31 - Fix getting dlls.
+			1.0.32 - rework transition.
 
 			Previous versions:
+			1.0.31 - Fix getting dlls.
 			1.0.30 - Fix dll name.
 			1.0.29 - Fix dll name.
 			1.0.28 - Revert access validator.
