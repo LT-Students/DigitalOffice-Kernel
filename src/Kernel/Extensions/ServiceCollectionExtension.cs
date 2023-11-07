@@ -29,8 +29,14 @@ public static class ServiceCollectionExtension
     try
     {
       var asmPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-      var files = Directory.GetFiles(asmPath, "*LT*.dll");
+      var files = Directory.GetFiles(asmPath, "LT*.dll");
+      var filesList = string.Empty;
+      foreach (var item in files)
+      {
+        filesList += $"{item} \n";
+      }
 
+      logger.LogInformation(filesList);
       List<Assembly> assemblies = new();
 
       foreach (string fileName in files)
