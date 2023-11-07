@@ -5,7 +5,7 @@
 
         <TargetFramework>net7.0</TargetFramework>
 
-        <AssemblyName>LTDO.EndpointSupport</AssemblyName>
+        <AssemblyName>LTDO.Kernel.EndpointSupport</AssemblyName>
         <RootNamespace>DigitalOffice.Kernel.EndpointSupport</RootNamespace>
         <IsPackable>true</IsPackable>
         <IncludeSymbols>true</IncludeSymbols>
