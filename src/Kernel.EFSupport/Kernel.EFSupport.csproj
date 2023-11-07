@@ -4,7 +4,7 @@
 
         <TargetFramework>net7.0</TargetFramework>
 
-        <AssemblyName>DigitalOffice.Kernel.EFSupport</AssemblyName>
+        <AssemblyName>LTDO.EFSupport</AssemblyName>
         <RootNamespace>DigitalOffice.Kernel.EFSupport</RootNamespace>
         <IsPackable>true</IsPackable>
         <IncludeSymbols>true</IncludeSymbols>
@@ -17,7 +17,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.21" />
+		<ProjectReference Include="..\..\..\..\Lanit\DigitalOffice-Kernel\src\Kernel\Kernel.csproj" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.9" />

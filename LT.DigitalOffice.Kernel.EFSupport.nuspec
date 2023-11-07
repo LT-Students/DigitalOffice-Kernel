@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>DigitalOffice.Kernel.EFSupport</id>
+    <id>LTDO.Kernel.EFSupport</id>
     <version>1.0.2</version>
     <title>DigitalOffice.Kernel.EFSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>

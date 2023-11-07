@@ -5,7 +5,7 @@
 
         <TargetFramework>net7.0</TargetFramework>
 
-        <AssemblyName>DigitalOffice.Kernel.EndpointSupport</AssemblyName>
+        <AssemblyName>LTDO.EndpointSupport</AssemblyName>
         <RootNamespace>DigitalOffice.Kernel.EndpointSupport</RootNamespace>
         <IsPackable>true</IsPackable>
         <IncludeSymbols>true</IncludeSymbols>
@@ -18,8 +18,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.21" />
-        <PackageReference Include="DigitalOffice.Kernel.BrokerSupport" Version="1.0.8" />
-    </ItemGroup>
+		<ProjectReference Include="..\..\..\..\Lanit\DigitalOffice-Kernel\src\Kernel\Kernel.csproj" />
+		<ProjectReference Include="..\..\..\..\Lanit\DigitalOffice-Kernel\src\Kernel.BrokerSupport\Kernel.BrokerSupport.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
 	<metadata>
-		<id>DigitalOffice.Kernel.BrokerSupport</id>
+		<id>LTDO.Kernel.BrokerSupport</id>
 		<version>1.0.9</version>
 		<title>DigitalOffice.Kernel.BrokerSupport</title>
 		<authors>Lanit-Tercom Digital Office Team</authors>

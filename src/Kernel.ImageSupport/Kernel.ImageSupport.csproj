@@ -5,7 +5,7 @@
 
     <TargetFramework>net7.0</TargetFramework>
 
-    <AssemblyName>DigitalOffice.Kernel.ImageSupport</AssemblyName>
+    <AssemblyName>LTDO.ImageSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.ImageSupport</RootNamespace>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>
@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DigitalOffice.Kernel" Version="1.0.21" />
+	  <ProjectReference Include="..\..\..\..\Lanit\DigitalOffice-Kernel\src\Kernel\Kernel.csproj" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
     <PackageReference Include="Svg" Version="3.4.4" />
   </ItemGroup>

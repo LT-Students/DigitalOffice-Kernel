@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
     <metadata>
-        <id>DigitalOffice.Kernel.ImageSupport</id>
+        <id>LTDO.Kernel.ImageSupport</id>
         <version>1.0.6</version>
         <title>DigitalOffice.Kernel.ImageSupport</title>
         <authors>Lanit-Tercom Digital Office Team</authors>

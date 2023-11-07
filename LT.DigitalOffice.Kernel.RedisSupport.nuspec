@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>DigitalOffice.Kernel.RedisSupport</id>
+    <id>LTDO.Kernel.RedisSupport</id>
     <version>1.0.7</version>
     <title>DigitalOffice.Kernel.RedisSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>

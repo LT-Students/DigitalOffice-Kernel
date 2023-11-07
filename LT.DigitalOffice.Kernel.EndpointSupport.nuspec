@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>DigitalOffice.Kernel.EndpointSupport</id>
+    <id>LTDO.Kernel.EndpointSupport</id>
     <version>1.0.4</version>
     <title>DigitalOffice.Kernel.EndpointSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
