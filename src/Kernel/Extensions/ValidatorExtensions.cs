@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LTDO.Kernel.Extensions;
+namespace DigitalOffice.Kernel.Extensions;
 
 /// <summary>
 /// Provides extension methods for FluentValidation package.

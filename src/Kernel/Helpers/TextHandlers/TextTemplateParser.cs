@@ -1,8 +1,8 @@
-﻿using LTDO.Kernel.Helpers.TextHandlers.Interfaces;
+﻿using DigitalOffice.Kernel.Helpers.TextHandlers.Interfaces;
 using System;
 using System.Collections.Generic;
 
-namespace LTDO.Kernel.Helpers.TextHandlers;
+namespace DigitalOffice.Kernel.Helpers.TextHandlers;
 
 public class TextTemplateParser : ITextTemplateParser
 {

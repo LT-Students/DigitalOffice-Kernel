@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.Validators;
+namespace DigitalOffice.Kernel.Validators;
 
 public abstract class ExtendedEditRequestValidator<I, T> : AbstractValidator<(I, JsonPatchDocument<T>)>
   where T : class

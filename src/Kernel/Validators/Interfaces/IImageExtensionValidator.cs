@@ -1,7 +1,7 @@
-﻿using FluentValidation;
-using LTDO.Kernel.Attributes;
+﻿using DigitalOffice.Kernel.Attributes;
+using FluentValidation;
 
-namespace LTDO.Kernel.Validators.Interfaces;
+namespace DigitalOffice.Kernel.Validators.Interfaces;
 
 [AutoInject]
 public interface IImageExtensionValidator : IValidator<string>

@@ -1,8 +1,8 @@
-﻿using LTDO.Kernel.Constants;
+﻿using DigitalOffice.Kernel.Constants;
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace LTDO.Kernel.Extensions;
+namespace DigitalOffice.Kernel.Extensions;
 
 public static class HttpContextExtensions
 {

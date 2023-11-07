@@ -1,11 +1,11 @@
-﻿using LTDO.Kernel.Extensions;
+﻿using DigitalOffice.Kernel.Extensions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.CustomModelBinderProviders.Binders;
+namespace DigitalOffice.Kernel.CustomModelBinderProviders.Binders;
 
 public class StringTrimmerBinder : IModelBinder
 {

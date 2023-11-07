@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace LTDO.Kernel.Exceptions.Models;
+namespace DigitalOffice.Kernel.Exceptions.Models;
 
 /// <summary>
 /// Indicates that the requested resource could not be found but may be available in the future.

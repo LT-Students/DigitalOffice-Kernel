@@ -1,6 +1,6 @@
 ﻿using System.Collections.Immutable;
 
-namespace LTDO.Kernel.Constants;
+namespace DigitalOffice.Kernel.Constants;
 
 public static class ImageFormats
 {

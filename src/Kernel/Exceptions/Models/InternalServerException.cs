@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace LTDO.Kernel.Exceptions.Models;
+namespace DigitalOffice.Kernel.Exceptions.Models;
 
 [Serializable]
 public class InternalServerException : BaseException

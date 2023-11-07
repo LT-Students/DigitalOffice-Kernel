@@ -3,7 +3,7 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.Middlewares.ApiInformation;
+namespace DigitalOffice.Kernel.Middlewares.ApiInformation;
 
 public class ApiInformationMiddleware
 {

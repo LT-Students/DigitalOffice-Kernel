@@ -1,7 +1,7 @@
-﻿using LTDO.Kernel.Extensions;
+﻿using DigitalOffice.Kernel.Extensions;
 using System;
 
-namespace LTDO.Kernel.Middlewares.ApiInformation;
+namespace DigitalOffice.Kernel.Middlewares.ApiInformation;
 
 public abstract class BaseApiInfo
 {

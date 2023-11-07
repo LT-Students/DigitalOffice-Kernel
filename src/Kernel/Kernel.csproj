@@ -6,7 +6,7 @@
       <TargetFramework>net7.0</TargetFramework>
 
       <AssemblyName>LTDO.Kernel</AssemblyName>
-      <RootNamespace>LTDO.Kernel</RootNamespace>
+      <RootNamespace>DigitalOffice.Kernel</RootNamespace>
       <IsPackable>true</IsPackable>
       <IncludeSymbols>true</IncludeSymbols>
       <SymbolPackageFormat>snupkg</SymbolPackageFormat>
