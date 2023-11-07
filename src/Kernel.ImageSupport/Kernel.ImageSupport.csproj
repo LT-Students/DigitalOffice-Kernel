@@ -5,7 +5,7 @@
 
     <TargetFramework>net7.0</TargetFramework>
 
-    <AssemblyName>LTDO.ImageSupport</AssemblyName>
+    <AssemblyName>LTDO.Kernel.ImageSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.ImageSupport</RootNamespace>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>
