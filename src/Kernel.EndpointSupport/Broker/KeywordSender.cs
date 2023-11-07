@@ -1,15 +1,15 @@
-﻿using LTDO.Kernel.BrokerSupport.Configurations;
-using LTDO.Kernel.BrokerSupport.Helpers;
-using LTDO.Kernel.BrokerSupport.TextTemplateModels;
-using LTDO.Kernel.BrokerSupport.TextTemplateModels.Requests;
-using LTDO.Kernel.EndpointSupport.Helpers;
+﻿using DigitalOffice.Kernel.BrokerSupport.Configurations;
+using DigitalOffice.Kernel.BrokerSupport.Helpers;
+using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels;
+using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
+using DigitalOffice.Kernel.EndpointSupport.Helpers;
 using Microsoft.AspNetCore.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.EndpointSupport.Broker;
+namespace DigitalOffice.Kernel.EndpointSupport.Broker;
 
 public static class KeywordSender
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LTDO.Kernel.EndpointSupport.Constants.Endpoints;
+namespace DigitalOffice.Kernel.EndpointSupport.Constants.Endpoints;
 
 static public class UserServiceEndpoints
 {
