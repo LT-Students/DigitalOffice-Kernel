@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.0.6</Version>
+        <Version>1.0.8</Version>
 
         <TargetFramework>net7.0</TargetFramework>
 
@@ -18,8 +18,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="LTDO.Kernel" Version="1.0.29" />
-        <PackageReference Include="LTDO.Kernel.BrokerSupport" Version="1.0.14" />
+        <PackageReference Include="LTDO.Kernel" Version="1.0.30" />
+        <PackageReference Include="LTDO.Kernel.BrokerSupport" Version="1.0.15" />
     </ItemGroup>
 
 </Project>
