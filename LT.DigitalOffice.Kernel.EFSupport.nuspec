@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>LTDO.Kernel.EFSupport</id>
-		<version>1.0.5</version>
+		<version>1.0.6</version>
 		<title>LTDO.Kernel.EFSupport</title>
 		<authors>Lanit-Tercom Digital Office Team</authors>
 		<owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library used in the Digital Office project.</description>
 		<releaseNotes>
-			1.0.5 - target new kernel.
+			1.0.6 - target new kernel.
 
 			Previous versions:
+			1.0.5 - target new kernel.
 			1.0.4 - change root namespace.
 			1.0.3 - change deps.
 			1.0.2 - update libs.
@@ -23,7 +24,7 @@
 		<tags>DigitalOffice</tags>
 		<dependencies>
 			<group targetFramework="net7.0">
-				<dependency id="LTDO.Kernel" version="1.0.29"/>
+				<dependency id="LTDO.Kernel" version="1.0.31"/>
 				<dependency id="Microsoft.EntityFrameworkCore" version="7.0.9" />
 				<dependency id="Microsoft.EntityFrameworkCore.InMemory" version="7.0.9" />
 				<dependency id="Microsoft.EntityFrameworkCore.Relational" version="7.0.9" />
