@@ -5,7 +5,7 @@
 
       <TargetFramework>net7.0</TargetFramework>
 
-      <AssemblyName>DigitalOffice.Kernel</AssemblyName>
+      <AssemblyName>LTDO.Kernel</AssemblyName>
       <RootNamespace>DigitalOffice.Kernel</RootNamespace>
       <IsPackable>true</IsPackable>
       <IncludeSymbols>true</IncludeSymbols>
