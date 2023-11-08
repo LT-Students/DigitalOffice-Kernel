@@ -1,8 +1,8 @@
-﻿using FluentValidation;
-using LT.DigitalOffice.Kernel.Validators.Interfaces;
+﻿using DigitalOffice.Kernel.Validators.Interfaces;
+using FluentValidation;
 using System;
 
-namespace LT.DigitalOffice.Kernel.Validators;
+namespace DigitalOffice.Kernel.Validators;
 
 public class ImageContentValidator : AbstractValidator<string>, IImageContentValidator
 {

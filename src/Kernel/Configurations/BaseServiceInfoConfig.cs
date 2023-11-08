@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.Kernel.Configurations;
+﻿namespace DigitalOffice.Kernel.Configurations;
 
 public class BaseServiceInfoConfig
 {

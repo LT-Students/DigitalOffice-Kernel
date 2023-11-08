@@ -1,4 +1,4 @@
-﻿using LT.DigitalOffice.Kernel.Attributes;
+﻿using DigitalOffice.Kernel.Attributes;
 using System.Threading.Tasks;
 
 namespace DigitalOffice.Kernel.ImageSupport.Helpers.Interfaces;

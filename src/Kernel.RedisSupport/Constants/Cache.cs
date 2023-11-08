@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.Kernel.RedisSupport.Constants;
+﻿namespace LTDO.Kernel.RedisSupport.Constants;
 
 public static class Cache
 {

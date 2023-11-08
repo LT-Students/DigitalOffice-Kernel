@@ -1,10 +1,10 @@
-﻿using LT.DigitalOffice.Kernel.EndpointSupport.Attributes;
+﻿using DigitalOffice.Kernel.EndpointSupport.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace LT.DigitalOffice.Kernel.EndpointSupport.Helpers;
+namespace DigitalOffice.Kernel.EndpointSupport.Helpers;
 
 public static class KeywordCollector
 {

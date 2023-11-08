@@ -1,9 +1,9 @@
-﻿using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
-using LT.DigitalOffice.Kernel.Attributes;
+﻿using DigitalOffice.Kernel.Attributes;
+using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
 using System;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
+namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
 
 /// <summary>
 /// Provides access validation methods to check whether user is an administrator

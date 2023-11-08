@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LT.DigitalOffice.Kernel.Responses;
+namespace DigitalOffice.Kernel.Responses;
 
 public class OperationResultResponse<T>
 {

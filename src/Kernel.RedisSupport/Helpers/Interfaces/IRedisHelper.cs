@@ -1,9 +1,9 @@
-﻿using LT.DigitalOffice.Kernel.Attributes;
+﻿using DigitalOffice.Kernel.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
+namespace LTDO.Kernel.RedisSupport.Helpers.Interfaces;
 
 [AutoInject]
 public interface IRedisHelper

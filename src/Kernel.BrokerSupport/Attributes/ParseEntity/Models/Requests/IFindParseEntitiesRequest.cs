@@ -1,4 +1,4 @@
-﻿namespace LT.DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Requests;
+﻿namespace DigitalOffice.Kernel.BrokerSupport.Attributes.ParseEntity.Models.Requests;
 
 public interface IFindParseEntitiesRequest
 {

@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <Version>1.0.2</Version>
+        <Version>1.0.7</Version>
 
         <TargetFramework>net7.0</TargetFramework>
 
-        <AssemblyName>DigitalOffice.Kernel.EFSupport</AssemblyName>
+        <AssemblyName>LTDO.Kernel.EFSupport</AssemblyName>
         <RootNamespace>DigitalOffice.Kernel.EFSupport</RootNamespace>
         <IsPackable>true</IsPackable>
         <IncludeSymbols>true</IncludeSymbols>
@@ -17,7 +17,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="DigitalOffice.Kernel" Version="1.0.21" />
+        <PackageReference Include="LTDO.Kernel" Version="1.0.32" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.9" />

@@ -57,7 +57,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel\DigitalOffice.Kernel.dll" target="lib\net7.0" />
-    <file src="artifacts\kernel\DigitalOffice.Kernel.pdb" target="lib\net7.0" />
+    <file src="artifacts\kernel\LTDO.Kernel.dll" target="lib\net7.0" />
+    <file src="artifacts\kernel\LTDO.Kernel.pdb" target="lib\net7.0" />
   </files>
 </package>

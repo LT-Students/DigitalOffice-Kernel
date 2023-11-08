@@ -1,5 +1,5 @@
-﻿using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
-using LT.DigitalOffice.Kernel.Configurations;
+﻿using DigitalOffice.Kernel.BrokerSupport.Configurations;
+using DigitalOffice.Kernel.Configurations;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -8,7 +8,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.HealthChecks;
+namespace DigitalOffice.Kernel.BrokerSupport.HealthChecks;
 
 public class RabbitMqHealthCheck : IHealthCheck
 {

@@ -1,9 +1,9 @@
-﻿using LT.DigitalOffice.Kernel.Responses;
+﻿using DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Net;
 
-namespace LT.DigitalOffice.Kernel.Helpers;
+namespace DigitalOffice.Kernel.Helpers;
 
 public static class ResponseCreatorStatic
 {

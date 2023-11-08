@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.9</Version>
+    <Version>1.0.17</Version>
 
     <TargetFramework>net7.0</TargetFramework>
 
-    <AssemblyName>DigitalOffice.Kernel.BrokerSupport</AssemblyName>
+    <AssemblyName>LTDO.Kernel.BrokerSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.BrokerSupport</RootNamespace>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>
@@ -18,8 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DigitalOffice.Kernel" Version="1.0.21" />
-
+    <PackageReference Include="LTDO.Kernel" Version="1.0.32" />
     <PackageReference Include="MassTransit" Version="8.0.16" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.16" />
   </ItemGroup>

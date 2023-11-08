@@ -1,10 +1,10 @@
-﻿using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
+﻿using LTDO.Kernel.RedisSupport.Helpers.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
+namespace LTDO.Kernel.RedisSupport.Helpers;
 
 public class GlobalCacheRepository : IGlobalCacheRepository
 {
@@ -21,7 +21,7 @@ public class GlobalCacheRepository : IGlobalCacheRepository
 
   public async Task CreateAsync<T>(int database, string key, T item, Guid elementId, TimeSpan? lifeTime)
   {
-    if (!await _redisHelper.CreateAsync<T>(database, key, item, lifeTime))
+    if (!await _redisHelper.CreateAsync(database, key, item, lifeTime))
     {
       return;
     }
@@ -31,7 +31,7 @@ public class GlobalCacheRepository : IGlobalCacheRepository
 
   public async Task CreateAsync<T>(int database, string key, T item, List<Guid> elementsIds, TimeSpan? lifeTime)
   {
-    if (!await _redisHelper.CreateAsync<T>(database, key, item, lifeTime))
+    if (!await _redisHelper.CreateAsync(database, key, item, lifeTime))
     {
       return;
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace LT.DigitalOffice.Kernel.BrokerSupport.Broker;
+namespace DigitalOffice.Kernel.BrokerSupport.Broker;
 
 /// <summary>
 /// Interface that is needed to form the response in message broker.

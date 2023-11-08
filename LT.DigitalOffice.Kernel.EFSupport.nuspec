@@ -1,35 +1,40 @@
 <?xml version="1.0"?>
 <package >
-  <metadata>
-    <id>DigitalOffice.Kernel.EFSupport</id>
-    <version>1.0.2</version>
-    <title>DigitalOffice.Kernel.EFSupport</title>
-    <authors>Lanit-Tercom Digital Office Team</authors>
-    <owners>Lanit-Tercom Digital Office</owners>
-    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Library used in the Digital Office project.</description>
-    <releaseNotes>
-        1.0.2 - update libs.
+	<metadata>
+		<id>LTDO.Kernel.EFSupport</id>
+		<version>1.0.7</version>
+		<title>DigitalOffice.Kernel.EFSupport</title>
+		<authors>Lanit-Tercom Digital Office Team</authors>
+		<owners>Lanit-Tercom Digital Office</owners>
+		<projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Library used in the Digital Office project.</description>
+		<releaseNotes>
+			1.0.7 - target new kernel.
 
-        Previous versions:
-				1.0.1 - Update to .NET 7.0.
-        1.0.0 - Initial.
-    </releaseNotes>
-    <copyright>Copyright © LT Digital Office</copyright>
-    <tags>DigitalOffice</tags>
-    <dependencies>
-      <group targetFramework="net7.0">
-        <dependency id="DigitalOffice.Kernel" version="1.0.21"/>
-        <dependency id="Microsoft.EntityFrameworkCore" version="7.0.9" />
-        <dependency id="Microsoft.EntityFrameworkCore.InMemory" version="7.0.9" />
-        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="7.0.9" />
-        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="7.0.9" />
-      </group>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.dll" target="lib\net7.0" />
-    <file src="artifacts\kernel_ef\DigitalOffice.Kernel.EFSupport.pdb" target="lib\net7.0" />
-  </files>
+			Previous versions:
+			1.0.6 - target new kernel.
+			1.0.5 - target new kernel.
+			1.0.4 - change root namespace.
+			1.0.3 - change deps.
+			1.0.2 - update libs.
+			1.0.1 - Update to .NET 7.0.
+			1.0.0 - Initial.
+		</releaseNotes>
+		<copyright>Copyright © LT Digital Office</copyright>
+		<tags>DigitalOffice</tags>
+		<dependencies>
+			<group targetFramework="net7.0">
+				<dependency id="LTDO.Kernel" version="1.0.32"/>
+				<dependency id="Microsoft.EntityFrameworkCore" version="7.0.9" />
+				<dependency id="Microsoft.EntityFrameworkCore.InMemory" version="7.0.9" />
+				<dependency id="Microsoft.EntityFrameworkCore.Relational" version="7.0.9" />
+				<dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="7.0.9" />
+			</group>
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="artifacts\kernel_ef\LTDO.Kernel.EFSupport.dll" target="lib\net7.0" />
+		<file src="artifacts\kernel_ef\LTDO.Kernel.EFSupport.pdb" target="lib\net7.0" />
+	</files>
 </package>

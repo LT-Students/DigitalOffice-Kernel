@@ -1,15 +1,15 @@
 ﻿using DigitalOffice.Kernel.BrokerSupport.Configurations;
+using DigitalOffice.Kernel.BrokerSupport.Helpers;
 using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels;
 using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
-using LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
-using LT.DigitalOffice.Kernel.EndpointSupport.Helpers;
+using DigitalOffice.Kernel.EndpointSupport.Helpers;
 using Microsoft.AspNetCore.Builder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.Kernel.EndpointSupport.Broker;
+namespace DigitalOffice.Kernel.EndpointSupport.Broker;
 
 public static class KeywordSender
 {
@@ -32,8 +32,7 @@ public static class KeywordSender
             keywords: endpointKeywords.Value));
       }
 
-      await RequestHandler.ProcessRequest<ICreateKeywordsRequest, bool>(
-        app.CreateRc<ICreateKeywordsRequest>(rabbitConfig, rabbitConfig.CreateKeywordsEndpoint),
+      await app.CreateRc<ICreateKeywordsRequest>(rabbitConfig, rabbitConfig.CreateKeywordsEndpoint).ProcessRequest<ICreateKeywordsRequest, bool>(
         ICreateKeywordsRequest.CreateObj(requestData));
     }
   }
