@@ -1,9 +1,9 @@
-﻿using DigitalOffice.Kernel.Attributes;
-using DigitalOffice.Kernel.Responses;
+﻿using LT.DigitalOffice.Kernel.Attributes;
+using LT.DigitalOffice.Kernel.Responses;
 using System.Collections.Generic;
 using System.Net;
 
-namespace DigitalOffice.Kernel.Helpers.Interfaces;
+namespace LT.DigitalOffice.Kernel.Helpers.Interfaces;
 
 [AutoInject]
 public interface IResponseCreator

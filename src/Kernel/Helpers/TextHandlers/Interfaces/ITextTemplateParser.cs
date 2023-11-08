@@ -1,7 +1,7 @@
-﻿using DigitalOffice.Kernel.Attributes;
+﻿using LT.DigitalOffice.Kernel.Attributes;
 using System.Collections.Generic;
 
-namespace DigitalOffice.Kernel.Helpers.TextHandlers.Interfaces;
+namespace LT.DigitalOffice.Kernel.Helpers.TextHandlers.Interfaces;
 
 [AutoInject]
 public interface ITextTemplateParser

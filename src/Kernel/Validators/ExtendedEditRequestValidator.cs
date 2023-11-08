@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DigitalOffice.Kernel.Validators;
+namespace LT.DigitalOffice.Kernel.Validators;
 
 public abstract class ExtendedEditRequestValidator<I, T> : AbstractValidator<(I, JsonPatchDocument<T>)>
   where T : class
@@ -73,7 +73,7 @@ public abstract class ExtendedEditRequestValidator<I, T> : AbstractValidator<(I,
 
     foreach (var validateDelegate in predicates)
     {
-      if (!await validateDelegate.Key(RequestedOperation))
+      if (!(await validateDelegate.Key(RequestedOperation)))
       {
         Context.AddFailure(propertyName, validateDelegate.Value);
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigitalOffice.Kernel.Exceptions.Models;
+namespace LT.DigitalOffice.Kernel.Exceptions.Models;
 
 public class ErrorResponse
 {

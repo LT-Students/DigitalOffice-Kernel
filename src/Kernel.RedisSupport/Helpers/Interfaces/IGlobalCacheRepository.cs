@@ -1,9 +1,9 @@
-﻿using DigitalOffice.Kernel.Attributes;
+﻿using LT.DigitalOffice.Kernel.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LTDO.Kernel.RedisSupport.Helpers.Interfaces;
+namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 
 [AutoInject]
 public interface IGlobalCacheRepository

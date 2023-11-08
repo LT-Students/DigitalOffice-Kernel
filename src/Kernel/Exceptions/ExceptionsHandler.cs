@@ -1,5 +1,5 @@
-﻿using DigitalOffice.Kernel.Exceptions.Models;
-using FluentValidation;
+﻿using FluentValidation;
+using LT.DigitalOffice.Kernel.Exceptions.Models;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -13,7 +13,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace DigitalOffice.Kernel.Exceptions;
+namespace LT.DigitalOffice.Kernel;
 
 /// <summary>
 /// Represents exception handler middleware. Provides method for handle exceptions.

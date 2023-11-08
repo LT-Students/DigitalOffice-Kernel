@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace DigitalOffice.Kernel.Exceptions.Models;
+namespace LT.DigitalOffice.Kernel.Exceptions.Models;
 
 /// <summary>
 /// Indicates that the server cannot or will not process the request due to an apparent client error.

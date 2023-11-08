@@ -1,4 +1,4 @@
-﻿namespace LTDO.Kernel.RedisSupport.Configurations;
+﻿namespace LT.DigitalOffice.Kernel.RedisSupport.Configurations;
 
 public class RedisConfig
 {

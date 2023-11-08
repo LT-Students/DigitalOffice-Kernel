@@ -1,13 +1,13 @@
-﻿using DigitalOffice.Kernel.Exceptions.Models;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
+using LT.DigitalOffice.Kernel.Exceptions.Models;
 using MediatR;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DigitalOffice.Kernel.Behaviours;
+namespace LT.DigitalOffice.Kernel.Behaviours;
 
 public class ValidationPipelineBehaviour<TRequest, TResponse>
   : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>

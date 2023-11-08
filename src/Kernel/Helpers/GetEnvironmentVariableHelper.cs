@@ -1,7 +1,7 @@
-﻿using DigitalOffice.Kernel.Exceptions.Models;
+﻿using LT.DigitalOffice.Kernel.Exceptions.Models;
 using System;
 
-namespace DigitalOffice.Kernel.Helpers;
+namespace LT.DigitalOffice.Kernel.Helpers;
 
 public static class GetEnvironmentVariableHelper
 {

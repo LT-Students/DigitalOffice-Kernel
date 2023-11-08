@@ -1,5 +1,6 @@
-﻿using DigitalOffice.Kernel.BrokerSupport.Attributes;
-using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
+﻿using DigitalOffice.Kernel.BrokerSupport.TextTemplateModels.Requests;
+using LT.DigitalOffice.Kernel.BrokerSupport.Attributes;
+using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
 
 namespace DigitalOffice.Kernel.BrokerSupport.Configurations;
 

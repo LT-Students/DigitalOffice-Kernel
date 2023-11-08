@@ -1,12 +1,12 @@
-﻿using LTDO.Kernel.RedisSupport.Configurations;
-using LTDO.Kernel.RedisSupport.Helpers.Interfaces;
+﻿using LT.DigitalOffice.Kernel.RedisSupport.Configurations;
+using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace LTDO.Kernel.RedisSupport.Helpers;
+namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
 
 public class CacheNotebook : ICacheNotebook
 {

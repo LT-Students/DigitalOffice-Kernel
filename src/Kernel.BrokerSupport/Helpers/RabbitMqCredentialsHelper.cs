@@ -1,13 +1,12 @@
-﻿using DigitalOffice.Kernel.BrokerSupport.Configurations;
-using DigitalOffice.Kernel.Configurations;
+﻿using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
 using Serilog;
 using System;
 
-namespace DigitalOffice.Kernel.BrokerSupport.Helpers;
+namespace LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
 
 public class RabbitMqCredentialsHelper
 {
-  public static (string username, string password) Get(BaseRabbitMqConfig rabbitMqConfig, BaseServiceInfoConfig serviceInfoConfig)
+  public static (string username, string password) Get(BaseRabbitMqConfig rabbitMqConfig, Kernel.Configurations.BaseServiceInfoConfig serviceInfoConfig)
   {
     static string GetString(string envVar, string fromAppsettings, string generated, string fieldName)
     {

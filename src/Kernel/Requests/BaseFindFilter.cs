@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
-namespace DigitalOffice.Kernel.Requests;
+namespace LT.DigitalOffice.Kernel.Requests;
 
 public record BaseFindFilter
 {

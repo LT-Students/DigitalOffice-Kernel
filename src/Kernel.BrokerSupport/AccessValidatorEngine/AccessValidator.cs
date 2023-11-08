@@ -1,8 +1,10 @@
 ﻿using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Enum;
-using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
 using DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
-using DigitalOffice.Kernel.BrokerSupport.Helpers;
-using DigitalOffice.Kernel.Extensions;
+using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Interfaces;
+using LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine.Requests;
+using LT.DigitalOffice.Kernel.BrokerSupport.Helpers;
+using LT.DigitalOffice.Kernel.Constants;
+using LT.DigitalOffice.Kernel.Extensions;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -10,7 +12,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine;
+namespace LT.DigitalOffice.Kernel.BrokerSupport.AccessValidatorEngine;
 
 public class AccessValidator : IAccessValidator
 {
@@ -24,7 +26,8 @@ public class AccessValidator : IAccessValidator
 
   private async Task<bool> IsUserAdminAsync(Guid userId)
   {
-    return await _rcCheckAdmin.ProcessRequest<ICheckUserIsAdminRequest, bool>(
+    return await RequestHandler.ProcessRequest<ICheckUserIsAdminRequest, bool>(
+    _rcCheckAdmin,
     ICheckUserIsAdminRequest.CreateObj(userId),
     logger: _logger);
   }
@@ -79,7 +82,8 @@ public class AccessValidator : IAccessValidator
       return true;
     }
 
-    return await _rcCheckRights.ProcessRequest<ICheckUserRightsRequest, bool>(
+    return await RequestHandler.ProcessRequest<ICheckUserRightsRequest, bool>(
+      _rcCheckRights,
       ICheckUserRightsRequest.CreateObj(userId.Value, rightIds),
       logger: _logger);
   }
@@ -113,7 +117,8 @@ public class AccessValidator : IAccessValidator
       return true;
     }
 
-    return await _rcCheckAnyRights.ProcessRequest<ICheckUserAnyRightRequest, bool>(
+    return await RequestHandler.ProcessRequest<ICheckUserAnyRightRequest, bool>(
+      _rcCheckAnyRights,
       ICheckUserAnyRightRequest.CreateObj(userId.Value, rightIds),
       logger: _logger);
   }
@@ -136,11 +141,13 @@ public class AccessValidator : IAccessValidator
     switch (managerSource)
     {
       case ManagerSource.Project:
-        return await _rcCheckProjectManager.ProcessRequest<ICheckProjectManagerRequest, bool>(
+        return await RequestHandler.ProcessRequest<ICheckProjectManagerRequest, bool>(
+          _rcCheckProjectManager,
           ICheckProjectManagerRequest.CreateObj(userId, entityId),
           logger: _logger);
       case ManagerSource.Department:
-        return await _rcCheckDepartmentManager.ProcessRequest<ICheckDepartmentManagerRequest, bool>(
+        return await RequestHandler.ProcessRequest<ICheckDepartmentManagerRequest, bool>(
+          _rcCheckDepartmentManager,
           ICheckDepartmentManagerRequest.CreateObj(userId, entityId),
           logger: _logger);
       default:
