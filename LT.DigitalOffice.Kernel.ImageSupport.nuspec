@@ -32,7 +32,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="artifacts\kernel_image\DigitalOffice.Kernel.ImageSupport.dll" target="lib\net7.0" />
-        <file src="artifacts\kernel_image\DigitalOffice.Kernel.ImageSupport.pdb" target="lib\net7.0" />
+        <file src="artifacts\kernel_image\LTDO.Kernel.ImageSupport.dll" target="lib\net7.0" />
+        <file src="artifacts\kernel_image\LTDO.Kernel.ImageSupport.pdb" target="lib\net7.0" />
     </files>
 </package>
