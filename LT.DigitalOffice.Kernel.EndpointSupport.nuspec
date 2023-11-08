@@ -32,7 +32,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_endpoint\DigitalOffice.Kernel.EndpointSupport.dll" target="lib\net7.0" />
-    <file src="artifacts\kernel_endpoint\DigitalOffice.Kernel.EndpointSupport.pdb" target="lib\net7.0" />
+    <file src="artifacts\kernel_endpoint\LTDO.Kernel.EndpointSupport.dll" target="lib\net7.0" />
+    <file src="artifacts\kernel_endpoint\LTDO.Kernel.EndpointSupport.pdb" target="lib\net7.0" />
   </files>
 </package>
