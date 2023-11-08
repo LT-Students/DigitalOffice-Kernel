@@ -1,10 +1,10 @@
-﻿using DigitalOffice.Kernel.Helpers.Interfaces;
-using DigitalOffice.Kernel.Responses;
+﻿using LT.DigitalOffice.Kernel.Helpers.Interfaces;
+using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Net;
 
-namespace DigitalOffice.Kernel.Helpers;
+namespace LT.DigitalOffice.Kernel.Helpers;
 
 public class ResponseCreator : IResponseCreator
 {

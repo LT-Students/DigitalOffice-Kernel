@@ -1,4 +1,4 @@
-﻿namespace DigitalOffice.Kernel.Enums;
+﻿namespace LT.DigitalOffice.Kernel.Enums;
 
 public enum InjectType
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DigitalOffice.Kernel.Exceptions.Models;
+namespace LT.DigitalOffice.Kernel.Exceptions.Models;
 
 /// <summary>
 /// Indicates client or server error.

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DigitalOffice.Kernel.BrokerSupport.Broker;
+namespace LT.DigitalOffice.Kernel.BrokerSupport.Broker;
 
 /// <summary>
 /// Wraps the returned object from a function in OperationResult.

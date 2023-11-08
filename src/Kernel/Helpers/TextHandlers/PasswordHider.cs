@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace DigitalOffice.Kernel.Helpers.TextHandlers;
+namespace LT.DigitalOffice.Kernel.Helpers;
 
 public static class PasswordHider
 {

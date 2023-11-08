@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace LTDO.Kernel.RedisSupport.Extensions;
+namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions;
 
 public static class RedisExtension
 {

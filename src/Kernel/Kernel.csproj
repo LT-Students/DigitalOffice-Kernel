@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <Version>1.0.32</Version>
+      <Version>1.0.25</Version>
 
       <TargetFramework>net7.0</TargetFramework>
 
-      <AssemblyName>LTDO.Kernel</AssemblyName>
+      <AssemblyName>DigitalOffice.Kernel</AssemblyName>
       <RootNamespace>DigitalOffice.Kernel</RootNamespace>
       <IsPackable>true</IsPackable>
       <IncludeSymbols>true</IncludeSymbols>

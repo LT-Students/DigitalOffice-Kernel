@@ -1,8 +1,8 @@
-﻿using DigitalOffice.Kernel.Constants;
-using DigitalOffice.Kernel.Validators.Interfaces;
-using FluentValidation;
+﻿using FluentValidation;
+using LT.DigitalOffice.Kernel.Constants;
+using LT.DigitalOffice.Kernel.Validators.Interfaces;
 
-namespace DigitalOffice.Kernel.Validators;
+namespace LT.DigitalOffice.Kernel.Validators;
 
 public class ImageExtensionValidator : AbstractValidator<string>, IImageExtensionValidator
 {

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>LTDO.Kernel</id>
-    <version>1.0.32</version>
+    <id>DigitalOffice.Kernel</id>
+    <version>1.0.25</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,16 +10,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-			1.0.32 - rework transition.
+			1.0.25 - Edit ClaimService rights.
 
 			Previous versions:
-			1.0.31 - Fix getting dlls.
-			1.0.30 - Fix dll name.
-			1.0.29 - Fix dll name.
-			1.0.28 - Revert access validator.
-			1.0.27 - Change root namespace in Kernel.
-			1.0.26 - Test update version.
-			1.0.25 - Edit ClaimService rights.
 			1.0.24 - Add ClaimService rights.
 			1.0.23 - Change BaseFindFilter TakeCount default value to 0.
 			1.0.22 - Add AddEditRemoveHrProcesses right.
@@ -63,7 +56,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel\LTDO.Kernel.dll" target="lib\net7.0" />
-    <file src="artifacts\kernel\LTDO.Kernel.pdb" target="lib\net7.0" />
+    <file src="artifacts\kernel\DigitalOffice.Kernel.dll" target="lib\net7.0" />
+    <file src="artifacts\kernel\DigitalOffice.Kernel.pdb" target="lib\net7.0" />
   </files>
 </package>

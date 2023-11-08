@@ -1,4 +1,4 @@
-﻿namespace DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
+﻿namespace LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
 
 /// <summary>
 /// The DTO model is a binding the request internal model of consumer for RabbitMQ.

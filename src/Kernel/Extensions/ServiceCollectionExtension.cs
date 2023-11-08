@@ -1,5 +1,5 @@
-﻿using DigitalOffice.Kernel.Attributes;
-using DigitalOffice.Kernel.Enums;
+﻿using LT.DigitalOffice.Kernel.Attributes;
+using LT.DigitalOffice.Kernel.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace DigitalOffice.Kernel.Extensions;
+namespace LT.DigitalOffice.Kernel.Extensions;
 
 /// <summary>
 /// Helper class for services extensions.
@@ -29,7 +29,8 @@ public static class ServiceCollectionExtension
     try
     {
       var asmPath = Path.GetDirectoryName(Assembly.GetCallingAssembly().Location);
-      var files = Directory.GetFiles(asmPath, "LT*.dll");
+      var files = Directory.GetFiles(asmPath, "*DigitalOffice*.dll");
+
       List<Assembly> assemblies = new();
 
       foreach (string fileName in files)

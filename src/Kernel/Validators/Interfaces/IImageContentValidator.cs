@@ -1,7 +1,7 @@
-﻿using DigitalOffice.Kernel.Attributes;
-using FluentValidation;
+﻿using FluentValidation;
+using LT.DigitalOffice.Kernel.Attributes;
 
-namespace DigitalOffice.Kernel.Validators.Interfaces;
+namespace LT.DigitalOffice.Kernel.Validators.Interfaces;
 
 [AutoInject]
 public interface IImageContentValidator : IValidator<string>
