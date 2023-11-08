@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
 	<metadata>
-		<id>DigitalOffice.Kernel.BrokerSupport</id>
-		<version>1.0.9</version>
+		<id>LTDO.Kernel.BrokerSupport</id>
+		<version>1.0.18</version>
 		<title>DigitalOffice.Kernel.BrokerSupport</title>
 		<authors>Lanit-Tercom Digital Office Team</authors>
 		<owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library used in the Digital Office project.</description>
 		<releaseNotes>
-			1.0.9 - add timeout parameter to RequestHandler.
+			1.0.18 - transfer to new nuget server.
 
 			Previous versions:
+			1.0.9 - add timeout parameter to RequestHandler.
 			1.0.8 - Update libs.
 			1.0.7 - Update Uri in RabbitMqHealthCheck.
 			1.0.6 - Update logging in MassTransitExtensions, added services.AddMassTransitHostedService() call to MassTransitExtensions.
@@ -29,7 +30,7 @@
 			<group targetFramework="net7.0">
 				<dependency id="MassTransit" version="8.0.16"/>
 				<dependency id="MassTransit.RabbitMQ" version="8.0.16"/>
-				<dependency id="DigitalOffice.Kernel" version="1.0.21" />
+				<dependency id="LTDO.Kernel" version="1.0.33" />
 			</group>
 		</dependencies>
 	</metadata>

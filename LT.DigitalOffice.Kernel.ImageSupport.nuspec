@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
     <metadata>
-        <id>DigitalOffice.Kernel.ImageSupport</id>
-        <version>1.0.6</version>
+        <id>LTDO.Kernel.ImageSupport</id>
+        <version>1.0.12</version>
         <title>DigitalOffice.Kernel.ImageSupport</title>
         <authors>Lanit-Tercom Digital Office Team</authors>
         <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Library used in the Digital Office project.</description>
         <releaseNotes>
-            1.0.6 - Update libs.
+            1.0.12 - transfer to new nuget server.
 
             Previous versions:
+						1.0.6 - Update libs.
 						1.0.5 - Update to .NET 7.0.
             1.0.4 - Modify ImageCompressHelper.
             1.0.3 - Make ImageResizeHelper to crop pictures for preview in the middle.
@@ -25,7 +26,7 @@
         <dependencies>
             <group targetFramework="net7.0">
                 <dependency id="SixLabors.ImageSharp" version="2.1.3"/>
-                <dependency id="DigitalOffice.Kernel" version="1.0.21"/>
+                <dependency id="LTDO.Kernel" version="1.0.33"/>
                 <dependency id="Svg" version="3.4.4"/>
             </group>
         </dependencies>
