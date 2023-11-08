@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>DigitalOffice.Kernel</id>
-    <version>1.0.25</version>
+    <id>LTDO.Kernel</id>
+    <version>1.0.33</version>
     <title>DigitalOffice.Kernel</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-			1.0.25 - Edit ClaimService rights.
+			1.0.33 - transfer to new nuget server.
 
 			Previous versions:
+			1.0.25 - Edit ClaimService rights.
 			1.0.24 - Add ClaimService rights.
 			1.0.23 - Change BaseFindFilter TakeCount default value to 0.
 			1.0.22 - Add AddEditRemoveHrProcesses right.
