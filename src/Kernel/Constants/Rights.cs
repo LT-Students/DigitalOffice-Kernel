@@ -23,8 +23,8 @@
 /// <value name="AddEditRemoveSurvey">Right grants admin rights to survey service</value>
 /// <value name="AddEditRemoveHrProcesses">Right grants admin rights to HR processes automation</value>
 /// <value name="AddEditRemoveClaims">Right allows you to edit all claims. Specify the department for claims that do not have it specified. Assign responsible persons</value>
-/// <value name="AddEditRemoveResponsible">Right allows you to edit claims inside your department</value>
-/// <value name="AddEditRemoveManager">Right allows you to reject or approve claims that come from departments</value>
+/// <value name="AddEditRemoveClaimsResponsible">Right allows you to edit claims inside your department</value>
+/// <value name="AddEditRemoveClaimsManager">Right allows you to reject or approve claims that come from departments</value>
 public static class Rights
 {
   public const int AddEditRemoveUsers = 1;
@@ -46,6 +46,6 @@ public static class Rights
   public const int AddEditRemoveSurvey = 17;
   public const int AddEditRemoveHrProcesses = 18;
   public const int AddEditRemoveClaims = 19;
-  public const int AddEditRemoveResponsible = 20;
-  public const int AddEditRemoveManager = 21;
+  public const int AddEditRemoveClaimsResponsible = 20;
+  public const int AddEditRemoveClaimsManager = 21;
 }
