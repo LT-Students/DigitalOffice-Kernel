@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-		1.0.14 - transfer to new nuget server.
+		1.0.14 - add survey to Cache.
 
 		Previous versions:
 		1.0.13 - transfer to new nuget server.
