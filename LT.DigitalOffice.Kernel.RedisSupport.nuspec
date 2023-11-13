@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LTDO.Kernel.RedisSupport</id>
-    <version>1.0.13</version>
+    <version>1.0.14</version>
     <title>DigitalOffice.Kernel.RedisSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,18 +10,19 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-        1.0.12 - transfer to new nuget server.
+		1.0.14 - transfer to new nuget server.
 
-        Previous versions:
-				1.0.7 - update libs.
-				1.0.6 - Add Skills to Cache class.
-        1.0.5 - Update to .NET 7.0.
-        1.0.4 - Add Tokens to Cache class.
-        1.0.3 - Add request name to GetRedisCacheKey methods.
-        1.0.2 - Add Clear() method to GlobalCacheRepository.
-        1.0.1 - Update kernel version used in this lib.
-        1.0.0 - Initial.
-    </releaseNotes>
+		Previous versions:
+		1.0.13 - transfer to new nuget server.
+		1.0.7 - update libs.
+		1.0.6 - Add Skills to Cache class.
+		1.0.5 - Update to .NET 7.0.
+		1.0.4 - Add Tokens to Cache class.
+		1.0.3 - Add request name to GetRedisCacheKey methods.
+		1.0.2 - Add Clear() method to GlobalCacheRepository.
+		1.0.1 - Update kernel version used in this lib.
+		1.0.0 - Initial.
+	</releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
