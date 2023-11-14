@@ -11,4 +11,5 @@ public static class Cache
   public const int Rights = 6;
   public const int Tokens = 7;
   public const int Skills = 8;
+  public const int Surveys = 9;
 }
