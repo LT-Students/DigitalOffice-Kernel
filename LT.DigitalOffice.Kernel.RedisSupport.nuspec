@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>LTDO.Kernel.RedisSupport</id>
-    <version>1.0.14</version>
+    <version>1.0.15</version>
     <title>DigitalOffice.Kernel.RedisSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,30 +10,31 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-		1.0.14 - add survey to Cache.
+      1.0.15 - update stack exchange dep.
 
-		Previous versions:
-		1.0.13 - transfer to new nuget server.
-		1.0.7 - update libs.
-		1.0.6 - Add Skills to Cache class.
-		1.0.5 - Update to .NET 7.0.
-		1.0.4 - Add Tokens to Cache class.
-		1.0.3 - Add request name to GetRedisCacheKey methods.
-		1.0.2 - Add Clear() method to GlobalCacheRepository.
-		1.0.1 - Update kernel version used in this lib.
-		1.0.0 - Initial.
-	</releaseNotes>
+      Previous versions:
+      1.0.14 - add survey to Cache.
+      1.0.13 - transfer to new nuget server.
+      1.0.7 - update libs.
+      1.0.6 - Add Skills to Cache class.
+      1.0.5 - Update to .NET 7.0.
+      1.0.4 - Add Tokens to Cache class.
+      1.0.3 - Add request name to GetRedisCacheKey methods.
+      1.0.2 - Add Clear() method to GlobalCacheRepository.
+      1.0.1 - Update kernel version used in this lib.
+      1.0.0 - Initial.
+    </releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
     <tags>DigitalOffice</tags>
     <dependencies>
       <group targetFramework="net7.0">
-        <dependency id="StackExchange.Redis" version="2.2.50" />
-        <dependency id="LTDO.Kernel" version="1.0.33" />
+        <dependency id="StackExchange.Redis" version="2.6.122"/>
+        <dependency id="LTDO.Kernel" version="1.0.33"/>
       </group>
     </dependencies>
   </metadata>
   <files>
-    <file src="artifacts\kernel_redis\LTDO.Kernel.RedisSupport.dll" target="lib\net7.0" />
-    <file src="artifacts\kernel_redis\LTDO.Kernel.RedisSupport.pdb" target="lib\net7.0" />
+    <file src="artifacts\kernel_redis\LTDO.Kernel.RedisSupport.dll" target="lib\net7.0"/>
+    <file src="artifacts\kernel_redis\LTDO.Kernel.RedisSupport.pdb" target="lib\net7.0"/>
   </files>
 </package>
