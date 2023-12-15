@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Version>1.0.11</Version>
+        <Version>2.0.0</Version>
 
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
 
         <AssemblyName>LTDO.Kernel.EndpointSupport</AssemblyName>
         <RootNamespace>DigitalOffice.Kernel.EndpointSupport</RootNamespace>
@@ -18,8 +18,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="LTDO.Kernel" Version="1.0.33" />
-        <PackageReference Include="LTDO.Kernel.BrokerSupport" Version="1.0.18" />
+        <PackageReference Include="LTDO.Kernel" Version="2.0.0" />
+        <PackageReference Include="LTDO.Kernel.BrokerSupport" Version="2.0.0" />
     </ItemGroup>
 
 </Project>
