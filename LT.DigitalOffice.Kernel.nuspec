@@ -61,7 +61,7 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="artifacts\kernel\DigitalOffice.Kernel.dll" target="lib\net7.0"/>
-        <file src="artifacts\kernel\DigitalOffice.Kernel.pdb" target="lib\net7.0"/>
+        <file src="artifacts\kernel\DigitalOffice.Kernel.dll" target="lib\net8.0"/>
+        <file src="artifacts\kernel\DigitalOffice.Kernel.pdb" target="lib\net8.0"/>
     </files>
 </package>
