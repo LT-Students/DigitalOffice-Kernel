@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>LTDO.Kernel</id>
-        <version>2.0.1</version>
+        <version>2.0.0</version>
         <title>DigitalOffice.Kernel</title>
         <authors>Lanit-Tercom Digital Office Team</authors>
         <owners>Lanit-Tercom Digital Office</owners>
@@ -10,10 +10,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Library used in the Digital Office project.</description>
         <releaseNotes>
-            2.0.1 - add AddEditRemoveEducations right.
+            2.0.0 - migrate to dotnet 8.
 
             Previous versions:
-            2.0.0 - migrate to dotnet 8.
             1.0.34 - modify claim right names.
             1.0.33 - transfer to new nuget server.
             1.0.25 - Edit ClaimService rights.
