@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>LTDO.Kernel.DapperSupport</id>
+    <version>1.0.0</version>
+    <title>DigitalOffice.Kernel.DapperSupport</title>
+    <authors>Lanit-Tercom Digital Office Team</authors>
+    <owners>Lanit-Tercom Digital Office</owners>
+    <projectUrl>https://github.com/LT-Students/DigitalOffice-Kernel</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Library used in the Digital Office project.</description>
+    <releaseNotes>
+		
+      1.0.0 - Initial.
+
+      Previous versions:
+		
+	</releaseNotes>
+    <copyright>Copyright © LT Digital Office</copyright>
+    <tags>DigitalOffice</tags>
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="LTDO.Kernel" version="2.0.0"/>
+        <PackageReference Include="FluentMigrator.Runner" Version="5.0.0" />
+        <dependency id="Dapper" Version="2.1.28" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="artifacts\kernel_dapper\LTDO.Kernel.DapperSupport.dll" target="lib\net8.0" />
+    <file src="artifacts\kernel_dapper\LTDO.Kernel.DapperSupport.pdb" target="lib\net8.0" />
+  </files>
+</package>

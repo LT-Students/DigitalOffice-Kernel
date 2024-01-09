@@ -25,6 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{BE32B5DF-5B6
 		.github\workflows\main.yml = .github\workflows\main.yml
 		.github\workflows\nuget_kernel.yml = .github\workflows\nuget_kernel.yml
 		.github\workflows\nuget_kernel_broker.yml = .github\workflows\nuget_kernel_broker.yml
+		nuget_kernel_dapper.yml = nuget_kernel_dapper.yml
 		.github\workflows\nuget_kernel_ef.yml = .github\workflows\nuget_kernel_ef.yml
 		.github\workflows\nuget_kernel_endpoint.yml = .github\workflows\nuget_kernel_endpoint.yml
 		.github\workflows\nuget_kernel_image.yml = .github\workflows\nuget_kernel_image.yml
@@ -34,6 +35,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{5FD294CA-DC1E-436A-82D4-7D87935F7F0C}"
 	ProjectSection(SolutionItems) = preProject
 		LT.DigitalOffice.Kernel.BrokerSupport.nuspec = LT.DigitalOffice.Kernel.BrokerSupport.nuspec
+		LT.DigitalOffice.Kernel.DapperSupport.nuspec = LT.DigitalOffice.Kernel.DapperSupport.nuspec
 		LT.DigitalOffice.Kernel.EFSupport.nuspec = LT.DigitalOffice.Kernel.EFSupport.nuspec
 		LT.DigitalOffice.Kernel.EndpointSupport.nuspec = LT.DigitalOffice.Kernel.EndpointSupport.nuspec
 		LT.DigitalOffice.Kernel.ImageSupport.nuspec = LT.DigitalOffice.Kernel.ImageSupport.nuspec
@@ -55,7 +57,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.EndpointSupport", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.EndpointSupport.UnitTests", "test\Kernel.EndpointSupport.UnitTests\Kernel.EndpointSupport.UnitTests.csproj", "{9FB9FB9A-3D56-4B85-80BC-C18311369E16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.EFSupport", "src\Kernel.EFSupport\Kernel.EFSupport.csproj", "{9D7EE0D2-B351-4BC0-A43E-2EC2D30C6811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kernel.EFSupport", "src\Kernel.EFSupport\Kernel.EFSupport.csproj", "{9D7EE0D2-B351-4BC0-A43E-2EC2D30C6811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kernel.DapperSupport", "src\Kernel.DapperSupport\Kernel.DapperSupport.csproj", "{9EF97175-1DAB-464B-A3AB-28BDF6A3EFA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +111,10 @@ Global
 		{9D7EE0D2-B351-4BC0-A43E-2EC2D30C6811}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D7EE0D2-B351-4BC0-A43E-2EC2D30C6811}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D7EE0D2-B351-4BC0-A43E-2EC2D30C6811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EF97175-1DAB-464B-A3AB-28BDF6A3EFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EF97175-1DAB-464B-A3AB-28BDF6A3EFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EF97175-1DAB-464B-A3AB-28BDF6A3EFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EF97175-1DAB-464B-A3AB-28BDF6A3EFA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,6 +133,7 @@ Global
 		{46BF3A9E-B765-4254-9362-B20CB63A3CBF} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
 		{9FB9FB9A-3D56-4B85-80BC-C18311369E16} = {12F33343-2D9F-4585-9B0E-02DDF4046625}
 		{9D7EE0D2-B351-4BC0-A43E-2EC2D30C6811} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
+		{9EF97175-1DAB-464B-A3AB-28BDF6A3EFA3} = {BCFECB30-2ADC-451E-839C-32B23FAA398E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FACABE25-5CB9-4CCC-BD5E-D96AC398DE04}
