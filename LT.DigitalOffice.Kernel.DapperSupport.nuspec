@@ -21,7 +21,7 @@
     <dependencies>
       <group targetFramework="net8.0">
         <dependency id="LTDO.Kernel" version="2.0.0"/>
-        <PackageReference Include="FluentMigrator.Runner" Version="5.0.0" />
+        <dependency id="FluentMigrator.Runner" Version="5.0.0" />
         <dependency id="Dapper" Version="2.1.28" />
       </group>
     </dependencies>
