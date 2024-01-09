@@ -82,12 +82,12 @@ csharp_style_var_when_type_is_apparent = false
 
 # Expression-bodied members
 csharp_style_expression_bodied_accessors = when_on_single_line:suggestion
-csharp_style_expression_bodied_constructors = false
+csharp_style_expression_bodied_constructors = false:silent
 csharp_style_expression_bodied_indexers = when_on_single_line:suggestion
 csharp_style_expression_bodied_lambdas = when_on_single_line:suggestion
-csharp_style_expression_bodied_local_functions = false
-csharp_style_expression_bodied_methods = false
-csharp_style_expression_bodied_operators = false
+csharp_style_expression_bodied_local_functions = false:silent
+csharp_style_expression_bodied_methods = false:silent
+csharp_style_expression_bodied_operators = false:silent
 csharp_style_expression_bodied_properties = when_on_single_line:suggestion
 
 # Pattern matching preferences
@@ -108,10 +108,10 @@ csharp_style_prefer_readonly_struct = true
 
 # Code-block preferences
 csharp_prefer_braces = true:warning
-csharp_prefer_simple_using_statement = false
+csharp_prefer_simple_using_statement = false:suggestion
 csharp_style_namespace_declarations = file_scoped:suggestion
 csharp_style_prefer_method_group_conversion = true:suggestion
-csharp_style_prefer_top_level_statements = false
+csharp_style_prefer_top_level_statements = false:silent
 
 # Expression-level preferences
 csharp_prefer_simple_default_expression = true
@@ -261,3 +261,14 @@ dotnet_naming_style.hungarian.required_prefix = _
 dotnet_naming_style.hungarian.required_suffix = 
 dotnet_naming_style.hungarian.word_separator = 
 dotnet_naming_style.hungarian.capitalization = camel_case
+csharp_style_prefer_primary_constructors = true:suggestion
+
+[*.{cs,vb}]
+dotnet_style_operator_placement_when_wrapping = beginning_of_line
+tab_width = 2
+indent_size = 2
+end_of_line = crlf
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_null_propagation = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
+dotnet_style_prefer_auto_properties = true:suggestion
