@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-		1.0.0 - Initial.
+		
+      1.0.0 - Initial.
 
-		Previous versions:
+      Previous versions:
 		
 	</releaseNotes>
     <copyright>Copyright © LT Digital Office</copyright>
