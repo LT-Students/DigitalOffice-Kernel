@@ -33,8 +33,8 @@ public static class StringExtensions
         continue;
       }
 
-      if (subValues[0].ToUpper() == "USER" ||
-          subValues[0].ToUpper() == "PASSWORD")
+      if (subValues[0].Equals("USER", StringComparison.CurrentCultureIgnoreCase) ||
+          subValues[0].Equals("PASSWORD", StringComparison.CurrentCultureIgnoreCase))
       {
         subValues[1] = "*****";
 
@@ -75,10 +75,9 @@ public static class StringExtensions
     PropertyInfo baseTypeInfo = modelType
       .GetProperties()
       .FirstOrDefault(p => p.PropertyType.FullName != null && p.PropertyType.FullName.Contains("List"));
-    if (baseTypeInfo is not null)
+    object listValue = baseTypeInfo?.GetValue(obj);
+    if (listValue is not null)
     {
-      object listValue = baseTypeInfo.GetValue(obj);
-
       int listCount = (int)baseTypeInfo.PropertyType.GetProperty("Count")?.GetValue(listValue)!;
       for (int innerIndex = 0; innerIndex < listCount; innerIndex++)
       {
@@ -94,11 +93,8 @@ public static class StringExtensions
         .GetProperties(BindingFlags.Instance | BindingFlags.Public)
         .Where(
           prop =>
-            prop.PropertyType.FullName != null
-            && !prop.PropertyType.IsPrimitive
-            && !prop.PropertyType.IsEnum
-            && prop.PropertyType.IsClass
-            && !prop.PropertyType.FullName.StartsWith("System"));
+            prop.PropertyType is { FullName: not null, IsPrimitive: false, IsEnum: false, IsClass: true } &&
+            !prop.PropertyType.FullName.StartsWith("System"));
 
     foreach (PropertyInfo customType in customTypes)
     {
