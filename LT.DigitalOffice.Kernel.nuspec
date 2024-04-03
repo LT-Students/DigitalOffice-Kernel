@@ -10,7 +10,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Library used in the Digital Office project.</description>
         <releaseNotes>
-            2.0.3 - Add AddEditRemovePrProcesses right.
+            2.0.3 - Add 'AddEditRemovePrProcesses' constant for Rights.
 
             Previous versions:
             2.0.2 - fix bug in Trim attribute.
