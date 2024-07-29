@@ -41,5 +41,5 @@ public interface IRedisHelper
   /// <param name="database">Id of database.</param>
   /// <param name="key">Unique value to identify cached value.</param>
   /// <returns>Whether value is already stored in cache with provided key.</returns>
-  Task<bool> Contains(int database, string key);
+  Task<bool> ContainsAsync(int database, string key);
 }

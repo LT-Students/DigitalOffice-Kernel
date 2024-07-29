@@ -81,7 +81,7 @@ public class RedisHelper(
     return true;
   }
 
-  public Task<bool> Contains(int database, string key)
+  public Task<bool> ContainsAsync(int database, string key)
   {
     if (!cache.IsConnected)
     {
