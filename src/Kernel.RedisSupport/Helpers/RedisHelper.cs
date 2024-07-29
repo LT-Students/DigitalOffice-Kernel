@@ -17,7 +17,7 @@ public class RedisHelper(
   {
     if (!cache.IsConnected)
     {
-      logger.LogError("Connection with Redis cache interrupted.");
+      logger.LogError("Connection with cache storage interrupted.");
 
       return Task.FromResult(false);
     }
@@ -35,7 +35,7 @@ public class RedisHelper(
   {
     if (!cache.IsConnected)
     {
-      logger.LogError("Connection with Redis cache interrupted.");
+      logger.LogError("Connection with cache storage interrupted.");
 
       return default;
     }
@@ -61,7 +61,7 @@ public class RedisHelper(
   {
     if (!cache.IsConnected || elements is null)
     {
-      logger.LogError("Connection with Redis cache interrupted.");
+      logger.LogError("Connection with cache storage interrupted.");
 
       return false;
     }
@@ -85,7 +85,7 @@ public class RedisHelper(
   {
     if (!cache.IsConnected)
     {
-      logger.LogError("Connection with Redis cache interrupted.");
+      logger.LogError("Connection with cache storage interrupted.");
 
       return Task.FromResult(false);
     }
