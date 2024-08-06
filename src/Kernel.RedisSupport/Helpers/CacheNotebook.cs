@@ -82,6 +82,19 @@ public class CacheNotebook : ICacheNotebook
     _dictionary.TryRemove(elementId, out _);
   }
 
+  public void Clear(int database)
+  {
+    var keysToRemove = _dictionary
+        .Where(k => k.Value.Any(frame => frame.Database == database))
+        .Select(k => k.Key)
+        .ToList();
+
+    foreach (Guid key in keysToRemove)
+    {
+      _dictionary.TryRemove(key, out _);
+    }
+  }
+
   public void Clear()
   {
     _dictionary.Clear();

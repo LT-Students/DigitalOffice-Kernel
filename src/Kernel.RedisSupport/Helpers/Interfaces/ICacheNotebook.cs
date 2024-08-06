@@ -12,5 +12,6 @@ public interface ICacheNotebook
   IEnumerable<(int database, string key)> GetKeys(Guid elementId);
   IEnumerable<(int database, string key)> GetKeys();
   void Remove(Guid elementId);
+  void Clear(int database);
   void Clear();
 }

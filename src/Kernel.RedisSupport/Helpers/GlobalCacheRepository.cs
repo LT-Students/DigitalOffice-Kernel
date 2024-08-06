@@ -56,6 +56,20 @@ public class GlobalCacheRepository : IGlobalCacheRepository
     return true;
   }
 
+  public async Task<bool> Clear(int database)
+  {
+    var elements = _cacheNotebook.GetKeys().Where(x => x.database == database).ToList();
+
+    if (!await _redisHelper.RemoveAsync(elements))
+    {
+      return false;
+    }
+
+    _cacheNotebook.Clear(database);
+
+    return true;
+  }
+
   public async Task<bool> Clear()
   {
     if (!await _redisHelper.RemoveAsync(_cacheNotebook.GetKeys().ToList()))
