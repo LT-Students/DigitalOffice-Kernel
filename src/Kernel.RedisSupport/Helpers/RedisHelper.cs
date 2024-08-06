@@ -22,7 +22,6 @@ public class RedisHelper(
       return Task.FromResult(false);
     }
 
-
     logger.LogInformation(
       "Value was cached in cache {cache} with key {cacheKey}.",
       database,
