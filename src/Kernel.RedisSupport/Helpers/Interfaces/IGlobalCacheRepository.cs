@@ -12,5 +12,6 @@ public interface IGlobalCacheRepository
   Task CreateAsync<T>(int database, string key, T item, List<Guid> elementsIds, TimeSpan? lifeTime);
   Task<T> GetAsync<T>(int database, string key);
   Task<bool> RemoveAsync(Guid elementId);
+  Task<bool> Clear(int database);
   Task<bool> Clear();
 }

@@ -1,5 +1,6 @@
 ﻿using LT.DigitalOffice.Kernel.RedisSupport.Configurations;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Concurrent;
@@ -30,11 +31,14 @@ public class CacheNotebook : ICacheNotebook
 
   private static readonly ConcurrentDictionary<Guid, List<Frame>> _dictionary = new();
   private readonly IOptions<RedisConfig> _options;
+  private readonly ILogger<CacheNotebook> _logger;
 
   public CacheNotebook(
-    IOptions<RedisConfig> options)
+    IOptions<RedisConfig> options,
+    ILogger<CacheNotebook> logger)
   {
     _options = options;
+    _logger = logger;
   }
 
   public void Add(List<Guid> elementsIds, int database, string key)
@@ -65,6 +69,8 @@ public class CacheNotebook : ICacheNotebook
   {
     if (!_dictionary.TryGetValue(elementId, out var frames) || frames is null)
     {
+      _logger.LogInformation("No cache items found for element with Id: '{elementId}'", elementId);
+
       return Enumerable.Empty<(int database, string key)>();
     }
 
@@ -79,19 +85,25 @@ public class CacheNotebook : ICacheNotebook
 
   public void Remove(Guid elementId)
   {
-    _dictionary.TryRemove(elementId, out _);
+    if (!_dictionary.TryRemove(elementId, out _))
+    {
+      _logger.LogInformation("No cache items found for element with Id: '{elementId}'", elementId);
+    }
   }
 
   public void Clear(int database)
   {
     var keysToRemove = _dictionary
-        .Where(k => k.Value.Any(frame => frame.Database == database))
+        .Where(k => k.Value.Any(f => f.Database == database))
         .Select(k => k.Key)
         .ToList();
 
     foreach (Guid key in keysToRemove)
     {
-      _dictionary.TryRemove(key, out _);
+      if (!_dictionary.TryRemove(key, out _))
+      {
+        _logger.LogInformation("No cache items found for element with Id: '{key}'", key);
+      }
     }
   }
 
