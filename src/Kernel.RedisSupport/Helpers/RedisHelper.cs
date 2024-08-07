@@ -89,6 +89,11 @@ public class RedisHelper(
       return Task.FromResult(false);
     }
 
+    logger.LogInformation(
+      "Checking existence of key in cache. Database: '{database}', Key: '{key}'",
+      database,
+      key);
+
     return cache.GetDatabase(database).KeyExistsAsync(new RedisKey(key));
   }
 }
