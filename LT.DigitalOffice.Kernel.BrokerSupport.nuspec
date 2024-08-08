@@ -2,7 +2,7 @@
 <package >
 	<metadata>
 		<id>LTDO.Kernel.BrokerSupport</id>
-		<version>2.0.0</version>
+		<version>2.0.1</version>
 		<title>DigitalOffice.Kernel.BrokerSupport</title>
 		<authors>Lanit-Tercom Digital Office Team</authors>
 		<owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<description>Library used in the Digital Office project.</description>
 		<releaseNotes>
-			2.0.0 - migrate to dotnet 8.
+			2.0.1 - modify TokenMiddleware to work with parameterized routes.
 
 			Previous versions:
+			2.0.0 - migrate to dotnet 8.
 			1.0.18 - transfer to new nuget server.
 			1.0.9 - add timeout parameter to RequestHandler.
 			1.0.8 - Update libs.
@@ -31,7 +32,7 @@
 			<group targetFramework="net8.0">
 				<dependency id="MassTransit" version="8.1.2"/>
 				<dependency id="MassTransit.RabbitMQ" version="8.1.2"/>
-				<dependency id="LTDO.Kernel" version="2.0.0" />
+				<dependency id="LTDO.Kernel" version="2.0.3" />
 			</group>
 		</dependencies>
 	</metadata>
