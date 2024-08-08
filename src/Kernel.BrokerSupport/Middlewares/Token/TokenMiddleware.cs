@@ -40,11 +40,12 @@ public class TokenMiddleware
     HttpContext context,
     IRequestClient<ICheckTokenRequest> client)
   {
+    // TODO: Rework
     if (string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase) ||
         tokenConfiguration.SkippedEndpoints != null &&
-          tokenConfiguration.SkippedEndpoints.Any(
-            url =>
-              url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase)))
+        tokenConfiguration.SkippedEndpoints.Any(url =>
+          url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase) ||
+          context.Request.Path.StartsWithSegments(new PathString(url))))
     {
       await requestDelegate.Invoke(context);
     }
