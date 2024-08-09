@@ -12,4 +12,5 @@ public static class Cache
   public const int Tokens = 7;
   public const int Skills = 8;
   public const int Surveys = 9;
+  public const int Filters = 10;
 }
