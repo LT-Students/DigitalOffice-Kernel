@@ -1,5 +1,8 @@
 ﻿namespace LT.DigitalOffice.Kernel.RedisSupport.Constants;
 
+/// <summary>
+/// Enum representing the IDs of cache databases.
+/// </summary>
 public enum Cache
 {
   Users = 0,

@@ -1,12 +1,16 @@
 ﻿using LT.DigitalOffice.Kernel.Attributes;
+using LT.DigitalOffice.Kernel.RedisSupport.Constants;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 
+/// <summary>
+/// Helper for manipulating data in cache storages.
+/// </summary>
 [AutoInject]
-public interface IRedisHelper
+public interface ICacheHelper
 {
   /// <summary>
   /// Method for caching values.
@@ -16,8 +20,8 @@ public interface IRedisHelper
   /// <param name="item">Value to cache.</param>
   /// <param name="lifeTime">How long value must be cached.</param>
   /// <typeparam name="T">Type of value to cache.</typeparam>
-  /// <returns>Whether value was successfully cached</returns>
-  Task<bool> CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime = null);
+  /// <returns>Whether value was successfully cached.</returns>
+  Task<bool> CreateAsync<T>(Cache database, string key, T item, TimeSpan? lifeTime = null);
 
   /// <summary>
   /// Method for getting value from cache storage.
@@ -26,14 +30,14 @@ public interface IRedisHelper
   /// <param name="key">Unique value to identify cached value.</param>
   /// <typeparam name="T">Type of value to receive.</typeparam>
   /// <returns>Cached value.</returns>
-  Task<T> GetAsync<T>(int database, string key);
+  Task<T> GetAsync<T>(Cache database, string key);
 
   /// <summary>
   /// Method for removing value from cache storage.
   /// </summary>
   /// <param name="elements">Pairs of database Ids and value keys to remove.</param>
   /// <returns>Whether value was successfully removed from cache storage.</returns>
-  Task<bool> RemoveAsync(List<(int database, string key)> elements);
+  Task<bool> RemoveAsync(List<(Cache database, string key)> elements);
 
   /// <summary>
   /// Method for checking if value is already stored in cache with provided key.
@@ -41,5 +45,5 @@ public interface IRedisHelper
   /// <param name="database">Id of database.</param>
   /// <param name="key">Unique value to identify cached value.</param>
   /// <returns>Whether value is already stored in cache with provided key.</returns>
-  Task<bool> ContainsAsync(int database, string key);
+  Task<bool> ContainsAsync(Cache database, string key);
 }
