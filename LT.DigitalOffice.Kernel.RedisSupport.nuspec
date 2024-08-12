@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>LTDO.Kernel.RedisSupport</id>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
     <title>DigitalOffice.Kernel.RedisSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      2.0.5 - add Filter table to Cache.
+      2.0.6 - add docs.
 
       Previous versions:
+      2.0.5 - add Filter table to Cache.
       2.0.4 - add AddRedisDistributedCache extension method.
       2.0.3 - update StackExchange.Redis and add Microsoft.Extensions.Caching.StackExchangeRedis.
       2.0.2 - add Clear method to GlobalCache.
