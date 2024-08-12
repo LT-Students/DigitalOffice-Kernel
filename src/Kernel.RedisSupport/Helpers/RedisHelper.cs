@@ -1,4 +1,5 @@
-﻿using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
+﻿using LT.DigitalOffice.Kernel.RedisSupport.Constants;
+using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using StackExchange.Redis;
@@ -8,12 +9,16 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
 
+/// <inheritdoc />
 public class RedisHelper(
   IConnectionMultiplexer cache,
   ILogger<RedisHelper> logger)
-  : IRedisHelper
+  : ICacheHelper
 {
-  public Task<bool> CreateAsync<T>(int database, string key, T item, TimeSpan? lifeTime)
+  #region public methods
+
+  /// <inheritdoc/>
+  public Task<bool> CreateAsync<T>(Cache database, string key, T item, TimeSpan? lifeTime)
   {
     if (!cache.IsConnected)
     {
@@ -27,10 +32,11 @@ public class RedisHelper(
       database,
       key);
 
-    return cache.GetDatabase(database).StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
+    return cache.GetDatabase((int)database).StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
   }
 
-  public async Task<T> GetAsync<T>(int database, string key)
+  /// <inheritdoc/>
+  public async Task<T> GetAsync<T>(Cache database, string key)
   {
     if (!cache.IsConnected)
     {
@@ -39,30 +45,50 @@ public class RedisHelper(
       return default;
     }
 
-    RedisValue data = await cache.GetDatabase(database).StringGetAsync(key);
+    RedisValue data = await cache.GetDatabase((int)database).StringGetAsync(key);
 
-    if (data.HasValue)
+    if (!data.HasValue)
     {
-      T item = JsonConvert.DeserializeObject<T>(data);
-
-      logger.LogInformation(
-        "Cached value was received from cache {cache} with key {cacheKey}.",
+      logger.LogWarning(
+        "No data received from cache {cache} with key {cacheKey}",
         database,
         key);
 
-      return item;
+      return default;
     }
 
-    return default;
+    T item = JsonConvert.DeserializeObject<T>(data);
+
+    logger.LogInformation(
+      "Cached value was received from cache {cache} with key {cacheKey}.",
+      database,
+      key);
+
+    return item;
   }
 
-  public async Task<bool> RemoveAsync(List<(int database, string key)> elements)
+  /// <inheritdoc/>
+  public async Task<bool> RemoveAsync(List<(Cache database, string key)> elements)
   {
-    if (!cache.IsConnected || elements is null)
+    if (!cache.IsConnected)
     {
       logger.LogError("Connection with cache storage interrupted.");
 
       return false;
+    }
+
+    if (elements is null)
+    {
+      logger.LogError("Elements with null value provided.");
+
+      throw new ArgumentNullException(nameof(elements));
+    }
+
+    if (elements.Count == 0)
+    {
+      logger.LogError("No elements provided.");
+
+      throw new ArgumentException("Empty lis of elements provided.", nameof(elements));
     }
 
     foreach ((int database, string key) element in elements)
@@ -80,7 +106,8 @@ public class RedisHelper(
     return true;
   }
 
-  public Task<bool> ContainsAsync(int database, string key)
+  /// <inheritdoc/>
+  public Task<bool> ContainsAsync(Cache database, string key)
   {
     if (!cache.IsConnected)
     {
@@ -94,6 +121,8 @@ public class RedisHelper(
       database,
       key);
 
-    return cache.GetDatabase(database).KeyExistsAsync(new RedisKey(key));
+    return cache.GetDatabase((int)database).KeyExistsAsync(new RedisKey(key));
   }
+
+  #endregion
 }

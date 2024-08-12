@@ -1,4 +1,5 @@
 ﻿using LT.DigitalOffice.Kernel.Helpers;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -7,6 +8,9 @@ using System;
 
 namespace DigitalOffice.Kernel.RedisSupport.Extensions;
 
+/// <summary>
+/// Class with extension method for working with Redis cache.
+/// </summary>
 public static class RedisServiceExtension
 {
   /// <summary>
@@ -36,8 +40,9 @@ public static class RedisServiceExtension
   }
 
   /// <summary>
-  /// Registers Redis cache provider as distributed cache via <see cref="StackExchangeRedisCacheServiceCollectionExtensions"/>
+  /// Registers Redis cache provider as distributed cache via <see cref="StackExchangeRedisCacheServiceCollectionExtensions"/>.
   /// </summary>
+  /// <remarks>After applying this method Redis can be accessed with <see cref="IDistributedCache"/>.</remarks>
   public static void AddRedisDistributedCache(this IServiceCollection services, IConfiguration configuration)
   {
     string redisConnectionString = Environment.GetEnvironmentVariable("RedisConnectionString");

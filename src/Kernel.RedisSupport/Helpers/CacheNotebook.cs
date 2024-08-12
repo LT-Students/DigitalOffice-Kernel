@@ -1,8 +1,8 @@
 ﻿using LT.DigitalOffice.Kernel.RedisSupport.Configurations;
+using LT.DigitalOffice.Kernel.RedisSupport.Constants;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using StackExchange.Redis;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -10,45 +10,38 @@ using System.Linq;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
 
-public class CacheNotebook : ICacheNotebook
+/// <inheritdoc/>
+public class CacheNotebook(
+  IOptions<RedisConfig> options,
+  ILogger<CacheNotebook> logger)
+  : ICacheNotebook
 {
-  private class Frame
-  {
-    public int Database { get; init; }
-    public string Key { get; init; }
-    public TimeSpan LifeTime { get; init; }
-    public DateTime CreatedAtUtc { get; init; }
-
-    public Frame(int database, string key, TimeSpan lifeTime)
-    {
-      Database = database;
-      Key = key;
-      LifeTime = lifeTime;
-      CreatedAtUtc = DateTime.UtcNow;
-    }
-
-    public bool IsOverdue { get { return CreatedAtUtc + LifeTime < DateTime.UtcNow; } }
-  }
+  #region private fields and classes
 
   private static readonly ConcurrentDictionary<Guid, List<Frame>> _dictionary = new();
-  private readonly IOptions<RedisConfig> _options;
-  private readonly ILogger<CacheNotebook> _logger;
 
-  public CacheNotebook(
-    IOptions<RedisConfig> options,
-    ILogger<CacheNotebook> logger)
+  private class Frame(Cache database, string key, TimeSpan lifeTime)
   {
-    _options = options;
-    _logger = logger;
+    public Cache Database { get; init; } = database;
+    public string Key { get; init; } = key;
+    private TimeSpan LifeTime { get; init; } = lifeTime;
+    private DateTime CreatedAtUtc { get; init; } = DateTime.UtcNow;
+
+    public bool IsOverdue => CreatedAtUtc + LifeTime < DateTime.UtcNow;
   }
 
-  public void Add(List<Guid> elementsIds, int database, string key)
+  #endregion
+
+  #region public methods
+
+  /// <inheritdoc/>
+  public void Add(List<Guid> elementsIds, Cache database, string key)
   {
     foreach (var elementId in elementsIds)
     {
       Add(elementId, database, key);
 
-      _logger.LogInformation(
+      logger.LogInformation(
          "Added cache item. ElementId: '{elementId}', Database: '{database}', Key: '{key}'",
          elementId,
          database,
@@ -56,9 +49,10 @@ public class CacheNotebook : ICacheNotebook
     }
   }
 
-  public void Add(Guid elementId, int database, string key)
+  /// <inheritdoc/>
+  public void Add(Guid elementId, Cache database, string key)
   {
-    Frame frame = new(database, key, TimeSpan.FromMinutes(_options.Value.CacheLiveInMinutes));
+    Frame frame = new(database, key, TimeSpan.FromMinutes(options.Value.CacheLiveInMinutes));
 
     _dictionary.AddOrUpdate(
       elementId,
@@ -68,7 +62,7 @@ public class CacheNotebook : ICacheNotebook
         frames = frames.Where(f => !f.IsOverdue).ToList();
         frames.Add(frame);
 
-        _logger.LogInformation(
+        logger.LogInformation(
           "Added cache item. ElementId: '{elementId}', Database: '{database}', Key: '{key}'",
           elementId,
           database,
@@ -78,39 +72,43 @@ public class CacheNotebook : ICacheNotebook
       });
   }
 
-  public IEnumerable<(int database, string key)> GetKeys(Guid elementId)
+  /// <inheritdoc/>
+  public IEnumerable<(Cache database, string key)> GetKeys(Guid elementId)
   {
     if (!_dictionary.TryGetValue(elementId, out var frames) || frames is null)
     {
-      _logger.LogInformation("No cache items found for element with Id: '{elementId}'", elementId);
+      logger.LogInformation("No cache items found for element with Id: '{elementId}'", elementId);
 
-      return Enumerable.Empty<(int database, string key)>();
+      return [];
     }
 
-    _logger.LogInformation("Get keys of cache items for element with Id: '{elementId}'", elementId);
+    logger.LogInformation("Get keys of cache items for element with Id: '{elementId}'", elementId);
 
     return frames.Where(frame => !frame.IsOverdue).Select(frame => (frame.Database, frame.Key)).ToList();
   }
 
-  public IEnumerable<(int database, string key)> GetKeys()
+  /// <inheritdoc/>
+  public IEnumerable<(Cache database, string key)> GetKeys()
   {
-    _logger.LogInformation("Get keys of all cache items");
+    logger.LogInformation("Get keys of all cache items");
 
     return _dictionary.Values.SelectMany(frames => frames.Where(frame => frame is not null && !frame.IsOverdue)
       .Select(frame => (frame.Database, frame.Key)));
   }
 
+  /// <inheritdoc/>
   public void Remove(Guid elementId)
   {
     if (!_dictionary.TryRemove(elementId, out _))
     {
-      _logger.LogInformation("No cache items found for element with Id: '{elementId}'", elementId);
+      logger.LogInformation("No cache items found for element with Id: '{elementId}'", elementId);
     }
 
-    _logger.LogInformation("Cache item for element with Id: '{elementId}' was removed", elementId);
+    logger.LogInformation("Cache item for element with Id: '{elementId}' was removed", elementId);
   }
 
-  public void Clear(int database)
+  /// <inheritdoc/>
+  public void Clear(Cache database)
   {
     var keysToRemove = _dictionary
         .Where(k => k.Value.Any(f => f.Database == database))
@@ -121,17 +119,20 @@ public class CacheNotebook : ICacheNotebook
     {
       if (!_dictionary.TryRemove(key, out _))
       {
-        _logger.LogInformation("No cache items found for element with Id: '{key}'", key);
+        logger.LogInformation("No cache items found for element with Id: '{key}'", key);
       }
     }
 
-    _logger.LogInformation("Cache items from database '{database}' were removed'", database);
+    logger.LogInformation("Cache items from database '{database}' were removed'", database);
   }
 
+  /// <inheritdoc/>
   public void Clear()
   {
     _dictionary.Clear();
 
-    _logger.LogInformation("Cache items were removed");
+    logger.LogInformation("Cache items were removed");
   }
+
+  #endregion
 }
