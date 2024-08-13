@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using LT.DigitalOffice.Kernel.RedisSupport.Constants;
+using Serilog;
 using StackExchange.Redis;
 using System;
 using System.Net;
@@ -19,7 +20,7 @@ public static class FlushRedisDbHelper
   /// <param name="database">ID of database to flush.</param>
   public static void FlushDatabase(
     string redisConnStr,
-    int database)
+    Cache database)
   {
     try
     {
@@ -29,7 +30,7 @@ public static class FlushRedisDbHelper
       foreach (EndPoint endpoint in endpoints)
       {
         IServer server = cm.GetServer(endpoint);
-        server.FlushDatabase(database);
+        server.FlushDatabase((int)database);
       }
     }
     catch (Exception ex)
