@@ -2,6 +2,7 @@
 using LT.DigitalOffice.Kernel.Constants;
 using MassTransit;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
@@ -18,6 +19,7 @@ public class TokenMiddleware
   private const string Token = "token";
   private const string OptionsMethod = "OPTIONS";
 
+  private readonly ILogger<TokenMiddleware> _logger;
   private readonly RequestDelegate requestDelegate;
   private readonly TokenConfiguration tokenConfiguration;
 
@@ -25,9 +27,11 @@ public class TokenMiddleware
   /// Default constructor.
   /// </summary>
   public TokenMiddleware(
+    ILogger<TokenMiddleware> logger,
     RequestDelegate requestDelegate,
     IOptions<TokenConfiguration> option)
   {
+    _logger = logger;
     this.requestDelegate = requestDelegate;
 
     tokenConfiguration = option.Value;
@@ -40,6 +44,8 @@ public class TokenMiddleware
     HttpContext context,
     IRequestClient<ICheckTokenRequest> client)
   {
+    _logger.LogInformation("Starting to authorize request to: {path}.", context.Request.Path);
+
     // TODO: Rework
     if (string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase) ||
         tokenConfiguration.SkippedEndpoints != null &&
@@ -47,6 +53,8 @@ public class TokenMiddleware
           url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase) ||
           context.Request.Path.StartsWithSegments(new PathString(url))))
     {
+      _logger.LogInformation("Successfully skipped endpoint.");
+
       await requestDelegate.Invoke(context);
     }
     else
@@ -57,6 +65,8 @@ public class TokenMiddleware
       {
         context.Response.Headers.AccessControlAllowOrigin = "*";
         context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+
+        _logger.LogWarning("No token provided.");
         return;
       }
 
@@ -70,10 +80,14 @@ public class TokenMiddleware
       {
         context.Items[ConstStrings.UserId] = response.Message.Body;
 
+        _logger.LogInformation("Successfully validated token.");
+
         await requestDelegate.Invoke(context);
       }
       else
       {
+        _logger.LogWarning("Failed to validate token.");
+
         context.Response.Headers.AccessControlAllowOrigin = "*";
         context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
       }
