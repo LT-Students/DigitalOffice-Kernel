@@ -79,16 +79,16 @@ public class RedisHelper(
 
     if (elements is null)
     {
-      logger.LogError("Elements with null value provided.");
+      logger.LogWarning("Elements with null value provided.");
 
-      throw new ArgumentNullException(nameof(elements));
+      return false;
     }
 
     if (elements.Count == 0)
     {
-      logger.LogError("No elements provided.");
+      logger.LogWarning("No elements provided.");
 
-      throw new ArgumentException("Empty lis of elements provided.", nameof(elements));
+      return false;
     }
 
     foreach ((int database, string key) element in elements)
