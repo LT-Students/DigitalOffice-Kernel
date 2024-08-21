@@ -9,7 +9,7 @@ namespace LT.DigitalOffice.Kernel.Requests;
 public record BaseFindFilter
 {
   private int _skipCount;
-  private int _takeCount = 0;
+  private int? _takeCount;
 
   /// <summary>
   /// Number of entries to skip.
@@ -27,7 +27,7 @@ public record BaseFindFilter
   /// </summary>
   [FromQuery(Name = "takecount")]
   [Required]
-  public int TakeCount
+  public int? TakeCount
   {
     get => _takeCount;
     set => _takeCount = value > -1 ? value : 0;
