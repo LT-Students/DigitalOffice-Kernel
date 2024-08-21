@@ -15,7 +15,6 @@ public record BaseFindFilter
   /// Number of entries to skip.
   /// </summary>
   [FromQuery(Name = "skipcount")]
-  [Required]
   public int SkipCount
   {
     get => _skipCount;
@@ -26,7 +25,6 @@ public record BaseFindFilter
   /// Number of entries to take.
   /// </summary>
   [FromQuery(Name = "takecount")]
-  [Required]
   public int? TakeCount
   {
     get => _takeCount;
