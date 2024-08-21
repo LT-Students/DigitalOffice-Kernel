@@ -3,10 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LT.DigitalOffice.Kernel.Requests;
 
+/// <summary>
+/// Base filter for find requests.
+/// </summary>
 public record BaseFindFilter
 {
-  private int skipCount;
-  private int takeCount = 0;
+  private int _skipCount;
+  private int _takeCount = 0;
 
   /// <summary>
   /// Number of entries to skip.
@@ -15,8 +18,8 @@ public record BaseFindFilter
   [Required]
   public int SkipCount
   {
-    get => skipCount;
-    set => skipCount = value > -1 ? value : 0;
+    get => _skipCount;
+    set => _skipCount = value > -1 ? value : 0;
   }
 
   /// <summary>
@@ -26,7 +29,7 @@ public record BaseFindFilter
   [Required]
   public int TakeCount
   {
-    get => takeCount;
-    set => takeCount = value > -1 ? value : 0;
+    get => _takeCount;
+    set => _takeCount = value > -1 ? value : 0;
   }
 }
