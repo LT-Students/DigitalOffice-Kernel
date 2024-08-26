@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>2.0.9</Version>
+    <Version>2.0.10</Version>
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>LTDO.Kernel.RedisSupport</AssemblyName>
     <RootNamespace>DigitalOffice.Kernel.RedisSupport</RootNamespace>
@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LTDO.Kernel" Version="2.0.3" />
+    <PackageReference Include="LTDO.Kernel" Version="2.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="8.0.7" />
     <PackageReference Include="StackExchange.Redis" Version="2.8.0" />
   </ItemGroup>

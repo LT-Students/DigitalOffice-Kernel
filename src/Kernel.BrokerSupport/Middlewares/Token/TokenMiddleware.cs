@@ -4,6 +4,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Linq;
 using System.Net;
@@ -20,8 +21,8 @@ public class TokenMiddleware
   private const string OptionsMethod = "OPTIONS";
 
   private readonly ILogger<TokenMiddleware> _logger;
-  private readonly RequestDelegate requestDelegate;
-  private readonly TokenConfiguration tokenConfiguration;
+  private readonly RequestDelegate _requestDelegate;
+  private readonly TokenConfiguration _tokenConfiguration;
 
   /// <summary>
   /// Default constructor.
@@ -32,9 +33,9 @@ public class TokenMiddleware
     IOptions<TokenConfiguration> option)
   {
     _logger = logger;
-    this.requestDelegate = requestDelegate;
+    _requestDelegate = requestDelegate;
 
-    tokenConfiguration = option.Value;
+    _tokenConfiguration = option.Value;
   }
 
   /// <summary>
@@ -48,18 +49,18 @@ public class TokenMiddleware
 
     // TODO: Rework
     if (string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase) ||
-        tokenConfiguration.SkippedEndpoints != null &&
-        tokenConfiguration.SkippedEndpoints.Any(url =>
+        _tokenConfiguration.SkippedEndpoints != null &&
+        _tokenConfiguration.SkippedEndpoints.Any(url =>
           url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase) ||
-          context.Request.Path.StartsWithSegments(new PathString(url))))
+          context.Request.Path.StartsWithSegments(new PathString(url), StringComparison.OrdinalIgnoreCase)))
     {
       _logger.LogInformation("Successfully skipped endpoint.");
 
-      await requestDelegate.Invoke(context);
+      await _requestDelegate.Invoke(context);
     }
     else
     {
-      var token = context.Request.Headers[Token];
+      StringValues token = context.Request.Headers[Token];
 
       if (string.IsNullOrEmpty(token))
       {
@@ -82,7 +83,7 @@ public class TokenMiddleware
 
         _logger.LogInformation("Successfully validated token.");
 
-        await requestDelegate.Invoke(context);
+        await _requestDelegate.Invoke(context);
       }
       else
       {

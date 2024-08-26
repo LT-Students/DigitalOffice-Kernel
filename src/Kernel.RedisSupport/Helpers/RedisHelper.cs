@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
@@ -20,30 +21,55 @@ public class RedisHelper(
   /// <inheritdoc/>
   public Task<bool> CreateAsync<T>(Cache database, string key, T item, TimeSpan? lifeTime)
   {
-    if (!cache.IsConnected)
-    {
-      logger.LogError("Connection with cache storage interrupted.");
-
-      return Task.FromResult(false);
-    }
+    CheckConnection();
 
     logger.LogInformation(
       "Value was cached in cache {cache} with key {cacheKey}.",
       database,
       key);
 
-    return cache.GetDatabase((int)database).StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
+    return cache
+      .GetDatabase((int)database)
+      .StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
+  }
+
+  /// <inheritdoc/>
+  public Task AddToSetAsync<T>(Cache database, string key, T item)
+  {
+    CheckConnection();
+
+    if (!Enum.IsDefined(database))
+    {
+      logger.LogError("Wrong database value provided.");
+
+      throw new ArgumentException("Wrong database values provided.", nameof(database));
+    }
+
+    if (string.IsNullOrEmpty(key))
+    {
+      logger.LogError("Wrong key value provided.");
+
+      throw new ArgumentException("Wrong key value provided.", nameof(key));
+    }
+
+    if (item is null)
+    {
+      throw new ArgumentNullException(nameof(item), "Null item provided.");
+    }
+
+    IDatabase db = cache.GetDatabase((int)database);
+
+    logger.LogInformation("Adding value to set with key: {key}", key);
+
+    return db.SetAddAsync(
+      new RedisKey(key),
+      new RedisValue(JsonConvert.SerializeObject(item)));
   }
 
   /// <inheritdoc/>
   public async Task<T> GetAsync<T>(Cache database, string key)
   {
-    if (!cache.IsConnected)
-    {
-      logger.LogError("Connection with cache storage interrupted.");
-
-      return default;
-    }
+    CheckConnection();
 
     RedisValue data = await cache.GetDatabase((int)database).StringGetAsync(key);
 
@@ -68,14 +94,22 @@ public class RedisHelper(
   }
 
   /// <inheritdoc/>
+  public IEnumerable<string> GetFromSetAsync(Cache database, string key)
+  {
+    CheckConnection();
+
+    IDatabase db = cache.GetDatabase((int)database);
+    RedisValue[] values = db.SetMembers(new RedisKey(key));
+
+    logger.LogInformation("Values from cache set were received.");
+
+    return values.Select(rv => rv.ToString());
+  }
+
+  /// <inheritdoc/>
   public async Task<bool> RemoveAsync(List<(Cache database, string key)> elements)
   {
-    if (!cache.IsConnected)
-    {
-      logger.LogError("Connection with cache storage interrupted.");
-
-      return false;
-    }
+    CheckConnection();
 
     if (elements is null)
     {
@@ -109,12 +143,7 @@ public class RedisHelper(
   /// <inheritdoc/>
   public Task<bool> ContainsAsync(Cache database, string key)
   {
-    if (!cache.IsConnected)
-    {
-      logger.LogError("Connection with cache storage interrupted.");
-
-      return Task.FromResult(false);
-    }
+    CheckConnection();
 
     logger.LogInformation(
       "Checking existence of key in cache. Database: '{database}', Key: '{key}'",
@@ -122,6 +151,26 @@ public class RedisHelper(
       key);
 
     return cache.GetDatabase((int)database).KeyExistsAsync(new RedisKey(key));
+  }
+
+  #endregion
+
+  #region private methods
+
+  /// <summary>
+  /// Checks if connection to Redis can be established.
+  /// </summary>
+  /// <exception cref="RedisException">Connection can't be established.</exception>
+  private void CheckConnection()
+  {
+    if (cache.IsConnected)
+    {
+      return;
+    }
+
+    logger.LogError("Connection with cache storage interrupted.");
+
+    throw new RedisException("Failed to connect to Redis.");
   }
 
   #endregion

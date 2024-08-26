@@ -24,6 +24,18 @@ public interface ICacheHelper
   Task<bool> CreateAsync<T>(Cache database, string key, T item, TimeSpan? lifeTime = null);
 
   /// <summary>
+  /// Method for caching values in set.
+  /// </summary>
+  /// <param name="database">Id of database.</param>
+  /// <param name="key">Unique value to identify cached value.</param>
+  /// <param name="item">Value to cache.</param>
+  /// <typeparam name="T">Type of value to cache.</typeparam>
+  /// <returns>Whether value was successfully cached.</returns>
+  /// <exception cref="ArgumentException">If wrong database or key provided.</exception>
+  /// <exception cref="ArgumentNullException">If null item provided.</exception>
+  Task AddToSetAsync<T>(Cache database, string key, T item);
+
+  /// <summary>
   /// Method for getting value from cache storage.
   /// </summary>
   /// <param name="database">Id of database.</param>
@@ -31,6 +43,14 @@ public interface ICacheHelper
   /// <typeparam name="T">Type of value to receive.</typeparam>
   /// <returns>Cached value.</returns>
   Task<T> GetAsync<T>(Cache database, string key);
+
+  /// <summary>
+  /// Get all values from cache
+  /// </summary>
+  /// <param name="database"></param>
+  /// <param name="key"></param>
+  /// <returns>List of unique values.</returns>
+  IEnumerable<string> GetFromSetAsync(Cache database, string key);
 
   /// <summary>
   /// Method for removing value from cache storage.
