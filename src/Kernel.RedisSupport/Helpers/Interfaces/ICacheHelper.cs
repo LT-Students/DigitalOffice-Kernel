@@ -50,7 +50,7 @@ public interface ICacheHelper
   /// <param name="database"></param>
   /// <param name="key"></param>
   /// <returns>List of unique values.</returns>
-  IEnumerable<string> GetFromSetAsync(Cache database, string key);
+  Task<IEnumerable<string>> GetFromSetAsync(Cache database, string key);
 
   /// <summary>
   /// Method for removing value from cache storage.

@@ -94,12 +94,12 @@ public class RedisHelper(
   }
 
   /// <inheritdoc/>
-  public IEnumerable<string> GetFromSetAsync(Cache database, string key)
+  public async Task<IEnumerable<string>> GetFromSetAsync(Cache database, string key)
   {
     CheckConnection();
 
     IDatabase db = cache.GetDatabase((int)database);
-    RedisValue[] values = db.SetMembers(new RedisKey(key));
+    RedisValue[] values = await db.SetMembersAsync(new RedisKey(key));
 
     logger.LogInformation("Values from cache set were received.");
 
