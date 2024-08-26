@@ -33,7 +33,7 @@ public interface ICacheHelper
   /// <returns>Whether value was successfully cached.</returns>
   /// <exception cref="ArgumentException">If wrong database or key provided.</exception>
   /// <exception cref="ArgumentNullException">If null item provided.</exception>
-  Task AddToSetAsync<T>(Cache database, string key, T item);
+  Task<bool> AddToSetAsync<T>(Cache database, string key, T item);
 
   /// <summary>
   /// Method for getting value from cache storage.

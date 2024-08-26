@@ -34,7 +34,7 @@ public class RedisHelper(
   }
 
   /// <inheritdoc/>
-  public Task AddToSetAsync<T>(Cache database, string key, T item)
+  public Task<bool> AddToSetAsync<T>(Cache database, string key, T item)
   {
     CheckConnection();
 
@@ -61,9 +61,9 @@ public class RedisHelper(
 
     logger.LogInformation("Adding value to set with key: {key}", key);
 
-    return db.SetAddAsync(
-      new RedisKey(key),
-      new RedisValue(JsonConvert.SerializeObject(item)));
+    return item is string
+      ? AddValueToSetAsync(db, key, item)
+      : AddValueToSetAsync(db, key, JsonConvert.SerializeObject(item));
   }
 
   /// <inheritdoc/>
@@ -171,6 +171,21 @@ public class RedisHelper(
     logger.LogError("Connection with cache storage interrupted.");
 
     throw new RedisException("Failed to connect to Redis.");
+  }
+
+  /// <summary>
+  /// Adds specified value with key to Redis set.
+  /// </summary>
+  /// <param name="db">DB to add value in.</param>
+  /// <param name="key">Unique value to identify cached value.</param>
+  /// <param name="item">Value to cache.</param>
+  /// <typeparam name="T">Type of value to receive.</typeparam>
+  /// <returns>Whether value was successfully cached.</returns>
+  private Task<bool> AddValueToSetAsync<T>(IDatabase db, string key, T item)
+  {
+    return db.SetAddAsync(
+      new RedisKey(key),
+      new RedisValue(JsonConvert.SerializeObject(item)));
   }
 
   #endregion
