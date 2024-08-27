@@ -62,7 +62,7 @@ public class RedisHelper(
     logger.LogInformation("Adding value to set with key: {key}", key);
 
     return item is string
-      ? AddValueToSetAsync(db, key, item)
+      ? AddValueToSetAsync(db, key, item.ToString())
       : AddValueToSetAsync(db, key, JsonConvert.SerializeObject(item));
   }
 
@@ -179,13 +179,10 @@ public class RedisHelper(
   /// <param name="db">DB to add value in.</param>
   /// <param name="key">Unique value to identify cached value.</param>
   /// <param name="item">Value to cache.</param>
-  /// <typeparam name="T">Type of value to receive.</typeparam>
   /// <returns>Whether value was successfully cached.</returns>
-  private Task<bool> AddValueToSetAsync<T>(IDatabase db, string key, T item)
+  private Task<bool> AddValueToSetAsync(IDatabase db, string key, string item)
   {
-    return db.SetAddAsync(
-      new RedisKey(key),
-      new RedisValue(JsonConvert.SerializeObject(item)));
+    return db.SetAddAsync(new RedisKey(key), new RedisValue(item));
   }
 
   #endregion
