@@ -34,39 +34,6 @@ public class RedisHelper(
   }
 
   /// <inheritdoc/>
-  public Task<bool> AddToSetAsync<T>(Cache database, string key, T item)
-  {
-    CheckConnection();
-
-    if (!Enum.IsDefined(database))
-    {
-      logger.LogError("Wrong database value provided.");
-
-      throw new ArgumentException("Wrong database values provided.", nameof(database));
-    }
-
-    if (string.IsNullOrEmpty(key))
-    {
-      logger.LogError("Wrong key value provided.");
-
-      throw new ArgumentException("Wrong key value provided.", nameof(key));
-    }
-
-    if (item is null)
-    {
-      throw new ArgumentNullException(nameof(item), "Null item provided.");
-    }
-
-    IDatabase db = cache.GetDatabase((int)database);
-
-    logger.LogInformation("Adding value to set with key: {key}", key);
-
-    return item is string
-      ? AddValueToSetAsync(db, key, item.ToString())
-      : AddValueToSetAsync(db, key, JsonConvert.SerializeObject(item));
-  }
-
-  /// <inheritdoc/>
   public async Task<T> GetAsync<T>(Cache database, string key)
   {
     CheckConnection();
@@ -91,19 +58,6 @@ public class RedisHelper(
       key);
 
     return item;
-  }
-
-  /// <inheritdoc/>
-  public async Task<IEnumerable<string>> GetFromSetAsync(Cache database, string key)
-  {
-    CheckConnection();
-
-    IDatabase db = cache.GetDatabase((int)database);
-    RedisValue[] values = await db.SetMembersAsync(new RedisKey(key));
-
-    logger.LogInformation("Values from cache set were received.");
-
-    return values.Select(rv => rv.ToString());
   }
 
   /// <inheritdoc/>
@@ -153,6 +107,87 @@ public class RedisHelper(
     return cache.GetDatabase((int)database).KeyExistsAsync(new RedisKey(key));
   }
 
+  /// <inheritdoc/>
+  public Task<bool> AddValueToSetAsync<T>(Cache database, string key, T item)
+  {
+    CheckInput(database, key, item);
+    CheckConnection();
+    IDatabase db = cache.GetDatabase((int)database);
+
+    logger.LogInformation("Adding value to set with key: {key}", key);
+
+    return item is string
+      ? AddValueToSetAsync(db, key, item.ToString())
+      : AddValueToSetAsync(db, key, JsonConvert.SerializeObject(item));
+  }
+
+  /// <inheritdoc/>
+  public async Task<IEnumerable<string>> GetValuesFromSetAsync(Cache database, string key)
+  {
+    CheckInput(database, key);
+    CheckConnection();
+
+    IDatabase db = cache.GetDatabase((int)database);
+    RedisValue[] values = await db.SetMembersAsync(new RedisKey(key));
+
+    logger.LogInformation("Values from cache set were received.");
+
+    return values.Select(rv => rv.ToString());
+  }
+
+  /// <inheritdoc/>
+  public async Task<bool> RemoveValueFromSetAsync<T>(Cache database, string key, T item)
+  {
+    CheckInput(database, key, item);
+    CheckConnection();
+
+    IDatabase db = cache.GetDatabase((int)database);
+
+    RedisValue value = item is string
+      ? new RedisValue(item.ToString())
+      : new RedisValue(JsonConvert.SerializeObject(item));
+
+    return await db.SetRemoveAsync(new RedisKey(key), value);
+  }
+
+  /// <inheritdoc/>
+  public async Task<long> RemoveValuesFromSetAsync<T>(Cache database, string key, List<T> items)
+  {
+    CheckInput(database, key);
+    if (items.Any(i => i is null))
+    {
+      throw new ArgumentNullException(nameof(items), "Null item provided.");
+    }
+
+    CheckConnection();
+    IDatabase db = cache.GetDatabase((int)database);
+
+    RedisValue[] values = new RedisValue[items.Count];
+    for (int i = 0; i < values.Length; i++)
+    {
+      values[i] = items[i] is string
+        ? new RedisValue(items[i].ToString())
+        : new RedisValue(JsonConvert.SerializeObject(items[i]));
+    }
+
+    return await db.SetRemoveAsync(new RedisKey(key), values);
+  }
+
+  /// <inheritdoc/>
+  public async Task<bool> SetContainsAsync<T>(Cache database, string key, T item)
+  {
+    CheckInput(database, key, item);
+    CheckConnection();
+
+    IDatabase db = cache.GetDatabase((int)database);
+
+    RedisValue value = item is string
+      ? new RedisValue(item.ToString())
+      : new RedisValue(JsonConvert.SerializeObject(item));
+
+    return await db.SetContainsAsync(key, value);
+  }
+
   #endregion
 
   #region private methods
@@ -183,6 +218,48 @@ public class RedisHelper(
   private Task<bool> AddValueToSetAsync(IDatabase db, string key, string item)
   {
     return db.SetAddAsync(new RedisKey(key), new RedisValue(item));
+  }
+
+  /// <summary>
+  /// Checks input provided to methods.
+  /// </summary>
+  /// <param name="database">database to add value in.</param>
+  /// <param name="key">Unique value to identify cached value.</param>
+  /// <param name="item">Value to cache.</param>
+  /// <typeparam name="T">Type of provided item.</typeparam>
+  /// <exception cref="ArgumentException">If incorrect <see cref="database"/> or <see cref="key"/> provided.</exception>
+  /// <exception cref="ArgumentNullException">If <see cref="item"/> is null.</exception>
+  private void CheckInput<T>(Cache database, string key, T item)
+  {
+    CheckInput(database, key);
+
+    if (item is null)
+    {
+      throw new ArgumentNullException(nameof(item), "Null item provided.");
+    }
+  }
+
+  /// <summary>
+  /// Checks input provided to methods.
+  /// </summary>
+  /// <param name="database">database to add value in.</param>
+  /// <param name="key">Unique value to identify cached value.</param>
+  /// <exception cref="ArgumentException">If incorrect <see cref="database"/> or <see cref="key"/> provided.</exception>
+  private void CheckInput(Cache database, string key)
+  {
+    if (!Enum.IsDefined(database))
+    {
+      logger.LogError("Wrong database value provided.");
+
+      throw new ArgumentException("Wrong database values provided.", nameof(database));
+    }
+
+    if (string.IsNullOrEmpty(key))
+    {
+      logger.LogError("Wrong key value provided.");
+
+      throw new ArgumentException("Wrong key value provided.", nameof(key));
+    }
   }
 
   #endregion
