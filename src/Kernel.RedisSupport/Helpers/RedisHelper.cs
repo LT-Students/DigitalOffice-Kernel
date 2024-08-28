@@ -227,8 +227,8 @@ public class RedisHelper(
   /// <param name="key">Unique value to identify cached value.</param>
   /// <param name="item">Value to cache.</param>
   /// <typeparam name="T">Type of provided item.</typeparam>
-  /// <exception cref="ArgumentException">If incorrect <see cref="database"/> or <see cref="key"/> provided.</exception>
-  /// <exception cref="ArgumentNullException">If <see cref="item"/> is null.</exception>
+  /// <exception cref="ArgumentException">If incorrect database or key provided.</exception>
+  /// <exception cref="ArgumentNullException">If item is null.</exception>
   private void CheckInput<T>(Cache database, string key, T item)
   {
     CheckInput(database, key);
@@ -244,7 +244,7 @@ public class RedisHelper(
   /// </summary>
   /// <param name="database">database to add value in.</param>
   /// <param name="key">Unique value to identify cached value.</param>
-  /// <exception cref="ArgumentException">If incorrect <see cref="database"/> or <see cref="key"/> provided.</exception>
+  /// <exception cref="ArgumentException">If incorrect database or key provided.</exception>
   private void CheckInput(Cache database, string key)
   {
     if (!Enum.IsDefined(database))
