@@ -104,7 +104,9 @@ public class RedisHelper(
       database,
       key);
 
-    return cache.GetDatabase((int)database).KeyExistsAsync(new RedisKey(key));
+    return cache
+      .GetDatabase((int)database)
+      .KeyExistsAsync(new RedisKey(key));
   }
 
   /// <inheritdoc/>
@@ -136,7 +138,7 @@ public class RedisHelper(
   }
 
   /// <inheritdoc/>
-  public async Task<bool> RemoveValueFromSetAsync<T>(Cache database, string key, T item)
+  public Task<bool> RemoveValueFromSetAsync<T>(Cache database, string key, T item)
   {
     CheckInput(database, key, item);
     CheckConnection();
@@ -147,11 +149,11 @@ public class RedisHelper(
       ? new RedisValue(item.ToString())
       : new RedisValue(JsonConvert.SerializeObject(item));
 
-    return await db.SetRemoveAsync(new RedisKey(key), value);
+    return db.SetRemoveAsync(new RedisKey(key), value);
   }
 
   /// <inheritdoc/>
-  public async Task<long> RemoveValuesFromSetAsync<T>(Cache database, string key, List<T> items)
+  public Task<long> RemoveValuesFromSetAsync<T>(Cache database, string key, List<T> items)
   {
     CheckInput(database, key);
     if (items.Any(i => i is null))
@@ -170,11 +172,11 @@ public class RedisHelper(
         : new RedisValue(JsonConvert.SerializeObject(items[i]));
     }
 
-    return await db.SetRemoveAsync(new RedisKey(key), values);
+    return db.SetRemoveAsync(new RedisKey(key), values);
   }
 
   /// <inheritdoc/>
-  public async Task<bool> SetContainsAsync<T>(Cache database, string key, T item)
+  public Task<bool> SetContainsAsync<T>(Cache database, string key, T item)
   {
     CheckInput(database, key, item);
     CheckConnection();
@@ -185,7 +187,7 @@ public class RedisHelper(
       ? new RedisValue(item.ToString())
       : new RedisValue(JsonConvert.SerializeObject(item));
 
-    return await db.SetContainsAsync(key, value);
+    return db.SetContainsAsync(key, value);
   }
 
   #endregion
