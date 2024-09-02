@@ -6,4 +6,5 @@ public class BaseServiceInfoConfig
 
   public string Id { get; init; }
   public string Name { get; init; }
+  public string Environment { get; set; }
 }
