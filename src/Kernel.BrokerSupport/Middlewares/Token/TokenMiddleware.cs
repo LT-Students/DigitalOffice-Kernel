@@ -1,12 +1,12 @@
 ﻿using LT.DigitalOffice.Kernel.BrokerSupport.Broker;
 using LT.DigitalOffice.Kernel.Constants;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using System;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -47,12 +47,8 @@ public class TokenMiddleware
   {
     _logger.LogInformation("Starting to authorize request to: {path}.", context.Request.Path);
 
-    // TODO: Rework
-    if (string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase) ||
-        _tokenConfiguration.SkippedEndpoints != null &&
-        _tokenConfiguration.SkippedEndpoints.Any(url =>
-          url.Equals(context.Request.Path, StringComparison.OrdinalIgnoreCase) ||
-          context.Request.Path.StartsWithSegments(new PathString(url), StringComparison.OrdinalIgnoreCase)))
+    if (context.GetEndpoint()?.Metadata.GetMetadata<AllowAnonymousAttribute>() != null ||
+        string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase))
     {
       _logger.LogInformation("Successfully skipped endpoint.");
 

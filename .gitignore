@@ -363,4 +363,4 @@ MigrationBackup/
 /dataSources/
 /dataSources.local.xml
 # Idea
-.idea/.idea.DigitalOffice.Kernel/.idea
+.idea
