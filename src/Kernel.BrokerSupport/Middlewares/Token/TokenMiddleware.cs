@@ -47,8 +47,9 @@ public class TokenMiddleware
   {
     _logger.LogInformation("Starting to authorize request to: {path}.", context.Request.Path);
 
-    if (context.GetEndpoint()?.Metadata.GetMetadata<AllowAnonymousAttribute>() != null ||
-        string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase))
+    if (string.Equals(context.Request.Path, "/hc", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(context.Request.Method, OptionsMethod, StringComparison.OrdinalIgnoreCase) ||
+        context.GetEndpoint()?.Metadata.GetMetadata<AllowAnonymousAttribute>() != null)
     {
       _logger.LogInformation("Successfully skipped endpoint.");
 
