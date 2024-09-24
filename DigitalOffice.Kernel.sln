@@ -25,7 +25,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yml", "yml", "{BE32B5DF-5B6
 		.github\workflows\main.yml = .github\workflows\main.yml
 		.github\workflows\nuget_kernel.yml = .github\workflows\nuget_kernel.yml
 		.github\workflows\nuget_kernel_broker.yml = .github\workflows\nuget_kernel_broker.yml
-		nuget_kernel_dapper.yml = nuget_kernel_dapper.yml
 		.github\workflows\nuget_kernel_ef.yml = .github\workflows\nuget_kernel_ef.yml
 		.github\workflows\nuget_kernel_endpoint.yml = .github\workflows\nuget_kernel_endpoint.yml
 		.github\workflows\nuget_kernel_image.yml = .github\workflows\nuget_kernel_image.yml
