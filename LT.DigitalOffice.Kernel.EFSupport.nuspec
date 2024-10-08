@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LTDO.Kernel.EFSupport</id>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <title>DigitalOffice.Kernel.EFSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      2.0.1 - add Unit of Work.
+      2.0.2 - add Microsoft.EntityFrameworkCore.Design.
 
       Previous versions:
+      2.0.1 - add Unit of Work.
       2.0.0 - migrate to dotnet 8.
       1.0.8 - transfer to new nuget server.
       1.0.2 - update libs.
@@ -24,10 +25,11 @@
     <dependencies>
       <group targetFramework="net8.0">
         <dependency id="LTDO.Kernel" version="2.0.7"/>
-        <dependency id="Microsoft.EntityFrameworkCore" version="8.0.8" />
-        <dependency id="Microsoft.EntityFrameworkCore.InMemory" version="8.0.8" />
-        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="8.0.8" />
-        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="8.0.8" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="8.0.10" />
+        <dependency id="Microsoft.EntityFrameworkCore.InMemory" version="8.0.10" />
+        <dependency id="Microsoft.EntityFrameworkCore.Relational" version="8.0.10" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="8.0.10" />
+        <dependency id="Microsoft.EntityFrameworkCore.Design" version="8.0.10" />
       </group>
     </dependencies>
   </metadata>
