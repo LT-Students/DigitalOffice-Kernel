@@ -17,7 +17,7 @@ public class UnitOfWork(DbContext context) : IUnitOfWork
       throw new ArgumentException("Repository with provided type already added.", nameof(repository));
     }
 
-    if (_repositories.TryAdd(type, repository))
+    if (!_repositories.TryAdd(type, repository))
     {
       throw new ArgumentException("Failed to add repository.", nameof(repository));
     }
