@@ -2,6 +2,7 @@ using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.Kernel.Requests;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ public interface IRepository<T> where T : class
 {
   Task<IQueryable<T>> GetAllAsync();
   Task<T> GetAsync(Guid id);
-  Task<(int, T)> FindAsync(BaseFindFilter filter);
+  Task<(List<T>, int)> FindAsync(BaseFindFilter filter);
   Task<Guid> CreateAsync(T entity);
   Task<T> EditAsync(JsonPatchDocument<T> patch);
   Task<T> UpdateAsync(T entity);
