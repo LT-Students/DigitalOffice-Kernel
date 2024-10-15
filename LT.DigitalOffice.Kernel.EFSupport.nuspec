@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>LTDO.Kernel.EFSupport</id>
-    <version>2.0.4</version>
+    <version>2.0.5</version>
     <title>DigitalOffice.Kernel.EFSupport</title>
     <authors>Lanit-Tercom Digital Office Team</authors>
     <owners>Lanit-Tercom Digital Office</owners>
@@ -10,9 +10,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Library used in the Digital Office project.</description>
     <releaseNotes>
-      2.0.4 - edit Unit of Work.
+      2.0.5 - update IRepository.
 
       Previous versions:
+      2.0.4 - edit Unit of Work.
       2.0.3 - add DbModified and DbCreated.
       2.0.2 - add Microsoft.EntityFrameworkCore.Design.
       2.0.1 - add Unit of Work.
