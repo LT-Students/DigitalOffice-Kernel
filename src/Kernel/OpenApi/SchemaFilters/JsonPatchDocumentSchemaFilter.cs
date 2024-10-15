@@ -29,7 +29,7 @@ public class JsonPatchDocumentSchemaFilter : ISchemaFilter
               "op", new OpenApiSchema
               {
                 Type = "string",
-                Enum = new List<IOpenApiAny> { new OpenApiString("replace") }
+                Enum = new List<IOpenApiAny> { new OpenApiString("add"), new OpenApiString("remove"), new OpenApiString("replace"), new OpenApiString("move"), new OpenApiString("copy"), new OpenApiString("test") }
               }
             },
             {
