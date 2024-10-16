@@ -11,7 +11,7 @@ namespace LT.DigitalOffice.Kernel.EFSupport.Provider;
 [AutoInject]
 public interface IRepository<T> where T : class
 {
-  Task<IQueryable<T>> GetAllAsync();
+  IQueryable<T> GetAllAsync();
   Task<T> GetAsync(Guid id);
   Task<(List<T>, int)> FindAsync(BaseFindFilter filter);
   Task<Guid> CreateAsync(T entity);
