@@ -11,11 +11,11 @@ namespace LT.DigitalOffice.Kernel.EFSupport.Provider;
 [AutoInject]
 public interface IRepository<T> where T : class
 {
-  IQueryable<T> GetAllAsync();
+  IQueryable<T> GetAllAsync(bool toTrack);
   Task<T> GetAsync(Guid id);
   Task<(List<T>, int)> FindAsync(BaseFindFilter filter);
-  Task<Guid> CreateAsync(T entity);
+  Guid CreateAsync(T entity);
   Task<T> EditAsync(JsonPatchDocument<T> patch);
   Task<T> UpdateAsync(T entity);
-  Task<bool> DeleteAsync(T entity);
+  bool DeleteAsync(T entity);
 }
