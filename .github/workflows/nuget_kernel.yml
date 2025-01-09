@@ -20,11 +20,6 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Setup NuGet.exe
-        uses: NuGet/setup-nuget@v1.0.5
-        with:
-          nuget-api-key: ${{secrets.NUGET}}
-
       - name: Restore
         run: dotnet restore
 
@@ -35,5 +30,5 @@ jobs:
         run: dotnet test test/Kernel.UnitTests/Kernel.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Push nuget
-        run: dotnet nuget push ./artifacts/kernel/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
+        run: dotnet nuget push ./artifacts/kernel/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
 

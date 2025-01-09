@@ -20,11 +20,6 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Setup NuGet.exe
-        uses: NuGet/setup-nuget@v1.0.5
-        with:
-          nuget-api-key: ${{secrets.NUGET}}
-
       - name: Restore
         run: dotnet restore
 
@@ -34,9 +29,9 @@ jobs:
       - name: Test
         run: dotnet test test/Kernel.BrokerSupport.UnitTests/Kernel.BrokerSupport.UnitTests.csproj --no-restore --verbosity normal
 
-      - name: Pack nuget
-        run: nuget pack LT.DigitalOffice.Kernel.BrokerSupport.nuspec -Symbols -SymbolPackageFormat snupkg -OutputDirectory ./artifacts/kernel_broker
+      - name: Pack
+        run: dotnet pack --configuration Release --no-build --output ./artifacts/kernel_broker
 
       - name: Push nuget
-        run: dotnet nuget push ./artifacts/kernel_broker/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
+        run: dotnet nuget push ./artifacts/kernel_broker/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
 
