@@ -50,7 +50,7 @@ public class RedisHelper(
       return default;
     }
 
-    T item = JsonConvert.DeserializeObject<T>(data);
+    T item = JsonSerializer.Deserialize<T>(data);
 
     logger.LogInformation(
       "Cached value was received from cache {cache} with key {cacheKey}.",
