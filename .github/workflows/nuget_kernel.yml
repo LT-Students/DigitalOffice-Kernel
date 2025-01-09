@@ -20,20 +20,18 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Setup NuGet.exe
-        uses: NuGet/setup-nuget@v1.0.5
-        with:
-          nuget-api-key: ${{secrets.NUGET}}
-
       - name: Restore
         run: dotnet restore
 
       - name: Build
-        run: dotnet build src/Kernel/Kernel.csproj --no-restore --configuration Release --output ./artifacts/kernel
+        run: dotnet build --configuration Release --no-restore
 
       - name: Test
         run: dotnet test test/Kernel.UnitTests/Kernel.UnitTests.csproj --no-restore --verbosity normal
 
+      - name: Pack
+        run: dotnet pack --configuration Release --no-build --output ./artifacts/kernel
+
       - name: Push nuget
-        run: dotnet nuget push ./artifacts/kernel/**.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
+        run: dotnet nuget push ./artifacts/kernel/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
 
