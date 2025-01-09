@@ -1,12 +1,12 @@
 ﻿using LT.DigitalOffice.Kernel.RedisSupport.Constants;
 using LT.DigitalOffice.Kernel.RedisSupport.Helpers.Interfaces;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Helpers;
 
@@ -30,7 +30,7 @@ public class RedisHelper(
 
     return cache
       .GetDatabase((int)database)
-      .StringSetAsync(key, JsonConvert.SerializeObject(item), lifeTime);
+      .StringSetAsync(key, JsonSerializer.Serialize(item), lifeTime);
   }
 
   /// <inheritdoc/>
@@ -120,7 +120,7 @@ public class RedisHelper(
 
     return item is string
       ? AddValueToSetAsync(db, key, item.ToString())
-      : AddValueToSetAsync(db, key, JsonConvert.SerializeObject(item));
+      : AddValueToSetAsync(db, key, JsonSerializer.Serialize(item));
   }
 
   /// <inheritdoc/>
@@ -147,7 +147,7 @@ public class RedisHelper(
 
     RedisValue value = item is string
       ? new RedisValue(item.ToString())
-      : new RedisValue(JsonConvert.SerializeObject(item));
+      : new RedisValue(JsonSerializer.Serialize(item));
 
     return db.SetRemoveAsync(new RedisKey(key), value);
   }
@@ -169,7 +169,7 @@ public class RedisHelper(
     {
       values[i] = items[i] is string
         ? new RedisValue(items[i].ToString())
-        : new RedisValue(JsonConvert.SerializeObject(items[i]));
+        : new RedisValue(JsonSerializer.Serialize(items[i]));
     }
 
     return db.SetRemoveAsync(new RedisKey(key), values);
@@ -185,7 +185,7 @@ public class RedisHelper(
 
     RedisValue value = item is string
       ? new RedisValue(item.ToString())
-      : new RedisValue(JsonConvert.SerializeObject(item));
+      : new RedisValue(JsonSerializer.Serialize(item));
 
     return db.SetContainsAsync(key, value);
   }

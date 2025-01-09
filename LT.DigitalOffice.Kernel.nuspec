@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>LTDO.Kernel</id>
-        <version>2.0.8</version>
+        <version>2.0.9</version>
         <title>DigitalOffice.Kernel</title>
         <authors>Lanit-Tercom Digital Office Team</authors>
         <owners>Lanit-Tercom Digital Office</owners>
@@ -10,46 +10,47 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Library used in the Digital Office project.</description>
         <releaseNotes>
-            2.0.8 - add JsonConvertHelper.
+          2.0.9 - remove Newtonsoft.Json.
 
-            Previous versions:
-            2.0.7 - extend BaseServiceInfoConfig.
-            2.0.6 - fix BaseFindFilter.
-            2.0.5 - tweak 'ApplyFilter' extension method.
-            2.0.4 - Add 'ApplyFilter' extension method.
-            2.0.3 - Add 'AddEditRemovePrProcesses' constant for Rights.
-            2.0.2 - fix bug in Trim attribute.
-            2.0.0 - migrate to dotnet 8.
-            1.0.34 - modify claim right names.
-            1.0.33 - transfer to new nuget server.
-            1.0.25 - Edit ClaimService rights.
-            1.0.24 - Add ClaimService rights.
-            1.0.23 - Change BaseFindFilter TakeCount default value to 0.
-            1.0.22 - Add AddEditRemoveHrProcesses right.
-            1.0.21 - Update libs.
-            1.0.20 - Rename AddFailureForPropertyIf to AddFailureForPropertyIfNot in BaseEditRequestValidator and
-            ExtendedEditRequestValidator, set default value to takeCount in BaseFindFilter.
-            1.0.19 - Add 'AddEditRemoveSurvey' constant for Rights.
-            1.0.18 - Add JsonPatchDocumentSchemaFilter, SwaggerConfiguration.
-            1.0.17 - Add 'AddEditRemoveCompanyStructure' and 'AddEditRemoveEvents' constants for Rights.
-            1.0.16 - Fix BaseEditRequestValidator and ExtendedEditRequestValidator.
-            1.0.15 - Remove pack step from nuget_kernel.yml
-            1.0.14 - Set true to GeneratePackageOnBuild option.
-            1.0.13 - Add documentation to BaseFindFilter.
-            1.0.12 - Remove IBaseFindFilterValidator.
-            1.0.11 - Add TokenOperationFilter, replace EndWith() with Equals() in Base and Extended
-            EditRequestValidators, remove BaseFindFilterValidator.
-            1.0.10 - Fix dependencies.
-            1.0.9 - Update to .NET 7.0.
-            1.0.8 - Changed namespace in Validation Behaviour
-            1.0.7 - Added 'AddEditRemoveLibrary' constant for Rights.
-            1.0.6 - Add new rights.
-            1.0.5 - Update BaseFindFilter.
-            1.0.4 - Update MediatR version to 11.0.0.
-            1.0.3 - Add Validation Behaviour.
-            1.0.2 - Add ".webp" to ImageFormats.
-            1.0.1 - Add FindResult.
-            1.0.0 - Initial.
+          Previous versions:
+          2.0.8 - add JsonConvertHelper.
+          2.0.7 - extend BaseServiceInfoConfig.
+          2.0.6 - fix BaseFindFilter.
+          2.0.5 - tweak 'ApplyFilter' extension method.
+          2.0.4 - Add 'ApplyFilter' extension method.
+          2.0.3 - Add 'AddEditRemovePrProcesses' constant for Rights.
+          2.0.2 - fix bug in Trim attribute.
+          2.0.0 - migrate to dotnet 8.
+          1.0.34 - modify claim right names.
+          1.0.33 - transfer to new nuget server.
+          1.0.25 - Edit ClaimService rights.
+          1.0.24 - Add ClaimService rights.
+          1.0.23 - Change BaseFindFilter TakeCount default value to 0.
+          1.0.22 - Add AddEditRemoveHrProcesses right.
+          1.0.21 - Update libs.
+          1.0.20 - Rename AddFailureForPropertyIf to AddFailureForPropertyIfNot in BaseEditRequestValidator and
+          ExtendedEditRequestValidator, set default value to takeCount in BaseFindFilter.
+          1.0.19 - Add 'AddEditRemoveSurvey' constant for Rights.
+          1.0.18 - Add JsonPatchDocumentSchemaFilter, SwaggerConfiguration.
+          1.0.17 - Add 'AddEditRemoveCompanyStructure' and 'AddEditRemoveEvents' constants for Rights.
+          1.0.16 - Fix BaseEditRequestValidator and ExtendedEditRequestValidator.
+          1.0.15 - Remove pack step from nuget_kernel.yml
+          1.0.14 - Set true to GeneratePackageOnBuild option.
+          1.0.13 - Add documentation to BaseFindFilter.
+          1.0.12 - Remove IBaseFindFilterValidator.
+          1.0.11 - Add TokenOperationFilter, replace EndWith() with Equals() in Base and Extended
+          EditRequestValidators, remove BaseFindFilterValidator.
+          1.0.10 - Fix dependencies.
+          1.0.9 - Update to .NET 7.0.
+          1.0.8 - Changed namespace in Validation Behaviour
+          1.0.7 - Added 'AddEditRemoveLibrary' constant for Rights.
+          1.0.6 - Add new rights.
+          1.0.5 - Update BaseFindFilter.
+          1.0.4 - Update MediatR version to 11.0.0.
+          1.0.3 - Add Validation Behaviour.
+          1.0.2 - Add ".webp" to ImageFormats.
+          1.0.1 - Add FindResult.
+          1.0.0 - Initial.
         </releaseNotes>
         <copyright>Copyright © LT Digital Office</copyright>
         <tags>DigitalOffice</tags>
