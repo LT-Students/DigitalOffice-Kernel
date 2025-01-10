@@ -24,13 +24,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build src/Kernel.RedisSupport/Kernel.RedisSupport.csproj --configuration Release --no-restore
 
       - name: Test
         run: dotnet test test/Kernel.RedisSupport.UnitTests/Kernel.RedisSupport.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build --output ./artifacts/kernel_redis
+        run: dotnet pack src/Kernel.RedisSupport/Kernel.RedisSupport.csproj --configuration Release --no-build --output ./artifacts/kernel_redis
 
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel_redis/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}

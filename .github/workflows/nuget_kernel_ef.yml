@@ -24,10 +24,10 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build src/Kernel.EFSupport/Kernel.EFSupport.csproj --configuration Release --no-restore
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build --output ./artifacts/kernel_ef
+        run: dotnet pack src/Kernel.EFSupport/Kernel.EFSupport.csproj --configuration Release --no-build --output ./artifacts/kernel_ef
 
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel_ef/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
