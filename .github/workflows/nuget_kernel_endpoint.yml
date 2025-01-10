@@ -24,13 +24,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build src/Kernel.EndpointSupport/Kernel.EndpointSupport.csproj --configuration Release --no-restore
 
       - name: Test
         run: dotnet test test/Kernel.EndpointSupport.UnitTests/Kernel.EndpointSupport.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build --output ./artifacts/kernel_endpoint
+        run: dotnet pack src/Kernel.EndpointSupport/Kernel.EndpointSupport.csproj --configuration Release --no-build --output ./artifacts/kernel_endpoint
 
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel_endpoint/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}

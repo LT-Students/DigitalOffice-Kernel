@@ -24,13 +24,13 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build src/Kernel.ImageSupport/Kernel.ImageSupport.csproj --configuration Release --no-restore
 
       - name: Test
         run: dotnet test test/Kernel.ImageSupport.UnitTests/Kernel.ImageSupport.UnitTests.csproj --no-restore --verbosity normal
 
       - name: Pack
-        run: dotnet pack --configuration Release --no-build --output ./artifacts/kernel_image
+        run: dotnet pack src/Kernel.ImageSupport/Kernel.ImageSupport.csproj --configuration Release --no-build --output ./artifacts/kernel_image
 
       - name: Push nuget
         run: dotnet nuget push ./artifacts/kernel_image/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{secrets.NUGET}}
