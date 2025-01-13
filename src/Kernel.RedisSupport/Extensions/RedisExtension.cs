@@ -1,10 +1,10 @@
-﻿using Serilog;
+﻿using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 
 namespace LT.DigitalOffice.Kernel.RedisSupport.Extensions;
 
@@ -112,7 +112,7 @@ public static class RedisExtension
       throw new ArgumentNullException(nameof(obj), "Null object for constructing cache key provided.");
     }
 
-    string cacheKey = JsonSerializer.Serialize(obj);
+    string cacheKey = JsonConvert.SerializeObject(obj);
     if (!string.IsNullOrEmpty(prefix))
     {
       cacheKey = $"{prefix}_{cacheKey}";

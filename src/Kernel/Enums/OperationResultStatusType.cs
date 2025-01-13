@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace LT.DigitalOffice.Kernel.Enums;
 
-[JsonConverter(typeof(JsonStringEnumConverter<OperationResultStatusType>))]
+[JsonConverter(typeof(StringEnumConverter))]
 public enum OperationResultStatusType
 {
   FullSuccess,

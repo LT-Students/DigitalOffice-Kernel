@@ -1,8 +1,8 @@
 ﻿using LT.DigitalOffice.Kernel.Extensions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.Kernel.CustomModelBinderProviders.Binders;
@@ -18,7 +18,7 @@ public class StringTrimmerBinder : IModelBinder
 
     Type modelType = bindingContext.ModelType;
     string json = await new StreamReader(bindingContext.HttpContext.Request.Body).ReadToEndAsync();
-    object obj = JsonSerializer.Deserialize(json, modelType);
+    object obj = JsonConvert.DeserializeObject(json, modelType);
 
     obj.TrimSpaces(modelType);
 
