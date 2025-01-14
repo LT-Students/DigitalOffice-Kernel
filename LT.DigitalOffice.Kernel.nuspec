@@ -62,7 +62,6 @@
                 <dependency id="FluentValidation.AspNetCore" version="11.3.0"/>
                 <dependency id="Microsoft.AspNetCore.JsonPatch" version="8.0.10"/>
                 <dependency id="Microsoft.Extensions.Options.ConfigurationExtensions" version="8.0.0"/>
-                <dependency id="System.Text.Json" version="8.0.5"/>
                 <dependency id="Serilog.AspNetCore" version="8.0.3"/>
                 <dependency id="Swashbuckle.AspNetCore" version="6.9.0"/>
                 <dependency id="Swashbuckle.AspNetCore.Annotations" version="6.9.0"/>
