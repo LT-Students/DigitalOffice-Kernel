@@ -86,6 +86,34 @@ public static class RedisExtension
   }
 
   /// <summary>
+  /// Method for generating unique cache key with specified parameters.
+  /// </summary>
+  /// <param name="requestName">Name of operation describing key.</param>
+  /// <param name="additionalArguments">Additional argument to unique key.</param>
+  /// <returns>Generated key.</returns>
+  public static string GetRedisCacheKey(
+    string requestName,
+    IEnumerable<(string variableName, object value)> additionalArguments = null)
+  {
+    StringBuilder sb = new(requestName);
+
+    if (additionalArguments is not null)
+    {
+      foreach ((string variableName, object value) arg in additionalArguments)
+      {
+        if (arg.value is null)
+        {
+          continue;
+        }
+
+        sb.Append($"{arg.variableName}{arg.value}");
+      }
+    }
+
+    return sb.ToString();
+  }
+
+  /// <summary>
   /// Returns all properties from passed object exclude collections. Properties are used for redis key creating
   /// </summary>
   /// <param name="obj">Object containing properties</param>
